@@ -61,7 +61,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
-## 0.1.0 (TBD)
+## 0.1.0 (2026-04-25)
 
 ### Initial Cities
 
