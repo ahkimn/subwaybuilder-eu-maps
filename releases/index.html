@@ -139,200 +139,81 @@
     <section>
       <h2>README</h2>
       <article class="readme">
-        <h1>Summary</h1>
-        <p>
-          Each map covers the metropolitan area around one or more major
-          European cities. Metropolitan-area bounds are drawn from national
-          cadastral or statistical-office boundary products; municipal-level
-          population, employment, and commute data drive resident and worker
-          placement below the municipality scale wherever the source data allows
-          it.
-        </p>
-        <h2>Features</h2>
-        <ul>
-          <li>
-            High level of detail, with sub-municipality population placement
-            driven by country-specific rasters or settlement-unit grids.
-          </li>
-          <li>
-            Spatial realism -- points are assigned in a manner that is aware of
-            water features, administrative boundaries, and density-weighted
-            placement surfaces.
-          </li>
-          <li>
-            Special demand from several sources is modeled where
-            country-specific open data is available.
-          </li>
-          <li style="margin-left: 1.25em">**Czech Republic**</li>
-          <li style="margin-left: 2.5em">**Airports**</li>
-          <li style="margin-left: 3.75em">
-            Demand based on annualized passenger statistics from the Czech Civil
-            Aviation Authority, split by international &amp; national travelers.
-          </li>
-          <li style="margin-left: 2.5em">**Institutions of Learning**</li>
-          <li style="margin-left: 3.75em">
-            Students in post-secondary (univerzity / vysoké školy) sized from
-            official prezenční (in-person) enrollment datasheets published by
-            MŠMT (Ministry of Education).
-          </li>
-          <li style="margin-left: 2.5em">**Cultural Attractions**</li>
-          <li style="margin-left: 3.75em">
-            Attendance figures sourced from the krajské (regional) tourism
-            statistics published on tourdata.cz.
-          </li>
-          <li style="margin-left: 3.75em">
-            Zoos, botanical gardens, aquariums.
-          </li>
-          <li style="margin-left: 3.75em">
-            Art &amp; history museums, castles, chateaux.
-          </li>
-          <li style="margin-left: 3.75em">
-            Major parks, spa towns, and natural landmarks.
-          </li>
-          <li style="margin-left: 3.75em">
-            Major religious sites (cathedrals, monasteries, pilgrimage
-            churches).
-          </li>
-          <li style="margin-left: 1.25em">**Poland**</li>
-          <li style="margin-left: 2.5em">Planned for a future release.</li>
-          <li>
-            Overture-derived buildings, OSRM routing, and export packaging are
-            shared with the broader Subway Builder map pipeline.
-          </li>
-          <li>
-            Building depth is default to -10m, with train-related infrastructure
-            exempt.
-          </li>
-        </ul>
-        <h2>High-Level Methodology</h2>
-        <p>
-          Resident and commuter totals are estimated from country-specific
-          census and employment tables, then distributed spatially using the
-          best available mesh or raster guidance for each country. Population
-          counts are conserved at municipality-level control totals, while
-          workplace-side calibration and commute matrices keep resident and
-          worker demand in balance.
-        </p>
-        <p>
-          A gravity model augmented with observed municipality-to-municipality
-          commute flows reproduces macro-level commute patterns when
-          sub-municipal O/D pairs are not directly published.
-        </p>
-        <h3>Czech Republic</h3>
-        <p>
-          Czech bundles combine CZSO Census 2021 population and
-          economic-activity tables with the EU JRC GHS-POP 2020 100m raster for
-          within-municipality population weighting. For distributing jobs, a
-          separate 100m raster layer built from Overture building volumes (and
-          weighed by industry type) is constructed against the DojizdkovyProud
-          workplace-side totals. Administrative boundaries come from RUIAN (the
-          Czech cadastral registry). For resident-worker flows, the CZSO 2021
-          commute O/D matrix at sub-municipal (ZSJ-díl) granularity is used to
-          provide macro-level flow, with randomization used to assign individual
-          populations for each ZSJ-díl pair to points within their respective
-          boundaries.
-        </p>
-        <p>
-          In addition, because the 2021 census was conducted during COVID, its
-          published commute matrix inflates same-settlement (and therefore
-          ZSJ-díl) self-commute flows well above pre-pandemic levels. A
-          gravity-based correction pass redistributes the excess self-commute
-          volume into cross-settlement flows. The parameters of the gravity
-          model are calibrated per bundle, using the known log-normal
-          commute-distance distribution from the CZSO 2021 commute O/D matrix.
-          This correction pass brings aggregate self-commute back to plausible
-          pre-pandemic levels without distorting the observed inter-settlement
-          flow structure.
-        </p>
-        <h3>Future countries</h3>
-        <p>
-          Additional European countries will be added as country-specific
-          open-data pipelines come online. Each country follows the same
-          conservation-and-calibration scheme above, with country-specific
-          inputs substituted for boundaries, population, employment, commute
-          matrices, and special-demand layers.
-        </p>
-        <h2>Primary Data Sources</h2>
-        <h3>Czech Republic</h3>
-        <ul>
-          <li>
-            ČÚZK RUIAN — cadastral boundaries for municipalities and basic
-            settlement units (cuzk.cz)
-          </li>
-          <li>
-            ČSÚ Sčítání 2021 — population, economic activity, age structure
-            (csu.gov.cz)
-          </li>
-          <li>
-            EU JRC GHS-POP 2023A / 2020 epoch — 100m population raster for
-            within-municipality weighting (ghsl.jrc.ec.europa.eu)
-          </li>
-          <li>
-            ČSÚ DojizdkovyProud 2021 — sub-municipal commute O/D matrix and
-            workplace-side occupied-jobs tables
-          </li>
-          <li>
-            MŠMT DSIA F21 — university and junior-college enrollment (msmt.cz)
-          </li>
-          <li>tourdata.cz — krajské attraction visitor statistics</li>
-          <li>
-            Úřad pro civilní letectví ČR (Czech CAA) — airport passenger
-            statistics
-          </li>
-        </ul>
-        <h3>Future countries</h3>
-        <p>To be populated as each country&#x27;s pipeline is finalized.</p>
-        <h2>Issues/Questions</h2>
-        <p>
-          Please raise an issue on this repository for incorrect manifests,
-          broken download links, or release-page problems. Suggestions are
-          welcome — especially pointers to country-specific open datasets that
-          could improve existing bundles or unlock new ones.
-        </p>
-        <h1>Changelog</h1>
-        <h2>0.1.0 (TBD)</h2>
-        <h3>Initial Cities</h3>
-        <ul>
-          <li>**Czech Republic**</li>
-          <li style="margin-left: 1.25em"><code>BRQ</code> - Brno</li>
-          <li style="margin-left: 1.25em"><code>OSR</code> - Ostrava</li>
-          <li style="margin-left: 1.25em"><code>PLZ</code> - Plzeň (Pilsen)</li>
-          <li style="margin-left: 1.25em"><code>PRG</code> - Praha (Prague)</li>
-        </ul>
-        <h3>New Features</h3>
-        <ul>
-          <li>First release of the Czech Republic map pack.</li>
-          <li>
-            Sub-municipal (ZSJ-díl) resident and worker placement for all four
-            bundles, calibrated against Census 2021 tables and the GHS-POP 2020
-            raster.
-          </li>
-          <li>
-            Phase E special demand for airports, universities/colleges, and
-            cultural attractions on all four bundles.
-          </li>
-          <li>
-            COVID-era self-commute correction applied to all Czech bundles;
-            aggregate self-commute share brought from ~27–34% (published census)
-            down to ~3–8% per bundle via gravity-calibrated redistribution.
-          </li>
-          <li>Overture-derived buildings and OSRM routing included.</li>
-        </ul>
-        <h3>Known Issues</h3>
-        <ul>
-          <li>Poland bundles are not yet included.</li>
-        </ul>
-        <h1>Planned Updates</h1>
-        <ul>
-          <li>Poland — boundary, census, and commute data in research.</li>
-          <li>
-            Additional Czech regional bundles as source-data coverage expands.
-          </li>
-          <li>
-            Continued refinement of attraction coverage for Czech bundles.
-          </li>
-        </ul>
-      </article>
+      <h1>Summary</h1>
+      <p>Each map covers the metropolitan area around one or more major European cities. Metropolitan-area bounds are drawn from national cadastral or statistical-office boundary products; municipal-level population, employment, and commute data drive resident and worker placement below the municipality scale wherever the source data allows it.</p>
+      <h2>Features</h2>
+      <ul>
+        <li>High level of detail, with sub-municipality population placement driven by country-specific rasters or settlement-unit grids.</li>
+        <li>Spatial realism -- points are assigned in a manner that is aware of water features, administrative boundaries, and density-weighted placement surfaces.</li>
+        <li>Special demand from several sources is modeled where country-specific open data is available.</li>
+        <li style="margin-left: 1.25em;"><strong>Czech Republic</strong></li>
+        <li style="margin-left: 2.50em;"><strong>Airports</strong></li>
+        <li style="margin-left: 3.75em;">Demand based on annualized passenger statistics from the Czech Civil Aviation Authority, split by international &amp; national travelers.</li>
+        <li style="margin-left: 2.50em;"><strong>Institutions of Learning</strong></li>
+        <li style="margin-left: 3.75em;">Students in post-secondary (univerzity / vysoké školy) sized from official prezenční (in-person) enrollment datasheets published by MŠMT (Ministry of Education).</li>
+        <li style="margin-left: 2.50em;"><strong>Cultural Attractions</strong></li>
+        <li style="margin-left: 3.75em;">Attendance figures sourced from the krajské (regional) tourism statistics published on tourdata.cz.</li>
+        <li style="margin-left: 3.75em;">Zoos, botanical gardens, aquariums.</li>
+        <li style="margin-left: 3.75em;">Art &amp; history museums, castles, chateaux.</li>
+        <li style="margin-left: 3.75em;">Major parks, spa towns, and natural landmarks.</li>
+        <li style="margin-left: 3.75em;">Major religious sites (cathedrals, monasteries, pilgrimage churches).</li>
+        <li style="margin-left: 1.25em;"><strong>Poland</strong></li>
+        <li style="margin-left: 2.50em;">Planned for a future release.</li>
+        <li>Overture-derived buildings, OSRM routing, and export packaging are shared with the broader Subway Builder map pipeline.</li>
+        <li>Building depth is default to -10m, with train-related infrastructure exempt.</li>
+      </ul>
+      <h2>High-Level Methodology</h2>
+      <p>Resident and commuter totals are estimated from country-specific census and employment tables, then distributed spatially using the best available mesh or raster guidance for each country. Population counts are conserved at municipality-level control totals, while workplace-side calibration and commute matrices keep resident and worker demand in balance.</p>
+      <p>A gravity model augmented with observed municipality-to-municipality commute flows reproduces macro-level commute patterns when sub-municipal O/D pairs are not directly published.</p>
+      <h3>Czech Republic</h3>
+      <p>Czech bundles combine CZSO Census 2021 population and economic-activity tables with the EU JRC GHS-POP 2020 100m raster for within-municipality population weighting. For distributing jobs, a separate 100m raster layer built from Overture building volumes (and weighed by industry type) is constructed against the DojizdkovyProud workplace-side totals. Administrative boundaries come from RUIAN (the Czech cadastral registry). For resident-worker flows, the CZSO 2021 commute O/D matrix at sub-municipal (ZSJ-díl) granularity is used to provide macro-level flow, with randomization used to assign individual populations for each ZSJ-díl pair to points within their respective boundaries.</p>
+      <p>In addition, because the 2021 census was conducted during COVID, its published commute matrix inflates same-settlement (and therefore ZSJ-díl) self-commute flows well above pre-pandemic levels. A gravity-based correction pass redistributes the excess self-commute volume into cross-settlement flows. The parameters of the gravity model are calibrated per bundle, using the known log-normal commute-distance distribution from the CZSO 2021 commute O/D matrix. This correction pass brings aggregate self-commute back to plausible pre-pandemic levels without distorting the observed inter-settlement flow structure.</p>
+      <h3>Future countries</h3>
+      <p>Additional European countries will be added as country-specific open-data pipelines come online. Each country follows the same conservation-and-calibration scheme above, with country-specific inputs substituted for boundaries, population, employment, commute matrices, and special-demand layers.</p>
+      <h2>Primary Data Sources</h2>
+      <h3>Czech Republic</h3>
+      <ul>
+        <li>ČÚZK RUIAN — cadastral boundaries for municipalities and basic settlement units (cuzk.cz)</li>
+        <li>ČSÚ Sčítání 2021 — population, economic activity, age structure (csu.gov.cz)</li>
+        <li>EU JRC GHS-POP 2023A / 2020 epoch — 100m population raster for within-municipality weighting (ghsl.jrc.ec.europa.eu)</li>
+        <li>ČSÚ DojizdkovyProud 2021 — sub-municipal commute O/D matrix and workplace-side occupied-jobs tables</li>
+        <li>MŠMT DSIA F21 — university and junior-college enrollment (msmt.cz)</li>
+        <li>tourdata.cz — krajské attraction visitor statistics</li>
+        <li>Úřad pro civilní letectví ČR (Czech CAA) — airport passenger statistics</li>
+      </ul>
+      <h3>Future countries</h3>
+      <p>To be populated as each country&#x27;s pipeline is finalized.</p>
+      <h2>Issues/Questions</h2>
+      <p>Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to country-specific open datasets that could improve existing bundles or unlock new ones.</p>
+      <h1>Changelog</h1>
+      <h2>0.1.0 (TBD)</h2>
+      <h3>Initial Cities</h3>
+      <ul>
+        <li><strong>Czech Republic</strong></li>
+        <li style="margin-left: 1.25em;"><code>BRQ</code> - Brno</li>
+        <li style="margin-left: 1.25em;"><code>OSR</code> - Ostrava</li>
+        <li style="margin-left: 1.25em;"><code>PLZ</code> - Plzeň (Pilsen)</li>
+        <li style="margin-left: 1.25em;"><code>PRG</code> - Praha (Prague)</li>
+      </ul>
+      <h3>New Features</h3>
+      <ul>
+        <li>First release of the Czech Republic map pack.</li>
+        <li>Sub-municipal (ZSJ-díl) resident and worker placement for all four bundles, calibrated against Census 2021 tables and the GHS-POP 2020 raster.</li>
+        <li>Phase E special demand for airports, universities/colleges, and cultural attractions on all four bundles.</li>
+        <li>COVID-era self-commute correction applied to all Czech bundles; aggregate self-commute share brought from ~27–34% (published census) down to ~3–8% per bundle via gravity-calibrated redistribution.</li>
+        <li>Overture-derived buildings and OSRM routing included.</li>
+      </ul>
+      <h3>Known Issues</h3>
+      <ul>
+        <li>Poland bundles are not yet included.</li>
+      </ul>
+      <h1>Planned Updates</h1>
+      <ul>
+        <li>Poland — boundary, census, and commute data in research.</li>
+        <li>Additional Czech regional bundles as source-data coverage expands.</li>
+        <li>Continued refinement of attraction coverage for Czech bundles.</li>
+      </ul>
+    </article>
     </section>
   </body>
 </html>
