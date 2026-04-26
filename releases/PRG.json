@@ -2,6 +2,14 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.1.1",
+      "game_version": ">=1.3.0",
+      "date": "2026-04-26",
+      "changelog": "Updated resident and worker point seeding, removed self-commute workers, and reduced overall population count by ~30% by upscaling minimum pop size.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.1.1/PRG.zip",
+      "sha256": "e894fef79bb1129bda7fc429333735159bb9c160b9923130a6c3a4576e68cdf8"
+    },
+    {
       "version": "0.1.0",
       "game_version": ">=1.3.0",
       "date": "2026-04-25",

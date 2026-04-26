@@ -61,6 +61,35 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
+## 0.1.1 (2026-04-26)
+
+### New Cities
+
+- **Czech Republic**
+  - `HKP` - Hradec Králové - Pardubice
+  - `OLO` - Olomouc
+  - `UCH` - Ústí nad Labem - Chomutov
+
+### Updated Cities
+
+- **Czech Republic**
+  - `BRQ` - Brno
+  - `OSR` - Ostrava
+  - `PLZ` - Plzeň
+  - `PRG` - Praha
+
+### New Features
+
+- Augmented the GHS-POP resident/population raster with Overture building information to reduce noise caused by smoothing
+  - Known industrial areas now "mask" the raster to prevent resident placement in industrial estates
+  - Areas with no Overture coverage also "mask" the raster to prevent resident placement in entirely rural areas
+- Updated worker raster to take into account worker totals from non-intersecting cells in the Overture mesh cross-ref
+- Removed same-node workers entirely, resulting in a very small ~0.2-0.6% drop in total modeled demand for each city in the bundle
+
+### Known Issues
+
+- The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map
+
 ## 0.1.0 (2026-04-25)
 
 ### Initial Cities
@@ -68,8 +97,8 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - **Czech Republic**
   - `BRQ` - Brno
   - `OSR` - Ostrava
-  - `PLZ` - Plzeň (Pilsen)
-  - `PRG` - Praha (Prague)
+  - `PLZ` - Plzeň
+  - `PRG` - Praha
 
 ### New Features
 
@@ -81,7 +110,11 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ### Known Issues
 
-- Poland bundles are not yet included.
+- Some maps contain points that have residents live/work at the same location, which is an artifact of two distinct causes:
+  - Some ZSJ-díl only contain one worker point, so any residents at that point who also work in the boundary must have a null commute
+  - Some very small ZSJ-díl have only one point total, so any residents who also work in the boundary must have a null commute
+- Residential point location is noisy, and not entirely distanced from total "activity" density due to the smoothness of the GHS-POP raster.
+  - This sometimes placing residents near industrial locations
 
 # Planned Updates
 
