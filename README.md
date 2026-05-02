@@ -61,18 +61,47 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
+## 0.1.2 (2026-05-02)
+
+### Updated Cities
+
+- **Czechia**
+  - `BRQ` - Brno
+  - `HKP` - Hradec Králové - Pardubice
+  - `OLO` - Olomouc
+  - `OSR` - Ostrava
+  - `PLZ` - Plzeň
+  - `PRG` - Praha
+  - `UCH` - Ústí nad Labem - Chomutov
+
+### New Features
+
+- All Czechia map boundaries expanded to include more of the surrounding area
+- RÚIAN replaces Overture as the canonical source of CZ buildings, with nearly full tag + height coverage for ~4.22 million buildings nationwide
+  - Better tagging enables more accurate point placement, with residential points only allowed on buildings tagged as residential, and worker points only allowed on buildings that could palusibly contain workplaces
+- Worker points are now seeded separately from residential points, and are snapped to building polygons to improve placement in industrial estates
+- Recalibrated building floor area job density priors against per-bundle empiric evidence and SLDB-NACE classifications, to better distribute workers amongst the seeded points
+
+### Known Issues
+
+- Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.
+
+### Bugfixes
+
+- Fixed a bug where the cross-ref mesh for residential mass was essentially non-functional due to an ID formation mismatch.
+
 ## 0.1.1 (2026-04-26)
 
 ### New Cities
 
-- **Czech Republic**
+- **Czechia**
   - `HKP` - Hradec Králové - Pardubice
   - `OLO` - Olomouc
   - `UCH` - Ústí nad Labem - Chomutov
 
 ### Updated Cities
 
-- **Czech Republic**
+- **Czechia**
   - `BRQ` - Brno
   - `OSR` - Ostrava
   - `PLZ` - Plzeň
@@ -94,7 +123,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ### Initial Cities
 
-- **Czech Republic**
+- **Czechia**
   - `BRQ` - Brno
   - `OSR` - Ostrava
   - `PLZ` - Plzeň
@@ -102,7 +131,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ### New Features
 
-- First release of the Czech Republic map pack.
+- First release of the Czechia map pack.
 - Sub-municipal (ZSJ-díl) resident and worker placement for all four bundles, calibrated against Census 2021 tables and the GHS-POP 2020 raster.
 - Phase E special demand for airports, universities/colleges, and cultural attractions on all four bundles.
 - COVID-era self-commute correction applied to all Czech bundles; aggregate self-commute share brought from ~27–34% (published census) down to ~3–8% per bundle via gravity-calibrated redistribution.

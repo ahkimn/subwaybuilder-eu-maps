@@ -2,6 +2,14 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.2.0",
+      "game_version": ">=1.3.0",
+      "date": "2026-05-02",
+      "changelog": "Expanded map, fixed resident distribution, overhauled worker seeding / size distribution priors.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.1.2/BRQ.zip",
+      "sha256": "09dc7dfc82a460b9afe06fe01366922d34c75711dfa59b8c194ab4d35af7ab21"
+    },
+    {
       "version": "0.1.1",
       "game_version": ">=1.3.0",
       "date": "2026-04-26",
