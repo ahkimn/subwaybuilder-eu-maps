@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "versions": [
+    {
+      "version": "0.1.0",
+      "game_version": "<=1.3.0",
+      "date": "2026-05-13",
+      "changelog": "Newly added in 0.2.1",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.1/KTW.zip",
+      "sha256": "0434973950fa74fbcf619581a9c657386f3aeff2ba52b9a4b49581a534ad28fc"
+    }
+  ]
+}

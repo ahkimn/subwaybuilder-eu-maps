@@ -104,6 +104,54 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
+## 0.2.1 (TBD)
+
+### New Cities
+
+- **Poland**
+  - `WAR` - Warszawa
+  - `KTW` - Katowice / GZM (Górnośląsko-Zagłębiowska Metropolia)
+  - `POZ` - Poznań
+  - `LUZ` - Lublin
+  - `SZZ` - Szczecin
+  - `BTK` - Białystok
+  - `RZE` - Rzeszów
+
+### Updated Cities
+
+- **Poland**
+  - `BZG` - Bydgoszcz - Toruń
+  - `GDN` - Gdańsk
+  - `KRK` - Kraków
+  - `LCJ` - Łódź
+  - `WRO` - Wrocław
+
+### New Features
+
+- Point seeding rebuilt around BDOT residential geometry, replacing the GHS-POP × residential-mask hybrid with a per-cell footprint × floor-count signal. Resident points now sit on BDOT building polygons directly.
+  - Large industrial estates that previously concentrated worker demand at a single overloaded point are now split into multiple workplace points, with tighter inter-point spacing.
+  - Merged residence + workplace points now anchor to the location with the strongest combined residential and workplace signal, rather than defaulting to the residential side — fixes cases where a point carrying most of a sector's workers sat on a low-worker cell.
+- Census-mesh conservation overhaul. The 125m + 250m + 1km NSP hybrid previously inflated gmina-level rollups by 15–23%.
+  - Several fixes were made so that the rollup now conserves to ~1% of NSP truth across all 12 bundles, and rural residential pockets that were dropped by the over-aggressive strict-quadrant rule are now retained.
+- Point agglomeration overhauled to be sensitive to per-boundary density, with rural cells receiving lighter agglomeration passes
+- Special demand coverage refreshed across all 12 bundles
+  - Airports recurated to 2025 ULC data (15 airports, with proper krajowy / międzynarodowy traveler split per port).
+  - Universities now use per-institution in-person (stacjonarne) shares from POL-on `iKindName`, replacing the flat national-average haircut applied in 0.2.0.
+  - Per-faculty placement for 32 of the 65 covered higher-education institutions (446K students across 315 points), replacing single-point placement at the rector's office for those institutions.
+- Tourism attraction coverage expanded by ~25 famous PoIs missing from POT (Jasna Góra, Bazylika Mariacka Kraków / Gdańsk, Sanktuarium Licheń, Kalwaria Zebrzydowska, PGE Narodowy, Stadion Śląski, AmberExpo, several major Catholic sanctuaries and palaces). 17 POT classifier corrections (cable cars, orthodox cerkwie, mining tourist trails, narrow-gauge railways) and a sports-venue recalibration are also included.
+- **Urban-palace ticketed/unticketed disaggregation** for the largest royal residence-park complexes (Łazienki Królewskie 5.0M; Wilanów 2.8M). Visitor demand is split between the ticketed pavilion(s) and the free park rather than concentrated at the palace coord, mirroring the per-trailhead pattern already used for the largest national parks.
+
+### Bugfixes
+
+- Several miejsko-wiejska gminas across multiple bundles were previously silently zeroed in resident/worker mass due to administrative-code mismatches between source registries. All such gminas now resolve correctly.
+- Areas affected by 2025 administrative gmina splits (e.g. Grabówka, east of Białystok) had their workplace demand silently zeroed because the new gmina codes did not yet exist in the BDL employment registry. Workplaces in such areas now receive their share of the parent gmina's employment.
+
+### Known Issues
+
+- 33 of the 65 covered higher-education institutions still use single-point placement at the rector's office (per-faculty disaggregation lands in 0.2.1 for the other 32). Multi-campus institutions outside that 32 are not yet disaggregated.
+- Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant function in BDOT and are not split between residential and worker meshes — a small (~2%) population of buildings is affected. Tracked for a future cycle.
+- Self-loop reconstruction absorbs 2021 → 2024 workforce growth into intra-gmina mass, slightly inflating self-commute.
+
 ## 0.2.0 (2026-05-06)
 
 ### Initial Cities
