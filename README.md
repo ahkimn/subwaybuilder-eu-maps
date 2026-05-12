@@ -104,7 +104,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
-## 0.2.1 (TBD)
+## 0.2.1 (2026-05-12)
 
 ### New Cities
 
