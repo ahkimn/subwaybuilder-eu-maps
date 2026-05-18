@@ -104,6 +104,44 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
+## 0.2.3 (2026-05-19)
+
+### Updated Cities
+
+- **Poland**
+  - `WAR` - Warszawa
+  - `KTW` - Katowice / GZM (Górnośląsko-Zagłębiowska Metropolia)
+  - `KRK` - Kraków
+  - `POZ` - Poznań
+  - `WRO` - Wrocław
+  - `GDN` - Gdańsk
+  - `LCJ` - Łódź
+  - `LUZ` - Lublin
+  - `SZZ` - Szczecin
+  - `BTK` - Białystok
+  - `BZG` - Bydgoszcz - Toruń
+  - `RZE` - Rzeszów
+
+### New Features
+
+- **Worker destination distribution rebalanced.** Within each sub-municipal area that contains multiple worker points, the share of inbound commuters is now distributed across those points by their relative employment weight rather than concentrating on whichever sibling won the proportional-sampling lottery.
+
+- **Worker point seeding improvements for industrial estates and dense urban blocks.** Building footprint area is now blended into the seeding signal alongside floor count and local workplace density.
+  - Large warehouse parks holding a small number of very large buildings now should split into multiple worker points rather than concentrating on a single mega-point.
+  - The clustering pass that places workers around seed locations is now refined to prevent the entire worker mass of a small block from snapping onto its largest building.
+
+- **Building polygon coverage expanded.** The buildings layer now includes BDOT's stadiums, engineering polygons, and technical infrastructure polygons (transformer stations and similar).
+
+- **Neighbourhood label coverage.** Place name labels at the dzielnice and miejscowość level now come from the GUS SIMC official locality registry joined against OSM `teryt:simc` tags.
+
+- **Edge-of-bundle municipality reassignment.** A small set of peripheral gminas at the FUA boundary that were previously silently zeroed (due to source-registry mismatches or recent administrative boundary changes) now resolve correctly for both residence and worker mass.
+
+### Other Features
+
+- **Bundle boundary refinements for KTW and KRK.** Katowice now folds in the Rybnik FUA on its southwestern edge as well as Oświęcim in the southeast. Kraków is also expanded slightly west to meet that new boundary.
+
+- **Per-faculty placement extended to four additional institutions.** Politechnika Śląska, Śląski Uniwersytet Medyczny, Uniwersytet Rolniczy w Krakowie, and Uniwersytet Rzeszowski now have per-wydział spatial distribution instead of concentrating all students at the rector's office.
+
 ## 0.2.2 (2026-05-17)
 
 ### New Cities

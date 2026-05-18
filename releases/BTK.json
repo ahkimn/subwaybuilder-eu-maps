@@ -2,6 +2,14 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.1.1",
+      "game_version": "<=1.3.0",
+      "date": "2026-05-19",
+      "changelog": "Updated point placement, origin/destination seeding, added additional BDOT polygons.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.3/BTK.zip",
+      "sha256": "3902017bdd4dcb1d27dabe39be46defa100b016075e483600db8571f284802f2"
+    },
+    {
       "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-05-13",
