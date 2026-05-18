@@ -104,6 +104,50 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
+## 0.2.2 (2026-05-17)
+
+### New Cities
+
+- **Czechia**
+  - `CBS` - České Budějovice
+  - `LBC` - Liberec - Jablonec nad Nisou
+
+### Updated Cities
+
+- **Czechia**
+  - `BRQ` - Brno
+  - `HKP` - Hradec Králové - Pardubice
+  - `OLO` - Olomouc
+  - `OSR` - Ostrava
+  - `PLZ` - Plzeň
+  - `PRG` - Praha
+  - `UCH` - Ústí nad Labem - Chomutov
+
+### New Features
+
+- Building footprint area is now blended into the worker placement signal.
+  - Industrial estates containing a small number of large warehouses should now be split into multiple anchored points rather than concentrating onto a single mega-point
+- New special demand points are added across all bundles, including
+  - **Libraries** -- with multi-branch library systems disaggregated per pobočka rather than concentrated at the central building. Per-branch visitor counts are derived from operator annual reports
+  - **Hospitals** -- with daily commute demand at inpatient and outpatient hospital facilities sized from ÚZIS Lůžkový fond (per-facility bed counts and occupancy) joined with the NRPZS national provider register for addresses and coordinates.
+  - **Military bases** -- with demand for active-duty soldiers stationed kasárna generated from a small set of named AČR installations
+- Workplace point populations are now better balanced.
+  - When a ZSJ-díl contains multiple worker points, workers are now actually distributed across those points rather than concentrating onto whichever point won the proportional sampling lottery.
+- Restored worker inbound for ZSJ-díl mismatched by the COVID-era census.
+  - ZSJ-díl that have residents and worker capacity on paper but show zero inbound flow in the published 2021 commute matrix now receive a small share of commutes.
+
+### Bugfixes
+
+- Large floor area worker outlier inflation fixed.
+  - The reconciliation pass that balances residence-side and workplace-side totals could over-assign workers to a single building in volume-heavy ZSJ-díl, yielding artifacts like a single distribution warehouse or shopping-mall building modelled as containing the worker mass of an entire district.
+- Worker-point snap now respects ZSJ-díl boundaries.
+  - When a worker point is snapped to a nearby building polygon, the snap now prefers a building within the same ZSJ-díl, falling back to any-polygon only when no in-ZSJ-díl candidate exists.
+  - Previously the largest-building-in-radius rule could anchor a ZSJ-díl's entire worker mass on a neighbor's building, particularly at ZSJ-díl edges adjacent to industrial sites.
+
+### Known Issues
+
+- A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.
+
 ## 0.2.1 (2026-05-12)
 
 ### New Cities

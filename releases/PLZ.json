@@ -2,6 +2,14 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.2.1",
+      "game_version": "<=1.3.0",
+      "date": "2026-05-18",
+      "changelog": "Added hospitals, military bases, and library special demand.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PLZ.zip",
+      "sha256": "a2c346783fcaf66c4e9391bdefc7f2985dd0a8e98132258c0c98c40d0095b93c"
+    },
+    {
       "version": "0.2.0",
       "game_version": ">=1.3.0",
       "date": "2026-05-02",
