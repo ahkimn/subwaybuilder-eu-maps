@@ -18,6 +18,12 @@ Each map covers the metropolitan area around one or more major European cities. 
       - Art & history museums, castles, chateaux.
       - Major parks, spa towns, and natural landmarks.
       - Major religious sites (cathedrals, monasteries, pilgrimage churches).
+    - **Libraries**
+      - Per-branch visitor counts from library operator annual reports, disaggregated per pobočka.
+    - **Hospitals**
+      - Daily commute demand at inpatient and outpatient facilities, sized from ÚZIS per-facility bed counts and occupancy.
+    - **Military bases**
+      - Active-duty personnel at named AČR (Czech Army) installations.
   - **Poland**
     - **Airports**
       - Demand based on annualized passenger statistics from the Civil Aviation Authority (Urząd Lotnictwa Cywilnego), split by international (ruch międzynarodowy) and national (ruch krajowy) travelers.
@@ -43,7 +49,11 @@ Each map covers the metropolitan area around one or more major European cities. 
       - Per-season attendance from Instytut Teatralny (e-teatr.pl) for theatres; operator sprawozdania (annual reports) for philharmonics and opera houses.
     - **Multi-Purpose Arenas**
       - Non-sport event volume at major arenas (Tauron Arena Kraków, Spodek Katowice, Atlas Arena Łódź, Ergo Arena Gdańsk-Sopot, ORLEN Arena Płock, Arena Toruń, etc.) modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand.
-- Overture-derived buildings, OSRM routing, and export packaging are shared with the broader Subway Builder map pipeline.
+    - **Hospitals**
+      - Daily commute demand at inpatient and outpatient facilities. Per-facility bed counts are allocated from voivodship totals by BDOT10k building floor area, anchored to the RPWDL national medical-entity registry.
+    - **Military bases**
+      - Active-duty personnel at Land Forces, Air Force, Navy, Special Forces, and Territorial Defence installations.
+- Buildings are sourced from each country's national cadastre (RÚIAN for Czechia, BDOT10k for Poland). OSRM routing and export packaging are shared with the broader Subway Builder map pipeline.
 - Building depth is default to -10m, with train-related infrastructure exempt.
 
 ## High-Level Methodology
@@ -81,6 +91,8 @@ Additional European countries will be added as country-specific open-data pipeli
 - MŠMT DSIA F21 — university and junior-college enrollment (msmt.cz)
 - tourdata.cz — krajské attraction visitor statistics
 - Úřad pro civilní letectví ČR (Czech CAA) — airport passenger statistics
+- ÚZIS ČR — Lůžkový fond per-facility hospital bed counts and occupancy, with the NRPZS national health-provider register for facility addresses (uzis.cz)
+- AČR installation roster — active-duty personnel counts curated from official unit pages and public references
 
 ### Poland
 
@@ -93,6 +105,9 @@ Additional European countries will be added as country-specific open-data pipeli
 - PIPT (Polska Izba Przemysłu Targowego) and Instytut Teatralny — convention / exhibition visitor statistics (polfair.pl) and per-season theatre attendance (e-teatr.pl)
 - National sports leagues — Ekstraklasa football (ekstrastats.pl), Tauron Hokej Liga (hokej.net), PlusLiga volleyball (sportowefakty.wp.pl), ORLEN Superliga handball (orlen-superliga.pl)
 - Municipal traffic studies — Warsaw Badanie Ruchu 2015 (WBR) and Wrocław Kompleksowe Badanie Ruchu 2018 (KBR), driving the optional rejon-level workplace prior and rejon × rejon OD overlay
+- RPWDL — Rejestr Podmiotów Wykonujących Działalność Leczniczą, the national medical-entity registry for hospital facilities and addresses (via dane.gov.pl)
+- GUS BDL "Zdrowie i ochrona zdrowia" — per-voivodship hospital bed occupancy and outpatient visitation rates
+- Military installation roster — active-duty personnel counts curated from Polish Armed Forces unit references and public sources
 
 ### Future countries
 
@@ -102,7 +117,67 @@ To be populated as each country's pipeline is finalized.
 
 Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to country-specific open datasets that could improve existing bundles or unlock new ones.
 
+## Known Issues
+
+- A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.
+- 33 of the 65 covered higher-education institutions still use single-point placement at the rector's office. Multi-campus institutions outside the 32 already disaggregated are not yet per-faculty split.
+- Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant function in BDOT and are not split between residential and worker meshes — a small (~2%) population of buildings is affected. Tracked for a future cycle.
+- Self-loop reconstruction absorbs 2021 → 2024 workforce growth into intra-gmina mass, slightly inflating self-commute relative to a pure 2021 census view.
+- Per-college in-person attendance is not available to the same granularity as CZ; the resulting single-point campuses geocoded against the cadastre lead to some awkward large point placement.
+- Residential point location is somewhat noisy — within-rejon population weighting uses a hybrid of the census grid and a GHS-POP 100m raster gated by the BDOT10k residential mask. The mask is more selective than the CZ pipeline's RÚIAN binary mask, but GHS-POP smoothing still places some residents near light-industrial estates that BDOT10k does not classify as workplace.
+- The `pracujący` count from BDL is the narrowest of four PL employment measures (excludes individual farmers on holdings <1 ha and small-employer agriculture). The gap to broader measures (NSP 2021 census `pracujący` ~16.5M, GUS `pracujący ogółem` P3193 ~16.0M, vs BDL ~14.1M) is mostly small-farm employment, but the choice of measure may be revisited given the large rural areas covered in some bundles.
+- Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.
+- Some maps contain points that have residents live/work at the same location, which is an artifact of two distinct causes:
+  - Some ZSJ-díl only contain one worker point, so any residents at that point who also work in the boundary must have a null commute.
+  - Some very small ZSJ-díl have only one point total, so any residents who also work in the boundary must have a null commute.
+- Residential point location is noisy, and not entirely distanced from total "activity" density due to the smoothness of the GHS-POP raster — sometimes placing residents near industrial locations.
+- ~~Gdańsk oceanic index is not fully constructed -- requires a follow up and will be fixed in the next iteration~~ **(Resolved in 0.2.1)**
+- ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
+
 # Changelog
+
+## 0.2.4 (2026-05-30)
+
+### Updated Cities
+
+- **Poland**
+  - `WAR` - Warszawa
+  - `KTW` - Katowice / GZM (Górnośląsko-Zagłębiowska Metropolia)
+  - `KRK` - Kraków
+  - `POZ` - Poznań
+  - `WRO` - Wrocław
+  - `GDN` - Gdańsk
+  - `LCJ` - Łódź
+  - `LUZ` - Lublin
+  - `SZZ` - Szczecin
+  - `BTK` - Białystok
+  - `BZG` - Bydgoszcz - Toruń
+  - `RZE` - Rzeszów
+
+### New Features
+
+- **Broader employment basis.** The per-municipality worker control total now uses the broader GUS NSP 2021 census `pracujący` (an ILO-style residence-side measure) instead of the narrower BDL administrative `pracujący` (P4280) used previously.
+  - This lifts worker totals across all 12 bundles, with the largest impact in agriculture-heavy rural gminas that the administrative measure under-counts
+
+- **Symmetric cordon at the map boundary.** Cross-boundary commute flows that the published NSP 2021 matrix would otherwise have collapsed onto each boundary gmina's self-loop diagonal are now redistributed across in-bundle gateway gminas via a mass-conserving multinomial weighted by gravity × in-bundle capacity
+  - Redirected diagonal self-loop share is then debited at the new gateway origin. \
+  - The cordon pass operates symmetrically in both directions (outbound: in-bundle resident, out-of-bundle job; inbound: out-of-bundle resident, in-bundle job).
+  - The result significantly improves CBD self-loop accuracy on monocentric bundles and de-conflates the boundary self-loop where the closed-matrix fabrication previously over-concentrated it; recovery is sharpest at the map boundary itself, declining monotonically toward the interior.
+
+- New special demand categories added across all 12 bundles:
+  - **Hospitals** -- daily commute demand at inpatient and outpatient hospital facilities. Per-facility bed counts are allocated from voivodship totals by BDOT10k building floor area, anchored to the RPWDL national medical-entity registry.
+
+  - **Military bases** -- active-duty personnel demand at Polish Land Forces, Air Force, Navy, Special Forces, and Territorial Defence installations.
+
+  - **Passenger-ferry terminals.** New demand points at Świnoujście, Gdynia, Gdańsk-Westerplatte, and the seasonal Hel passenger pier — sized from annual Port Monitor passenger statistics.
+
+### Other Features
+
+- **Additional venue and attraction coverage.** Several smaller demand additions across all 12 bundles: I liga football spectator demand (cup-game inclusive) at the lower-tier clubs, non-league event volume at major multi-use stadiums, municipal sport-recreation facilities operated by local MOSiR / BOSiR offices, and additional Catholic sanctuaries and marquee tourism attractions.
+
+### Bugfixes
+
+- **Corrected university faculty coordinates.** Wydział Neofilologii Uniwersytetu Warszawskiego (Powiśle, near BUW) and Wydział Lekarski Uniwersytetu Jagiellońskiego Collegium Medicum (Stare Miasto, Kraków) repositioned to their actual addresses. The prior coordinates had snapped to the wrong same-name street via the national geocoder's candidate-disambiguation step.
 
 ## 0.2.3 (2026-05-19)
 
@@ -182,10 +257,6 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - When a worker point is snapped to a nearby building polygon, the snap now prefers a building within the same ZSJ-díl, falling back to any-polygon only when no in-ZSJ-díl candidate exists.
   - Previously the largest-building-in-radius rule could anchor a ZSJ-díl's entire worker mass on a neighbor's building, particularly at ZSJ-díl edges adjacent to industrial sites.
 
-### Known Issues
-
-- A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.
-
 ## 0.2.1 (2026-05-12)
 
 ### New Cities
@@ -228,12 +299,6 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Several miejsko-wiejska gminas across multiple bundles were previously silently zeroed in resident/worker mass due to administrative-code mismatches between source registries. All such gminas now resolve correctly.
 - Areas affected by 2025 administrative gmina splits (e.g. Grabówka, east of Białystok) had their workplace demand silently zeroed because the new gmina codes did not yet exist in the BDL employment registry. Workplaces in such areas now receive their share of the parent gmina's employment.
 
-### Known Issues
-
-- 33 of the 65 covered higher-education institutions still use single-point placement at the rector's office (per-faculty disaggregation lands in 0.2.1 for the other 32). Multi-campus institutions outside that 32 are not yet disaggregated.
-- Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant function in BDOT and are not split between residential and worker meshes — a small (~2%) population of buildings is affected. Tracked for a future cycle.
-- Self-loop reconstruction absorbs 2021 → 2024 workforce growth into intra-gmina mass, slightly inflating self-commute.
-
 ## 0.2.0 (2026-05-06)
 
 ### Initial Cities
@@ -256,16 +321,6 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - The diagonal is reconstructed deterministically per gmina as `BDL[g] − Σ inbound_OD[dest=g]`.
 - BDOT10k-derived buildings are used in place of Overture, standard OSRM routing (congruous with CZ) is included.
 
-### Known Issues
-
-- Per-college in-person attendance is not available to the same granularity as CZ and the resulting single-point campuses geocoded against the cadastre, leading to some awkward large point placement
-- Residential point location is somewhat noisy — within-rejon population weighting uses a hybrid of the census grid and a GHS-POP 100m raster gated by the BDOT10k residential mask.
-  - The mask is more selective than the CZ pipeline's RÚIAN binary mask, but GHS-POP smoothing still places some residents near light-industrial estates that BDOT10k does not classify as workplace.
-- The `pracujący` count from BDL is the narrowest of four PL employment measures (excludes individual farmers on holdings <1 ha and small-employer agriculture)
-  - The gap to broader measures (NSP 2021 census `pracujący` ~16.5M, GUS `pracujący ogółem` P3193 ~16.0M, vs BDL ~14.1M) is mostly small-farm employment, but the choice of measure may be revisited given the large rural areas covered in some bundles
-- Self-loop reconstruction absorbs all 2021 → 2024 workforce growth (~5–7%) into intra-gmina mass, slightly inflating self-commute relative to a pure 2021 census view
-- Gdańsk oceanic index is not fully constructed -- requires a follow up and will be fixed in the next iteration
-
 ## 0.1.2 (2026-05-02)
 
 ### Updated Cities
@@ -286,10 +341,6 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - Better tagging enables more accurate point placement, with residential points only allowed on buildings tagged as residential, and worker points only allowed on buildings that could palusibly contain workplaces
 - Worker points are now seeded separately from residential points, and are snapped to building polygons to improve placement in industrial estates
 - Recalibrated building floor area job density priors against per-bundle empiric evidence and SLDB-NACE classifications, to better distribute workers amongst the seeded points
-
-### Known Issues
-
-- Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.
 
 ### Bugfixes
 
@@ -320,10 +371,6 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Updated worker raster to take into account worker totals from non-intersecting cells in the Overture mesh cross-ref
 - Removed same-node workers entirely, resulting in a very small ~0.2-0.6% drop in total modeled demand for each city in the bundle
 
-### Known Issues
-
-- The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map
-
 ## 0.1.0 (2026-04-25)
 
 ### Initial Cities
@@ -341,14 +388,6 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Phase E special demand for airports, universities/colleges, and cultural attractions on all four bundles.
 - COVID-era self-commute correction applied to all Czech bundles; aggregate self-commute share brought from ~27–34% (published census) down to ~3–8% per bundle via gravity-calibrated redistribution.
 - Overture-derived buildings and OSRM routing included.
-
-### Known Issues
-
-- Some maps contain points that have residents live/work at the same location, which is an artifact of two distinct causes:
-  - Some ZSJ-díl only contain one worker point, so any residents at that point who also work in the boundary must have a null commute
-  - Some very small ZSJ-díl have only one point total, so any residents who also work in the boundary must have a null commute
-- Residential point location is noisy, and not entirely distanced from total "activity" density due to the smoothness of the GHS-POP raster.
-  - This sometimes placing residents near industrial locations
 
 # Planned Updates
 
