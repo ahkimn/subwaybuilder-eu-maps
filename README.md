@@ -136,7 +136,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 # Changelog
 
-## 0.2.4 (2026-05-30)
+## 0.2.4 (2026-06-01)
 
 ### Updated Cities
 
@@ -177,7 +177,8 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ### Bugfixes
 
-- **Corrected university faculty coordinates.** Wydział Neofilologii Uniwersytetu Warszawskiego (Powiśle, near BUW) and Wydział Lekarski Uniwersytetu Jagiellońskiego Collegium Medicum (Stare Miasto, Kraków) repositioned to their actual addresses. The prior coordinates had snapped to the wrong same-name street via the national geocoder's candidate-disambiguation step.
+- **Corrected university faculty coordinates.** Wydział Neofilologii Uniwersytetu Warszawskiego (Powiśle, near BUW) and Wydział Lekarski Uniwersytetu Jagiellońskiego Collegium Medicum (Stare Miasto, Kraków) repositioned to their actual addresses.
+  - The prior coordinates had snapped to the wrong same-name street via the national geocoder's candidate-disambiguation step.
 
 ## 0.2.3 (2026-05-19)
 
