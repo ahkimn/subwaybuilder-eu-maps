@@ -156,6 +156,9 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ### New Features
 
+- **Fuller land use coverage.** All twelve maps now source land use polygons from BDOT directly, giving much fuller coverage of park/wooded land.
+  - Rendered landuse is now clipped to water, so no water features appear obscured by greenery when rendered.
+
 - **Broader employment basis.** The per-municipality worker control total now uses the broader GUS NSP 2021 census `pracujący` (an ILO-style residence-side measure) instead of the narrower BDL administrative `pracujący` (P4280) used previously.
   - This lifts worker totals across all 12 bundles, with the largest impact in agriculture-heavy rural gminas that the administrative measure under-counts
 
