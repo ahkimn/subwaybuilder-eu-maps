@@ -1,0 +1,13 @@
+{
+  "schema_version": 1,
+  "versions": [
+    {
+      "version": "0.1.0",
+      "game_version": "<=1.3.0",
+      "date": "2026-06-11",
+      "changelog": "Newly added in 0.3.0",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TAY.zip",
+      "sha256": "68d4bc47cd6d349fa5d5630aa4408fed3a81a91ed784bfa689b687d13d606996"
+    }
+  ]
+}
