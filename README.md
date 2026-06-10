@@ -1,4 +1,6 @@
-# Summary
+# subwaybuilder-eu-maps
+
+## Summary
 
 Each map covers the metropolitan area around one or more major European cities. Metropolitan-area bounds are drawn from national cadastral or statistical-office boundary products; municipal-level population, employment, and commute data drive resident and worker placement below the municipality scale wherever the source data allows it.
 
@@ -6,54 +8,8 @@ Each map covers the metropolitan area around one or more major European cities. 
 
 - High level of detail, with sub-municipality population placement driven by country-specific rasters or settlement-unit grids.
 - Spatial realism -- points are assigned in a manner that is aware of water features, administrative boundaries, and density-weighted placement surfaces.
-- Special demand from several sources is modeled where country-specific open data is available.
-  - **Czech Republic**
-    - **Airports**
-      - Demand based on annualized passenger statistics from the Czech Civil Aviation Authority, split by international & national travelers.
-    - **Institutions of Learning**
-      - Students in post-secondary (univerzity / vysoké školy) sized from official prezenční (in-person) enrollment datasheets published by MŠMT (Ministry of Education).
-    - **Cultural Attractions**
-      - Attendance figures sourced from the krajské (regional) tourism statistics published on tourdata.cz.
-      - Zoos, botanical gardens, aquariums.
-      - Art & history museums, castles, chateaux.
-      - Major parks, spa towns, and natural landmarks.
-      - Major religious sites (cathedrals, monasteries, pilgrimage churches).
-    - **Libraries**
-      - Per-branch visitor counts from library operator annual reports, disaggregated per pobočka.
-    - **Hospitals**
-      - Daily commute demand at inpatient and outpatient facilities, sized from ÚZIS per-facility bed counts and occupancy.
-    - **Military bases**
-      - Active-duty personnel at named AČR (Czech Army) installations.
-  - **Poland**
-    - **Airports**
-      - Demand based on annualized passenger statistics from the Civil Aviation Authority (Urząd Lotnictwa Cywilnego), split by international (ruch międzynarodowy) and national (ruch krajowy) travelers.
-    - **Institutions of Learning**
-      - Students in higher education sized from the POL-on RADON registry (Polish Ministry of Education) joined with GUS public per-institution enrollment statistics, and geocoded via the Polish national address geocoder GUGiK CAPAP. A composite stacjonarni (in-person) × in-person-attendance haircut is applied to estimate active on-site demand because GUS publishes only total enrollment, not the form-of-study split.
-    - **Cultural Attractions**
-      - Attendance figures sourced from the POT (Polska Organizacja Turystyczna) annual "Frekwencja w atrakcjach turystycznych" report.
-      - Major museums, castles, palaces, and historic buildings.
-      - Zoos, botanical gardens, arboreta, palmiarnie.
-      - Water parks and thermal baths.
-      - Catholic sanctuaries, cathedrals, basilicas, and monasteries.
-      - UNESCO World Heritage sites (Auschwitz-Birkenau, Wieliczka/Bochnia salt mines).
-      - National parks with **per-entrance demand disaggregation** for the largest parks (Tatrzański, Kampinoski, Karkonoski, Pieniński, Wielkopolski, PN Gór Stołowych) — the published park-level total is split across major trailheads / gateway entrances rather than a single park centroid.
-    - **Sports Venues**
-      - Annual spectator counts derived from official league statistics across four top-tier Polish leagues:
-        - Ekstraklasa football (ekstrastats.pl).
-        - Tauron Hokej Liga ice hockey (hokej.net + polskihokej.eu).
-        - PlusLiga men's volleyball (plusliga.pl + sportowefakty.wp.pl).
-        - ORLEN Superliga handball (orlen-superliga.pl).
-    - **Convention & Exhibition Centers**
-      - Annual visitor totals from the PIPT (Polska Izba Przemysłu Targowego) annual industry report and per-operator pages.
-    - **Theatres, Philharmonics & Opera**
-      - Per-season attendance from Instytut Teatralny (e-teatr.pl) for theatres; operator sprawozdania (annual reports) for philharmonics and opera houses.
-    - **Multi-Purpose Arenas**
-      - Non-sport event volume at major arenas (Tauron Arena Kraków, Spodek Katowice, Atlas Arena Łódź, Ergo Arena Gdańsk-Sopot, ORLEN Arena Płock, Arena Toruń, etc.) modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand.
-    - **Hospitals**
-      - Daily commute demand at inpatient and outpatient facilities. Per-facility bed counts are allocated from voivodship totals by BDOT10k building floor area, anchored to the RPWDL national medical-entity registry.
-    - **Military bases**
-      - Active-duty personnel at Land Forces, Air Force, Navy, Special Forces, and Territorial Defence installations.
-- Buildings are sourced from each country's national cadastre (RÚIAN for Czechia, BDOT10k for Poland). OSRM routing and export packaging are shared with the broader Subway Builder map pipeline.
+- Special demand from several country-specific open-data sources is modeled — covering airports, ports, universities, hospitals, military installations, sports venues, cultural attractions, museums, libraries, and tourism sites. See [Special Demand Details](#special-demand-details) below for the per-country category breakdown.
+- Buildings are sourced from each country's national cadastre (RÚIAN for Czechia, BDOT10k for Poland, EHR + ETAK for Estonia). OSRM routing data is shared with the broader Subway Builder map pipeline.
 - Building depth is default to -10m, with train-related infrastructure exempt.
 
 ## High-Level Methodology
@@ -62,19 +18,25 @@ Resident and commuter totals are estimated from country-specific census and empl
 
 A gravity model augmented with observed municipality-to-municipality commute flows reproduces macro-level commute patterns when sub-municipal O/D pairs are not directly published.
 
-### Czech Republic
+#### Czech Republic
 
 Czech bundles combine CZSO Census 2021 population and economic-activity tables with the EU JRC GHS-POP 2020 100m raster for within-municipality population weighting. For distributing jobs, a separate 100m raster layer built from Overture building volumes (and weighed by industry type) is constructed against the DojizdkovyProud workplace-side totals. Administrative boundaries come from RUIAN (the Czech cadastral registry). For resident-worker flows, the CZSO 2021 commute O/D matrix at sub-municipal (ZSJ-díl) granularity is used to provide macro-level flow, with randomization used to assign individual populations for each ZSJ-díl pair to points within their respective boundaries.
 
 In addition, because the 2021 census was conducted during COVID, its published commute matrix inflates same-settlement (and therefore ZSJ-díl) self-commute flows well above pre-pandemic levels. A gravity-based correction pass redistributes the excess self-commute volume into cross-settlement flows. The parameters of the gravity model are calibrated per bundle, using the known log-normal commute-distance distribution from the CZSO 2021 commute O/D matrix. This correction pass brings aggregate self-commute back to plausible pre-pandemic levels without distorting the observed inter-settlement flow structure.
 
-### Poland
+#### Poland
 
 Polish bundles combine GUS NSP 2021 census tables (population at 1km / 250m / 125m hybrid resolution; per-rejon population from the 16-sheet voivodship workbook) with the GUGiK BDOT10k national buildings cadastre for within-municipality population and worker weighting. The metropolitan-area boundary unit is the FUA (Funkcjonalny Obszar Miejski), defined by the Eurostat URAU 2021 layer, with each FUA dissolved from member gmina polygons via the GUGiK PRG cadastral registry.
 
 The sub-municipal base unit of population/worker modeling is the **BREC rejon statystyczny** (35,774 nationwide), GUS's official statistical enumeration area — the direct analog to the Czech ZSJ-díl. Per-rejon worker mass is derived from BDOT10k floor area weighted by `kodKst` (the Polish building-function classification; 9 worker classes), with per-bundle weights calibrated by NNLS fit against BDL PKD employment counts. Gmina-level `pracujący` (BDL) is the column-margin truth for worker totals.
 
-Two PL-specific calibration corrections augment the JP-style municipal-weighted gravity Phase D. First, GUS strips intra-gmina commute flows at NSP 2021 publication. A **deterministic self-loop reconstruction** pass per gmina restores the diagonal as `BDL[g] − Σ inbound[g]`, recovering the intra-gmina worker mass that the model would otherwise lose.
+Two PL-specific calibration corrections augment the JP-style municipal-weighted gravity model. First, GUS strips intra-gmina commute flows at NSP 2021 publication. A **deterministic self-loop reconstruction** pass per gmina restores the diagonal as `BDL[g] − Σ inbound[g]`, recovering the intra-gmina worker mass that the model would otherwise lose.
+
+#### Estonia
+
+Estonian bundles combine the 2021 Estonian census per-municipality and per-asustusüksus tables with Statistikaamet's INSPIRE-aligned 100 m / 250 m population grid for within-municipality population weighting. Workplace mass is derived from the Ehitisregister national building cache filtered through the three-tier KAOS use-code taxonomy (residential / workplace / mixed-use), with per-firm employee totals from Estonian Commercial Register annual reports providing the workplace anchor. Administrative boundaries come from the EHAK (Eesti haldus- ja asustusjaotuse klassifikaator) registry; the five largest cities — Tallinn, Tartu, Pärnu, Narva, Kohtla-Järve — are further subdivided into asum / kvartal / linnaosa neighborhoods via Maa-amet's official sub-municipal boundary layer (Tallinn 92 polygons, Tartu 51, Pärnu 22, Narva 19, Kohtla-Järve 5).
+
+Commute flows are calibrated against the 2021 census commute matrix, which publishes only bin-marginal shares (within-municipality, within-county, cross-county, against Tallinn, against Tartu) rather than a full municipality × municipality cell matrix. A Generalized IPF pass with destination-pinning on the two anchor cities reconciles a gravity-decay model against those bin marginals; a symmetric containment-share guard prevents over-routing to the urban core when the decay would otherwise concentrate flows on Tallinn / Tartu.
 
 ### Future countries
 
@@ -82,7 +44,7 @@ Additional European countries will be added as country-specific open-data pipeli
 
 ## Primary Data Sources
 
-### Czech Republic
+#### Czech Republic
 
 - ČÚZK RUIAN — cadastral boundaries for municipalities and basic settlement units (cuzk.cz)
 - ČSÚ Sčítání 2021 — population, economic activity, age structure (csu.gov.cz)
@@ -94,7 +56,7 @@ Additional European countries will be added as country-specific open-data pipeli
 - ÚZIS ČR — Lůžkový fond per-facility hospital bed counts and occupancy, with the NRPZS national health-provider register for facility addresses (uzis.cz)
 - AČR installation roster — active-duty personnel counts curated from official unit pages and public references
 
-### Poland
+#### Poland
 
 - GUGiK — PRG cadastral boundaries (voivodships, powiats, gminas), BDOT10k national building cadastre with PKOB → kodKst classification, and CAPAP national address geocoder (geoportal.gov.pl)
 - GUS NSP 2021 / BREC / BDL — population at 1km / 250m / 125m hybrid grid, sub-gmina `rejon statystyczny` polygons + per-rejon populations, gmina-level pracujący employment, establishments, PKD-section workplace breakdown (P4457), per-institution student enrollment, and public-sector cultural attendance aggregates (stat.gov.pl, bdl.stat.gov.pl)
@@ -108,6 +70,19 @@ Additional European countries will be added as country-specific open-data pipeli
 - RPWDL — Rejestr Podmiotów Wykonujących Działalność Leczniczą, the national medical-entity registry for hospital facilities and addresses (via dane.gov.pl)
 - GUS BDL "Zdrowie i ochrona zdrowia" — per-voivodship hospital bed occupancy and outpatient visitation rates
 - Military installation roster — active-duty personnel counts curated from Polish Armed Forces unit references and public sources
+
+#### Estonia
+
+- Statistikaamet (Statistics Estonia) — 2021 census (per-municipality and per-asustusüksus population, employment, demographics), INSPIRE-aligned 100 m / 250 m population grid, commute O/D bin-marginal matrix, employed-residents by economic activity, national tourism visitor statistics, EHAK administrative classifier (stat.ee)
+- Maa-amet (Estonian Land Board) — ETAK topographic data (buildings + land-use + water + transport ROW polygons), KAOS building-use taxonomy, authoritative address geocoder, annual cadastral snapshot with siht1 zoning, sub-municipal asum / kvartal / linnaosa boundaries for the five largest cities (geoportaal.maaamet.ee)
+- Ehitisregister (Estonian Building Registry) — national building cache with per-building KAOS use codes, floor counts, footprints, and unit counts (ehr.ee)
+- Eesti Ametlik Ariregister (Estonian Commercial Register) — per-firm employee totals from majandusaasta aruanded (annual reports), used as the workplace anchor for sectoral employment (ariregister.rik.ee)
+- Eesti Hariduse Infosüsteem (EHIS / HTM) — institutional metadata + per-institution enrollment for universities, junior colleges, and technical colleges (haridussilm.ee)
+- Tallinna Lennujaam (Tallinn Airport) — terminal-level annual passenger statistics (tallinn-airport.ee)
+- Tallinna Sadam (Port of Tallinn) — per-port annual passenger throughput at Old City Harbour (Helsinki / Stockholm / cruise terminals), Paldiski North / South, Paljassaare, plus the regional ports at Rohuküla, Sillamäe, and Saaremaa (ts.ee)
+- Terviseamet (Estonian Health Board) — hospital facility registry + per-facility bed counts (terviseamet.ee)
+- Kaitsevägi (Estonian Defence Forces) — garrison roster, active-duty personnel curated from official unit references (mil.ee)
+- Eurostat / EMODnet Bathymetry — INSPIRE Population Grid epoch alignment + EMODnet DTM bathymetry for coastal bundles
 
 ### Future countries
 
@@ -134,15 +109,38 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - ~~Gdańsk oceanic index is not fully constructed -- requires a follow up and will be fixed in the next iteration~~ **(Resolved in 0.2.1)**
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
-# Changelog
+## Changelog
 
-## 0.2.4 (2026-06-01)
+### 0.3.0 (2026-06-10)
 
-### Updated Cities
+#### Initial Cities
+
+- **Estonia**
+  - `TLL` - Tallinn
+  - `TAY` - Tartu
+  - `EPU` - Pärnu
+  - `IDV` - Ida-Viru (Narva + Kohtla-Järve)
+
+#### New Features
+
+- First release of the Estonia maps.
+- Sub-municipal (asustusüksus) resident and worker placement for all four bundles, calibrated against the 2021 Estonian census and Statistikaamet's INSPIRE-aligned 100 m / 250 m gridded population.
+  - The five largest cities (Tallinn, Tartu, Pärnu, Narva, Kohtla-Järve) are further subdivided into asum / kvartal / linnaosa neighborhoods via Maa-amet's official sub-municipal boundary layer.
+  - Per-asustusüksus worker mass uses the Ehitisregister national building cache (with the official KAOS use-code taxonomy filtering residential / workplace / mixed-use) and per-firm employee totals from Estonian Commercial Register annual reports as the workplace anchor.
+- Demand points for airports, passenger ferry terminals, universities and colleges, cultural attractions, convention and exhibition centers, sports venues, libraries, religious sites, national parks and natural landmarks, spa resorts, and theme parks across all four bundles.
+- Per-municipality commute calibration against the 2021 census commute matrix.
+  - The published matrix releases only bin-marginal shares (within-municipality, within-county, cross-county, against Tallinn, against Tartu) rather than a full municipality-to-municipality cell matrix.
+  - A Generalized IPF pass reconciles a gravity-decay model against those marginals with destination-pinning on the two anchor cities; a symmetric containment guard prevents over-routing to the urban core.
+- ETAK + Ehitisregister-derived buildings used in place of Overture for spatial detail.
+- Standard OSRM routing included.
+
+### 0.2.4 (2026-06-01)
+
+#### Updated Cities
 
 - **Poland**
   - `WAR` - Warszawa
-  - `KTW` - Katowice / GZM (Górnośląsko-Zagłębiowska Metropolia)
+  - `KTW` - Katowice - GZM (Górnośląsko-Zagłębiowska Metropolia)
   - `KRK` - Kraków
   - `POZ` - Poznań
   - `WRO` - Wrocław
@@ -154,7 +152,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - `BZG` - Bydgoszcz - Toruń
   - `RZE` - Rzeszów
 
-### New Features
+#### New Features
 
 - **Fuller land use coverage.** All twelve maps now source land use polygons from BDOT directly, giving much fuller coverage of park/wooded land.
   - Rendered landuse is now clipped to water, so no water features appear obscured by greenery when rendered.
@@ -174,22 +172,22 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
   - **Passenger-ferry terminals.** New demand points at Świnoujście, Gdynia, Gdańsk-Westerplatte, and the seasonal Hel passenger pier — sized from annual Port Monitor passenger statistics.
 
-### Other Features
+#### Other Features
 
 - **Additional venue and attraction coverage.** Several smaller demand additions across all 12 bundles: I liga football spectator demand (cup-game inclusive) at the lower-tier clubs, non-league event volume at major multi-use stadiums, municipal sport-recreation facilities operated by local MOSiR / BOSiR offices, and additional Catholic sanctuaries and marquee tourism attractions.
 
-### Bugfixes
+#### Bugfixes
 
 - **Corrected university faculty coordinates.** Wydział Neofilologii Uniwersytetu Warszawskiego (Powiśle, near BUW) and Wydział Lekarski Uniwersytetu Jagiellońskiego Collegium Medicum (Stare Miasto, Kraków) repositioned to their actual addresses.
   - The prior coordinates had snapped to the wrong same-name street via the national geocoder's candidate-disambiguation step.
 
-## 0.2.3 (2026-05-19)
+### 0.2.3 (2026-05-19)
 
-### Updated Cities
+#### Updated Cities
 
 - **Poland**
   - `WAR` - Warszawa
-  - `KTW` - Katowice / GZM (Górnośląsko-Zagłębiowska Metropolia)
+  - `KTW` - Katowice - GZM (Górnośląsko-Zagłębiowska Metropolia)
   - `KRK` - Kraków
   - `POZ` - Poznań
   - `WRO` - Wrocław
@@ -201,7 +199,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - `BZG` - Bydgoszcz - Toruń
   - `RZE` - Rzeszów
 
-### New Features
+#### New Features
 
 - **Worker destination distribution rebalanced.** Within each sub-municipal area that contains multiple worker points, the share of inbound commuters is now distributed across those points by their relative employment weight rather than concentrating on whichever sibling won the proportional-sampling lottery.
 
@@ -215,21 +213,21 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 - **Edge-of-bundle municipality reassignment.** A small set of peripheral gminas at the FUA boundary that were previously silently zeroed (due to source-registry mismatches or recent administrative boundary changes) now resolve correctly for both residence and worker mass.
 
-### Other Features
+#### Other Features
 
 - **Bundle boundary refinements for KTW and KRK.** Katowice now folds in the Rybnik FUA on its southwestern edge as well as Oświęcim in the southeast. Kraków is also expanded slightly west to meet that new boundary.
 
 - **Per-faculty placement extended to four additional institutions.** Politechnika Śląska, Śląski Uniwersytet Medyczny, Uniwersytet Rolniczy w Krakowie, and Uniwersytet Rzeszowski now have per-wydział spatial distribution instead of concentrating all students at the rector's office.
 
-## 0.2.2 (2026-05-17)
+### 0.2.2 (2026-05-17)
 
-### New Cities
+#### New Cities
 
 - **Czechia**
   - `CBS` - České Budějovice
   - `LBC` - Liberec - Jablonec nad Nisou
 
-### Updated Cities
+#### Updated Cities
 
 - **Czechia**
   - `BRQ` - Brno
@@ -240,7 +238,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - `PRG` - Praha
   - `UCH` - Ústí nad Labem - Chomutov
 
-### New Features
+#### New Features
 
 - Building footprint area is now blended into the worker placement signal.
   - Industrial estates containing a small number of large warehouses should now be split into multiple anchored points rather than concentrating onto a single mega-point
@@ -253,7 +251,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Restored worker inbound for ZSJ-díl mismatched by the COVID-era census.
   - ZSJ-díl that have residents and worker capacity on paper but show zero inbound flow in the published 2021 commute matrix now receive a small share of commutes.
 
-### Bugfixes
+#### Bugfixes
 
 - Large floor area worker outlier inflation fixed.
   - The reconciliation pass that balances residence-side and workplace-side totals could over-assign workers to a single building in volume-heavy ZSJ-díl, yielding artifacts like a single distribution warehouse or shopping-mall building modelled as containing the worker mass of an entire district.
@@ -261,20 +259,20 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - When a worker point is snapped to a nearby building polygon, the snap now prefers a building within the same ZSJ-díl, falling back to any-polygon only when no in-ZSJ-díl candidate exists.
   - Previously the largest-building-in-radius rule could anchor a ZSJ-díl's entire worker mass on a neighbor's building, particularly at ZSJ-díl edges adjacent to industrial sites.
 
-## 0.2.1 (2026-05-12)
+### 0.2.1 (2026-05-12)
 
-### New Cities
+#### New Cities
 
 - **Poland**
   - `WAR` - Warszawa
-  - `KTW` - Katowice / GZM (Górnośląsko-Zagłębiowska Metropolia)
+  - `KTW` - Katowice - GZM (Górnośląsko-Zagłębiowska Metropolia)
   - `POZ` - Poznań
   - `LUZ` - Lublin
   - `SZZ` - Szczecin
   - `BTK` - Białystok
   - `RZE` - Rzeszów
 
-### Updated Cities
+#### Updated Cities
 
 - **Poland**
   - `BZG` - Bydgoszcz - Toruń
@@ -283,7 +281,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - `LCJ` - Łódź
   - `WRO` - Wrocław
 
-### New Features
+#### New Features
 
 - Point seeding rebuilt around BDOT residential geometry, replacing the GHS-POP × residential-mask hybrid with a per-cell footprint × floor-count signal. Resident points now sit on BDOT building polygons directly.
   - Large industrial estates that previously concentrated worker demand at a single overloaded point are now split into multiple workplace points, with tighter inter-point spacing.
@@ -298,14 +296,14 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Tourism attraction coverage expanded by ~25 famous PoIs missing from POT (Jasna Góra, Bazylika Mariacka Kraków / Gdańsk, Sanktuarium Licheń, Kalwaria Zebrzydowska, PGE Narodowy, Stadion Śląski, AmberExpo, several major Catholic sanctuaries and palaces). 17 POT classifier corrections (cable cars, orthodox cerkwie, mining tourist trails, narrow-gauge railways) and a sports-venue recalibration are also included.
 - **Urban-palace ticketed/unticketed disaggregation** for the largest royal residence-park complexes (Łazienki Królewskie 5.0M; Wilanów 2.8M). Visitor demand is split between the ticketed pavilion(s) and the free park rather than concentrated at the palace coord, mirroring the per-trailhead pattern already used for the largest national parks.
 
-### Bugfixes
+#### Bugfixes
 
 - Several miejsko-wiejska gminas across multiple bundles were previously silently zeroed in resident/worker mass due to administrative-code mismatches between source registries. All such gminas now resolve correctly.
 - Areas affected by 2025 administrative gmina splits (e.g. Grabówka, east of Białystok) had their workplace demand silently zeroed because the new gmina codes did not yet exist in the BDL employment registry. Workplaces in such areas now receive their share of the parent gmina's employment.
 
-## 0.2.0 (2026-05-06)
+### 0.2.0 (2026-05-06)
 
-### Initial Cities
+#### Initial Cities
 
 - **Poland**
   - `BZG` - Bydgoszcz - Toruń
@@ -314,7 +312,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - `LCJ` - Łódź
   - `WRO` - Wrocław
 
-### New Features
+#### New Features
 
 - First release of the Poland maps.
 - Sub-gmina (BREC rejon statystyczny) resident and worker placement for all four bundles, calibrated against NSP 2021 census tables and the GUGiK BDOT10k national buildings cadastre.
@@ -325,9 +323,9 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - The diagonal is reconstructed deterministically per gmina as `BDL[g] − Σ inbound_OD[dest=g]`.
 - BDOT10k-derived buildings are used in place of Overture, standard OSRM routing (congruous with CZ) is included.
 
-## 0.1.2 (2026-05-02)
+### 0.1.2 (2026-05-02)
 
-### Updated Cities
+#### Updated Cities
 
 - **Czechia**
   - `BRQ` - Brno
@@ -338,7 +336,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - `PRG` - Praha
   - `UCH` - Ústí nad Labem - Chomutov
 
-### New Features
+#### New Features
 
 - All Czechia map boundaries expanded to include more of the surrounding area
 - RÚIAN replaces Overture as the canonical source of CZ buildings, with nearly full tag + height coverage for ~4.22 million buildings nationwide
@@ -346,20 +344,20 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Worker points are now seeded separately from residential points, and are snapped to building polygons to improve placement in industrial estates
 - Recalibrated building floor area job density priors against per-bundle empiric evidence and SLDB-NACE classifications, to better distribute workers amongst the seeded points
 
-### Bugfixes
+#### Bugfixes
 
 - Fixed a bug where the cross-ref mesh for residential mass was essentially non-functional due to an ID formation mismatch.
 
-## 0.1.1 (2026-04-26)
+### 0.1.1 (2026-04-26)
 
-### New Cities
+#### New Cities
 
 - **Czechia**
   - `HKP` - Hradec Králové - Pardubice
   - `OLO` - Olomouc
   - `UCH` - Ústí nad Labem - Chomutov
 
-### Updated Cities
+#### Updated Cities
 
 - **Czechia**
   - `BRQ` - Brno
@@ -367,7 +365,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - `PLZ` - Plzeň
   - `PRG` - Praha
 
-### New Features
+#### New Features
 
 - Augmented the GHS-POP resident/population raster with Overture building information to reduce noise caused by smoothing
   - Known industrial areas now "mask" the raster to prevent resident placement in industrial estates
@@ -375,9 +373,9 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Updated worker raster to take into account worker totals from non-intersecting cells in the Overture mesh cross-ref
 - Removed same-node workers entirely, resulting in a very small ~0.2-0.6% drop in total modeled demand for each city in the bundle
 
-## 0.1.0 (2026-04-25)
+### 0.1.0 (2026-04-25)
 
-### Initial Cities
+#### Initial Cities
 
 - **Czechia**
   - `BRQ` - Brno
@@ -385,7 +383,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
   - `PLZ` - Plzeň
   - `PRG` - Praha
 
-### New Features
+#### New Features
 
 - First release of the Czechia maps.
 - Sub-municipal (ZSJ-díl) resident and worker placement for all four bundles, calibrated against Census 2021 tables and the GHS-POP 2020 raster.
@@ -393,8 +391,114 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - COVID-era self-commute correction applied to all Czech bundles; aggregate self-commute share brought from ~27–34% (published census) down to ~3–8% per bundle via gravity-calibrated redistribution.
 - Overture-derived buildings and OSRM routing included.
 
-# Planned Updates
+## Planned Updates
 
-- Continued refinement of attraction coverage and point placement for Czech/Polish bundles.
-- Additional Polish cities not yet included
-- Addition of additional Central/Eastern European countries (Estonia/Hungary/Slovakia/Ukraine)
+- Additional Polish cities not yet included.
+- Addition of additional Central / Eastern European countries (Hungary / Slovakia / Ukraine).
+- Hospital and military-base demand layers for the Estonian bundles (Terviseamet + Kaitsevägi sources curated in the pipeline but not yet rendered in v0.3.0).
+
+## Special Demand Details
+
+Per-country category breakdown of the modeled demand-point categories beyond residence and workplace commute. Each row is geocoded against the relevant national authoritative source and sized from operator or government-published visitor / passenger / enrollment / bed-count figures.
+
+### Czech Republic
+
+- **Airports**
+  - Demand based on annualized passenger statistics from the Czech Civil Aviation Authority, split by international & national travelers.
+- **Institutions of Learning**
+  - Students in post-secondary (univerzity / vysoké školy) sized from official prezenční (in-person) enrollment datasheets published by MŠMT (Ministry of Education).
+- **Cultural Attractions**
+  - Attendance figures sourced from the krajské (regional) tourism statistics published on tourdata.cz, supplemented with operator annual reports and per-site visitor counters for sites missing from the krajské aggregates.
+  - Zoos, botanical gardens, aquariums.
+  - Art & history museums, castles, chateaux.
+  - Major parks, hot-spring spa towns (Karlovy Vary, Mariánské Lázně, Františkovy Lázně, Poděbrady), and natural landmarks.
+  - Major religious sites (cathedrals, monasteries, pilgrimage churches).
+  - UNESCO World Heritage sites (Pražský hrad, historic centers of Český Krumlov, Kutná Hora, and Olomouc, Lednice-Valtice cultural landscape, etc.).
+  - Theme parks and aquaparks (Aquapalace Praha, Aqualand Moravia, etc.).
+- **Libraries**
+  - Per-branch visitor counts from library operator annual reports, disaggregated per pobočka.
+- **Cultural Centers, Theatres & Concert Halls**
+  - Per-season attendance from operator annual reports at the principal kulturní domy, divadla, and koncertní sály venues.
+- **Multi-Purpose Arenas**
+  - Non-sport event volume at major arenas (O2 arena Praha, Ostravar Aréna, Home Credit Arena Liberec, etc.) modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand.
+- **Convention & Exhibition Centers**
+  - Annual visitor totals from operator annual reports for the principal Czech expo and congress venues (Výstaviště Praha, BVV Brno, etc.).
+- **Sports Venues**
+  - Annual spectator counts at the principal Czech league venues across football (Fortuna Liga), ice hockey (Tipsport Extraliga), and basketball, plus public sport complexes (swimming, ice rinks) at municipal sport centers.
+- **Hospitals**
+  - Daily commute demand at inpatient and outpatient facilities, sized from ÚZIS per-facility bed counts and occupancy.
+- **Military bases**
+  - Active-duty personnel at named AČR (Czech Army) installations.
+
+### Poland
+
+- **Airports**
+  - Demand based on annualized passenger statistics from the Civil Aviation Authority (Urząd Lotnictwa Cywilnego), split by international (ruch międzynarodowy) and national (ruch krajowy) travelers.
+- **Passenger Ferry Terminals**
+  - Per-terminal annual passenger throughput at the Świnoujście ferry terminal, the Gdynia and Gdańsk-Westerplatte cruise + ferry terminals, and the seasonal Hel passenger pier — sized from Port Monitor passenger statistics and port-operator annual reports.
+- **Institutions of Learning**
+  - Students in higher education sized from the POL-on RADON registry (Polish Ministry of Education) joined with GUS public per-institution enrollment statistics, and geocoded via the Polish national address geocoder GUGiK CAPAP. A composite stacjonarni (in-person) × in-person-attendance haircut is applied to estimate active on-site demand because GUS publishes only total enrollment, not the form-of-study split.
+- **Cultural Attractions**
+  - Attendance figures sourced from the POT (Polska Organizacja Turystyczna) annual "Frekwencja w atrakcjach turystycznych" report, supplemented with operator annual reports and per-site visitor counters for sites missing from the POT aggregates.
+  - Major museums, castles, palaces, and historic buildings.
+  - Zoos, botanical gardens, arboreta, palmiarnie.
+  - Water parks and thermal baths.
+  - Catholic sanctuaries, cathedrals, basilicas, and monasteries.
+  - UNESCO World Heritage sites (Auschwitz-Birkenau, Wieliczka/Bochnia salt mines).
+  - National parks with **per-entrance demand disaggregation** for the largest parks (Tatrzański, Kampinoski, Karkonoski, Pieniński, Wielkopolski, PN Gór Stołowych) — the published park-level total is split across major trailheads / gateway entrances rather than a single park centroid.
+- **Sports Venues**
+  - Annual spectator counts derived from official league statistics across four top-tier Polish leagues:
+    - Ekstraklasa football (ekstrastats.pl).
+    - Tauron Hokej Liga ice hockey (hokej.net + polskihokej.eu).
+    - PlusLiga men's volleyball (plusliga.pl + sportowefakty.wp.pl).
+    - ORLEN Superliga handball (orlen-superliga.pl).
+- **Convention & Exhibition Centers**
+  - Annual visitor totals from the PIPT (Polska Izba Przemysłu Targowego) annual industry report and per-operator pages.
+- **Theatres, Philharmonics & Opera**
+  - Per-season attendance from Instytut Teatralny (e-teatr.pl) for theatres; operator sprawozdania (annual reports) for philharmonics and opera houses.
+- **Multi-Purpose Arenas**
+  - Non-sport event volume at major arenas (Tauron Arena Kraków, Spodek Katowice, Atlas Arena Łódź, Ergo Arena Gdańsk-Sopot, ORLEN Arena Płock, Arena Toruń, etc.) modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand.
+- **Hospitals**
+  - Daily commute demand at inpatient and outpatient facilities. Per-facility bed counts are allocated from voivodship totals by BDOT10k building floor area, anchored to the RPWDL national medical-entity registry.
+- **Military bases**
+  - Active-duty personnel at Land Forces, Air Force, Navy, Special Forces, and Territorial Defence installations.
+
+### Estonia
+
+- **Airports**
+  - Demand based on terminal-level annual passenger statistics from Tallinna Lennujaam (Tallinn Airport).
+- **Passenger Ferry Terminals**
+  - Per-terminal annual passenger throughput at the Old City Harbour Helsinki-line, Stockholm-line, cruise, and Paljassaare berths, the Paldiski North / South terminals, and the regional ports at Rohuküla, Sillamäe, and Saaremaa — sized from Tallinna Sadam (Port of Tallinn) and Statistikaamet maritime statistics.
+- **Institutions of Learning**
+  - Students at universities (ülikoolid), technical colleges (rakenduskõrgkoolid), and junior colleges (kõrgkoolid), sized from Eesti Hariduse Infosüsteem (the Ministry of Education registry) per-institution enrollment.
+- **Cultural Attractions**
+  - Attendance figures sourced from Statistikaamet national tourism statistics, supplemented with operator annual reports and per-site visitor counters for sites missing from the national aggregates.
+  - Zoos, botanical gardens.
+  - Art and general museums, castles, manor houses.
+  - Major parks, hot-spring spa resorts, and natural landmarks.
+  - National parks (Lahemaa, Soomaa, Karula, Matsalu, Vilsandi).
+  - Major religious sites (Lutheran, Orthodox, and Catholic cathedrals, monasteries, and pilgrimage churches).
+  - UNESCO World Heritage sites — Tallinn Vanalinn (Old Town) with **per-pavilion demand disaggregation**: the published city-level total is split between the ticketed pavilions (Toomkirik, Niguliste, Kiek in de Kök, Linnamüür) and the free walking-tour area rather than concentrated at the Old Town centroid.
+  - Theme parks and aquaparks.
+- **Libraries**
+  - Per-branch visitor counts from library operator annual reports, including the Estonian National Library and the principal municipal branches.
+- **Cultural Centers, Theatres & Concert Halls**
+  - Per-season attendance from operator annual reports at the principal concert halls, theatres, philharmonics, and cultural districts (kultuurikeskused).
+- **Multi-Purpose Arenas**
+  - Non-sport event volume at the principal Estonian arenas modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand.
+- **Convention & Exhibition Centers**
+  - Annual visitor totals from operator annual reports for the principal Estonian expo and conference venues.
+- **Sports Venues**
+  - Annual spectator counts at the principal Estonian league venues across football, basketball, ice hockey, and volleyball, plus public sport complexes (swimming, ice rinks) at municipal sport centers.
+- **Hospitals** _(to be populated in a future release)_
+  - Daily commute demand at inpatient and outpatient facilities, sized from Terviseamet (Estonian Health Board) per-facility bed counts.
+- **Military bases** _(to be populated in a future release)_
+  - Active-duty personnel at Kaitsevägi (Estonian Defence Forces) garrisons.
+
+## License
+
+All maps are released under the [GNU General Public License v3.0](https://github.com/ahkimn/subwaybuilder-eu-maps/blob/main/LICENSE).
+
+## Credits
+
+All maps authored by [Yukina-](https://subwaybuildermodded.com/credits/)
