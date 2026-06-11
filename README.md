@@ -94,18 +94,15 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ## Known Issues
 
-- A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.
-- 33 of the 65 covered higher-education institutions still use single-point placement at the rector's office. Multi-campus institutions outside the 32 already disaggregated are not yet per-faculty split.
-- Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant function in BDOT and are not split between residential and worker meshes — a small (~2%) population of buildings is affected. Tracked for a future cycle.
-- Self-loop reconstruction absorbs 2021 → 2024 workforce growth into intra-gmina mass, slightly inflating self-commute relative to a pure 2021 census view.
-- Per-college in-person attendance is not available to the same granularity as CZ; the resulting single-point campuses geocoded against the cadastre lead to some awkward large point placement.
-- Residential point location is somewhat noisy — within-rejon population weighting uses a hybrid of the census grid and a GHS-POP 100m raster gated by the BDOT10k residential mask. The mask is more selective than the CZ pipeline's RÚIAN binary mask, but GHS-POP smoothing still places some residents near light-industrial estates that BDOT10k does not classify as workplace.
-- The `pracujący` count from BDL is the narrowest of four PL employment measures (excludes individual farmers on holdings <1 ha and small-employer agriculture). The gap to broader measures (NSP 2021 census `pracujący` ~16.5M, GUS `pracujący ogółem` P3193 ~16.0M, vs BDL ~14.1M) is mostly small-farm employment, but the choice of measure may be revisited given the large rural areas covered in some bundles.
-- Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.
-- Some maps contain points that have residents live/work at the same location, which is an artifact of two distinct causes:
-  - Some ZSJ-díl only contain one worker point, so any residents at that point who also work in the boundary must have a null commute.
-  - Some very small ZSJ-díl have only one point total, so any residents who also work in the boundary must have a null commute.
-- Residential point location is noisy, and not entirely distanced from total "activity" density due to the smoothness of the GHS-POP raster — sometimes placing residents near industrial locations.
+- (CZ) A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.
+- (PL) 33 of the 65 covered higher-education institutions still use single-point placement at the rector's office. Multi-campus institutions outside the 32 already disaggregated are not yet per-faculty split.
+- (PL) Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant function in BDOT and are not split between residential and worker meshes — a small (~2%) population of buildings is affected. Tracked for a future cycle.
+- (PL) Self-loop reconstruction absorbs 2021 → 2024 workforce growth into intra-gmina mass, slightly inflating self-commute relative to a pure 2021 census view.
+- (PL) Per-college in-person attendance is not available to the same granularity as CZ; the resulting single-point campuses geocoded against the cadastre lead to some awkward large point placement.
+- (CZ) Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.
+- (CZ) Residential point location is noisy, and not entirely distanced from total "activity" density due to the smoothness of the GHS-POP raster — sometimes placing residents near industrial locations.
+- (EE/PL/CZ Coastal). Faraway water boundaries have grid-like artifacts due to the pipeline only extracting nearshore water
+- The `pracujący` count from BDL is the narrowest of four PL employment measures (excludes individual farmers on holdings <1 ha and small-employer agriculture). The gap to broader measures (NSP 2021 census `pracujący` ~16.5M, GUS `pracujący ogółem` P3193 ~16.0M, vs BDL ~14.1M) is mostly small-farm employment, but the choice of measure may be revisited given the large rural areas covered in some bundles. **(Resolved in 0.2.4)**
 - ~~Gdańsk oceanic index is not fully constructed -- requires a follow up and will be fixed in the next iteration~~ **(Resolved in 0.2.1)**
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
