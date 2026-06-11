@@ -94,19 +94,82 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ## Known Issues
 
-- (CZ) A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.
-- (PL) 33 of the 65 covered higher-education institutions still use single-point placement at the rector's office. Multi-campus institutions outside the 32 already disaggregated are not yet per-faculty split.
-- (PL) Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant function in BDOT and are not split between residential and worker meshes — a small (~2%) population of buildings is affected. Tracked for a future cycle.
-- (PL) Self-loop reconstruction absorbs 2021 → 2024 workforce growth into intra-gmina mass, slightly inflating self-commute relative to a pure 2021 census view.
-- (PL) Per-college in-person attendance is not available to the same granularity as CZ; the resulting single-point campuses geocoded against the cadastre lead to some awkward large point placement.
-- (CZ) Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.
-- (CZ) Residential point location is noisy, and not entirely distanced from total "activity" density due to the smoothness of the GHS-POP raster — sometimes placing residents near industrial locations.
-- (EE/PL/CZ Coastal). Faraway water boundaries have grid-like artifacts due to the pipeline only extracting nearshore water
-- The `pracujący` count from BDL is the narrowest of four PL employment measures (excludes individual farmers on holdings <1 ha and small-employer agriculture). The gap to broader measures (NSP 2021 census `pracujący` ~16.5M, GUS `pracujący ogółem` P3193 ~16.0M, vs BDL ~14.1M) is mostly small-farm employment, but the choice of measure may be revisited given the large rural areas covered in some bundles. **(Resolved in 0.2.4)**
+### Czechia
+
+- A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.
+- Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.
+- Residential point location is noisy, and not entirely distanced from total "activity" density due to the smoothness of the GHS-POP raster — sometimes placing residents near industrial locations.
+
+### Poland
+
+- 33 of the 65 covered higher-education institutions still use single-point placement at the rector's office. Multi-campus institutions outside the 32 already disaggregated are not yet per-faculty split.
+- Per-college in-person attendance is not available at the same granularity as Czechia; the resulting single-point campuses geocoded against the cadastre lead to some awkward large point placement.
+- Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant cadastral function and are not split between residential and worker meshes — a small (~2%) population of buildings is affected.
+- Self-loop reconstruction absorbs both 2021 → 2024 workforce growth and the long-haul register commutes that the cordon depth gate now correctly removes from daily transit, slightly inflating self-commute share — most visibly in boundary gminas of high-OOB-commuter bundles (warsaw, gdansk, szczecin).
+
+### Estonia
+
+- The modeled commute-distance distribution under-represents very-short trips (≤1 km, ~6% modeled vs ~16% in the Statistics Estonia TT231 ground truth) and very-long trips (>100 km, ~0.1% modeled vs ~3% TT231). The shortfall on the short tail is a sub-grid limitation (the resident-mesh cell grain floors how close origin and destination can land); the long tail is a closed-system limitation (the model only places trip endpoints within the bundle).
+- Cross-county commutes whose destination is neither Tallinn nor Tartu are currently modelled as in-bundle self-loops rather than redistributed across the remaining 13 county capitals (maakonna keskus). Affects ~6.8–6.9% of Pärnu and Ida-Viru bundle residents, ~1.5–3.8% of Tallinn / Tartu.
+
+### Cross-country
+
+- Faraway water, cross-border land, and cross-border inland water past the bundle's modeled extent can render as a no-data "grid" pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).
+- Cross-border commute flows are absent from every country's national O/D matrix (CZ / PL / EE alike publish only within-country commutes). The model therefore reconstructs all worker demand from in-bundle residents only, which understates true labour-side demand in border bundles whose populations commute substantially to a neighbouring country. Most visible on Zielona Góra and Szczecin (Berlin / Brandenburg side), Ústí nad Labem – Chomutov, Liberec – Jablonec, and Ostrava (cross-border to Saxony / Slovakia / southern Poland respectively), and Ida-Viru (historically Narva – Ivangorod, now mostly closed).
+
+### Resolved (historical)
+
+#### Poland
+
+- ~~Under a single shared EU-wide gravity decay curve, modeled mean cross-gmina commute distance ran roughly +2 to +4 km long across most PL bundles vs the NSP-2021 cordon-adjusted observed mean. Player-visible as phantom long-haul commuters spread across the map.~~ **(Resolved in 0.3.1 — per-bundle commute-distance calibration; mean over-inflation across the 19-bundle PL fleet drops from +2.60 km to −0.03 km, all 19 within ±1 km.)**
+- ~~The cordon mechanism fabricated implausibly long (>80 km, register / weekly-commute skew) cross-boundary flows as in-bundle daily transit demand at the map edge, over-saturating boundary gateway gminas — most visibly Warsaw, where inbound concentration ran 0.72 with 12 over-saturated gateways.~~ **(Resolved in 0.3.1 — cordon depth gate; Warsaw inbound concentration drops to 0.36 with all 12 gateways cleared; implausible-depth share roughly halved on all 19 bundles in both directions.)**
+- ~~Three building-function codes in the Polish national classification (freight handling, postal sorting, aircraft hangars) silently routed large logistics and retail halls into a high-density transport-active workplace class instead of warehousing, causing a ~20× per-gmina workplace-mass over-weight on the affected buildings and pushing jobs out of central districts into peripheral logistics belts.~~ **(Resolved in 0.3.1 — workplace classification fix.)**
+- ~~PL's published commute O/D matrix is employer-seat keyed: a najemni worker's commute is attributed to their employer's registered seat (siedziba), not their physical workplace. National employers headquartered in Warsaw / Kraków therefore booked their geographically-dispersed workforce's jobs to the HQ city, over-concentrating jobs at corporate-HQ city-counties.~~ **(Resolved in 0.2.4 — workplace totals re-keyed toward NSP-2021 P4500 physical workplace location.)**
+- ~~The `pracujący` count from BDL is the narrowest of four PL employment measures (excludes individual farmers on holdings <1 ha and small-employer agriculture). The gap to broader measures (NSP 2021 census `pracujący` ~16.5M, GUS `pracujący ogółem` P3193 ~16.0M, vs BDL ~14.1M) is mostly small-farm employment.~~ **(Resolved in 0.2.4 — broadened to the NSP 2021 census `pracujący`.)**
 - ~~Gdańsk oceanic index is not fully constructed -- requires a follow up and will be fixed in the next iteration~~ **(Resolved in 0.2.1)**
+
+#### Czechia
+
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.3.1 (2026-06-12)
+
+#### New Cities
+
+- **Poland**
+  - `CZE` - Częstochowa
+  - `IEG` - Zielona Góra
+  - `KIE` - Kielce
+  - `LEG` - Legnica - LGOM (Legnicko-Głogowski Okręg Miedziowy)
+  - `OPL` - Opole
+  - `RDO` - Radom
+  - `SZY` - Olsztyn
+
+#### New Features
+
+- **Seven new Poland bundles**, covering Częstochowa, Zielona Góra, Kielce, Legnica – LGOM, Opole, Radom, and Olsztyn. Each ships with sub-gmina BREC rejon-statystyczny resident and worker placement against BDOT10k buildings, PRG cadastral boundaries, and the same special-demand surface as the existing PL maps.
+
+- **Per-bundle commute-distance calibration.** The commute-distance distribution in each bundle now matches the bundle-specific NSP-2021 cordon-adjusted observed mean rather than inheriting a single EU-wide decay curve. Mean modeled commute-distance over-inflation across the full 19-map PL set drops from **+2.60 km to −0.03 km**; all 19 land within ±1 km of their observed target. Sub-municipal trip endpoints are correspondingly tighter — fewer phantom long-haul commuters across the map, denser local clusters around each map's central cities.
+
+- **Implausible long-haul cordon commutes redirected to self-loop.** Cross-boundary flows longer than ~80 km from origin to destination are no longer fabricated as in-bundle daily transit demand at the map edge — long flows are kept whole below 80 km, ramped down to zero at 160 km, and dropped beyond. The unretained mass reverts to local self-commutes via the existing mass-conserving reconstruction path.
+
+- **Workplace classification fix for large logistics halls.** Three building-function codes in the Polish national classification (freight handling, postal sorting, aircraft hangars) were silently routing large logistics and retail halls into a high-density transport-active workplace class instead of warehousing — a roughly 20× per-gmina workplace-mass over-weight on the affected buildings. The remap shifts these halls to warehousing density, redistributing workplace demand from peripheral logistics belts back toward the bundle centre. The section-H workplace split (transport vs warehousing) is also reshaped from 60/40 to 5/95 anchored to Eurostat sectoral employment shares.
+
+- **Sparser-class workplace density anchored to national priors.** The per-bundle calibration of building-class job densities now blends against PL national priors. Previously-sparse classes (e.g. transport-active in non-station bundles) no longer fit to implausible jobs sqm floor area ratios via calibration noise.
+
+- **Cleaner resident point placement on BDOT buildings.** Residents across all PL bundles now snap to nearest BDOT residential building polygons. .
+
+#### Other Features
+
+- **Cross-border earth coverage carved against high-resolution coast.** For bundles whose ocean mask reaches past the national boundary, the coarse neighbour-country earth layer no longer clobbers the high-resolution coast at low zoom. (None of the seven new bundles are coastal; the fix applies to existing Gdańsk and Szczecin too and ships with them in a future release.)
+
+#### Bugfixes
+
+- **(PL)** Per-bundle commute-distance calibration bounds widened; 6 bundles re-fit on the wider range so all 19 land within target.
+- **(PL)** BDOT building-density calibration tolerates backslash path separators on Windows / WSL.
+- Resident point placement tolerates corruption-recovery on intermediate cached outputs, removing a class of spurious rebuild prompts.
 
 ### 0.3.0 (2026-06-10)
 
