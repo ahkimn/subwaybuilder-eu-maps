@@ -1,2124 +1,571 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>subwaybuilder-eu-maps releases</title>
-    <style>
-      body {
-        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        margin: 24px;
-        line-height: 1.4;
-      }
-      table {
-        border-collapse: collapse;
-        width: 100%;
-      }
-      th,
-      td {
-        border: 1px solid #ddd;
-        padding: 8px;
-        text-align: left;
-      }
-      th {
-        background: #f5f5f5;
-      }
-      code {
-        background: #f2f2f2;
-        padding: 1px 4px;
-        border-radius: 4px;
-      }
-      section {
-        margin-top: 28px;
-      }
-      pre {
-        background: #fafafa;
-        border: 1px solid #ddd;
-        padding: 12px;
-        overflow-x: auto;
-        white-space: pre-wrap;
-      }
-      article.readme {
-        border: 1px solid #e6e6e6;
-        background: #fbfbfb;
-        padding: 14px;
-        border-radius: 6px;
-      }
-      article.readme h1,
-      article.readme h2,
-      article.readme h3,
-      article.readme h4 {
-        margin-top: 1.1em;
-        margin-bottom: 0.5em;
-      }
-      article.readme ul {
-        margin-top: 0.3em;
-      }
-      article.readme img {
-        max-width: 100%;
-        height: auto;
-        display: block;
-        margin: 8px 0;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>subwaybuilder-eu-maps</h1>
-    <p>
-      A collection of non-Japanese, non-Taiwanese city maps for the game Subway
-      Builder.
-    </p>
-    <table>
-      <thead>
-        <tr>
-          <th>Code</th>
-          <th>Country</th>
-          <th>Names</th>
-          <th>Manifest</th>
-          <th>Latest Version</th>
-          <th>Date</th>
-          <th>Latest Download</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>BRQ</td>
-          <td>CZ</td>
-          <td>Brno</td>
-          <td><a href="./BRQ.json">BRQ.json</a></td>
-          <td>0.2.1</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/BRQ.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/BRQ.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>BTK</td>
-          <td>PL</td>
-          <td>Białystok</td>
-          <td><a href="./BTK.json">BTK.json</a></td>
-          <td>0.2.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/BTK.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/BTK.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>BZG</td>
-          <td>PL</td>
-          <td>Bydgoszcz - Toruń</td>
-          <td><a href="./BZG.json">BZG.json</a></td>
-          <td>0.3.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/BZG.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/BZG.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>CBS</td>
-          <td>CZ</td>
-          <td>České Budějovice</td>
-          <td><a href="./CBS.json">CBS.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/CBS.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/CBS.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>CZE</td>
-          <td>PL</td>
-          <td>Częstochowa</td>
-          <td><a href="./CZE.json">CZE.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/CZE.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/CZE.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>EPU</td>
-          <td>EE</td>
-          <td>Pärnu</td>
-          <td><a href="./EPU.json">EPU.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/EPU.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/EPU.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>GDN</td>
-          <td>PL</td>
-          <td>Gdańsk</td>
-          <td><a href="./GDN.json">GDN.json</a></td>
-          <td>0.3.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/GDN.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/GDN.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>HKP</td>
-          <td>CZ</td>
-          <td>Hradec Králové - Pardubice</td>
-          <td><a href="./HKP.json">HKP.json</a></td>
-          <td>0.2.1</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/HKP.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/HKP.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>IDV</td>
-          <td>EE</td>
-          <td>Ida-Viru</td>
-          <td><a href="./IDV.json">IDV.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/IDV.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/IDV.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>IEG</td>
-          <td>PL</td>
-          <td>Zielona Góra</td>
-          <td><a href="./IEG.json">IEG.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/IEG.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/IEG.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>KIE</td>
-          <td>PL</td>
-          <td>Kielce</td>
-          <td><a href="./KIE.json">KIE.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/KIE.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/KIE.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>KRK</td>
-          <td>PL</td>
-          <td>Kraków</td>
-          <td><a href="./KRK.json">KRK.json</a></td>
-          <td>0.3.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KRK.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KRK.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>KTW</td>
-          <td>PL</td>
-          <td>Katowice - GZM</td>
-          <td><a href="./KTW.json">KTW.json</a></td>
-          <td>0.2.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KTW.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KTW.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>LBC</td>
-          <td>CZ</td>
-          <td>Liberec - Jablonec nad Nisou</td>
-          <td><a href="./LBC.json">LBC.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/LBC.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/LBC.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>LCJ</td>
-          <td>PL</td>
-          <td>Łódź</td>
-          <td><a href="./LCJ.json">LCJ.json</a></td>
-          <td>0.3.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/LCJ.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/LCJ.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>LEG</td>
-          <td>PL</td>
-          <td>Legnica - LGOM</td>
-          <td><a href="./LEG.json">LEG.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/LEG.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/LEG.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>LUZ</td>
-          <td>PL</td>
-          <td>Lublin</td>
-          <td><a href="./LUZ.json">LUZ.json</a></td>
-          <td>0.2.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/LUZ.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/LUZ.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>OLO</td>
-          <td>CZ</td>
-          <td>Olomouc</td>
-          <td><a href="./OLO.json">OLO.json</a></td>
-          <td>0.2.1</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/OLO.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/OLO.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>OPL</td>
-          <td>PL</td>
-          <td>Opole</td>
-          <td><a href="./OPL.json">OPL.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/OPL.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/OPL.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>OSR</td>
-          <td>CZ</td>
-          <td>Ostrava</td>
-          <td><a href="./OSR.json">OSR.json</a></td>
-          <td>0.2.1</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/OSR.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/OSR.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>PLZ</td>
-          <td>CZ</td>
-          <td>Plzeň</td>
-          <td><a href="./PLZ.json">PLZ.json</a></td>
-          <td>0.2.1</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PLZ.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PLZ.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>POZ</td>
-          <td>PL</td>
-          <td>Poznań</td>
-          <td><a href="./POZ.json">POZ.json</a></td>
-          <td>0.2.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/POZ.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/POZ.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>PRG</td>
-          <td>CZ</td>
-          <td>Praha</td>
-          <td><a href="./PRG.json">PRG.json</a></td>
-          <td>0.2.1</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PRG.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PRG.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>RDO</td>
-          <td>PL</td>
-          <td>Radom</td>
-          <td><a href="./RDO.json">RDO.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/RDO.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/RDO.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>RZE</td>
-          <td>PL</td>
-          <td>Rzeszów</td>
-          <td><a href="./RZE.json">RZE.json</a></td>
-          <td>0.2.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/RZE.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/RZE.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>SZY</td>
-          <td>PL</td>
-          <td>Olsztyn</td>
-          <td><a href="./SZY.json">SZY.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/SZY.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/SZY.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>SZZ</td>
-          <td>PL</td>
-          <td>Szczecin</td>
-          <td><a href="./SZZ.json">SZZ.json</a></td>
-          <td>0.2.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/SZZ.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/SZZ.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>TAY</td>
-          <td>EE</td>
-          <td>Tartu</td>
-          <td><a href="./TAY.json">TAY.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TAY.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TAY.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>TLL</td>
-          <td>EE</td>
-          <td>Tallinn</td>
-          <td><a href="./TLL.json">TLL.json</a></td>
-          <td>0.1.0</td>
-          <td>2026-06-12</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TLL.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TLL.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>UCH</td>
-          <td>CZ</td>
-          <td>Ústí nad Labem - Chomutov</td>
-          <td><a href="./UCH.json">UCH.json</a></td>
-          <td>0.2.1</td>
-          <td>2026-05-18</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/UCH.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/UCH.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>WAR</td>
-          <td>PL</td>
-          <td>Warszawa</td>
-          <td><a href="./WAR.json">WAR.json</a></td>
-          <td>0.2.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/WAR.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/WAR.zip</a
-            >
-          </td>
-        </tr>
-        <tr>
-          <td>WRO</td>
-          <td>PL</td>
-          <td>Wrocław</td>
-          <td><a href="./WRO.json">WRO.json</a></td>
-          <td>0.3.0</td>
-          <td>2026-06-01</td>
-          <td>
-            <a
-              href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/WRO.zip"
-              >https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/WRO.zip</a
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
-    <section>
-      <h2>README</h2>
-      <article class="readme">
-        <h1>subwaybuilder-eu-maps</h1>
-        <h2>Summary</h2>
-        <p>
-          Each map covers the metropolitan area around one or more major
-          European cities. Metropolitan-area bounds are drawn from national
-          cadastral or statistical-office boundary products; municipal-level
-          population, employment, and commute data drive resident and worker
-          placement below the municipality scale wherever the source data allows
-          it.
-        </p>
-        <h2>Features</h2>
-        <ul>
-          <li>
-            High level of detail, with sub-municipality population placement
-            driven by country-specific rasters or settlement-unit grids.
-          </li>
-          <li>
-            Spatial realism -- points are assigned in a manner that is aware of
-            water features, administrative boundaries, and density-weighted
-            placement surfaces.
-          </li>
-          <li>
-            Special demand from several country-specific open-data sources is
-            modeled — covering airports, ports, universities, hospitals,
-            military installations, sports venues, cultural attractions,
-            museums, libraries, and tourism sites. See
-            <a href="#special-demand-details">Special Demand Details</a> below
-            for the per-country category breakdown.
-          </li>
-          <li>
-            Buildings are sourced from each country&#x27;s national cadastre
-            (RÚIAN for Czechia, BDOT10k for Poland, EHR + ETAK for Estonia).
-            OSRM routing data is shared with the broader Subway Builder map
-            pipeline.
-          </li>
-          <li>
-            Building depth is default to -10m, with train-related infrastructure
-            exempt.
-          </li>
-        </ul>
-        <h2>High-Level Methodology</h2>
-        <p>
-          Resident and commuter totals are estimated from country-specific
-          census and employment tables, then distributed spatially using the
-          best available mesh or raster guidance for each country. Population
-          counts are conserved at municipality-level control totals, while
-          workplace-side calibration and commute matrices keep resident and
-          worker demand in balance.
-        </p>
-        <p>
-          A gravity model augmented with observed municipality-to-municipality
-          commute flows reproduces macro-level commute patterns when
-          sub-municipal O/D pairs are not directly published.
-        </p>
-        <h4>Czech Republic</h4>
-        <p>
-          Czech bundles combine CZSO Census 2021 population and
-          economic-activity tables with the EU JRC GHS-POP 2020 100m raster for
-          within-municipality population weighting. For distributing jobs, a
-          separate 100m raster layer built from Overture building volumes (and
-          weighed by industry type) is constructed against the DojizdkovyProud
-          workplace-side totals. Administrative boundaries come from RUIAN (the
-          Czech cadastral registry). For resident-worker flows, the CZSO 2021
-          commute O/D matrix at sub-municipal (ZSJ-díl) granularity is used to
-          provide macro-level flow, with randomization used to assign individual
-          populations for each ZSJ-díl pair to points within their respective
-          boundaries.
-        </p>
-        <p>
-          In addition, because the 2021 census was conducted during COVID, its
-          published commute matrix inflates same-settlement (and therefore
-          ZSJ-díl) self-commute flows well above pre-pandemic levels. A
-          gravity-based correction pass redistributes the excess self-commute
-          volume into cross-settlement flows. The parameters of the gravity
-          model are calibrated per bundle, using the known log-normal
-          commute-distance distribution from the CZSO 2021 commute O/D matrix.
-          This correction pass brings aggregate self-commute back to plausible
-          pre-pandemic levels without distorting the observed inter-settlement
-          flow structure.
-        </p>
-        <h4>Poland</h4>
-        <p>
-          Polish bundles combine GUS NSP 2021 census tables (population at 1km /
-          250m / 125m hybrid resolution; per-rejon population from the 16-sheet
-          voivodship workbook) with the GUGiK BDOT10k national buildings
-          cadastre for within-municipality population and worker weighting. The
-          metropolitan-area boundary unit is the FUA (Funkcjonalny Obszar
-          Miejski), defined by the Eurostat URAU 2021 layer, with each FUA
-          dissolved from member gmina polygons via the GUGiK PRG cadastral
-          registry.
-        </p>
-        <p>
-          The sub-municipal base unit of population/worker modeling is the
-          <strong>BREC rejon statystyczny</strong> (35,774 nationwide),
-          GUS&#x27;s official statistical enumeration area — the direct analog
-          to the Czech ZSJ-díl. Per-rejon worker mass is derived from BDOT10k
-          floor area weighted by <code>kodKst</code> (the Polish
-          building-function classification; 9 worker classes), with per-bundle
-          weights calibrated by NNLS fit against BDL PKD employment counts.
-          Gmina-level <code>pracujący</code> (BDL) is the column-margin truth
-          for worker totals.
-        </p>
-        <p>
-          Two PL-specific calibration corrections augment the JP-style
-          municipal-weighted gravity model. First, GUS strips intra-gmina
-          commute flows at NSP 2021 publication. A
-          <strong>deterministic self-loop reconstruction</strong> pass per gmina
-          restores the diagonal as <code>BDL[g] − Σ inbound[g]</code>,
-          recovering the intra-gmina worker mass that the model would otherwise
-          lose.
-        </p>
-        <h4>Estonia</h4>
-        <p>
-          Estonian bundles combine the 2021 Estonian census per-municipality and
-          per-asustusüksus tables with Statistikaamet&#x27;s INSPIRE-aligned 100
-          m / 250 m population grid for within-municipality population
-          weighting. Workplace mass is derived from the Ehitisregister national
-          building cache filtered through the three-tier KAOS use-code taxonomy
-          (residential / workplace / mixed-use), with per-firm employee totals
-          from Estonian Commercial Register annual reports providing the
-          workplace anchor. Administrative boundaries come from the EHAK (Eesti
-          haldus- ja asustusjaotuse klassifikaator) registry; the five largest
-          cities — Tallinn, Tartu, Pärnu, Narva, Kohtla-Järve — are further
-          subdivided into asum / kvartal / linnaosa neighborhoods via
-          Maa-amet&#x27;s official sub-municipal boundary layer (Tallinn 92
-          polygons, Tartu 51, Pärnu 22, Narva 19, Kohtla-Järve 5).
-        </p>
-        <p>
-          Commute flows are calibrated against the 2021 census commute matrix,
-          which publishes only bin-marginal shares (within-municipality,
-          within-county, cross-county, against Tallinn, against Tartu) rather
-          than a full municipality × municipality cell matrix. A Generalized IPF
-          pass with destination-pinning on the two anchor cities reconciles a
-          gravity-decay model against those bin marginals; a symmetric
-          containment-share guard prevents over-routing to the urban core when
-          the decay would otherwise concentrate flows on Tallinn / Tartu.
-        </p>
-        <h3>Future countries</h3>
-        <p>
-          Additional European countries will be added as country-specific
-          open-data pipelines come online. Each country follows the same
-          conservation-and-calibration scheme above, with country-specific
-          inputs substituted for boundaries, population, employment, commute
-          matrices, and special-demand layers.
-        </p>
-        <h2>Primary Data Sources</h2>
-        <h4>Czech Republic</h4>
-        <ul>
-          <li>
-            ČÚZK RUIAN — cadastral boundaries for municipalities and basic
-            settlement units (cuzk.cz)
-          </li>
-          <li>
-            ČSÚ Sčítání 2021 — population, economic activity, age structure
-            (csu.gov.cz)
-          </li>
-          <li>
-            EU JRC GHS-POP 2023A / 2020 epoch — 100m population raster for
-            within-municipality weighting (ghsl.jrc.ec.europa.eu)
-          </li>
-          <li>
-            ČSÚ DojizdkovyProud 2021 — sub-municipal commute O/D matrix and
-            workplace-side occupied-jobs tables
-          </li>
-          <li>
-            MŠMT DSIA F21 — university and junior-college enrollment (msmt.cz)
-          </li>
-          <li>tourdata.cz — krajské attraction visitor statistics</li>
-          <li>
-            Úřad pro civilní letectví ČR (Czech CAA) — airport passenger
-            statistics
-          </li>
-          <li>
-            ÚZIS ČR — Lůžkový fond per-facility hospital bed counts and
-            occupancy, with the NRPZS national health-provider register for
-            facility addresses (uzis.cz)
-          </li>
-          <li>
-            AČR installation roster — active-duty personnel counts curated from
-            official unit pages and public references
-          </li>
-        </ul>
-        <h4>Poland</h4>
-        <ul>
-          <li>
-            GUGiK — PRG cadastral boundaries (voivodships, powiats, gminas),
-            BDOT10k national building cadastre with PKOB → kodKst
-            classification, and CAPAP national address geocoder
-            (geoportal.gov.pl)
-          </li>
-          <li>
-            GUS NSP 2021 / BREC / BDL — population at 1km / 250m / 125m hybrid
-            grid, sub-gmina <code>rejon statystyczny</code> polygons + per-rejon
-            populations, gmina-level pracujący employment, establishments,
-            PKD-section workplace breakdown (P4457), per-institution student
-            enrollment, and public-sector cultural attendance aggregates
-            (stat.gov.pl, bdl.stat.gov.pl)
-          </li>
-          <li>
-            Eurostat URAU 2021 — Functional Urban Area polygons for
-            metropolitan-area definitions (gisco-services.ec.europa.eu)
-          </li>
-          <li>
-            POL-on RADON — Polish Ministry of Education registry of
-            higher-education institutions (radon.nauka.gov.pl)
-          </li>
-          <li>
-            POT (Polska Organizacja Turystyczna) — annual
-            <code>Frekwencja w atrakcjach turystycznych</code> PDF report
-          </li>
-          <li>
-            ULC (Urząd Lotnictwa Cywilnego) — airport passenger statistics
-          </li>
-          <li>
-            PIPT (Polska Izba Przemysłu Targowego) and Instytut Teatralny —
-            convention / exhibition visitor statistics (polfair.pl) and
-            per-season theatre attendance (e-teatr.pl)
-          </li>
-          <li>
-            National sports leagues — Ekstraklasa football (ekstrastats.pl),
-            Tauron Hokej Liga (hokej.net), PlusLiga volleyball
-            (sportowefakty.wp.pl), ORLEN Superliga handball (orlen-superliga.pl)
-          </li>
-          <li>
-            Municipal traffic studies — Warsaw Badanie Ruchu 2015 (WBR) and
-            Wrocław Kompleksowe Badanie Ruchu 2018 (KBR), driving the optional
-            rejon-level workplace prior and rejon × rejon OD overlay
-          </li>
-          <li>
-            RPWDL — Rejestr Podmiotów Wykonujących Działalność Leczniczą, the
-            national medical-entity registry for hospital facilities and
-            addresses (via dane.gov.pl)
-          </li>
-          <li>
-            GUS BDL &quot;Zdrowie i ochrona zdrowia&quot; — per-voivodship
-            hospital bed occupancy and outpatient visitation rates
-          </li>
-          <li>
-            Military installation roster — active-duty personnel counts curated
-            from Polish Armed Forces unit references and public sources
-          </li>
-        </ul>
-        <h4>Estonia</h4>
-        <ul>
-          <li>
-            Statistikaamet (Statistics Estonia) — 2021 census (per-municipality
-            and per-asustusüksus population, employment, demographics),
-            INSPIRE-aligned 100 m / 250 m population grid, commute O/D
-            bin-marginal matrix, employed-residents by economic activity,
-            national tourism visitor statistics, EHAK administrative classifier
-            (stat.ee)
-          </li>
-          <li>
-            Maa-amet (Estonian Land Board) — ETAK topographic data (buildings +
-            land-use + water + transport ROW polygons), KAOS building-use
-            taxonomy, authoritative address geocoder, annual cadastral snapshot
-            with siht1 zoning, sub-municipal asum / kvartal / linnaosa
-            boundaries for the five largest cities (geoportaal.maaamet.ee)
-          </li>
-          <li>
-            Ehitisregister (Estonian Building Registry) — national building
-            cache with per-building KAOS use codes, floor counts, footprints,
-            and unit counts (ehr.ee)
-          </li>
-          <li>
-            Eesti Ametlik Ariregister (Estonian Commercial Register) — per-firm
-            employee totals from majandusaasta aruanded (annual reports), used
-            as the workplace anchor for sectoral employment (ariregister.rik.ee)
-          </li>
-          <li>
-            Eesti Hariduse Infosüsteem (EHIS / HTM) — institutional metadata +
-            per-institution enrollment for universities, junior colleges, and
-            technical colleges (haridussilm.ee)
-          </li>
-          <li>
-            Tallinna Lennujaam (Tallinn Airport) — terminal-level annual
-            passenger statistics (tallinn-airport.ee)
-          </li>
-          <li>
-            Tallinna Sadam (Port of Tallinn) — per-port annual passenger
-            throughput at Old City Harbour (Helsinki / Stockholm / cruise
-            terminals), Paldiski North / South, Paljassaare, plus the regional
-            ports at Rohuküla, Sillamäe, and Saaremaa (ts.ee)
-          </li>
-          <li>
-            Terviseamet (Estonian Health Board) — hospital facility registry +
-            per-facility bed counts (terviseamet.ee)
-          </li>
-          <li>
-            Kaitsevägi (Estonian Defence Forces) — garrison roster, active-duty
-            personnel curated from official unit references (mil.ee)
-          </li>
-          <li>
-            Eurostat / EMODnet Bathymetry — INSPIRE Population Grid epoch
-            alignment + EMODnet DTM bathymetry for coastal bundles
-          </li>
-        </ul>
-        <h3>Future countries</h3>
-        <p>To be populated as each country&#x27;s pipeline is finalized.</p>
-        <h2>Issues/Questions</h2>
-        <p>
-          Please raise an issue on this repository for incorrect manifests,
-          broken download links, or release-page problems. Suggestions are
-          welcome — especially pointers to country-specific open datasets that
-          could improve existing bundles or unlock new ones.
-        </p>
-        <h2>Known Issues</h2>
-        <h3>Czechia</h3>
-        <ul>
-          <li>
-            A residual set of ZSJ-díl with no inbound commute flow from anywhere
-            in the 2021 census matrix (and no resident commuters either) remain
-            without modelled workers.
-          </li>
-          <li>
-            Obce on the outskirts of the map boundary see high levels of short
-            commutes due to the constraint that all commutes must start and end
-            within the map boundary.
-          </li>
-          <li>
-            Residential point location is noisy, and not entirely distanced from
-            total &quot;activity&quot; density due to the smoothness of the
-            GHS-POP raster — sometimes placing residents near industrial
-            locations.
-          </li>
-        </ul>
-        <h3>Poland</h3>
-        <ul>
-          <li>
-            33 of the 65 covered higher-education institutions still use
-            single-point placement at the rector&#x27;s office. Multi-campus
-            institutions outside the 32 already disaggregated are not yet
-            per-faculty split.
-          </li>
-          <li>
-            Per-college in-person attendance is not available at the same
-            granularity as Czechia; the resulting single-point campuses geocoded
-            against the cadastre lead to some awkward large point placement.
-          </li>
-          <li>
-            Mixed-use buildings (ground-floor retail + residential upstairs) are
-            classified by their predominant cadastral function and are not split
-            between residential and worker meshes — a small (~2%) population of
-            buildings is affected.
-          </li>
-          <li>
-            Self-loop reconstruction absorbs both 2021 → 2024 workforce growth
-            and the long-haul register commutes that the cordon depth gate now
-            correctly removes from daily transit, slightly inflating
-            self-commute share — most visibly in boundary gminas of
-            high-OOB-commuter bundles (warsaw, gdansk, szczecin).
-          </li>
-        </ul>
-        <h3>Estonia</h3>
-        <ul>
-          <li>
-            The modeled commute-distance distribution under-represents
-            very-short trips (≤1 km, ~6% modeled vs ~16% in the Statistics
-            Estonia TT231 ground truth) and very-long trips (&gt;100 km, ~0.1%
-            modeled vs ~3% TT231). The shortfall on the short tail is a sub-grid
-            limitation (the resident-mesh cell grain floors how close origin and
-            destination can land); the long tail is a closed-system limitation
-            (the model only places trip endpoints within the bundle).
-          </li>
-          <li>
-            Cross-county commutes whose destination is neither Tallinn nor Tartu
-            are currently modelled as in-bundle self-loops rather than
-            redistributed across the remaining 13 county capitals (maakonna
-            keskus). Affects ~6.8–6.9% of Pärnu and Ida-Viru bundle residents,
-            ~1.5–3.8% of Tallinn / Tartu.
-          </li>
-        </ul>
-        <h3>Cross-country</h3>
-        <ul>
-          <li>
-            Faraway water, cross-border land, and cross-border inland water past
-            the bundle&#x27;s modeled extent can render as a no-data
-            &quot;grid&quot; pattern at the lowest zoom levels because the
-            supplemental water and earth layers are extracted against the bundle
-            boundary plus a small buffer. Coverage is correct at gameplay zoom
-            levels and beyond; only the lowest-zoom overview is affected. Most
-            visible on Ida-Viru (Russian land east of Narva river; Lake Peipus),
-            Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the
-            south), Szczecin (German land to the west), and Gdańsk (Kaliningrad
-            to the north-east).
-          </li>
-          <li>
-            Cross-border commute flows are absent from every country&#x27;s
-            national O/D matrix (CZ / PL / EE alike publish only within-country
-            commutes). The model therefore reconstructs all worker demand from
-            in-bundle residents only, which understates true labour-side demand
-            in border bundles whose populations commute substantially to a
-            neighbouring country. Most visible on Zielona Góra and Szczecin
-            (Berlin / Brandenburg side), Ústí nad Labem – Chomutov, Liberec –
-            Jablonec, and Ostrava (cross-border to Saxony / Slovakia / southern
-            Poland respectively), and Ida-Viru (historically Narva – Ivangorod,
-            now mostly closed).
-          </li>
-        </ul>
-        <h3>Resolved (historical)</h3>
-        <h4>Poland</h4>
-        <ul>
-          <li>
-            <del
-              >Under a single shared EU-wide gravity decay curve, modeled mean
-              cross-gmina commute distance ran roughly +2 to +4 km long across
-              most PL bundles vs the NSP-2021 cordon-adjusted observed mean.
-              Player-visible as phantom long-haul commuters spread across the
-              map.</del
-            >
-            <strong
-              >(Resolved in 0.3.1 — per-bundle commute-distance calibration;
-              mean over-inflation across the 19-bundle PL fleet drops from +2.60
-              km to −0.03 km, all 19 within ±1 km.)</strong
-            >
-          </li>
-          <li>
-            <del
-              >The cordon mechanism fabricated implausibly long (&gt;80 km,
-              register / weekly-commute skew) cross-boundary flows as in-bundle
-              daily transit demand at the map edge, over-saturating boundary
-              gateway gminas — most visibly Warsaw, where inbound concentration
-              ran 0.72 with 12 over-saturated gateways.</del
-            >
-            <strong
-              >(Resolved in 0.3.1 — cordon depth gate; Warsaw inbound
-              concentration drops to 0.36 with all 12 gateways cleared;
-              implausible-depth share roughly halved on all 19 bundles in both
-              directions.)</strong
-            >
-          </li>
-          <li>
-            <del
-              >Three building-function codes in the Polish national
-              classification (freight handling, postal sorting, aircraft
-              hangars) silently routed large logistics and retail halls into a
-              high-density transport-active workplace class instead of
-              warehousing, causing a ~20× per-gmina workplace-mass over-weight
-              on the affected buildings and pushing jobs out of central
-              districts into peripheral logistics belts.</del
-            >
-            <strong>(Resolved in 0.3.1 — workplace classification fix.)</strong>
-          </li>
-          <li>
-            <del
-              >PL&#x27;s published commute O/D matrix is employer-seat keyed: a
-              najemni worker&#x27;s commute is attributed to their
-              employer&#x27;s registered seat (siedziba), not their physical
-              workplace. National employers headquartered in Warsaw / Kraków
-              therefore booked their geographically-dispersed workforce&#x27;s
-              jobs to the HQ city, over-concentrating jobs at corporate-HQ
-              city-counties.</del
-            >
-            <strong
-              >(Resolved in 0.2.4 — workplace totals re-keyed toward NSP-2021
-              P4500 physical workplace location.)</strong
-            >
-          </li>
-          <li>
-            <del
-              >The <code>pracujący</code> count from BDL is the narrowest of
-              four PL employment measures (excludes individual farmers on
-              holdings &lt;1 ha and small-employer agriculture). The gap to
-              broader measures (NSP 2021 census <code>pracujący</code> ~16.5M,
-              GUS <code>pracujący ogółem</code> P3193 ~16.0M, vs BDL ~14.1M) is
-              mostly small-farm employment.</del
-            >
-            <strong
-              >(Resolved in 0.2.4 — broadened to the NSP 2021 census
-              <code>pracujący</code>.)</strong
-            >
-          </li>
-          <li>
-            <del
-              >Gdańsk oceanic index is not fully constructed -- requires a
-              follow up and will be fixed in the next iteration</del
-            >
-            <strong>(Resolved in 0.2.1)</strong>
-          </li>
-        </ul>
-        <h4>Czechia</h4>
-        <ul>
-          <li>
-            <del
-              >The new metropolitan area boundaries are a bit strange and will
-              need some expansion. Targeting that in a 0.2.0 for each Czech
-              map</del
-            >
-            <strong>(Resolved in 0.2.0)</strong>
-          </li>
-        </ul>
-        <h2>Changelog</h2>
-        <h3>0.3.1 (2026-06-12)</h3>
-        <h4>New Cities</h4>
-        <ul>
-          <li><strong>Poland</strong></li>
-          <li style="margin-left: 1.25em"><code>CZE</code> - Częstochowa</li>
-          <li style="margin-left: 1.25em"><code>IEG</code> - Zielona Góra</li>
-          <li style="margin-left: 1.25em"><code>KIE</code> - Kielce</li>
-          <li style="margin-left: 1.25em">
-            <code>LEG</code> - Legnica - LGOM (Legnicko-Głogowski Okręg
-            Miedziowy)
-          </li>
-          <li style="margin-left: 1.25em"><code>OPL</code> - Opole</li>
-          <li style="margin-left: 1.25em"><code>RDO</code> - Radom</li>
-          <li style="margin-left: 1.25em"><code>SZY</code> - Olsztyn</li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>
-            <strong>Seven new Poland bundles</strong>, covering Częstochowa,
-            Zielona Góra, Kielce, Legnica – LGOM, Opole, Radom, and Olsztyn.
-            Each ships with sub-gmina BREC rejon-statystyczny resident and
-            worker placement against BDOT10k buildings, PRG cadastral
-            boundaries, and the same special-demand surface as the existing PL
-            maps.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Per-bundle commute-distance calibration.</strong> The
-            commute-distance distribution in each bundle now matches the
-            bundle-specific NSP-2021 cordon-adjusted observed mean rather than
-            inheriting a single EU-wide decay curve. Mean modeled
-            commute-distance over-inflation across the full 19-map PL set drops
-            from <strong>+2.60 km to −0.03 km</strong>; all 19 land within ±1 km
-            of their observed target. Sub-municipal trip endpoints are
-            correspondingly tighter — fewer phantom long-haul commuters across
-            the map, denser local clusters around each map&#x27;s central
-            cities.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong
-              >Implausible long-haul cordon commutes redirected to
-              self-loop.</strong
-            >
-            Cross-boundary flows longer than ~80 km from origin to destination
-            are no longer fabricated as in-bundle daily transit demand at the
-            map edge — long flows are kept whole below 80 km, ramped down to
-            zero at 160 km, and dropped beyond. The unretained mass reverts to
-            local self-commutes via the existing mass-conserving reconstruction
-            path.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong
-              >Workplace classification fix for large logistics halls.</strong
-            >
-            Three building-function codes in the Polish national classification
-            (freight handling, postal sorting, aircraft hangars) were silently
-            routing large logistics and retail halls into a high-density
-            transport-active workplace class instead of warehousing — a roughly
-            20× per-gmina workplace-mass over-weight on the affected buildings.
-            The remap shifts these halls to warehousing density, redistributing
-            workplace demand from peripheral logistics belts back toward the
-            bundle centre. The section-H workplace split (transport vs
-            warehousing) is also reshaped from 60/40 to 5/95 anchored to
-            Eurostat sectoral employment shares.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong
-              >Sparser-class workplace density anchored to national
-              priors.</strong
-            >
-            The per-bundle calibration of building-class job densities now
-            blends against PL national priors. Previously-sparse classes (e.g.
-            transport-active in non-station bundles) no longer fit to
-            implausible jobs sqm floor area ratios via calibration noise.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Cleaner resident point placement on BDOT buildings.</strong>
-            Residents across all PL bundles now snap to nearest BDOT residential
-            building polygons. .
-          </li>
-        </ul>
-        <h4>Other Features</h4>
-        <ul>
-          <li>
-            <strong
-              >Cross-border earth coverage carved against high-resolution
-              coast.</strong
-            >
-            For bundles whose ocean mask reaches past the national boundary, the
-            coarse neighbour-country earth layer no longer clobbers the
-            high-resolution coast at low zoom. (None of the seven new bundles
-            are coastal; the fix applies to existing Gdańsk and Szczecin too and
-            ships with them in a future release.)
-          </li>
-        </ul>
-        <h4>Bugfixes</h4>
-        <ul>
-          <li>
-            <strong>(PL)</strong> Per-bundle commute-distance calibration bounds
-            widened; 6 bundles re-fit on the wider range so all 19 land within
-            target.
-          </li>
-          <li>
-            <strong>(PL)</strong> BDOT building-density calibration tolerates
-            backslash path separators on Windows / WSL.
-          </li>
-          <li>
-            Resident point placement tolerates corruption-recovery on
-            intermediate cached outputs, removing a class of spurious rebuild
-            prompts.
-          </li>
-        </ul>
-        <h3>0.3.0 (2026-06-10)</h3>
-        <h4>Initial Cities</h4>
-        <ul>
-          <li><strong>Estonia</strong></li>
-          <li style="margin-left: 1.25em"><code>TLL</code> - Tallinn</li>
-          <li style="margin-left: 1.25em"><code>TAY</code> - Tartu</li>
-          <li style="margin-left: 1.25em"><code>EPU</code> - Pärnu</li>
-          <li style="margin-left: 1.25em">
-            <code>IDV</code> - Ida-Viru (Narva + Kohtla-Järve)
-          </li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>First release of the Estonia maps.</li>
-          <li>
-            Sub-municipal (asustusüksus) resident and worker placement for all
-            four bundles, calibrated against the 2021 Estonian census and
-            Statistikaamet&#x27;s INSPIRE-aligned 100 m / 250 m gridded
-            population.
-          </li>
-          <li style="margin-left: 1.25em">
-            The five largest cities (Tallinn, Tartu, Pärnu, Narva, Kohtla-Järve)
-            are further subdivided into asum / kvartal / linnaosa neighborhoods
-            via Maa-amet&#x27;s official sub-municipal boundary layer.
-          </li>
-          <li style="margin-left: 1.25em">
-            Per-asustusüksus worker mass uses the Ehitisregister national
-            building cache (with the official KAOS use-code taxonomy filtering
-            residential / workplace / mixed-use) and per-firm employee totals
-            from Estonian Commercial Register annual reports as the workplace
-            anchor.
-          </li>
-          <li>
-            Demand points for airports, passenger ferry terminals, universities
-            and colleges, cultural attractions, convention and exhibition
-            centers, sports venues, libraries, religious sites, national parks
-            and natural landmarks, spa resorts, and theme parks across all four
-            bundles.
-          </li>
-          <li>
-            Per-municipality commute calibration against the 2021 census commute
-            matrix.
-          </li>
-          <li style="margin-left: 1.25em">
-            The published matrix releases only bin-marginal shares
-            (within-municipality, within-county, cross-county, against Tallinn,
-            against Tartu) rather than a full municipality-to-municipality cell
-            matrix.
-          </li>
-          <li style="margin-left: 1.25em">
-            A Generalized IPF pass reconciles a gravity-decay model against
-            those marginals with destination-pinning on the two anchor cities; a
-            symmetric containment guard prevents over-routing to the urban core.
-          </li>
-          <li>
-            ETAK + Ehitisregister-derived buildings used in place of Overture
-            for spatial detail.
-          </li>
-          <li>Standard OSRM routing included.</li>
-        </ul>
-        <h3>0.2.4 (2026-06-01)</h3>
-        <h4>Updated Cities</h4>
-        <ul>
-          <li><strong>Poland</strong></li>
-          <li style="margin-left: 1.25em"><code>WAR</code> - Warszawa</li>
-          <li style="margin-left: 1.25em">
-            <code>KTW</code> - Katowice - GZM (Górnośląsko-Zagłębiowska
-            Metropolia)
-          </li>
-          <li style="margin-left: 1.25em"><code>KRK</code> - Kraków</li>
-          <li style="margin-left: 1.25em"><code>POZ</code> - Poznań</li>
-          <li style="margin-left: 1.25em"><code>WRO</code> - Wrocław</li>
-          <li style="margin-left: 1.25em"><code>GDN</code> - Gdańsk</li>
-          <li style="margin-left: 1.25em"><code>LCJ</code> - Łódź</li>
-          <li style="margin-left: 1.25em"><code>LUZ</code> - Lublin</li>
-          <li style="margin-left: 1.25em"><code>SZZ</code> - Szczecin</li>
-          <li style="margin-left: 1.25em"><code>BTK</code> - Białystok</li>
-          <li style="margin-left: 1.25em">
-            <code>BZG</code> - Bydgoszcz - Toruń
-          </li>
-          <li style="margin-left: 1.25em"><code>RZE</code> - Rzeszów</li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>
-            <strong>Fuller land use coverage.</strong> All twelve maps now
-            source land use polygons from BDOT directly, giving much fuller
-            coverage of park/wooded land.
-          </li>
-          <li style="margin-left: 1.25em">
-            Rendered landuse is now clipped to water, so no water features
-            appear obscured by greenery when rendered.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Broader employment basis.</strong> The per-municipality
-            worker control total now uses the broader GUS NSP 2021 census
-            <code>pracujący</code> (an ILO-style residence-side measure) instead
-            of the narrower BDL administrative <code>pracujący</code> (P4280)
-            used previously.
-          </li>
-          <li style="margin-left: 1.25em">
-            This lifts worker totals across all 12 bundles, with the largest
-            impact in agriculture-heavy rural gminas that the administrative
-            measure under-counts
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Symmetric cordon at the map boundary.</strong>
-            Cross-boundary commute flows that the published NSP 2021 matrix
-            would otherwise have collapsed onto each boundary gmina&#x27;s
-            self-loop diagonal are now redistributed across in-bundle gateway
-            gminas via a mass-conserving multinomial weighted by gravity ×
-            in-bundle capacity
-          </li>
-          <li style="margin-left: 1.25em">
-            Redirected diagonal self-loop share is then debited at the new
-            gateway origin. \
-          </li>
-          <li style="margin-left: 1.25em">
-            The cordon pass operates symmetrically in both directions (outbound:
-            in-bundle resident, out-of-bundle job; inbound: out-of-bundle
-            resident, in-bundle job).
-          </li>
-          <li style="margin-left: 1.25em">
-            The result significantly improves CBD self-loop accuracy on
-            monocentric bundles and de-conflates the boundary self-loop where
-            the closed-matrix fabrication previously over-concentrated it;
-            recovery is sharpest at the map boundary itself, declining
-            monotonically toward the interior.
-          </li>
-        </ul>
-        <ul>
-          <li>New special demand categories added across all 12 bundles:</li>
-          <li style="margin-left: 1.25em">
-            <strong>Hospitals</strong> -- daily commute demand at inpatient and
-            outpatient hospital facilities. Per-facility bed counts are
-            allocated from voivodship totals by BDOT10k building floor area,
-            anchored to the RPWDL national medical-entity registry.
-          </li>
-        </ul>
-        <ul>
-          <li style="margin-left: 1.25em">
-            <strong>Military bases</strong> -- active-duty personnel demand at
-            Polish Land Forces, Air Force, Navy, Special Forces, and Territorial
-            Defence installations.
-          </li>
-        </ul>
-        <ul>
-          <li style="margin-left: 1.25em">
-            <strong>Passenger-ferry terminals.</strong> New demand points at
-            Świnoujście, Gdynia, Gdańsk-Westerplatte, and the seasonal Hel
-            passenger pier — sized from annual Port Monitor passenger
-            statistics.
-          </li>
-        </ul>
-        <h4>Other Features</h4>
-        <ul>
-          <li>
-            <strong>Additional venue and attraction coverage.</strong> Several
-            smaller demand additions across all 12 bundles: I liga football
-            spectator demand (cup-game inclusive) at the lower-tier clubs,
-            non-league event volume at major multi-use stadiums, municipal
-            sport-recreation facilities operated by local MOSiR / BOSiR offices,
-            and additional Catholic sanctuaries and marquee tourism attractions.
-          </li>
-        </ul>
-        <h4>Bugfixes</h4>
-        <ul>
-          <li>
-            <strong>Corrected university faculty coordinates.</strong> Wydział
-            Neofilologii Uniwersytetu Warszawskiego (Powiśle, near BUW) and
-            Wydział Lekarski Uniwersytetu Jagiellońskiego Collegium Medicum
-            (Stare Miasto, Kraków) repositioned to their actual addresses.
-          </li>
-          <li style="margin-left: 1.25em">
-            The prior coordinates had snapped to the wrong same-name street via
-            the national geocoder&#x27;s candidate-disambiguation step.
-          </li>
-        </ul>
-        <h3>0.2.3 (2026-05-19)</h3>
-        <h4>Updated Cities</h4>
-        <ul>
-          <li><strong>Poland</strong></li>
-          <li style="margin-left: 1.25em"><code>WAR</code> - Warszawa</li>
-          <li style="margin-left: 1.25em">
-            <code>KTW</code> - Katowice - GZM (Górnośląsko-Zagłębiowska
-            Metropolia)
-          </li>
-          <li style="margin-left: 1.25em"><code>KRK</code> - Kraków</li>
-          <li style="margin-left: 1.25em"><code>POZ</code> - Poznań</li>
-          <li style="margin-left: 1.25em"><code>WRO</code> - Wrocław</li>
-          <li style="margin-left: 1.25em"><code>GDN</code> - Gdańsk</li>
-          <li style="margin-left: 1.25em"><code>LCJ</code> - Łódź</li>
-          <li style="margin-left: 1.25em"><code>LUZ</code> - Lublin</li>
-          <li style="margin-left: 1.25em"><code>SZZ</code> - Szczecin</li>
-          <li style="margin-left: 1.25em"><code>BTK</code> - Białystok</li>
-          <li style="margin-left: 1.25em">
-            <code>BZG</code> - Bydgoszcz - Toruń
-          </li>
-          <li style="margin-left: 1.25em"><code>RZE</code> - Rzeszów</li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>
-            <strong>Worker destination distribution rebalanced.</strong> Within
-            each sub-municipal area that contains multiple worker points, the
-            share of inbound commuters is now distributed across those points by
-            their relative employment weight rather than concentrating on
-            whichever sibling won the proportional-sampling lottery.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong
-              >Worker point seeding improvements for industrial estates and
-              dense urban blocks.</strong
-            >
-            Building footprint area is now blended into the seeding signal
-            alongside floor count and local workplace density.
-          </li>
-          <li style="margin-left: 1.25em">
-            Large warehouse parks holding a small number of very large buildings
-            now should split into multiple worker points rather than
-            concentrating on a single mega-point.
-          </li>
-          <li style="margin-left: 1.25em">
-            The clustering pass that places workers around seed locations is now
-            refined to prevent the entire worker mass of a small block from
-            snapping onto its largest building.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Building polygon coverage expanded.</strong> The buildings
-            layer now includes BDOT&#x27;s stadiums, engineering polygons, and
-            technical infrastructure polygons (transformer stations and
-            similar).
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Neighbourhood label coverage.</strong> Place name labels at
-            the dzielnice and miejscowość level now come from the GUS SIMC
-            official locality registry joined against OSM
-            <code>teryt:simc</code> tags.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong>Edge-of-bundle municipality reassignment.</strong> A small
-            set of peripheral gminas at the FUA boundary that were previously
-            silently zeroed (due to source-registry mismatches or recent
-            administrative boundary changes) now resolve correctly for both
-            residence and worker mass.
-          </li>
-        </ul>
-        <h4>Other Features</h4>
-        <ul>
-          <li>
-            <strong>Bundle boundary refinements for KTW and KRK.</strong>
-            Katowice now folds in the Rybnik FUA on its southwestern edge as
-            well as Oświęcim in the southeast. Kraków is also expanded slightly
-            west to meet that new boundary.
-          </li>
-        </ul>
-        <ul>
-          <li>
-            <strong
-              >Per-faculty placement extended to four additional
-              institutions.</strong
-            >
-            Politechnika Śląska, Śląski Uniwersytet Medyczny, Uniwersytet
-            Rolniczy w Krakowie, and Uniwersytet Rzeszowski now have per-wydział
-            spatial distribution instead of concentrating all students at the
-            rector&#x27;s office.
-          </li>
-        </ul>
-        <h3>0.2.2 (2026-05-17)</h3>
-        <h4>New Cities</h4>
-        <ul>
-          <li><strong>Czechia</strong></li>
-          <li style="margin-left: 1.25em">
-            <code>CBS</code> - České Budějovice
-          </li>
-          <li style="margin-left: 1.25em">
-            <code>LBC</code> - Liberec - Jablonec nad Nisou
-          </li>
-        </ul>
-        <h4>Updated Cities</h4>
-        <ul>
-          <li><strong>Czechia</strong></li>
-          <li style="margin-left: 1.25em"><code>BRQ</code> - Brno</li>
-          <li style="margin-left: 1.25em">
-            <code>HKP</code> - Hradec Králové - Pardubice
-          </li>
-          <li style="margin-left: 1.25em"><code>OLO</code> - Olomouc</li>
-          <li style="margin-left: 1.25em"><code>OSR</code> - Ostrava</li>
-          <li style="margin-left: 1.25em"><code>PLZ</code> - Plzeň</li>
-          <li style="margin-left: 1.25em"><code>PRG</code> - Praha</li>
-          <li style="margin-left: 1.25em">
-            <code>UCH</code> - Ústí nad Labem - Chomutov
-          </li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>
-            Building footprint area is now blended into the worker placement
-            signal.
-          </li>
-          <li style="margin-left: 1.25em">
-            Industrial estates containing a small number of large warehouses
-            should now be split into multiple anchored points rather than
-            concentrating onto a single mega-point
-          </li>
-          <li>
-            New special demand points are added across all bundles, including
-          </li>
-          <li style="margin-left: 1.25em">
-            <strong>Libraries</strong> -- with multi-branch library systems
-            disaggregated per pobočka rather than concentrated at the central
-            building. Per-branch visitor counts are derived from operator annual
-            reports
-          </li>
-          <li style="margin-left: 1.25em">
-            <strong>Hospitals</strong> -- with daily commute demand at inpatient
-            and outpatient hospital facilities sized from ÚZIS Lůžkový fond
-            (per-facility bed counts and occupancy) joined with the NRPZS
-            national provider register for addresses and coordinates.
-          </li>
-          <li style="margin-left: 1.25em">
-            <strong>Military bases</strong> -- with demand for active-duty
-            soldiers stationed kasárna generated from a small set of named AČR
-            installations
-          </li>
-          <li>Workplace point populations are now better balanced.</li>
-          <li style="margin-left: 1.25em">
-            When a ZSJ-díl contains multiple worker points, workers are now
-            actually distributed across those points rather than concentrating
-            onto whichever point won the proportional sampling lottery.
-          </li>
-          <li>
-            Restored worker inbound for ZSJ-díl mismatched by the COVID-era
-            census.
-          </li>
-          <li style="margin-left: 1.25em">
-            ZSJ-díl that have residents and worker capacity on paper but show
-            zero inbound flow in the published 2021 commute matrix now receive a
-            small share of commutes.
-          </li>
-        </ul>
-        <h4>Bugfixes</h4>
-        <ul>
-          <li>Large floor area worker outlier inflation fixed.</li>
-          <li style="margin-left: 1.25em">
-            The reconciliation pass that balances residence-side and
-            workplace-side totals could over-assign workers to a single building
-            in volume-heavy ZSJ-díl, yielding artifacts like a single
-            distribution warehouse or shopping-mall building modelled as
-            containing the worker mass of an entire district.
-          </li>
-          <li>Worker-point snap now respects ZSJ-díl boundaries.</li>
-          <li style="margin-left: 1.25em">
-            When a worker point is snapped to a nearby building polygon, the
-            snap now prefers a building within the same ZSJ-díl, falling back to
-            any-polygon only when no in-ZSJ-díl candidate exists.
-          </li>
-          <li style="margin-left: 1.25em">
-            Previously the largest-building-in-radius rule could anchor a
-            ZSJ-díl&#x27;s entire worker mass on a neighbor&#x27;s building,
-            particularly at ZSJ-díl edges adjacent to industrial sites.
-          </li>
-        </ul>
-        <h3>0.2.1 (2026-05-12)</h3>
-        <h4>New Cities</h4>
-        <ul>
-          <li><strong>Poland</strong></li>
-          <li style="margin-left: 1.25em"><code>WAR</code> - Warszawa</li>
-          <li style="margin-left: 1.25em">
-            <code>KTW</code> - Katowice - GZM (Górnośląsko-Zagłębiowska
-            Metropolia)
-          </li>
-          <li style="margin-left: 1.25em"><code>POZ</code> - Poznań</li>
-          <li style="margin-left: 1.25em"><code>LUZ</code> - Lublin</li>
-          <li style="margin-left: 1.25em"><code>SZZ</code> - Szczecin</li>
-          <li style="margin-left: 1.25em"><code>BTK</code> - Białystok</li>
-          <li style="margin-left: 1.25em"><code>RZE</code> - Rzeszów</li>
-        </ul>
-        <h4>Updated Cities</h4>
-        <ul>
-          <li><strong>Poland</strong></li>
-          <li style="margin-left: 1.25em">
-            <code>BZG</code> - Bydgoszcz - Toruń
-          </li>
-          <li style="margin-left: 1.25em"><code>GDN</code> - Gdańsk</li>
-          <li style="margin-left: 1.25em"><code>KRK</code> - Kraków</li>
-          <li style="margin-left: 1.25em"><code>LCJ</code> - Łódź</li>
-          <li style="margin-left: 1.25em"><code>WRO</code> - Wrocław</li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>
-            Point seeding rebuilt around BDOT residential geometry, replacing
-            the GHS-POP × residential-mask hybrid with a per-cell footprint ×
-            floor-count signal. Resident points now sit on BDOT building
-            polygons directly.
-          </li>
-          <li style="margin-left: 1.25em">
-            Large industrial estates that previously concentrated worker demand
-            at a single overloaded point are now split into multiple workplace
-            points, with tighter inter-point spacing.
-          </li>
-          <li style="margin-left: 1.25em">
-            Merged residence + workplace points now anchor to the location with
-            the strongest combined residential and workplace signal, rather than
-            defaulting to the residential side — fixes cases where a point
-            carrying most of a sector&#x27;s workers sat on a low-worker cell.
-          </li>
-          <li>
-            Census-mesh conservation overhaul. The 125m + 250m + 1km NSP hybrid
-            previously inflated gmina-level rollups by 15–23%.
-          </li>
-          <li style="margin-left: 1.25em">
-            Several fixes were made so that the rollup now conserves to ~1% of
-            NSP truth across all 12 bundles, and rural residential pockets that
-            were dropped by the over-aggressive strict-quadrant rule are now
-            retained.
-          </li>
-          <li>
-            Point agglomeration overhauled to be sensitive to per-boundary
-            density, with rural cells receiving lighter agglomeration passes
-          </li>
-          <li>Special demand coverage refreshed across all 12 bundles</li>
-          <li style="margin-left: 1.25em">
-            Airports recurated to 2025 ULC data (15 airports, with proper
-            krajowy / międzynarodowy traveler split per port).
-          </li>
-          <li style="margin-left: 1.25em">
-            Universities now use per-institution in-person (stacjonarne) shares
-            from POL-on <code>iKindName</code>, replacing the flat
-            national-average haircut applied in 0.2.0.
-          </li>
-          <li style="margin-left: 1.25em">
-            Per-faculty placement for 32 of the 65 covered higher-education
-            institutions (446K students across 315 points), replacing
-            single-point placement at the rector&#x27;s office for those
-            institutions.
-          </li>
-          <li>
-            Tourism attraction coverage expanded by ~25 famous PoIs missing from
-            POT (Jasna Góra, Bazylika Mariacka Kraków / Gdańsk, Sanktuarium
-            Licheń, Kalwaria Zebrzydowska, PGE Narodowy, Stadion Śląski,
-            AmberExpo, several major Catholic sanctuaries and palaces). 17 POT
-            classifier corrections (cable cars, orthodox cerkwie, mining tourist
-            trails, narrow-gauge railways) and a sports-venue recalibration are
-            also included.
-          </li>
-          <li>
-            <strong>Urban-palace ticketed/unticketed disaggregation</strong> for
-            the largest royal residence-park complexes (Łazienki Królewskie
-            5.0M; Wilanów 2.8M). Visitor demand is split between the ticketed
-            pavilion(s) and the free park rather than concentrated at the palace
-            coord, mirroring the per-trailhead pattern already used for the
-            largest national parks.
-          </li>
-        </ul>
-        <h4>Bugfixes</h4>
-        <ul>
-          <li>
-            Several miejsko-wiejska gminas across multiple bundles were
-            previously silently zeroed in resident/worker mass due to
-            administrative-code mismatches between source registries. All such
-            gminas now resolve correctly.
-          </li>
-          <li>
-            Areas affected by 2025 administrative gmina splits (e.g. Grabówka,
-            east of Białystok) had their workplace demand silently zeroed
-            because the new gmina codes did not yet exist in the BDL employment
-            registry. Workplaces in such areas now receive their share of the
-            parent gmina&#x27;s employment.
-          </li>
-        </ul>
-        <h3>0.2.0 (2026-05-06)</h3>
-        <h4>Initial Cities</h4>
-        <ul>
-          <li><strong>Poland</strong></li>
-          <li style="margin-left: 1.25em">
-            <code>BZG</code> - Bydgoszcz - Toruń
-          </li>
-          <li style="margin-left: 1.25em"><code>GDN</code> - Gdańsk</li>
-          <li style="margin-left: 1.25em"><code>KRK</code> - Kraków</li>
-          <li style="margin-left: 1.25em"><code>LCJ</code> - Łódź</li>
-          <li style="margin-left: 1.25em"><code>WRO</code> - Wrocław</li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>First release of the Poland maps.</li>
-          <li>
-            Sub-gmina (BREC rejon statystyczny) resident and worker placement
-            for all four bundles, calibrated against NSP 2021 census tables and
-            the GUGiK BDOT10k national buildings cadastre.
-          </li>
-          <li style="margin-left: 1.25em">
-            Per-bundle BDOT10k <code>kodKst</code> building-function weights are
-            fit against BDL PKD employment.
-          </li>
-          <li>
-            Phase E special demand for airports, universities, tourism
-            attractions, sports venues across four top-tier leagues,
-            convention/cultural centers, and multi-purpose arenas on all four
-            bundles.
-          </li>
-          <li>Self-loop reconstruction applied to all four bundles</li>
-          <li style="margin-left: 1.25em">
-            GUS strips intra-gmina commute flows at NSP 2021 publication (the
-            published matrix records only cross-gmina worker flows).
-          </li>
-          <li style="margin-left: 1.25em">
-            The diagonal is reconstructed deterministically per gmina as
-            <code>BDL[g] − Σ inbound_OD[dest=g]</code>.
-          </li>
-          <li>
-            BDOT10k-derived buildings are used in place of Overture, standard
-            OSRM routing (congruous with CZ) is included.
-          </li>
-        </ul>
-        <h3>0.1.2 (2026-05-02)</h3>
-        <h4>Updated Cities</h4>
-        <ul>
-          <li><strong>Czechia</strong></li>
-          <li style="margin-left: 1.25em"><code>BRQ</code> - Brno</li>
-          <li style="margin-left: 1.25em">
-            <code>HKP</code> - Hradec Králové - Pardubice
-          </li>
-          <li style="margin-left: 1.25em"><code>OLO</code> - Olomouc</li>
-          <li style="margin-left: 1.25em"><code>OSR</code> - Ostrava</li>
-          <li style="margin-left: 1.25em"><code>PLZ</code> - Plzeň</li>
-          <li style="margin-left: 1.25em"><code>PRG</code> - Praha</li>
-          <li style="margin-left: 1.25em">
-            <code>UCH</code> - Ústí nad Labem - Chomutov
-          </li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>
-            All Czechia map boundaries expanded to include more of the
-            surrounding area
-          </li>
-          <li>
-            RÚIAN replaces Overture as the canonical source of CZ buildings,
-            with nearly full tag + height coverage for ~4.22 million buildings
-            nationwide
-          </li>
-          <li style="margin-left: 1.25em">
-            Better tagging enables more accurate point placement, with
-            residential points only allowed on buildings tagged as residential,
-            and worker points only allowed on buildings that could palusibly
-            contain workplaces
-          </li>
-          <li>
-            Worker points are now seeded separately from residential points, and
-            are snapped to building polygons to improve placement in industrial
-            estates
-          </li>
-          <li>
-            Recalibrated building floor area job density priors against
-            per-bundle empiric evidence and SLDB-NACE classifications, to better
-            distribute workers amongst the seeded points
-          </li>
-        </ul>
-        <h4>Bugfixes</h4>
-        <ul>
-          <li>
-            Fixed a bug where the cross-ref mesh for residential mass was
-            essentially non-functional due to an ID formation mismatch.
-          </li>
-        </ul>
-        <h3>0.1.1 (2026-04-26)</h3>
-        <h4>New Cities</h4>
-        <ul>
-          <li><strong>Czechia</strong></li>
-          <li style="margin-left: 1.25em">
-            <code>HKP</code> - Hradec Králové - Pardubice
-          </li>
-          <li style="margin-left: 1.25em"><code>OLO</code> - Olomouc</li>
-          <li style="margin-left: 1.25em">
-            <code>UCH</code> - Ústí nad Labem - Chomutov
-          </li>
-        </ul>
-        <h4>Updated Cities</h4>
-        <ul>
-          <li><strong>Czechia</strong></li>
-          <li style="margin-left: 1.25em"><code>BRQ</code> - Brno</li>
-          <li style="margin-left: 1.25em"><code>OSR</code> - Ostrava</li>
-          <li style="margin-left: 1.25em"><code>PLZ</code> - Plzeň</li>
-          <li style="margin-left: 1.25em"><code>PRG</code> - Praha</li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>
-            Augmented the GHS-POP resident/population raster with Overture
-            building information to reduce noise caused by smoothing
-          </li>
-          <li style="margin-left: 1.25em">
-            Known industrial areas now &quot;mask&quot; the raster to prevent
-            resident placement in industrial estates
-          </li>
-          <li style="margin-left: 1.25em">
-            Areas with no Overture coverage also &quot;mask&quot; the raster to
-            prevent resident placement in entirely rural areas
-          </li>
-          <li>
-            Updated worker raster to take into account worker totals from
-            non-intersecting cells in the Overture mesh cross-ref
-          </li>
-          <li>
-            Removed same-node workers entirely, resulting in a very small
-            ~0.2-0.6% drop in total modeled demand for each city in the bundle
-          </li>
-        </ul>
-        <h3>0.1.0 (2026-04-25)</h3>
-        <h4>Initial Cities</h4>
-        <ul>
-          <li><strong>Czechia</strong></li>
-          <li style="margin-left: 1.25em"><code>BRQ</code> - Brno</li>
-          <li style="margin-left: 1.25em"><code>OSR</code> - Ostrava</li>
-          <li style="margin-left: 1.25em"><code>PLZ</code> - Plzeň</li>
-          <li style="margin-left: 1.25em"><code>PRG</code> - Praha</li>
-        </ul>
-        <h4>New Features</h4>
-        <ul>
-          <li>First release of the Czechia maps.</li>
-          <li>
-            Sub-municipal (ZSJ-díl) resident and worker placement for all four
-            bundles, calibrated against Census 2021 tables and the GHS-POP 2020
-            raster.
-          </li>
-          <li>
-            Phase E special demand for airports, universities/colleges, and
-            cultural attractions on all four bundles.
-          </li>
-          <li>
-            COVID-era self-commute correction applied to all Czech bundles;
-            aggregate self-commute share brought from ~27–34% (published census)
-            down to ~3–8% per bundle via gravity-calibrated redistribution.
-          </li>
-          <li>Overture-derived buildings and OSRM routing included.</li>
-        </ul>
-        <h2>Planned Updates</h2>
-        <ul>
-          <li>Additional Polish cities not yet included.</li>
-          <li>
-            Addition of additional Central / Eastern European countries (Hungary
-            / Slovakia / Ukraine).
-          </li>
-          <li>
-            Hospital and military-base demand layers for the Estonian bundles
-            (Terviseamet + Kaitsevägi sources curated in the pipeline but not
-            yet rendered in v0.3.0).
-          </li>
-        </ul>
-        <h2>Special Demand Details</h2>
-        <p>
-          Per-country category breakdown of the modeled demand-point categories
-          beyond residence and workplace commute. Each row is geocoded against
-          the relevant national authoritative source and sized from operator or
-          government-published visitor / passenger / enrollment / bed-count
-          figures.
-        </p>
-        <h3>Czech Republic</h3>
-        <ul>
-          <li><strong>Airports</strong></li>
-          <li style="margin-left: 1.25em">
-            Demand based on annualized passenger statistics from the Czech Civil
-            Aviation Authority, split by international &amp; national travelers.
-          </li>
-          <li><strong>Institutions of Learning</strong></li>
-          <li style="margin-left: 1.25em">
-            Students in post-secondary (univerzity / vysoké školy) sized from
-            official prezenční (in-person) enrollment datasheets published by
-            MŠMT (Ministry of Education).
-          </li>
-          <li><strong>Cultural Attractions</strong></li>
-          <li style="margin-left: 1.25em">
-            Attendance figures sourced from the krajské (regional) tourism
-            statistics published on tourdata.cz, supplemented with operator
-            annual reports and per-site visitor counters for sites missing from
-            the krajské aggregates.
-          </li>
-          <li style="margin-left: 1.25em">
-            Zoos, botanical gardens, aquariums.
-          </li>
-          <li style="margin-left: 1.25em">
-            Art &amp; history museums, castles, chateaux.
-          </li>
-          <li style="margin-left: 1.25em">
-            Major parks, hot-spring spa towns (Karlovy Vary, Mariánské Lázně,
-            Františkovy Lázně, Poděbrady), and natural landmarks.
-          </li>
-          <li style="margin-left: 1.25em">
-            Major religious sites (cathedrals, monasteries, pilgrimage
-            churches).
-          </li>
-          <li style="margin-left: 1.25em">
-            UNESCO World Heritage sites (Pražský hrad, historic centers of Český
-            Krumlov, Kutná Hora, and Olomouc, Lednice-Valtice cultural
-            landscape, etc.).
-          </li>
-          <li style="margin-left: 1.25em">
-            Theme parks and aquaparks (Aquapalace Praha, Aqualand Moravia,
-            etc.).
-          </li>
-          <li><strong>Libraries</strong></li>
-          <li style="margin-left: 1.25em">
-            Per-branch visitor counts from library operator annual reports,
-            disaggregated per pobočka.
-          </li>
-          <li>
-            <strong>Cultural Centers, Theatres &amp; Concert Halls</strong>
-          </li>
-          <li style="margin-left: 1.25em">
-            Per-season attendance from operator annual reports at the principal
-            kulturní domy, divadla, and koncertní sály venues.
-          </li>
-          <li><strong>Multi-Purpose Arenas</strong></li>
-          <li style="margin-left: 1.25em">
-            Non-sport event volume at major arenas (O2 arena Praha, Ostravar
-            Aréna, Home Credit Arena Liberec, etc.) modeled separately from the
-            sport-tenant rows so concert / family-event demand is captured
-            alongside the league spectator demand.
-          </li>
-          <li><strong>Convention &amp; Exhibition Centers</strong></li>
-          <li style="margin-left: 1.25em">
-            Annual visitor totals from operator annual reports for the principal
-            Czech expo and congress venues (Výstaviště Praha, BVV Brno, etc.).
-          </li>
-          <li><strong>Sports Venues</strong></li>
-          <li style="margin-left: 1.25em">
-            Annual spectator counts at the principal Czech league venues across
-            football (Fortuna Liga), ice hockey (Tipsport Extraliga), and
-            basketball, plus public sport complexes (swimming, ice rinks) at
-            municipal sport centers.
-          </li>
-          <li><strong>Hospitals</strong></li>
-          <li style="margin-left: 1.25em">
-            Daily commute demand at inpatient and outpatient facilities, sized
-            from ÚZIS per-facility bed counts and occupancy.
-          </li>
-          <li><strong>Military bases</strong></li>
-          <li style="margin-left: 1.25em">
-            Active-duty personnel at named AČR (Czech Army) installations.
-          </li>
-        </ul>
-        <h3>Poland</h3>
-        <ul>
-          <li><strong>Airports</strong></li>
-          <li style="margin-left: 1.25em">
-            Demand based on annualized passenger statistics from the Civil
-            Aviation Authority (Urząd Lotnictwa Cywilnego), split by
-            international (ruch międzynarodowy) and national (ruch krajowy)
-            travelers.
-          </li>
-          <li><strong>Passenger Ferry Terminals</strong></li>
-          <li style="margin-left: 1.25em">
-            Per-terminal annual passenger throughput at the Świnoujście ferry
-            terminal, the Gdynia and Gdańsk-Westerplatte cruise + ferry
-            terminals, and the seasonal Hel passenger pier — sized from Port
-            Monitor passenger statistics and port-operator annual reports.
-          </li>
-          <li><strong>Institutions of Learning</strong></li>
-          <li style="margin-left: 1.25em">
-            Students in higher education sized from the POL-on RADON registry
-            (Polish Ministry of Education) joined with GUS public
-            per-institution enrollment statistics, and geocoded via the Polish
-            national address geocoder GUGiK CAPAP. A composite stacjonarni
-            (in-person) × in-person-attendance haircut is applied to estimate
-            active on-site demand because GUS publishes only total enrollment,
-            not the form-of-study split.
-          </li>
-          <li><strong>Cultural Attractions</strong></li>
-          <li style="margin-left: 1.25em">
-            Attendance figures sourced from the POT (Polska Organizacja
-            Turystyczna) annual &quot;Frekwencja w atrakcjach
-            turystycznych&quot; report, supplemented with operator annual
-            reports and per-site visitor counters for sites missing from the POT
-            aggregates.
-          </li>
-          <li style="margin-left: 1.25em">
-            Major museums, castles, palaces, and historic buildings.
-          </li>
-          <li style="margin-left: 1.25em">
-            Zoos, botanical gardens, arboreta, palmiarnie.
-          </li>
-          <li style="margin-left: 1.25em">Water parks and thermal baths.</li>
-          <li style="margin-left: 1.25em">
-            Catholic sanctuaries, cathedrals, basilicas, and monasteries.
-          </li>
-          <li style="margin-left: 1.25em">
-            UNESCO World Heritage sites (Auschwitz-Birkenau, Wieliczka/Bochnia
-            salt mines).
-          </li>
-          <li style="margin-left: 1.25em">
-            National parks with
-            <strong>per-entrance demand disaggregation</strong> for the largest
-            parks (Tatrzański, Kampinoski, Karkonoski, Pieniński, Wielkopolski,
-            PN Gór Stołowych) — the published park-level total is split across
-            major trailheads / gateway entrances rather than a single park
-            centroid.
-          </li>
-          <li><strong>Sports Venues</strong></li>
-          <li style="margin-left: 1.25em">
-            Annual spectator counts derived from official league statistics
-            across four top-tier Polish leagues:
-          </li>
-          <li style="margin-left: 2.5em">
-            Ekstraklasa football (ekstrastats.pl).
-          </li>
-          <li style="margin-left: 2.5em">
-            Tauron Hokej Liga ice hockey (hokej.net + polskihokej.eu).
-          </li>
-          <li style="margin-left: 2.5em">
-            PlusLiga men&#x27;s volleyball (plusliga.pl + sportowefakty.wp.pl).
-          </li>
-          <li style="margin-left: 2.5em">
-            ORLEN Superliga handball (orlen-superliga.pl).
-          </li>
-          <li><strong>Convention &amp; Exhibition Centers</strong></li>
-          <li style="margin-left: 1.25em">
-            Annual visitor totals from the PIPT (Polska Izba Przemysłu
-            Targowego) annual industry report and per-operator pages.
-          </li>
-          <li><strong>Theatres, Philharmonics &amp; Opera</strong></li>
-          <li style="margin-left: 1.25em">
-            Per-season attendance from Instytut Teatralny (e-teatr.pl) for
-            theatres; operator sprawozdania (annual reports) for philharmonics
-            and opera houses.
-          </li>
-          <li><strong>Multi-Purpose Arenas</strong></li>
-          <li style="margin-left: 1.25em">
-            Non-sport event volume at major arenas (Tauron Arena Kraków, Spodek
-            Katowice, Atlas Arena Łódź, Ergo Arena Gdańsk-Sopot, ORLEN Arena
-            Płock, Arena Toruń, etc.) modeled separately from the sport-tenant
-            rows so concert / family-event demand is captured alongside the
-            league spectator demand.
-          </li>
-          <li><strong>Hospitals</strong></li>
-          <li style="margin-left: 1.25em">
-            Daily commute demand at inpatient and outpatient facilities.
-            Per-facility bed counts are allocated from voivodship totals by
-            BDOT10k building floor area, anchored to the RPWDL national
-            medical-entity registry.
-          </li>
-          <li><strong>Military bases</strong></li>
-          <li style="margin-left: 1.25em">
-            Active-duty personnel at Land Forces, Air Force, Navy, Special
-            Forces, and Territorial Defence installations.
-          </li>
-        </ul>
-        <h3>Estonia</h3>
-        <ul>
-          <li><strong>Airports</strong></li>
-          <li style="margin-left: 1.25em">
-            Demand based on terminal-level annual passenger statistics from
-            Tallinna Lennujaam (Tallinn Airport).
-          </li>
-          <li><strong>Passenger Ferry Terminals</strong></li>
-          <li style="margin-left: 1.25em">
-            Per-terminal annual passenger throughput at the Old City Harbour
-            Helsinki-line, Stockholm-line, cruise, and Paljassaare berths, the
-            Paldiski North / South terminals, and the regional ports at
-            Rohuküla, Sillamäe, and Saaremaa — sized from Tallinna Sadam (Port
-            of Tallinn) and Statistikaamet maritime statistics.
-          </li>
-          <li><strong>Institutions of Learning</strong></li>
-          <li style="margin-left: 1.25em">
-            Students at universities (ülikoolid), technical colleges
-            (rakenduskõrgkoolid), and junior colleges (kõrgkoolid), sized from
-            Eesti Hariduse Infosüsteem (the Ministry of Education registry)
-            per-institution enrollment.
-          </li>
-          <li><strong>Cultural Attractions</strong></li>
-          <li style="margin-left: 1.25em">
-            Attendance figures sourced from Statistikaamet national tourism
-            statistics, supplemented with operator annual reports and per-site
-            visitor counters for sites missing from the national aggregates.
-          </li>
-          <li style="margin-left: 1.25em">Zoos, botanical gardens.</li>
-          <li style="margin-left: 1.25em">
-            Art and general museums, castles, manor houses.
-          </li>
-          <li style="margin-left: 1.25em">
-            Major parks, hot-spring spa resorts, and natural landmarks.
-          </li>
-          <li style="margin-left: 1.25em">
-            National parks (Lahemaa, Soomaa, Karula, Matsalu, Vilsandi).
-          </li>
-          <li style="margin-left: 1.25em">
-            Major religious sites (Lutheran, Orthodox, and Catholic cathedrals,
-            monasteries, and pilgrimage churches).
-          </li>
-          <li style="margin-left: 1.25em">
-            UNESCO World Heritage sites — Tallinn Vanalinn (Old Town) with
-            <strong>per-pavilion demand disaggregation</strong>: the published
-            city-level total is split between the ticketed pavilions (Toomkirik,
-            Niguliste, Kiek in de Kök, Linnamüür) and the free walking-tour area
-            rather than concentrated at the Old Town centroid.
-          </li>
-          <li style="margin-left: 1.25em">Theme parks and aquaparks.</li>
-          <li><strong>Libraries</strong></li>
-          <li style="margin-left: 1.25em">
-            Per-branch visitor counts from library operator annual reports,
-            including the Estonian National Library and the principal municipal
-            branches.
-          </li>
-          <li>
-            <strong>Cultural Centers, Theatres &amp; Concert Halls</strong>
-          </li>
-          <li style="margin-left: 1.25em">
-            Per-season attendance from operator annual reports at the principal
-            concert halls, theatres, philharmonics, and cultural districts
-            (kultuurikeskused).
-          </li>
-          <li><strong>Multi-Purpose Arenas</strong></li>
-          <li style="margin-left: 1.25em">
-            Non-sport event volume at the principal Estonian arenas modeled
-            separately from the sport-tenant rows so concert / family-event
-            demand is captured alongside the league spectator demand.
-          </li>
-          <li><strong>Convention &amp; Exhibition Centers</strong></li>
-          <li style="margin-left: 1.25em">
-            Annual visitor totals from operator annual reports for the principal
-            Estonian expo and conference venues.
-          </li>
-          <li><strong>Sports Venues</strong></li>
-          <li style="margin-left: 1.25em">
-            Annual spectator counts at the principal Estonian league venues
-            across football, basketball, ice hockey, and volleyball, plus public
-            sport complexes (swimming, ice rinks) at municipal sport centers.
-          </li>
-          <li>
-            <strong>Hospitals</strong>
-            <em>(to be populated in a future release)</em>
-          </li>
-          <li style="margin-left: 1.25em">
-            Daily commute demand at inpatient and outpatient facilities, sized
-            from Terviseamet (Estonian Health Board) per-facility bed counts.
-          </li>
-          <li>
-            <strong>Military bases</strong>
-            <em>(to be populated in a future release)</em>
-          </li>
-          <li style="margin-left: 1.25em">
-            Active-duty personnel at Kaitsevägi (Estonian Defence Forces)
-            garrisons.
-          </li>
-        </ul>
-        <h2>License</h2>
-        <p>
-          All maps are released under the
-          <a
-            href="https://github.com/ahkimn/subwaybuilder-eu-maps/blob/main/LICENSE"
-            >GNU General Public License v3.0</a
-          >.
-        </p>
-        <h2>Credits</h2>
-        <p>
-          All maps authored by
-          <a href="https://subwaybuildermodded.com/credits/">Yukina-</a>
-        </p>
-      </article>
-    </section>
-  </body>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>subwaybuilder-eu-maps releases</title>
+  <style>
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; margin: 24px; line-height: 1.4; }
+    table { border-collapse: collapse; width: 100%; }
+    th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+    th { background: #f5f5f5; }
+    code { background: #f2f2f2; padding: 1px 4px; border-radius: 4px; }
+    section { margin-top: 28px; }
+    pre { background: #fafafa; border: 1px solid #ddd; padding: 12px; overflow-x: auto; white-space: pre-wrap; }
+    article.readme { border: 1px solid #e6e6e6; background: #fbfbfb; padding: 14px; border-radius: 6px; }
+    article.readme h1, article.readme h2, article.readme h3, article.readme h4 { margin-top: 1.1em; margin-bottom: 0.5em; }
+    article.readme ul { margin-top: 0.3em; }
+    article.readme img { max-width: 100%; height: auto; display: block; margin: 8px 0; }
+  </style>
+</head>
+<body>
+  <h1>subwaybuilder-eu-maps</h1>
+  <p>A collection of non-Japanese, non-Taiwanese city maps for the game Subway Builder.</p>
+  <table>
+    <thead>
+      <tr>
+        <th>Code</th>
+        <th>Country</th>
+        <th>Names</th>
+        <th>Manifest</th>
+        <th>Latest Version</th>
+        <th>Date</th>
+        <th>Latest Download</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>BRQ</td><td>CZ</td><td>Brno</td><td><a href="./BRQ.json">BRQ.json</a></td><td>0.2.1</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/BRQ.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/BRQ.zip</a></td></tr><tr><td>BTK</td><td>PL</td><td>Białystok</td><td><a href="./BTK.json">BTK.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/BTK.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/BTK.zip</a></td></tr><tr><td>BZG</td><td>PL</td><td>Bydgoszcz - Toruń</td><td><a href="./BZG.json">BZG.json</a></td><td>0.3.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/BZG.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/BZG.zip</a></td></tr><tr><td>CBS</td><td>CZ</td><td>České Budějovice</td><td><a href="./CBS.json">CBS.json</a></td><td>0.1.0</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/CBS.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/CBS.zip</a></td></tr><tr><td>CZE</td><td>PL</td><td></td><td><a href="./CZE.json">CZE.json</a></td><td>0.1.0</td><td>2026-06-13</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/CZE.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/CZE.zip</a></td></tr><tr><td>EPU</td><td>EE</td><td>Pärnu</td><td><a href="./EPU.json">EPU.json</a></td><td>0.1.0</td><td>2026-06-12</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/EPU.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/EPU.zip</a></td></tr><tr><td>GDN</td><td>PL</td><td>Gdańsk</td><td><a href="./GDN.json">GDN.json</a></td><td>0.3.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/GDN.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/GDN.zip</a></td></tr><tr><td>HKP</td><td>CZ</td><td>Hradec Králové - Pardubice</td><td><a href="./HKP.json">HKP.json</a></td><td>0.2.1</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/HKP.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/HKP.zip</a></td></tr><tr><td>IDV</td><td>EE</td><td>Ida-Viru</td><td><a href="./IDV.json">IDV.json</a></td><td>0.1.0</td><td>2026-06-12</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/IDV.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/IDV.zip</a></td></tr><tr><td>IEG</td><td>PL</td><td></td><td><a href="./IEG.json">IEG.json</a></td><td>0.1.0</td><td>2026-06-13</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/IEG.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/IEG.zip</a></td></tr><tr><td>KIE</td><td>PL</td><td></td><td><a href="./KIE.json">KIE.json</a></td><td>0.1.0</td><td>2026-06-13</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/KIE.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/KIE.zip</a></td></tr><tr><td>KRK</td><td>PL</td><td>Kraków</td><td><a href="./KRK.json">KRK.json</a></td><td>0.3.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KRK.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KRK.zip</a></td></tr><tr><td>KTW</td><td>PL</td><td>Katowice - GZM</td><td><a href="./KTW.json">KTW.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KTW.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KTW.zip</a></td></tr><tr><td>LBC</td><td>CZ</td><td>Liberec - Jablonec nad Nisou</td><td><a href="./LBC.json">LBC.json</a></td><td>0.1.0</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/LBC.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/LBC.zip</a></td></tr><tr><td>LCJ</td><td>PL</td><td>Łódź</td><td><a href="./LCJ.json">LCJ.json</a></td><td>0.3.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/LCJ.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/LCJ.zip</a></td></tr><tr><td>LEG</td><td>PL</td><td></td><td><a href="./LEG.json">LEG.json</a></td><td>0.1.0</td><td>2026-06-13</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/LEG.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/LEG.zip</a></td></tr><tr><td>LUZ</td><td>PL</td><td>Lublin</td><td><a href="./LUZ.json">LUZ.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/LUZ.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/LUZ.zip</a></td></tr><tr><td>OLO</td><td>CZ</td><td>Olomouc</td><td><a href="./OLO.json">OLO.json</a></td><td>0.2.1</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/OLO.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/OLO.zip</a></td></tr><tr><td>OPL</td><td>PL</td><td></td><td><a href="./OPL.json">OPL.json</a></td><td>0.1.0</td><td>2026-06-13</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/OPL.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/OPL.zip</a></td></tr><tr><td>OSR</td><td>CZ</td><td>Ostrava</td><td><a href="./OSR.json">OSR.json</a></td><td>0.2.1</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/OSR.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/OSR.zip</a></td></tr><tr><td>PLZ</td><td>CZ</td><td>Plzeň</td><td><a href="./PLZ.json">PLZ.json</a></td><td>0.2.1</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PLZ.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PLZ.zip</a></td></tr><tr><td>POZ</td><td>PL</td><td>Poznań</td><td><a href="./POZ.json">POZ.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/POZ.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/POZ.zip</a></td></tr><tr><td>PRG</td><td>CZ</td><td>Praha</td><td><a href="./PRG.json">PRG.json</a></td><td>0.2.1</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PRG.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PRG.zip</a></td></tr><tr><td>RDO</td><td>PL</td><td></td><td><a href="./RDO.json">RDO.json</a></td><td>0.1.0</td><td>2026-06-13</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/RDO.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/RDO.zip</a></td></tr><tr><td>RZE</td><td>PL</td><td>Rzeszów</td><td><a href="./RZE.json">RZE.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/RZE.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/RZE.zip</a></td></tr><tr><td>SZY</td><td>PL</td><td></td><td><a href="./SZY.json">SZY.json</a></td><td>0.1.0</td><td>2026-06-13</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/SZY.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/SZY.zip</a></td></tr><tr><td>SZZ</td><td>PL</td><td>Szczecin</td><td><a href="./SZZ.json">SZZ.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/SZZ.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/SZZ.zip</a></td></tr><tr><td>TAY</td><td>EE</td><td>Tartu</td><td><a href="./TAY.json">TAY.json</a></td><td>0.1.0</td><td>2026-06-12</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TAY.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TAY.zip</a></td></tr><tr><td>TLL</td><td>EE</td><td>Tallinn</td><td><a href="./TLL.json">TLL.json</a></td><td>0.1.0</td><td>2026-06-12</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TLL.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.0/TLL.zip</a></td></tr><tr><td>UCH</td><td>CZ</td><td>Ústí nad Labem - Chomutov</td><td><a href="./UCH.json">UCH.json</a></td><td>0.2.1</td><td>2026-05-18</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/UCH.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/UCH.zip</a></td></tr><tr><td>WAR</td><td>PL</td><td>Warszawa</td><td><a href="./WAR.json">WAR.json</a></td><td>0.2.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/WAR.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/WAR.zip</a></td></tr><tr><td>WRO</td><td>PL</td><td>Wrocław</td><td><a href="./WRO.json">WRO.json</a></td><td>0.3.0</td><td>2026-06-01</td><td><a href="https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/WRO.zip">https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/WRO.zip</a></td></tr>
+    </tbody>
+  </table>
+  <section>
+    <h2>README</h2>
+    <article class="readme">
+<h1>subwaybuilder-eu-maps</h1>
+<h2>Summary</h2>
+<p>Each map covers the metropolitan area around one or more major European cities. Metropolitan-area bounds are drawn from national cadastral or statistical-office boundary products; municipal-level population, employment, and commute data drive resident and worker placement below the municipality scale wherever the source data allows it.</p>
+<h2>Features</h2>
+<ul>
+  <li>High level of detail, with sub-municipality population placement driven by country-specific rasters or settlement-unit grids.</li>
+  <li>Spatial realism -- points are assigned in a manner that is aware of water features, administrative boundaries, and density-weighted placement surfaces.</li>
+  <li>Special demand from several country-specific open-data sources is modeled — covering airports, ports, universities, hospitals, military installations, sports venues, cultural attractions, museums, libraries, and tourism sites. See <a href="#special-demand-details">Special Demand Details</a> below for the per-country category breakdown.</li>
+  <li>Buildings are sourced from each country&#x27;s national cadastre (RÚIAN for Czechia, BDOT10k for Poland, EHR + ETAK for Estonia). OSRM routing data is shared with the broader Subway Builder map pipeline.</li>
+  <li>Building depth is default to -10m, with train-related infrastructure exempt.</li>
+</ul>
+<h2>High-Level Methodology</h2>
+<p>Resident and commuter totals are estimated from country-specific census and employment tables, then distributed spatially using the best available mesh or raster guidance for each country. Population counts are conserved at municipality-level control totals, while workplace-side calibration and commute matrices keep resident and worker demand in balance.</p>
+<p>A gravity model augmented with observed municipality-to-municipality commute flows reproduces macro-level commute patterns when sub-municipal O/D pairs are not directly published.</p>
+<h4>Czech Republic</h4>
+<p>Czech bundles combine CZSO Census 2021 population and economic-activity tables with the EU JRC GHS-POP 2020 100m raster for within-municipality population weighting. For distributing jobs, a separate 100m raster layer built from Overture building volumes (and weighed by industry type) is constructed against the DojizdkovyProud workplace-side totals. Administrative boundaries come from RUIAN (the Czech cadastral registry). For resident-worker flows, the CZSO 2021 commute O/D matrix at sub-municipal (ZSJ-díl) granularity is used to provide macro-level flow, with randomization used to assign individual populations for each ZSJ-díl pair to points within their respective boundaries.</p>
+<p>In addition, because the 2021 census was conducted during COVID, its published commute matrix inflates same-settlement (and therefore ZSJ-díl) self-commute flows well above pre-pandemic levels. A gravity-based correction pass redistributes the excess self-commute volume into cross-settlement flows. The parameters of the gravity model are calibrated per bundle, using the known log-normal commute-distance distribution from the CZSO 2021 commute O/D matrix. This correction pass brings aggregate self-commute back to plausible pre-pandemic levels without distorting the observed inter-settlement flow structure.</p>
+<h4>Poland</h4>
+<p>Polish bundles combine GUS NSP 2021 census tables (population at 1km / 250m / 125m hybrid resolution; per-rejon population from the 16-sheet voivodship workbook) with the GUGiK BDOT10k national buildings cadastre for within-municipality population and worker weighting. The metropolitan-area boundary unit is the FUA (Funkcjonalny Obszar Miejski), defined by the Eurostat URAU 2021 layer, with each FUA dissolved from member gmina polygons via the GUGiK PRG cadastral registry.</p>
+<p>The sub-municipal base unit of population/worker modeling is the <strong>BREC rejon statystyczny</strong> (35,774 nationwide), GUS&#x27;s official statistical enumeration area — the direct analog to the Czech ZSJ-díl. Per-rejon worker mass is derived from BDOT10k floor area weighted by <code>kodKst</code> (the Polish building-function classification; 9 worker classes), with per-bundle weights calibrated by NNLS fit against BDL PKD employment counts. Gmina-level <code>pracujący</code> (BDL) is the column-margin truth for worker totals.</p>
+<p>Two PL-specific calibration corrections augment the JP-style municipal-weighted gravity model. First, GUS strips intra-gmina commute flows at NSP 2021 publication. A <strong>deterministic self-loop reconstruction</strong> pass per gmina restores the diagonal as <code>BDL[g] − Σ inbound[g]</code>, recovering the intra-gmina worker mass that the model would otherwise lose.</p>
+<h4>Estonia</h4>
+<p>Estonian bundles combine the 2021 Estonian census per-municipality and per-asustusüksus tables with Statistikaamet&#x27;s INSPIRE-aligned 100 m / 250 m population grid for within-municipality population weighting. Workplace mass is derived from the Ehitisregister national building cache filtered through the three-tier KAOS use-code taxonomy (residential / workplace / mixed-use), with per-firm employee totals from Estonian Commercial Register annual reports providing the workplace anchor. Administrative boundaries come from the EHAK (Eesti haldus- ja asustusjaotuse klassifikaator) registry; the five largest cities — Tallinn, Tartu, Pärnu, Narva, Kohtla-Järve — are further subdivided into asum / kvartal / linnaosa neighborhoods via Maa-amet&#x27;s official sub-municipal boundary layer (Tallinn 92 polygons, Tartu 51, Pärnu 22, Narva 19, Kohtla-Järve 5).</p>
+<p>Commute flows are calibrated against the 2021 census commute matrix, which publishes only bin-marginal shares (within-municipality, within-county, cross-county, against Tallinn, against Tartu) rather than a full municipality × municipality cell matrix. A Generalized IPF pass with destination-pinning on the two anchor cities reconciles a gravity-decay model against those bin marginals; a symmetric containment-share guard prevents over-routing to the urban core when the decay would otherwise concentrate flows on Tallinn / Tartu.</p>
+<h3>Future countries</h3>
+<p>Additional European countries will be added as country-specific open-data pipelines come online. Each country follows the same conservation-and-calibration scheme above, with country-specific inputs substituted for boundaries, population, employment, commute matrices, and special-demand layers.</p>
+<h2>Primary Data Sources</h2>
+<h4>Czech Republic</h4>
+<ul>
+  <li>ČÚZK RUIAN — cadastral boundaries for municipalities and basic settlement units (cuzk.cz)</li>
+  <li>ČSÚ Sčítání 2021 — population, economic activity, age structure (csu.gov.cz)</li>
+  <li>EU JRC GHS-POP 2023A / 2020 epoch — 100m population raster for within-municipality weighting (ghsl.jrc.ec.europa.eu)</li>
+  <li>ČSÚ DojizdkovyProud 2021 — sub-municipal commute O/D matrix and workplace-side occupied-jobs tables</li>
+  <li>MŠMT DSIA F21 — university and junior-college enrollment (msmt.cz)</li>
+  <li>tourdata.cz — krajské attraction visitor statistics</li>
+  <li>Úřad pro civilní letectví ČR (Czech CAA) — airport passenger statistics</li>
+  <li>ÚZIS ČR — Lůžkový fond per-facility hospital bed counts and occupancy, with the NRPZS national health-provider register for facility addresses (uzis.cz)</li>
+  <li>AČR installation roster — active-duty personnel counts curated from official unit pages and public references</li>
+</ul>
+<h4>Poland</h4>
+<ul>
+  <li>GUGiK — PRG cadastral boundaries (voivodships, powiats, gminas), BDOT10k national building cadastre with PKOB → kodKst classification, and CAPAP national address geocoder (geoportal.gov.pl)</li>
+  <li>GUS NSP 2021 / BREC / BDL — population at 1km / 250m / 125m hybrid grid, sub-gmina <code>rejon statystyczny</code> polygons + per-rejon populations, gmina-level pracujący employment, establishments, PKD-section workplace breakdown (P4457), per-institution student enrollment, and public-sector cultural attendance aggregates (stat.gov.pl, bdl.stat.gov.pl)</li>
+  <li>Eurostat URAU 2021 — Functional Urban Area polygons for metropolitan-area definitions (gisco-services.ec.europa.eu)</li>
+  <li>POL-on RADON — Polish Ministry of Education registry of higher-education institutions (radon.nauka.gov.pl)</li>
+  <li>POT (Polska Organizacja Turystyczna) — annual <code>Frekwencja w atrakcjach turystycznych</code> PDF report</li>
+  <li>ULC (Urząd Lotnictwa Cywilnego) — airport passenger statistics</li>
+  <li>PIPT (Polska Izba Przemysłu Targowego) and Instytut Teatralny — convention / exhibition visitor statistics (polfair.pl) and per-season theatre attendance (e-teatr.pl)</li>
+  <li>National sports leagues — Ekstraklasa football (ekstrastats.pl), Tauron Hokej Liga (hokej.net), PlusLiga volleyball (sportowefakty.wp.pl), ORLEN Superliga handball (orlen-superliga.pl)</li>
+  <li>Municipal traffic studies — Warsaw Badanie Ruchu 2015 (WBR) and Wrocław Kompleksowe Badanie Ruchu 2018 (KBR), driving the optional rejon-level workplace prior and rejon × rejon OD overlay</li>
+  <li>RPWDL — Rejestr Podmiotów Wykonujących Działalność Leczniczą, the national medical-entity registry for hospital facilities and addresses (via dane.gov.pl)</li>
+  <li>GUS BDL &quot;Zdrowie i ochrona zdrowia&quot; — per-voivodship hospital bed occupancy and outpatient visitation rates</li>
+  <li>Military installation roster — active-duty personnel counts curated from Polish Armed Forces unit references and public sources</li>
+</ul>
+<h4>Estonia</h4>
+<ul>
+  <li>Statistikaamet (Statistics Estonia) — 2021 census (per-municipality and per-asustusüksus population, employment, demographics), INSPIRE-aligned 100 m / 250 m population grid, commute O/D bin-marginal matrix, employed-residents by economic activity, national tourism visitor statistics, EHAK administrative classifier (stat.ee)</li>
+  <li>Maa-amet (Estonian Land Board) — ETAK topographic data (buildings + land-use + water + transport ROW polygons), KAOS building-use taxonomy, authoritative address geocoder, annual cadastral snapshot with siht1 zoning, sub-municipal asum / kvartal / linnaosa boundaries for the five largest cities (geoportaal.maaamet.ee)</li>
+  <li>Ehitisregister (Estonian Building Registry) — national building cache with per-building KAOS use codes, floor counts, footprints, and unit counts (ehr.ee)</li>
+  <li>Eesti Ametlik Ariregister (Estonian Commercial Register) — per-firm employee totals from majandusaasta aruanded (annual reports), used as the workplace anchor for sectoral employment (ariregister.rik.ee)</li>
+  <li>Eesti Hariduse Infosüsteem (EHIS / HTM) — institutional metadata + per-institution enrollment for universities, junior colleges, and technical colleges (haridussilm.ee)</li>
+  <li>Tallinna Lennujaam (Tallinn Airport) — terminal-level annual passenger statistics (tallinn-airport.ee)</li>
+  <li>Tallinna Sadam (Port of Tallinn) — per-port annual passenger throughput at Old City Harbour (Helsinki / Stockholm / cruise terminals), Paldiski North / South, Paljassaare, plus the regional ports at Rohuküla, Sillamäe, and Saaremaa (ts.ee)</li>
+  <li>Terviseamet (Estonian Health Board) — hospital facility registry + per-facility bed counts (terviseamet.ee)</li>
+  <li>Kaitsevägi (Estonian Defence Forces) — garrison roster, active-duty personnel curated from official unit references (mil.ee)</li>
+  <li>Eurostat / EMODnet Bathymetry — INSPIRE Population Grid epoch alignment + EMODnet DTM bathymetry for coastal bundles</li>
+</ul>
+<h3>Future countries</h3>
+<p>To be populated as each country&#x27;s pipeline is finalized.</p>
+<h2>Issues/Questions</h2>
+<p>Please raise an issue on this repository for incorrect manifests, broken download links, or release-page problems. Suggestions are welcome — especially pointers to country-specific open datasets that could improve existing bundles or unlock new ones.</p>
+<h2>Known Issues</h2>
+<h3>Czechia</h3>
+<ul>
+  <li>A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.</li>
+  <li>Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.</li>
+  <li>Residential point location is noisy, and not entirely distanced from total &quot;activity&quot; density due to the smoothness of the GHS-POP raster — sometimes placing residents near industrial locations.</li>
+</ul>
+<h3>Poland</h3>
+<ul>
+  <li>33 of the 65 covered higher-education institutions still use single-point placement at the rector&#x27;s office. Multi-campus institutions outside the 32 already disaggregated are not yet per-faculty split.</li>
+  <li>Per-college in-person attendance is not available at the same granularity as Czechia; the resulting single-point campuses geocoded against the cadastre lead to some awkward large point placement.</li>
+  <li>Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant cadastral function and are not split between residential and worker meshes — a small (~2%) population of buildings is affected.</li>
+  <li>Self-loop reconstruction absorbs both 2021 → 2024 workforce growth and the long-haul register commutes that the cordon depth gate now correctly removes from daily transit, slightly inflating self-commute share — most visibly in boundary gminas of high-OOB-commuter bundles (warsaw, gdansk, szczecin).</li>
+</ul>
+<h3>Estonia</h3>
+<ul>
+  <li>The modeled commute-distance distribution under-represents very-short trips (≤1 km, ~6% modeled vs ~16% in the Statistics Estonia TT231 ground truth) and very-long trips (&gt;100 km, ~0.1% modeled vs ~3% TT231). The shortfall on the short tail is a sub-grid limitation (the resident-mesh cell grain floors how close origin and destination can land); the long tail is a closed-system limitation (the model only places trip endpoints within the bundle).</li>
+  <li>Cross-county commutes whose destination is neither Tallinn nor Tartu are currently modelled as in-bundle self-loops rather than redistributed across the remaining 13 county capitals (maakonna keskus). Affects ~6.8–6.9% of Pärnu and Ida-Viru bundle residents, ~1.5–3.8% of Tallinn / Tartu.</li>
+</ul>
+<h3>Cross-country</h3>
+<ul>
+  <li>Faraway water, cross-border land, and cross-border inland water past the bundle&#x27;s modeled extent can render as a no-data &quot;grid&quot; pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).</li>
+  <li>Cross-border commute flows are absent from every country&#x27;s national O/D matrix (CZ / PL / EE alike publish only within-country commutes). The model therefore reconstructs all worker demand from in-bundle residents only, which understates true labour-side demand in border bundles whose populations commute substantially to a neighbouring country. Most visible on Zielona Góra and Szczecin (Berlin / Brandenburg side), Ústí nad Labem – Chomutov, Liberec – Jablonec, and Ostrava (cross-border to Saxony / Slovakia / southern Poland respectively), and Ida-Viru (historically Narva – Ivangorod, now mostly closed).</li>
+</ul>
+<h3>Resolved (historical)</h3>
+<h4>Poland</h4>
+<ul>
+  <li><del>Under a single shared EU-wide gravity decay curve, modeled mean cross-gmina commute distance ran roughly +2 to +4 km long across most PL bundles vs the NSP-2021 cordon-adjusted observed mean. Player-visible as phantom long-haul commuters spread across the map.</del> <strong>(Resolved in 0.3.1 — per-bundle commute-distance calibration; mean over-inflation across the 19-bundle PL fleet drops from +2.60 km to −0.03 km, all 19 within ±1 km.)</strong></li>
+  <li><del>The cordon mechanism fabricated implausibly long (&gt;80 km, register / weekly-commute skew) cross-boundary flows as in-bundle daily transit demand at the map edge, over-saturating boundary gateway gminas — most visibly Warsaw, where inbound concentration ran 0.72 with 12 over-saturated gateways.</del> <strong>(Resolved in 0.3.1 — cordon depth gate; Warsaw inbound concentration drops to 0.36 with all 12 gateways cleared; implausible-depth share roughly halved on all 19 bundles in both directions.)</strong></li>
+  <li><del>Three building-function codes in the Polish national classification (freight handling, postal sorting, aircraft hangars) silently routed large logistics and retail halls into a high-density transport-active workplace class instead of warehousing, causing a ~20× per-gmina workplace-mass over-weight on the affected buildings and pushing jobs out of central districts into peripheral logistics belts.</del> <strong>(Resolved in 0.3.1 — workplace classification fix.)</strong></li>
+  <li><del>PL&#x27;s published commute O/D matrix is employer-seat keyed: a najemni worker&#x27;s commute is attributed to their employer&#x27;s registered seat (siedziba), not their physical workplace. National employers headquartered in Warsaw / Kraków therefore booked their geographically-dispersed workforce&#x27;s jobs to the HQ city, over-concentrating jobs at corporate-HQ city-counties.</del> <strong>(Resolved in 0.2.4 — workplace totals re-keyed toward NSP-2021 P4500 physical workplace location.)</strong></li>
+  <li><del>The <code>pracujący</code> count from BDL is the narrowest of four PL employment measures (excludes individual farmers on holdings &lt;1 ha and small-employer agriculture). The gap to broader measures (NSP 2021 census <code>pracujący</code> ~16.5M, GUS <code>pracujący ogółem</code> P3193 ~16.0M, vs BDL ~14.1M) is mostly small-farm employment.</del> <strong>(Resolved in 0.2.4 — broadened to the NSP 2021 census <code>pracujący</code>.)</strong></li>
+  <li><del>Gdańsk oceanic index is not fully constructed -- requires a follow up and will be fixed in the next iteration</del> <strong>(Resolved in 0.2.1)</strong></li>
+</ul>
+<h4>Czechia</h4>
+<ul>
+  <li><del>The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map</del> <strong>(Resolved in 0.2.0)</strong></li>
+</ul>
+<h2>Changelog</h2>
+<h3>0.3.1 (2026-06-12)</h3>
+<h4>New Cities</h4>
+<ul>
+  <li><strong>Poland</strong></li>
+  <li style="margin-left: 1.25em;"><code>CZE</code> - Częstochowa</li>
+  <li style="margin-left: 1.25em;"><code>IEG</code> - Zielona Góra</li>
+  <li style="margin-left: 1.25em;"><code>KIE</code> - Kielce</li>
+  <li style="margin-left: 1.25em;"><code>LEG</code> - Legnica - LGOM (Legnicko-Głogowski Okręg Miedziowy)</li>
+  <li style="margin-left: 1.25em;"><code>OPL</code> - Opole</li>
+  <li style="margin-left: 1.25em;"><code>RDO</code> - Radom</li>
+  <li style="margin-left: 1.25em;"><code>SZY</code> - Olsztyn</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li><strong>Per-bundle commute-distance calibration.</strong> The commute-distance distribution in each bundle now matches the bundle-specific NSP-2021 cordon-adjusted observed mean. Mean modeled commute-distance over-inflation across the full 19-map PL set drops from <strong>+2.60 km to −0.03 km</strong>; all 19 land within ±1 km of their observed target.</li>
+</ul>
+<ul>
+  <li><strong>Implausible long-haul cordon commutes redirected to self-loop.</strong> Cross-boundary flows longer than ~80 km from origin to destination are no longer fabricated as in-bundle daily transit demand at the map edge — long flows are kept whole below 80 km, ramped down to zero at 160 km, and dropped beyond. The unretained mass reverts to local self-commutes via the existing mass-conserving reconstruction path.</li>
+</ul>
+<ul>
+  <li><strong>Workplace classification fix for large logistics buildings.</strong> Three building-function codes in the Polish national classification (freight handling, postal sorting, aircraft hangars) were silently routing large logistics and retail buildings into a high-density transport-active workplace class instead of warehousing — a roughly 20× per-gmina workplace-mass over-weight on the affected buildings. The remap shifts these buildings to warehousing density, redistributing workplace demand from peripheral logistics belts back towards dencer office-heavy urban cores.</li>
+</ul>
+<ul>
+  <li><strong>Sparser-class workplace density anchored to national priors.</strong> The per-bundle calibration of building-class job densities now blends against PL national priors. Previously-sparse classes (e.g. transport-active in non-station bundles) no longer fit to implausible jobs sqm floor area ratios via calibration noise.</li>
+</ul>
+<ul>
+  <li><strong>Cleaner resident point placement on BDOT buildings.</strong> Residents across all PL bundles now snap to nearest BDOT residential building polygons.</li>
+</ul>
+<h3>0.3.0 (2026-06-10)</h3>
+<h4>Initial Cities</h4>
+<ul>
+  <li><strong>Estonia</strong></li>
+  <li style="margin-left: 1.25em;"><code>TLL</code> - Tallinn</li>
+  <li style="margin-left: 1.25em;"><code>TAY</code> - Tartu</li>
+  <li style="margin-left: 1.25em;"><code>EPU</code> - Pärnu</li>
+  <li style="margin-left: 1.25em;"><code>IDV</code> - Ida-Viru (Narva + Kohtla-Järve)</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li>First release of the Estonia maps.</li>
+  <li>Sub-municipal (asustusüksus) resident and worker placement for all four bundles, calibrated against the 2021 Estonian census and Statistikaamet&#x27;s INSPIRE-aligned 100 m / 250 m gridded population.</li>
+  <li style="margin-left: 1.25em;">The five largest cities (Tallinn, Tartu, Pärnu, Narva, Kohtla-Järve) are further subdivided into asum / kvartal / linnaosa neighborhoods via Maa-amet&#x27;s official sub-municipal boundary layer.</li>
+  <li style="margin-left: 1.25em;">Per-asustusüksus worker mass uses the Ehitisregister national building cache (with the official KAOS use-code taxonomy filtering residential / workplace / mixed-use) and per-firm employee totals from Estonian Commercial Register annual reports as the workplace anchor.</li>
+  <li>Demand points for airports, passenger ferry terminals, universities and colleges, cultural attractions, convention and exhibition centers, sports venues, libraries, religious sites, national parks and natural landmarks, spa resorts, and theme parks across all four bundles.</li>
+  <li>Per-municipality commute calibration against the 2021 census commute matrix.</li>
+  <li style="margin-left: 1.25em;">The published matrix releases only bin-marginal shares (within-municipality, within-county, cross-county, against Tallinn, against Tartu) rather than a full municipality-to-municipality cell matrix.</li>
+  <li style="margin-left: 1.25em;">A Generalized IPF pass reconciles a gravity-decay model against those marginals with destination-pinning on the two anchor cities; a symmetric containment guard prevents over-routing to the urban core.</li>
+  <li>ETAK + Ehitisregister-derived buildings used in place of Overture for spatial detail.</li>
+  <li>Standard OSRM routing included.</li>
+</ul>
+<h3>0.2.4 (2026-06-01)</h3>
+<h4>Updated Cities</h4>
+<ul>
+  <li><strong>Poland</strong></li>
+  <li style="margin-left: 1.25em;"><code>WAR</code> - Warszawa</li>
+  <li style="margin-left: 1.25em;"><code>KTW</code> - Katowice - GZM (Górnośląsko-Zagłębiowska Metropolia)</li>
+  <li style="margin-left: 1.25em;"><code>KRK</code> - Kraków</li>
+  <li style="margin-left: 1.25em;"><code>POZ</code> - Poznań</li>
+  <li style="margin-left: 1.25em;"><code>WRO</code> - Wrocław</li>
+  <li style="margin-left: 1.25em;"><code>GDN</code> - Gdańsk</li>
+  <li style="margin-left: 1.25em;"><code>LCJ</code> - Łódź</li>
+  <li style="margin-left: 1.25em;"><code>LUZ</code> - Lublin</li>
+  <li style="margin-left: 1.25em;"><code>SZZ</code> - Szczecin</li>
+  <li style="margin-left: 1.25em;"><code>BTK</code> - Białystok</li>
+  <li style="margin-left: 1.25em;"><code>BZG</code> - Bydgoszcz - Toruń</li>
+  <li style="margin-left: 1.25em;"><code>RZE</code> - Rzeszów</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li><strong>Fuller land use coverage.</strong> All twelve maps now source land use polygons from BDOT directly, giving much fuller coverage of park/wooded land.</li>
+  <li style="margin-left: 1.25em;">Rendered landuse is now clipped to water, so no water features appear obscured by greenery when rendered.</li>
+</ul>
+<ul>
+  <li><strong>Broader employment basis.</strong> The per-municipality worker control total now uses the broader GUS NSP 2021 census <code>pracujący</code> (an ILO-style residence-side measure) instead of the narrower BDL administrative <code>pracujący</code> (P4280) used previously.</li>
+  <li style="margin-left: 1.25em;">This lifts worker totals across all 12 bundles, with the largest impact in agriculture-heavy rural gminas that the administrative measure under-counts</li>
+</ul>
+<ul>
+  <li><strong>Symmetric cordon at the map boundary.</strong> Cross-boundary commute flows that the published NSP 2021 matrix would otherwise have collapsed onto each boundary gmina&#x27;s self-loop diagonal are now redistributed across in-bundle gateway gminas via a mass-conserving multinomial weighted by gravity × in-bundle capacity</li>
+  <li style="margin-left: 1.25em;">Redirected diagonal self-loop share is then debited at the new gateway origin. \</li>
+  <li style="margin-left: 1.25em;">The cordon pass operates symmetrically in both directions (outbound: in-bundle resident, out-of-bundle job; inbound: out-of-bundle resident, in-bundle job).</li>
+  <li style="margin-left: 1.25em;">The result significantly improves CBD self-loop accuracy on monocentric bundles and de-conflates the boundary self-loop where the closed-matrix fabrication previously over-concentrated it; recovery is sharpest at the map boundary itself, declining monotonically toward the interior.</li>
+</ul>
+<ul>
+  <li>New special demand categories added across all 12 bundles:</li>
+  <li style="margin-left: 1.25em;"><strong>Hospitals</strong> -- daily commute demand at inpatient and outpatient hospital facilities. Per-facility bed counts are allocated from voivodship totals by BDOT10k building floor area, anchored to the RPWDL national medical-entity registry.</li>
+</ul>
+<ul>
+  <li style="margin-left: 1.25em;"><strong>Military bases</strong> -- active-duty personnel demand at Polish Land Forces, Air Force, Navy, Special Forces, and Territorial Defence installations.</li>
+</ul>
+<ul>
+  <li style="margin-left: 1.25em;"><strong>Passenger-ferry terminals.</strong> New demand points at Świnoujście, Gdynia, Gdańsk-Westerplatte, and the seasonal Hel passenger pier — sized from annual Port Monitor passenger statistics.</li>
+</ul>
+<h4>Other Features</h4>
+<ul>
+  <li><strong>Additional venue and attraction coverage.</strong> Several smaller demand additions across all 12 bundles: I liga football spectator demand (cup-game inclusive) at the lower-tier clubs, non-league event volume at major multi-use stadiums, municipal sport-recreation facilities operated by local MOSiR / BOSiR offices, and additional Catholic sanctuaries and marquee tourism attractions.</li>
+</ul>
+<h4>Bugfixes</h4>
+<ul>
+  <li><strong>Corrected university faculty coordinates.</strong> Wydział Neofilologii Uniwersytetu Warszawskiego (Powiśle, near BUW) and Wydział Lekarski Uniwersytetu Jagiellońskiego Collegium Medicum (Stare Miasto, Kraków) repositioned to their actual addresses.</li>
+  <li style="margin-left: 1.25em;">The prior coordinates had snapped to the wrong same-name street via the national geocoder&#x27;s candidate-disambiguation step.</li>
+</ul>
+<h3>0.2.3 (2026-05-19)</h3>
+<h4>Updated Cities</h4>
+<ul>
+  <li><strong>Poland</strong></li>
+  <li style="margin-left: 1.25em;"><code>WAR</code> - Warszawa</li>
+  <li style="margin-left: 1.25em;"><code>KTW</code> - Katowice - GZM (Górnośląsko-Zagłębiowska Metropolia)</li>
+  <li style="margin-left: 1.25em;"><code>KRK</code> - Kraków</li>
+  <li style="margin-left: 1.25em;"><code>POZ</code> - Poznań</li>
+  <li style="margin-left: 1.25em;"><code>WRO</code> - Wrocław</li>
+  <li style="margin-left: 1.25em;"><code>GDN</code> - Gdańsk</li>
+  <li style="margin-left: 1.25em;"><code>LCJ</code> - Łódź</li>
+  <li style="margin-left: 1.25em;"><code>LUZ</code> - Lublin</li>
+  <li style="margin-left: 1.25em;"><code>SZZ</code> - Szczecin</li>
+  <li style="margin-left: 1.25em;"><code>BTK</code> - Białystok</li>
+  <li style="margin-left: 1.25em;"><code>BZG</code> - Bydgoszcz - Toruń</li>
+  <li style="margin-left: 1.25em;"><code>RZE</code> - Rzeszów</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li><strong>Worker destination distribution rebalanced.</strong> Within each sub-municipal area that contains multiple worker points, the share of inbound commuters is now distributed across those points by their relative employment weight rather than concentrating on whichever sibling won the proportional-sampling lottery.</li>
+</ul>
+<ul>
+  <li><strong>Worker point seeding improvements for industrial estates and dense urban blocks.</strong> Building footprint area is now blended into the seeding signal alongside floor count and local workplace density.</li>
+  <li style="margin-left: 1.25em;">Large warehouse parks holding a small number of very large buildings now should split into multiple worker points rather than concentrating on a single mega-point.</li>
+  <li style="margin-left: 1.25em;">The clustering pass that places workers around seed locations is now refined to prevent the entire worker mass of a small block from snapping onto its largest building.</li>
+</ul>
+<ul>
+  <li><strong>Building polygon coverage expanded.</strong> The buildings layer now includes BDOT&#x27;s stadiums, engineering polygons, and technical infrastructure polygons (transformer stations and similar).</li>
+</ul>
+<ul>
+  <li><strong>Neighbourhood label coverage.</strong> Place name labels at the dzielnice and miejscowość level now come from the GUS SIMC official locality registry joined against OSM <code>teryt:simc</code> tags.</li>
+</ul>
+<ul>
+  <li><strong>Edge-of-bundle municipality reassignment.</strong> A small set of peripheral gminas at the FUA boundary that were previously silently zeroed (due to source-registry mismatches or recent administrative boundary changes) now resolve correctly for both residence and worker mass.</li>
+</ul>
+<h4>Other Features</h4>
+<ul>
+  <li><strong>Bundle boundary refinements for KTW and KRK.</strong> Katowice now folds in the Rybnik FUA on its southwestern edge as well as Oświęcim in the southeast. Kraków is also expanded slightly west to meet that new boundary.</li>
+</ul>
+<ul>
+  <li><strong>Per-faculty placement extended to four additional institutions.</strong> Politechnika Śląska, Śląski Uniwersytet Medyczny, Uniwersytet Rolniczy w Krakowie, and Uniwersytet Rzeszowski now have per-wydział spatial distribution instead of concentrating all students at the rector&#x27;s office.</li>
+</ul>
+<h3>0.2.2 (2026-05-17)</h3>
+<h4>New Cities</h4>
+<ul>
+  <li><strong>Czechia</strong></li>
+  <li style="margin-left: 1.25em;"><code>CBS</code> - České Budějovice</li>
+  <li style="margin-left: 1.25em;"><code>LBC</code> - Liberec - Jablonec nad Nisou</li>
+</ul>
+<h4>Updated Cities</h4>
+<ul>
+  <li><strong>Czechia</strong></li>
+  <li style="margin-left: 1.25em;"><code>BRQ</code> - Brno</li>
+  <li style="margin-left: 1.25em;"><code>HKP</code> - Hradec Králové - Pardubice</li>
+  <li style="margin-left: 1.25em;"><code>OLO</code> - Olomouc</li>
+  <li style="margin-left: 1.25em;"><code>OSR</code> - Ostrava</li>
+  <li style="margin-left: 1.25em;"><code>PLZ</code> - Plzeň</li>
+  <li style="margin-left: 1.25em;"><code>PRG</code> - Praha</li>
+  <li style="margin-left: 1.25em;"><code>UCH</code> - Ústí nad Labem - Chomutov</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li>Building footprint area is now blended into the worker placement signal.</li>
+  <li style="margin-left: 1.25em;">Industrial estates containing a small number of large warehouses should now be split into multiple anchored points rather than concentrating onto a single mega-point</li>
+  <li>New special demand points are added across all bundles, including</li>
+  <li style="margin-left: 1.25em;"><strong>Libraries</strong> -- with multi-branch library systems disaggregated per pobočka rather than concentrated at the central building. Per-branch visitor counts are derived from operator annual reports</li>
+  <li style="margin-left: 1.25em;"><strong>Hospitals</strong> -- with daily commute demand at inpatient and outpatient hospital facilities sized from ÚZIS Lůžkový fond (per-facility bed counts and occupancy) joined with the NRPZS national provider register for addresses and coordinates.</li>
+  <li style="margin-left: 1.25em;"><strong>Military bases</strong> -- with demand for active-duty soldiers stationed kasárna generated from a small set of named AČR installations</li>
+  <li>Workplace point populations are now better balanced.</li>
+  <li style="margin-left: 1.25em;">When a ZSJ-díl contains multiple worker points, workers are now actually distributed across those points rather than concentrating onto whichever point won the proportional sampling lottery.</li>
+  <li>Restored worker inbound for ZSJ-díl mismatched by the COVID-era census.</li>
+  <li style="margin-left: 1.25em;">ZSJ-díl that have residents and worker capacity on paper but show zero inbound flow in the published 2021 commute matrix now receive a small share of commutes.</li>
+</ul>
+<h4>Bugfixes</h4>
+<ul>
+  <li>Large floor area worker outlier inflation fixed.</li>
+  <li style="margin-left: 1.25em;">The reconciliation pass that balances residence-side and workplace-side totals could over-assign workers to a single building in volume-heavy ZSJ-díl, yielding artifacts like a single distribution warehouse or shopping-mall building modelled as containing the worker mass of an entire district.</li>
+  <li>Worker-point snap now respects ZSJ-díl boundaries.</li>
+  <li style="margin-left: 1.25em;">When a worker point is snapped to a nearby building polygon, the snap now prefers a building within the same ZSJ-díl, falling back to any-polygon only when no in-ZSJ-díl candidate exists.</li>
+  <li style="margin-left: 1.25em;">Previously the largest-building-in-radius rule could anchor a ZSJ-díl&#x27;s entire worker mass on a neighbor&#x27;s building, particularly at ZSJ-díl edges adjacent to industrial sites.</li>
+</ul>
+<h3>0.2.1 (2026-05-12)</h3>
+<h4>New Cities</h4>
+<ul>
+  <li><strong>Poland</strong></li>
+  <li style="margin-left: 1.25em;"><code>WAR</code> - Warszawa</li>
+  <li style="margin-left: 1.25em;"><code>KTW</code> - Katowice - GZM (Górnośląsko-Zagłębiowska Metropolia)</li>
+  <li style="margin-left: 1.25em;"><code>POZ</code> - Poznań</li>
+  <li style="margin-left: 1.25em;"><code>LUZ</code> - Lublin</li>
+  <li style="margin-left: 1.25em;"><code>SZZ</code> - Szczecin</li>
+  <li style="margin-left: 1.25em;"><code>BTK</code> - Białystok</li>
+  <li style="margin-left: 1.25em;"><code>RZE</code> - Rzeszów</li>
+</ul>
+<h4>Updated Cities</h4>
+<ul>
+  <li><strong>Poland</strong></li>
+  <li style="margin-left: 1.25em;"><code>BZG</code> - Bydgoszcz - Toruń</li>
+  <li style="margin-left: 1.25em;"><code>GDN</code> - Gdańsk</li>
+  <li style="margin-left: 1.25em;"><code>KRK</code> - Kraków</li>
+  <li style="margin-left: 1.25em;"><code>LCJ</code> - Łódź</li>
+  <li style="margin-left: 1.25em;"><code>WRO</code> - Wrocław</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li>Point seeding rebuilt around BDOT residential geometry, replacing the GHS-POP × residential-mask hybrid with a per-cell footprint × floor-count signal. Resident points now sit on BDOT building polygons directly.</li>
+  <li style="margin-left: 1.25em;">Large industrial estates that previously concentrated worker demand at a single overloaded point are now split into multiple workplace points, with tighter inter-point spacing.</li>
+  <li style="margin-left: 1.25em;">Merged residence + workplace points now anchor to the location with the strongest combined residential and workplace signal, rather than defaulting to the residential side — fixes cases where a point carrying most of a sector&#x27;s workers sat on a low-worker cell.</li>
+  <li>Census-mesh conservation overhaul. The 125m + 250m + 1km NSP hybrid previously inflated gmina-level rollups by 15–23%.</li>
+  <li style="margin-left: 1.25em;">Several fixes were made so that the rollup now conserves to ~1% of NSP truth across all 12 bundles, and rural residential pockets that were dropped by the over-aggressive strict-quadrant rule are now retained.</li>
+  <li>Point agglomeration overhauled to be sensitive to per-boundary density, with rural cells receiving lighter agglomeration passes</li>
+  <li>Special demand coverage refreshed across all 12 bundles</li>
+  <li style="margin-left: 1.25em;">Airports recurated to 2025 ULC data (15 airports, with proper krajowy / międzynarodowy traveler split per port).</li>
+  <li style="margin-left: 1.25em;">Universities now use per-institution in-person (stacjonarne) shares from POL-on <code>iKindName</code>, replacing the flat national-average haircut applied in 0.2.0.</li>
+  <li style="margin-left: 1.25em;">Per-faculty placement for 32 of the 65 covered higher-education institutions (446K students across 315 points), replacing single-point placement at the rector&#x27;s office for those institutions.</li>
+  <li>Tourism attraction coverage expanded by ~25 famous PoIs missing from POT (Jasna Góra, Bazylika Mariacka Kraków / Gdańsk, Sanktuarium Licheń, Kalwaria Zebrzydowska, PGE Narodowy, Stadion Śląski, AmberExpo, several major Catholic sanctuaries and palaces). 17 POT classifier corrections (cable cars, orthodox cerkwie, mining tourist trails, narrow-gauge railways) and a sports-venue recalibration are also included.</li>
+  <li><strong>Urban-palace ticketed/unticketed disaggregation</strong> for the largest royal residence-park complexes (Łazienki Królewskie 5.0M; Wilanów 2.8M). Visitor demand is split between the ticketed pavilion(s) and the free park rather than concentrated at the palace coord, mirroring the per-trailhead pattern already used for the largest national parks.</li>
+</ul>
+<h4>Bugfixes</h4>
+<ul>
+  <li>Several miejsko-wiejska gminas across multiple bundles were previously silently zeroed in resident/worker mass due to administrative-code mismatches between source registries. All such gminas now resolve correctly.</li>
+  <li>Areas affected by 2025 administrative gmina splits (e.g. Grabówka, east of Białystok) had their workplace demand silently zeroed because the new gmina codes did not yet exist in the BDL employment registry. Workplaces in such areas now receive their share of the parent gmina&#x27;s employment.</li>
+</ul>
+<h3>0.2.0 (2026-05-06)</h3>
+<h4>Initial Cities</h4>
+<ul>
+  <li><strong>Poland</strong></li>
+  <li style="margin-left: 1.25em;"><code>BZG</code> - Bydgoszcz - Toruń</li>
+  <li style="margin-left: 1.25em;"><code>GDN</code> - Gdańsk</li>
+  <li style="margin-left: 1.25em;"><code>KRK</code> - Kraków</li>
+  <li style="margin-left: 1.25em;"><code>LCJ</code> - Łódź</li>
+  <li style="margin-left: 1.25em;"><code>WRO</code> - Wrocław</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li>First release of the Poland maps.</li>
+  <li>Sub-gmina (BREC rejon statystyczny) resident and worker placement for all four bundles, calibrated against NSP 2021 census tables and the GUGiK BDOT10k national buildings cadastre.</li>
+  <li style="margin-left: 1.25em;">Per-bundle BDOT10k <code>kodKst</code> building-function weights are fit against BDL PKD employment.</li>
+  <li>Phase E special demand for airports, universities, tourism attractions, sports venues across four top-tier leagues, convention/cultural centers, and multi-purpose arenas on all four bundles.</li>
+  <li>Self-loop reconstruction applied to all four bundles</li>
+  <li style="margin-left: 1.25em;">GUS strips intra-gmina commute flows at NSP 2021 publication (the published matrix records only cross-gmina worker flows).</li>
+  <li style="margin-left: 1.25em;">The diagonal is reconstructed deterministically per gmina as <code>BDL[g] − Σ inbound_OD[dest=g]</code>.</li>
+  <li>BDOT10k-derived buildings are used in place of Overture, standard OSRM routing (congruous with CZ) is included.</li>
+</ul>
+<h3>0.1.2 (2026-05-02)</h3>
+<h4>Updated Cities</h4>
+<ul>
+  <li><strong>Czechia</strong></li>
+  <li style="margin-left: 1.25em;"><code>BRQ</code> - Brno</li>
+  <li style="margin-left: 1.25em;"><code>HKP</code> - Hradec Králové - Pardubice</li>
+  <li style="margin-left: 1.25em;"><code>OLO</code> - Olomouc</li>
+  <li style="margin-left: 1.25em;"><code>OSR</code> - Ostrava</li>
+  <li style="margin-left: 1.25em;"><code>PLZ</code> - Plzeň</li>
+  <li style="margin-left: 1.25em;"><code>PRG</code> - Praha</li>
+  <li style="margin-left: 1.25em;"><code>UCH</code> - Ústí nad Labem - Chomutov</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li>All Czechia map boundaries expanded to include more of the surrounding area</li>
+  <li>RÚIAN replaces Overture as the canonical source of CZ buildings, with nearly full tag + height coverage for ~4.22 million buildings nationwide</li>
+  <li style="margin-left: 1.25em;">Better tagging enables more accurate point placement, with residential points only allowed on buildings tagged as residential, and worker points only allowed on buildings that could palusibly contain workplaces</li>
+  <li>Worker points are now seeded separately from residential points, and are snapped to building polygons to improve placement in industrial estates</li>
+  <li>Recalibrated building floor area job density priors against per-bundle empiric evidence and SLDB-NACE classifications, to better distribute workers amongst the seeded points</li>
+</ul>
+<h4>Bugfixes</h4>
+<ul>
+  <li>Fixed a bug where the cross-ref mesh for residential mass was essentially non-functional due to an ID formation mismatch.</li>
+</ul>
+<h3>0.1.1 (2026-04-26)</h3>
+<h4>New Cities</h4>
+<ul>
+  <li><strong>Czechia</strong></li>
+  <li style="margin-left: 1.25em;"><code>HKP</code> - Hradec Králové - Pardubice</li>
+  <li style="margin-left: 1.25em;"><code>OLO</code> - Olomouc</li>
+  <li style="margin-left: 1.25em;"><code>UCH</code> - Ústí nad Labem - Chomutov</li>
+</ul>
+<h4>Updated Cities</h4>
+<ul>
+  <li><strong>Czechia</strong></li>
+  <li style="margin-left: 1.25em;"><code>BRQ</code> - Brno</li>
+  <li style="margin-left: 1.25em;"><code>OSR</code> - Ostrava</li>
+  <li style="margin-left: 1.25em;"><code>PLZ</code> - Plzeň</li>
+  <li style="margin-left: 1.25em;"><code>PRG</code> - Praha</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li>Augmented the GHS-POP resident/population raster with Overture building information to reduce noise caused by smoothing</li>
+  <li style="margin-left: 1.25em;">Known industrial areas now &quot;mask&quot; the raster to prevent resident placement in industrial estates</li>
+  <li style="margin-left: 1.25em;">Areas with no Overture coverage also &quot;mask&quot; the raster to prevent resident placement in entirely rural areas</li>
+  <li>Updated worker raster to take into account worker totals from non-intersecting cells in the Overture mesh cross-ref</li>
+  <li>Removed same-node workers entirely, resulting in a very small ~0.2-0.6% drop in total modeled demand for each city in the bundle</li>
+</ul>
+<h3>0.1.0 (2026-04-25)</h3>
+<h4>Initial Cities</h4>
+<ul>
+  <li><strong>Czechia</strong></li>
+  <li style="margin-left: 1.25em;"><code>BRQ</code> - Brno</li>
+  <li style="margin-left: 1.25em;"><code>OSR</code> - Ostrava</li>
+  <li style="margin-left: 1.25em;"><code>PLZ</code> - Plzeň</li>
+  <li style="margin-left: 1.25em;"><code>PRG</code> - Praha</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li>First release of the Czechia maps.</li>
+  <li>Sub-municipal (ZSJ-díl) resident and worker placement for all four bundles, calibrated against Census 2021 tables and the GHS-POP 2020 raster.</li>
+  <li>Phase E special demand for airports, universities/colleges, and cultural attractions on all four bundles.</li>
+  <li>COVID-era self-commute correction applied to all Czech bundles; aggregate self-commute share brought from ~27–34% (published census) down to ~3–8% per bundle via gravity-calibrated redistribution.</li>
+  <li>Overture-derived buildings and OSRM routing included.</li>
+</ul>
+<h2>Planned Updates</h2>
+<ul>
+  <li>Additional Polish cities not yet included.</li>
+  <li>Addition of additional Central / Eastern European countries (Hungary / Slovakia / Ukraine).</li>
+  <li>Hospital and military-base demand layers for the Estonian bundles (Terviseamet + Kaitsevägi sources curated in the pipeline but not yet rendered in v0.3.0).</li>
+</ul>
+<h2>Special Demand Details</h2>
+<p>Per-country category breakdown of the modeled demand-point categories beyond residence and workplace commute. Each row is geocoded against the relevant national authoritative source and sized from operator or government-published visitor / passenger / enrollment / bed-count figures.</p>
+<h3>Czech Republic</h3>
+<ul>
+  <li><strong>Airports</strong></li>
+  <li style="margin-left: 1.25em;">Demand based on annualized passenger statistics from the Czech Civil Aviation Authority, split by international &amp; national travelers.</li>
+  <li><strong>Institutions of Learning</strong></li>
+  <li style="margin-left: 1.25em;">Students in post-secondary (univerzity / vysoké školy) sized from official prezenční (in-person) enrollment datasheets published by MŠMT (Ministry of Education).</li>
+  <li><strong>Cultural Attractions</strong></li>
+  <li style="margin-left: 1.25em;">Attendance figures sourced from the krajské (regional) tourism statistics published on tourdata.cz, supplemented with operator annual reports and per-site visitor counters for sites missing from the krajské aggregates.</li>
+  <li style="margin-left: 1.25em;">Zoos, botanical gardens, aquariums.</li>
+  <li style="margin-left: 1.25em;">Art &amp; history museums, castles, chateaux.</li>
+  <li style="margin-left: 1.25em;">Major parks, hot-spring spa towns (Karlovy Vary, Mariánské Lázně, Františkovy Lázně, Poděbrady), and natural landmarks.</li>
+  <li style="margin-left: 1.25em;">Major religious sites (cathedrals, monasteries, pilgrimage churches).</li>
+  <li style="margin-left: 1.25em;">UNESCO World Heritage sites (Pražský hrad, historic centers of Český Krumlov, Kutná Hora, and Olomouc, Lednice-Valtice cultural landscape, etc.).</li>
+  <li style="margin-left: 1.25em;">Theme parks and aquaparks (Aquapalace Praha, Aqualand Moravia, etc.).</li>
+  <li><strong>Libraries</strong></li>
+  <li style="margin-left: 1.25em;">Per-branch visitor counts from library operator annual reports, disaggregated per pobočka.</li>
+  <li><strong>Cultural Centers, Theatres &amp; Concert Halls</strong></li>
+  <li style="margin-left: 1.25em;">Per-season attendance from operator annual reports at the principal kulturní domy, divadla, and koncertní sály venues.</li>
+  <li><strong>Multi-Purpose Arenas</strong></li>
+  <li style="margin-left: 1.25em;">Non-sport event volume at major arenas (O2 arena Praha, Ostravar Aréna, Home Credit Arena Liberec, etc.) modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand.</li>
+  <li><strong>Convention &amp; Exhibition Centers</strong></li>
+  <li style="margin-left: 1.25em;">Annual visitor totals from operator annual reports for the principal Czech expo and congress venues (Výstaviště Praha, BVV Brno, etc.).</li>
+  <li><strong>Sports Venues</strong></li>
+  <li style="margin-left: 1.25em;">Annual spectator counts at the principal Czech league venues across football (Fortuna Liga), ice hockey (Tipsport Extraliga), and basketball, plus public sport complexes (swimming, ice rinks) at municipal sport centers.</li>
+  <li><strong>Hospitals</strong></li>
+  <li style="margin-left: 1.25em;">Daily commute demand at inpatient and outpatient facilities, sized from ÚZIS per-facility bed counts and occupancy.</li>
+  <li><strong>Military bases</strong></li>
+  <li style="margin-left: 1.25em;">Active-duty personnel at named AČR (Czech Army) installations.</li>
+</ul>
+<h3>Poland</h3>
+<ul>
+  <li><strong>Airports</strong></li>
+  <li style="margin-left: 1.25em;">Demand based on annualized passenger statistics from the Civil Aviation Authority (Urząd Lotnictwa Cywilnego), split by international (ruch międzynarodowy) and national (ruch krajowy) travelers.</li>
+  <li><strong>Passenger Ferry Terminals</strong></li>
+  <li style="margin-left: 1.25em;">Per-terminal annual passenger throughput at the Świnoujście ferry terminal, the Gdynia and Gdańsk-Westerplatte cruise + ferry terminals, and the seasonal Hel passenger pier — sized from Port Monitor passenger statistics and port-operator annual reports.</li>
+  <li><strong>Institutions of Learning</strong></li>
+  <li style="margin-left: 1.25em;">Students in higher education sized from the POL-on RADON registry (Polish Ministry of Education) joined with GUS public per-institution enrollment statistics, and geocoded via the Polish national address geocoder GUGiK CAPAP. A composite stacjonarni (in-person) × in-person-attendance haircut is applied to estimate active on-site demand because GUS publishes only total enrollment, not the form-of-study split.</li>
+  <li><strong>Cultural Attractions</strong></li>
+  <li style="margin-left: 1.25em;">Attendance figures sourced from the POT (Polska Organizacja Turystyczna) annual &quot;Frekwencja w atrakcjach turystycznych&quot; report, supplemented with operator annual reports and per-site visitor counters for sites missing from the POT aggregates.</li>
+  <li style="margin-left: 1.25em;">Major museums, castles, palaces, and historic buildings.</li>
+  <li style="margin-left: 1.25em;">Zoos, botanical gardens, arboreta, palmiarnie.</li>
+  <li style="margin-left: 1.25em;">Water parks and thermal baths.</li>
+  <li style="margin-left: 1.25em;">Catholic sanctuaries, cathedrals, basilicas, and monasteries.</li>
+  <li style="margin-left: 1.25em;">UNESCO World Heritage sites (Auschwitz-Birkenau, Wieliczka/Bochnia salt mines).</li>
+  <li style="margin-left: 1.25em;">National parks with <strong>per-entrance demand disaggregation</strong> for the largest parks (Tatrzański, Kampinoski, Karkonoski, Pieniński, Wielkopolski, PN Gór Stołowych) — the published park-level total is split across major trailheads / gateway entrances rather than a single park centroid.</li>
+  <li><strong>Sports Venues</strong></li>
+  <li style="margin-left: 1.25em;">Annual spectator counts derived from official league statistics across four top-tier Polish leagues:</li>
+  <li style="margin-left: 2.50em;">Ekstraklasa football (ekstrastats.pl).</li>
+  <li style="margin-left: 2.50em;">Tauron Hokej Liga ice hockey (hokej.net + polskihokej.eu).</li>
+  <li style="margin-left: 2.50em;">PlusLiga men&#x27;s volleyball (plusliga.pl + sportowefakty.wp.pl).</li>
+  <li style="margin-left: 2.50em;">ORLEN Superliga handball (orlen-superliga.pl).</li>
+  <li><strong>Convention &amp; Exhibition Centers</strong></li>
+  <li style="margin-left: 1.25em;">Annual visitor totals from the PIPT (Polska Izba Przemysłu Targowego) annual industry report and per-operator pages.</li>
+  <li><strong>Theatres, Philharmonics &amp; Opera</strong></li>
+  <li style="margin-left: 1.25em;">Per-season attendance from Instytut Teatralny (e-teatr.pl) for theatres; operator sprawozdania (annual reports) for philharmonics and opera houses.</li>
+  <li><strong>Multi-Purpose Arenas</strong></li>
+  <li style="margin-left: 1.25em;">Non-sport event volume at major arenas (Tauron Arena Kraków, Spodek Katowice, Atlas Arena Łódź, Ergo Arena Gdańsk-Sopot, ORLEN Arena Płock, Arena Toruń, etc.) modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand.</li>
+  <li><strong>Hospitals</strong></li>
+  <li style="margin-left: 1.25em;">Daily commute demand at inpatient and outpatient facilities. Per-facility bed counts are allocated from voivodship totals by BDOT10k building floor area, anchored to the RPWDL national medical-entity registry.</li>
+  <li><strong>Military bases</strong></li>
+  <li style="margin-left: 1.25em;">Active-duty personnel at Land Forces, Air Force, Navy, Special Forces, and Territorial Defence installations.</li>
+</ul>
+<h3>Estonia</h3>
+<ul>
+  <li><strong>Airports</strong></li>
+  <li style="margin-left: 1.25em;">Demand based on terminal-level annual passenger statistics from Tallinna Lennujaam (Tallinn Airport).</li>
+  <li><strong>Passenger Ferry Terminals</strong></li>
+  <li style="margin-left: 1.25em;">Per-terminal annual passenger throughput at the Old City Harbour Helsinki-line, Stockholm-line, cruise, and Paljassaare berths, the Paldiski North / South terminals, and the regional ports at Rohuküla, Sillamäe, and Saaremaa — sized from Tallinna Sadam (Port of Tallinn) and Statistikaamet maritime statistics.</li>
+  <li><strong>Institutions of Learning</strong></li>
+  <li style="margin-left: 1.25em;">Students at universities (ülikoolid), technical colleges (rakenduskõrgkoolid), and junior colleges (kõrgkoolid), sized from Eesti Hariduse Infosüsteem (the Ministry of Education registry) per-institution enrollment.</li>
+  <li><strong>Cultural Attractions</strong></li>
+  <li style="margin-left: 1.25em;">Attendance figures sourced from Statistikaamet national tourism statistics, supplemented with operator annual reports and per-site visitor counters for sites missing from the national aggregates.</li>
+  <li style="margin-left: 1.25em;">Zoos, botanical gardens.</li>
+  <li style="margin-left: 1.25em;">Art and general museums, castles, manor houses.</li>
+  <li style="margin-left: 1.25em;">Major parks, hot-spring spa resorts, and natural landmarks.</li>
+  <li style="margin-left: 1.25em;">National parks (Lahemaa, Soomaa, Karula, Matsalu, Vilsandi).</li>
+  <li style="margin-left: 1.25em;">Major religious sites (Lutheran, Orthodox, and Catholic cathedrals, monasteries, and pilgrimage churches).</li>
+  <li style="margin-left: 1.25em;">UNESCO World Heritage sites — Tallinn Vanalinn (Old Town) with <strong>per-pavilion demand disaggregation</strong>: the published city-level total is split between the ticketed pavilions (Toomkirik, Niguliste, Kiek in de Kök, Linnamüür) and the free walking-tour area rather than concentrated at the Old Town centroid.</li>
+  <li style="margin-left: 1.25em;">Theme parks and aquaparks.</li>
+  <li><strong>Libraries</strong></li>
+  <li style="margin-left: 1.25em;">Per-branch visitor counts from library operator annual reports, including the Estonian National Library and the principal municipal branches.</li>
+  <li><strong>Cultural Centers, Theatres &amp; Concert Halls</strong></li>
+  <li style="margin-left: 1.25em;">Per-season attendance from operator annual reports at the principal concert halls, theatres, philharmonics, and cultural districts (kultuurikeskused).</li>
+  <li><strong>Multi-Purpose Arenas</strong></li>
+  <li style="margin-left: 1.25em;">Non-sport event volume at the principal Estonian arenas modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand.</li>
+  <li><strong>Convention &amp; Exhibition Centers</strong></li>
+  <li style="margin-left: 1.25em;">Annual visitor totals from operator annual reports for the principal Estonian expo and conference venues.</li>
+  <li><strong>Sports Venues</strong></li>
+  <li style="margin-left: 1.25em;">Annual spectator counts at the principal Estonian league venues across football, basketball, ice hockey, and volleyball, plus public sport complexes (swimming, ice rinks) at municipal sport centers.</li>
+  <li><strong>Hospitals</strong> <em>(to be populated in a future release)</em></li>
+  <li style="margin-left: 1.25em;">Daily commute demand at inpatient and outpatient facilities, sized from Terviseamet (Estonian Health Board) per-facility bed counts.</li>
+  <li><strong>Military bases</strong> <em>(to be populated in a future release)</em></li>
+  <li style="margin-left: 1.25em;">Active-duty personnel at Kaitsevägi (Estonian Defence Forces) garrisons.</li>
+</ul>
+<h2>License</h2>
+<p>All maps are released under the <a href="https://github.com/ahkimn/subwaybuilder-eu-maps/blob/main/LICENSE">GNU General Public License v3.0</a>.</p>
+<h2>Credits</h2>
+<p>All maps authored by <a href="https://subwaybuildermodded.com/credits/">Yukina-</a></p>
+    </article>
+  </section>
+</body>
 </html>

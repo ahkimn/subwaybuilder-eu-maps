@@ -4,10 +4,10 @@
     {
       "version": "0.1.0",
       "game_version": "<=1.3.0",
-      "date": "2026-06-12",
+      "date": "2026-06-13",
       "changelog": "Map pack update.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/RDO.zip",
-      "sha256": "fb9dde53ef0c579cb6e8015ee23e51c0a0065d038fbd53a74115659b01a11305"
+      "sha256": "5fdf8b61af7ba67bd8f044e2f77639110f832b83562ffa6e4fc498021a0a503b"
     }
   ]
 }
