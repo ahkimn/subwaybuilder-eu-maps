@@ -149,27 +149,15 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 #### New Features
 
-- **Seven new Poland bundles**, covering Częstochowa, Zielona Góra, Kielce, Legnica – LGOM, Opole, Radom, and Olsztyn. Each ships with sub-gmina BREC rejon-statystyczny resident and worker placement against BDOT10k buildings, PRG cadastral boundaries, and the same special-demand surface as the existing PL maps.
-
-- **Per-bundle commute-distance calibration.** The commute-distance distribution in each bundle now matches the bundle-specific NSP-2021 cordon-adjusted observed mean rather than inheriting a single EU-wide decay curve. Mean modeled commute-distance over-inflation across the full 19-map PL set drops from **+2.60 km to −0.03 km**; all 19 land within ±1 km of their observed target. Sub-municipal trip endpoints are correspondingly tighter — fewer phantom long-haul commuters across the map, denser local clusters around each map's central cities.
+- **Per-bundle commute-distance calibration.** The commute-distance distribution in each bundle now matches the bundle-specific NSP-2021 cordon-adjusted observed mean. Mean modeled commute-distance over-inflation across the full 19-map PL set drops from **+2.60 km to −0.03 km**; all 19 land within ±1 km of their observed target.
 
 - **Implausible long-haul cordon commutes redirected to self-loop.** Cross-boundary flows longer than ~80 km from origin to destination are no longer fabricated as in-bundle daily transit demand at the map edge — long flows are kept whole below 80 km, ramped down to zero at 160 km, and dropped beyond. The unretained mass reverts to local self-commutes via the existing mass-conserving reconstruction path.
 
-- **Workplace classification fix for large logistics halls.** Three building-function codes in the Polish national classification (freight handling, postal sorting, aircraft hangars) were silently routing large logistics and retail halls into a high-density transport-active workplace class instead of warehousing — a roughly 20× per-gmina workplace-mass over-weight on the affected buildings. The remap shifts these halls to warehousing density, redistributing workplace demand from peripheral logistics belts back toward the bundle centre. The section-H workplace split (transport vs warehousing) is also reshaped from 60/40 to 5/95 anchored to Eurostat sectoral employment shares.
+- **Workplace classification fix for large logistics buildings.** Three building-function codes in the Polish national classification (freight handling, postal sorting, aircraft hangars) were silently routing large logistics and retail buildings into a high-density transport-active workplace class instead of warehousing — a roughly 20× per-gmina workplace-mass over-weight on the affected buildings. The remap shifts these buildings to warehousing density, redistributing workplace demand from peripheral logistics belts back towards dencer office-heavy urban cores.
 
 - **Sparser-class workplace density anchored to national priors.** The per-bundle calibration of building-class job densities now blends against PL national priors. Previously-sparse classes (e.g. transport-active in non-station bundles) no longer fit to implausible jobs sqm floor area ratios via calibration noise.
 
-- **Cleaner resident point placement on BDOT buildings.** Residents across all PL bundles now snap to nearest BDOT residential building polygons. .
-
-#### Other Features
-
-- **Cross-border earth coverage carved against high-resolution coast.** For bundles whose ocean mask reaches past the national boundary, the coarse neighbour-country earth layer no longer clobbers the high-resolution coast at low zoom. (None of the seven new bundles are coastal; the fix applies to existing Gdańsk and Szczecin too and ships with them in a future release.)
-
-#### Bugfixes
-
-- **(PL)** Per-bundle commute-distance calibration bounds widened; 6 bundles re-fit on the wider range so all 19 land within target.
-- **(PL)** BDOT building-density calibration tolerates backslash path separators on Windows / WSL.
-- Resident point placement tolerates corruption-recovery on intermediate cached outputs, removing a class of spurious rebuild prompts.
+- **Cleaner resident point placement on BDOT buildings.** Residents across all PL bundles now snap to nearest BDOT residential building polygons.
 
 ### 0.3.0 (2026-06-10)
 
