@@ -134,6 +134,51 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ## Changelog
 
+### 0.3.2 (2026-06-15)
+
+#### New Cities
+
+- **Czechia**
+  - `JIH` - Jihlava
+  - `KVY` - Karlovy Vary
+  - `ZLN` - Zlín
+
+#### Updated Cities
+
+- **Czechia**
+  - `BRQ` - Brno
+  - `CBS` - České Budějovice
+  - `HKP` - Hradec Králové - Pardubice
+  - `LBC` - Liberec - Jablonec nad Nisou
+  - `OLO` - Olomouc
+  - `OSR` - Ostrava
+  - `PLZ` - Plzeň
+  - `PRG` - Praha
+  - `UCH` - Ústí nad Labem - Chomutov
+
+#### New Features
+
+- **Expanded metropolitan boundaries.** All twelve maps use redrawn metro boundaries curated to whole-municipality (obec) coverage, removing the prior double-coverage between adjacent metros and widening each commuter shed.
+
+- **Fuller land use coverage.** All twelve maps now source land use polygons from RÚIAN/ZABAGED directly, giving much fuller coverage of park/wooded land.
+  - Rendered landuse is now clipped to water, so no water features appear obscured by greenery when rendered.
+
+- **Buildings sourced from the RÚIAN cadastre instead of Overture.** 3D footprints and heights now come from RÚIAN StavebniObjekt (height from recorded floor count), matching the cadastre-sourced buildings already used for Poland and Estonia and replacing the Overture footprints + building-volume height enrichment.
+
+- **Symmetric cordon at the map boundary.** Cross-boundary commute flows the published commute matrix would otherwise collapse onto each boundary district's self-loop are redistributed across in-bundle gateway districts by gravity × in-bundle capacity, in both directions — de-conflating the boundary self-loop and improving central-area commute accuracy.
+
+- **Shopping malls and special-function buildings reclassified.** ZABAGED building-type tags are now used to split the coarse RÚIAN "civic amenity" code that lumped malls in with schools, hospitals, and offices: malls move to retail density, schools / hospitals / administration to civic-facility, industry to production, and technical infrastructure to its own class, etc.
+
+- **Expanded special-demand coverage.** Added across the fleet: libraries (multi-branch systems disaggregated per branch), national museums and galleries, and large commercial markets as a new **shopping-center** category (e.g. SAPA Praha) — plus full coverage for the three new maps.
+
+- **Cleaner point placement.** Resident and workplace anchor points now snap to the nearest cadastre building footprint.
+
+#### Bugfixes
+
+- **Phantom residents in non-residential districts corrected.** Usual-residence population the census registers in industrial zones, dormitories, and institutions (which have almost no dwellings) is now capped to dwelling capacity, with the excess redistributed within the same municipality.
+
+- **Spa demand de-duplicated.** Czech spa (lázně) facilities were appended to the hospital layer with a uniform placeholder, producing clusters of identical-demand points; spa demand now lives only in the curated hot-spring attractions.
+
 ### 0.3.1 (2026-06-12)
 
 #### New Cities

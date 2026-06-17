@@ -2,20 +2,12 @@
   "schema_version": 1,
   "versions": [
     {
-      "version": "0.2.0",
+      "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-06-18",
       "changelog": "Buildings render in true 3D at heights measured from national airborne-LiDAR (ČÚZK) — factories, warehouses, and industrial halls stand at their real height instead of a flat single-storey default — with footprints and workplace placement from the RÚIAN state cadastre. Worker totals and rural coverage come from the CZSO 2021 census employment measure with sub-settlement commute O/D, and a gravity-based correction brings the COVID-inflated 2021 self-commute back to plausible pre-pandemic levels. Special-demand coverage spans hospitals, universities, airports, museums, theatres, libraries, spa/wellness, and sports & convention venues.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.2/LBC.zip",
-      "sha256": "56608839090590d836ba4452295187179e5ea8b4ce521c2b6d3f766bd800f1f1"
-    },
-    {
-      "version": "0.1.0",
-      "game_version": "<=1.3.0",
-      "date": "2026-05-18",
-      "changelog": "Newly added in 0.2.2",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/LBC.zip",
-      "sha256": "2e92a1cccb9611888db0dacd28772bbbafbe5d9564733bce632fb3142ff4124a"
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.2/ZLN.zip",
+      "sha256": "854c51db029c4e7482959c271be5336f06a4b2190c6751135fda851ace0a7209"
     }
   ]
 }
