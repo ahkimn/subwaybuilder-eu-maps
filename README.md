@@ -186,7 +186,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 ## Changelog
 
-### 0.4.1 (TBD)
+### 0.4.1 (2026-07-04)
 
 #### Updated Cities
 
@@ -200,7 +200,13 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 - **Per-building foundation depth.** A building's foundation — the below-ground volume a subway tunnel must clear — is now modeled per building from its height and footprint width rather than a flat default; mid- and high-rise foundations deepen with height and slenderness up to an 80 m cap.
   - Radio masts, antennae, and other non-occupiable tower structures are detected by their footprint slenderness and held at the minimum rather than given a deep foundation. Estonia and Latvia are the first countries to ship with modeled foundations; the other countries follow as they are re-exported.
+
+![riga_building_foundation_depth](img/riga_building_foundation_depth.png)
+
 - **Refined coastal bathymetry.** Baltic-facing bundles (Tallinn, Pärnu, Ida-Viru) now source coastal seafloor depth from EMODnet contours, with previously-shallow cells over deep water corrected and inter-band seams smoothed against the coastline.
+
+![riga_coastal_bathymetry](img/riga_coastal_bathymetry.png)
+
 - **Updated buildings index.** The buildings index for each map is now packaged in both `.bin` and `.json` formats, to enable compatibility with the most recent versions of the simulation engine.
 
 #### Bugfixes
@@ -208,7 +214,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - **Corrected implausible building heights from Ehitisregister spikes.** The Estonian building register carries occasional spike errors in both its registered-height (`korgus`) and floor-count (`max_korruste_arv`) fields — e.g. a 1025 m height on a two-storey village house, or 60 floors on a single-storey production shed.
   - Each height signal is now cross-validated against the building's volume-over-footprint ratio.
 
-### 0.4.0 (TBD)
+### 0.4.0 (2026-07-04)
 
 #### Initial Cities
 
