@@ -10,7 +10,7 @@ Each map covers the metropolitan area around one or more major European cities. 
 - Spatial realism -- points are assigned in a manner that is aware of water features, administrative boundaries, and density-weighted placement surfaces.
 - Special demand from several country-specific open-data sources is modeled — covering airports, ports, universities, hospitals, military installations, sports venues, cultural attractions, museums, libraries, and tourism sites. See [Special Demand Details](#special-demand-details) below for the per-country category breakdown.
 - Buildings are sourced from each country's national cadastre (RÚIAN for Czechia, BDOT10k for Poland, EHR + ETAK for Estonia). OSRM routing data is shared with the broader Subway Builder map pipeline.
-- Building depth is default to -10m, with train-related infrastructure exempt.
+- Building foundation depth (the clearance a subway tunnel needs to pass beneath a building) is modeled per building from its height and footprint width, starting with the Estonian bundles (0.3.3); bundles not yet re-exported use a flat default. Train-related infrastructure is exempt.
 
 ## High-Level Methodology
 
@@ -38,51 +38,102 @@ Estonian bundles combine the 2021 Estonian census per-municipality and per-asust
 
 Commute flows are calibrated against the 2021 census commute matrix, which publishes only bin-marginal shares (within-municipality, within-county, cross-county, against Tallinn, against Tartu) rather than a full municipality × municipality cell matrix. A Generalized IPF pass with destination-pinning on the two anchor cities reconciles a gravity-decay model against those bin marginals; a symmetric containment-share guard prevents over-routing to the urban core when the decay would otherwise concentrate flows on Tallinn / Tartu.
 
+#### Latvia
+
+Latvian bundles combine the 2021 Latvian census (_Tautskaite 2021_) per-LGU (Local Government Unit) and per-_pagasts_ (rural sub-municipal unit) tables with CSP's native hybrid population grid — 100 m across densely populated areas and _Blīvi apdzīvotās teritorijas_ (DPA) settlement clusters, and 1 km across rural areas — for within-municipality population weighting. Workplace mass is derived from the VZD INSPIRE Buildings national cache filtered through the 10-code INSPIRE `CurrentUseValue` taxonomy (residential filter + address-derived apartment unit-count cascade), with per-LGU workplace census totals and their NACE Rev 2 economic-activity breakdown providing the workplace anchor. Administrative boundaries come from the post-2021 42-LGU polygons published by VZD (35 _novadi_ + 7 _valstspilsētas_); the ATVK classifier defines LGU / pagasts / apkaime codes and the NUTS-3 crosswalk. Rīga is further subdivided into its 58 official _apkaime_ sub-city neighborhoods via the Rīgas dome open-data boundary set, and 131 pure-workplace anchor polygons — major industrial estates, office parks, port complexes, and airport employment zones — are carved out of the DPA layer as their own sub-municipal units.
+
+Commute flows are calibrated against the 2021 census commute matrix at three grains — NUTS-3 region × region (5×5), 42 LGU × 42 LGU, and sub-LGU pagasts × all workplaces — reconciled via a hierarchical gravity model with distance-decay. Symmetric cordon snapping at LGU boundaries preserves cross-bundle commute flow where the closed-matrix boundary would otherwise collapse it onto the boundary LGU's self-loop.
+
 ### Future countries
 
 Additional European countries will be added as country-specific open-data pipelines come online. Each country follows the same conservation-and-calibration scheme above, with country-specific inputs substituted for boundaries, population, employment, commute matrices, and special-demand layers.
 
 ## Primary Data Sources
 
+#### Shared (across all European bundles)
+
+- **Road Network & Land Cover Fallback** (road network, areal roads, and residual land-cover polygons for classes not covered by each country's national land-use registry) — [OpenStreetMap](https://www.openstreetmap.org/)
+- **Auxiliary Building Footprints** (side-channel for the 3D building tiles and ocean-mask polygons where cadastre coverage is incomplete) — [Overture Maps Foundation](https://overturemaps.org/)
+- **Coastal Bathymetry** (DTM at ~115 m resolution across the Baltic Sea, powering the coastal seafloor-depth layer for coastal bundles) — [EMODnet Bathymetry](https://emodnet.ec.europa.eu/en/bathymetry)
+- **Routing Network** (OSRM routing shared with the broader Subway Builder map pipeline) — [OSRM Project](http://project-osrm.org/)
+
 #### Czech Republic
 
-- ČÚZK RUIAN — cadastral boundaries for municipalities and basic settlement units (cuzk.cz)
-- ČSÚ Sčítání 2021 — population, economic activity, age structure (csu.gov.cz)
-- EU JRC GHS-POP 2023A / 2020 epoch — 100m population raster for within-municipality weighting (ghsl.jrc.ec.europa.eu)
-- ČSÚ DojizdkovyProud 2021 — sub-municipal commute O/D matrix and workplace-side occupied-jobs tables
-- MŠMT DSIA F21 — university and junior-college enrollment (msmt.cz)
-- tourdata.cz — krajské attraction visitor statistics
-- Úřad pro civilní letectví ČR (Czech CAA) — airport passenger statistics
-- ÚZIS ČR — Lůžkový fond per-facility hospital bed counts and occupancy, with the NRPZS national health-provider register for facility addresses (uzis.cz)
-- AČR installation roster — active-duty personnel counts curated from official unit pages and public references
+- **2021 Census** (_Sčítání lidu, domů a bytů 2021_ / SLDB 2021 — per-municipality and per-ZSJ-díl population, employment, economic activity) — [ČSÚ / CZSO](https://www.czso.cz/)
+- **Commute O/D Matrix** (ČSÚ DojizdkovyProud 2021 — sub-municipal residence × workplace commuter flows and workplace-side occupied-jobs tables) — [ČSÚ / CZSO](https://www.czso.cz/)
+- **Administrative Boundaries** (RUIAN _obec_ + ZSJ-díl polygons; national cadastral registry) — [ČÚZK](https://www.cuzk.cz/)
+- **Building Polygons & Use Classification** (RUIAN _StavebniObjekt_ with per-building footprint, floor count, and use classification, refined by ZABAGED® building-type tags — the sole building source for both modeled demand and the 3D building tiles) — [ČÚZK](https://www.cuzk.cz/)
+- **Land-Cover Polygons** (ZABAGED® Polohopis — parks, cemeteries, forests, grasslands, aerodromes) — [ČÚZK](https://www.cuzk.cz/)
+- **100 m Population Grid** (GHS-POP R2023A / 2020 epoch — 100 m population raster for within-municipality weighting) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/)
+- **University Enrollment** (MŠMT DSIA F21 — per-institution higher-education student headcount) — [MŠMT](https://dsia.msmt.cz/)
+- **Airport Passenger Statistics** (terminal-level annual passengers) — [ÚCL / Czech CAA](https://www.caa.cz/statistiky)
+- **Tourism Visitor Statistics** (krajské attraction visitor statistics) — [tourdata.cz](https://tourdata.cz/)
+- **Library & Theatre Attendance** (NIPOS Statistika kultury per-branch library visitor counts and per-season theatre attendance) — [NIPOS](https://www.statistikakultury.cz/)
+- **Sports League Attendance** (Chance Liga football, Tipsport Extraliga ice hockey) — [chanceliga.cz](https://www.chanceliga.cz/statistiky-rekordy) · [hokej.cz](https://www.hokej.cz/)
+- **Hospital Registry & Bed Statistics** (ÚZIS Lůžkový fond per-facility bed counts and occupancy; NRPZS provider register for facility addresses) — [ÚZIS ČR](https://www.uzis.cz/)
+- **Military Installations** (AČR garrison roster — active-duty personnel curated from official unit references and public sources)
 
 #### Poland
 
-- GUGiK — PRG cadastral boundaries (voivodships, powiats, gminas), BDOT10k national building cadastre with PKOB → kodKst classification, and CAPAP national address geocoder (geoportal.gov.pl)
-- GUS NSP 2021 / BREC / BDL — population at 1km / 250m / 125m hybrid grid, sub-gmina `rejon statystyczny` polygons + per-rejon populations, gmina-level pracujący employment, establishments, PKD-section workplace breakdown (P4457), per-institution student enrollment, and public-sector cultural attendance aggregates (stat.gov.pl, bdl.stat.gov.pl)
-- Eurostat URAU 2021 — Functional Urban Area polygons for metropolitan-area definitions (gisco-services.ec.europa.eu)
-- POL-on RADON — Polish Ministry of Education registry of higher-education institutions (radon.nauka.gov.pl)
-- POT (Polska Organizacja Turystyczna) — annual `Frekwencja w atrakcjach turystycznych` PDF report
-- ULC (Urząd Lotnictwa Cywilnego) — airport passenger statistics
-- PIPT (Polska Izba Przemysłu Targowego) and Instytut Teatralny — convention / exhibition visitor statistics (polfair.pl) and per-season theatre attendance (e-teatr.pl)
-- National sports leagues — Ekstraklasa football (ekstrastats.pl), Tauron Hokej Liga (hokej.net), PlusLiga volleyball (sportowefakty.wp.pl), ORLEN Superliga handball (orlen-superliga.pl)
-- Municipal traffic studies — Warsaw Badanie Ruchu 2015 (WBR) and Wrocław Kompleksowe Badanie Ruchu 2018 (KBR), driving the optional rejon-level workplace prior and rejon × rejon OD overlay
-- RPWDL — Rejestr Podmiotów Wykonujących Działalność Leczniczą, the national medical-entity registry for hospital facilities and addresses (via dane.gov.pl)
-- GUS BDL "Zdrowie i ochrona zdrowia" — per-voivodship hospital bed occupancy and outpatient visitation rates
-- Military installation roster — active-duty personnel counts curated from Polish Armed Forces unit references and public sources
+- **2021 Census** (_Narodowy Spis Powszechny Ludności i Mieszkań 2021_ / NSP 2021 — per-municipality and per-rejon population, employment, and demographics) — [GUS / Statistics Poland](https://stat.gov.pl/)
+- **Workplace Employment Statistics** (GUS NSP 2021 _pracujący_ ILO-style residence-side measure; GUS BDL sector-broken workplace statistics with PKD-section breakdown P4457) — [GUS NSP 2021](https://stat.gov.pl/) · [GUS BDL](https://bdl.stat.gov.pl/)
+- **Administrative Boundaries** (PRG _Państwowy Rejestr Granic_ — gminy + powiaty + województwa) — [GUGiK](https://www.gugik.gov.pl/)
+- **BREC Rejon Polygons** (_rejon statystyczny / obwód spisowy_ census units + per-rejon populations) — [GUS INSPIRE](https://geo.stat.gov.pl/)
+- **Building Polygons & Use Classification** (BDOT10k — per-building footprint with PKOB → kodKst classification and floor count) — [GUGiK](https://www.geoportal.gov.pl/)
+- **Address Geocoding** (GUGiK CAPAP national address geocoder) — [GUGiK CAPAP](https://www.gugik.gov.pl/)
+- **Functional Urban Area Boundaries** (Eurostat URAU FUA polygons, gmina-aggregated) — [Eurostat GISCO](https://ec.europa.eu/eurostat/web/gisco)
+- **100 m Population Grid** (GHS-POP R2023A / 2020 epoch) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/)
+- **Sub-Gmina Travel-Behaviour Surveys** (Warsaw Badanie Ruchu 2015 and Wrocław Kompleksowe Badanie Ruchu 2018, driving the optional rejon-level workplace prior and rejon × rejon OD overlay) — [Warsaw](https://transport.um.warszawa.pl/) · [Wrocław](https://www.wroclaw.pl/)
+- **Airport Passenger Statistics** (terminal-level annual passengers) — [ULC / Urząd Lotnictwa Cywilnego](https://ulc.gov.pl/pl/statystyki-analizy)
+- **Passenger-Ferry Terminal Statistics** (per-port annual passenger throughput — coastal bundles) — [Actia Forum Port Monitor](https://www.actiaforum.pl/)
+- **University Registry** (POL-on RADON institutional metadata) — [POL-on RADON](https://radon.nauka.gov.pl/)
+- **University Enrollment** (GUS per-institution higher-education student headcount) — [GUS Higher Education](https://stat.gov.pl/obszary-tematyczne/edukacja/)
+- **Tourism Visitor Statistics** (POT annual _Frekwencja w atrakcjach turystycznych_ ~960-attraction roll-up) — [Polska Organizacja Turystyczna](https://www.pot.gov.pl/)
+- **Convention & Exhibition Centers** (PIPT-tracked venues) — [Polska Izba Przemysłu Targowego](https://www.pipt.pl/)
+- **Theatre Attendance** (per-season Instytut Teatralny statistics) — [e-teatr.pl](https://www.e-teatr.pl/)
+- **Sports League Attendance** (Ekstraklasa football, Tauron Hokej Liga ice hockey, PlusLiga volleyball, ORLEN Superliga handball) — [ekstraklasa.org](https://www.ekstraklasa.org/) · [phl.pl](https://www.phl.pl/) · [plusliga.pl](https://www.plusliga.pl/) · [pgnig-superliga.pl](https://www.pgnig-superliga.pl/)
+- **Hospital Registry & Bed Statistics** (RPWDL medical-entity registry for facility addresses; GUS BDL health-sector bed-occupancy and outpatient rates) — [dane.gov.pl](https://dane.gov.pl/) · [GUS BDL](https://bdl.stat.gov.pl/)
+- **Military Installations** (Polish Armed Forces garrison roster — active-duty personnel curated from official unit references and public sources)
 
 #### Estonia
 
-- Statistikaamet (Statistics Estonia) — 2021 census (per-municipality and per-asustusüksus population, employment, demographics), INSPIRE-aligned 100 m / 250 m population grid, commute O/D bin-marginal matrix, employed-residents by economic activity, national tourism visitor statistics, EHAK administrative classifier (stat.ee)
-- Maa-amet (Estonian Land Board) — ETAK topographic data (buildings + land-use + water + transport ROW polygons), KAOS building-use taxonomy, authoritative address geocoder, annual cadastral snapshot with siht1 zoning, sub-municipal asum / kvartal / linnaosa boundaries for the five largest cities (geoportaal.maaamet.ee)
-- Ehitisregister (Estonian Building Registry) — national building cache with per-building KAOS use codes, floor counts, footprints, and unit counts (ehr.ee)
-- Eesti Ametlik Ariregister (Estonian Commercial Register) — per-firm employee totals from majandusaasta aruanded (annual reports), used as the workplace anchor for sectoral employment (ariregister.rik.ee)
-- Eesti Hariduse Infosüsteem (EHIS / HTM) — institutional metadata + per-institution enrollment for universities, junior colleges, and technical colleges (haridussilm.ee)
-- Tallinna Lennujaam (Tallinn Airport) — terminal-level annual passenger statistics (tallinn-airport.ee)
-- Tallinna Sadam (Port of Tallinn) — per-port annual passenger throughput at Old City Harbour (Helsinki / Stockholm / cruise terminals), Paldiski North / South, Paljassaare, plus the regional ports at Rohuküla, Sillamäe, and Saaremaa (ts.ee)
-- Terviseamet (Estonian Health Board) — hospital facility registry + per-facility bed counts (terviseamet.ee)
-- Kaitsevägi (Estonian Defence Forces) — garrison roster, active-duty personnel curated from official unit references (mil.ee)
-- Eurostat / EMODnet Bathymetry — INSPIRE Population Grid epoch alignment + EMODnet DTM bathymetry for coastal bundles
+- **2021 Census** (_Eesti rahvaloendus 2021_ / REL 2021 — per-municipality and per-asustusüksus population, employment, and demographics) — [Statistikaamet / Statistics Estonia](https://www.stat.ee/)
+- **INSPIRE Population Grid** (RR21 — 100 m and 250 m gridded population, INSPIRE-aligned in EPSG:3035; Eurostat epoch alignment) — [Statistikaamet](https://www.stat.ee/) · [Eurostat GISCO](https://ec.europa.eu/eurostat/web/gisco)
+- **Commute O/D Matrix** (RL21163 — residence × workplace bin-marginal shares: own-KOV / same-maakond / cross-maakond / Tallinn / Tartu) — [Statistikaamet](https://www.stat.ee/)
+- **Workplace Employment Statistics** (RL21166 employed-residents by EMTAK economic activity; per-firm employee counts from Eesti Ametlik Ariregister annual reports) — [Statistikaamet](https://www.stat.ee/) · [Äriregister](https://ariregister.rik.ee/)
+- **Administrative Boundaries** (EHAK _Eesti haldus- ja asustusjaotuse klassifikaator_ — omavalitsus + maakond + asustusüksus polygons) — [Statistikaamet EHAK](https://www.stat.ee/en/find-statistics/methodology/classifications/ehak)
+- **Building Registry** (Ehitisregister — national building cache with per-building KAOS use codes, floor counts, footprints, and unit counts) — [Eesti Ehitisregister](https://www.ehr.ee/)
+- **Topographic Polygons** (ETAK — Eesti Topograafiline Andmekogu — building footprints, land-use, water, and transport ROW polygons; KAOS use-code taxonomy; annual cadastral snapshot with siht1 zoning) — [Maa-amet](https://geoportaal.maaamet.ee/)
+- **Address Geocoding** (ADS — Aadressiandmete süsteem — Maa-amet's authoritative geocoding service) — [Maa-amet ADS](https://aadressid.maaamet.ee/)
+- **Sub-KOV Subdivisions** (AKS Mitteametlikud piirkonnad — asum / kvartal / linnaosa boundaries for the five largest cities: Tallinn 92, Tartu 51, Pärnu 22, Narva 19, Kohtla-Järve 5) — [Maa-amet](https://geoportaal.maaamet.ee/)
+- **Airport Passenger Statistics** (terminal-level annual passengers) — [Tallinna Lennujaam / Tallinn Airport](https://www.tallinn-airport.ee/)
+- **Passenger-Ferry Terminal Statistics** (per-port throughput at Old City Harbour, Paldiski North / South, Paljassaare, plus the regional ports at Rohuküla, Sillamäe, and Saaremaa) — [Tallinna Sadam / Port of Tallinn](https://www.ts.ee/) · [Statistikaamet](https://www.stat.ee/)
+- **University Registry & Enrollment** (EHIS / _Eesti Hariduse Infosüsteem_ — institutional metadata + per-institution enrollment for universities, junior colleges, and technical colleges) — [HTM / EHIS](https://www.haridussilm.ee/)
+- **Tourism Visitor Statistics** (Statistikaamet TUR042 + per-site operator reports) — [Statistikaamet TUR042](https://www.stat.ee/) · [Visit Estonia](https://www.visitestonia.com/)
+- **Hospital Registry & Bed Statistics** (Terviseamet facility registry + per-facility bed counts) — [Terviseamet](https://www.terviseamet.ee/)
+- **Military Installations** (Kaitsevägi garrison roster — active-duty personnel curated from official unit references) — [Kaitsevägi](https://mil.ee/)
+
+#### Latvia
+
+- **2021 Census** (_Tautskaite 2021_ — per-LGU, per-pagasts, and per-apkaime population and employment) — [CSP / Statistics Latvia](https://stat.gov.lv/)
+- **Native Census Grid** (CSP _teritorijas statistikas dati_ — 1 km rural + 100 m urban / DPA cell polygons with per-cell population × sex × age) — [CSP](https://stat.gov.lv/)
+- **Workplace Employment Statistics** (CSP workplace census tables at LGU grain with NACE Rev 2 economic-activity breakdown; annual residence-side and workplace-side marginals) — [CSP PxWeb](https://data.stat.gov.lv/)
+- **Commute O/D Matrix** (CSP commute matrix at three grains — NUTS-3 region × region, LGU × LGU, sub-LGU pagasts × all workplaces) — [CSP PxWeb](https://data.stat.gov.lv/)
+- **Population by Territorial Grain** (annual 2000–2025 population × sex × age at region, LGU, pagasts, DPA, city, town, village, apkaime) — [CSP PxWeb](https://data.stat.gov.lv/)
+- **Administrative Boundaries** (VZD post-2021 42-LGU polygons — 35 _novadi_ + 7 _valstspilsētas_) — [VZD / State Land Service](https://data.gov.lv/dati/lv/dataset/atr)
+- **ATVK Classifier** (_Administratīvo teritoriju un teritoriālo vienību klasifikators_ — 7-digit codes for LGUs, 512 pagasti, apkaimes, and NUTS-3 crosswalk) — [CSP ATVK](https://data.gov.lv/dati/lv/dataset/atvk)
+- **Building Polygons & Use Classification** (VZD INSPIRE Buildings national cache with 10-code `CurrentUseValue` classifications, floor counts, and footprints — the sole building source for both modeled demand and the 3D building tiles) — [VZD INSPIRE](https://data.gov.lv/dati/lv/dataset/ekas-inspire)
+- **Address Geocoding** (VZD INSPIRE Addresses — authoritative geocoder for institutional locations) — [VZD INSPIRE](https://data.gov.lv/dati/lv/dataset/adreses-inspire)
+- **Densely Populated Areas** (_Blīvi apdzīvotās teritorijas_ / DPA — CSP settlement-cluster polygons per EU Regulation 2017/543, including 131 pure-workplace anchor clusters) — [CSP via data.gov.lv](https://data.gov.lv/)
+- **Rīga Sub-City Boundaries** (_apkaime_ polygons — Rīga City's official 58 sub-city subdivisions) — [Rīgas dome](https://data.gov.lv/)
+- **Forest Register** (VMD _Meža valsts reģistra meža dati_ — per-stand forest polygons at 1:10 000 topographic scale) — [VMD / State Forest Service](https://data.gov.lv/dati/lv/dataset/meza-valsts-registra-meza-dati)
+- **Agricultural Parcels** (LAD _Lauku reģistra dati_ — LPIS field blocks and per-parcel crop declarations) — [LAD / Rural Support Service](https://www.lad.gov.lv/lv/lauku-registra-dati)
+- **Hydrography** (LGIA INSPIRE hydrography — inland rivers, lakes, and coastal water polygons) — [LGIA / Latvian Geospatial Information Agency](https://www.lgia.gov.lv/en/atvertie-dati)
+- **Airport Passenger Statistics** (CSP TPG010m monthly series for Rīga International + Rīga Airport operator annual reports) — [CSP TPG010m](https://stat.gov.lv/en/statistics-themes/business-sectors/passenger-traffic/tables/tpg010m-passenger-traffic-riga-airport) · [Rīga International Airport](https://www.riga-airport.com/)
+- **Port & Ferry Statistics** (per-terminal passenger throughput — Freeport of Rīga cruise, Ventspils and Liepāja Stena Line RoRo-PAX services) — [Freeport of Rīga](https://rop.lv/en/passengers) · [Liepāja SEZ](https://liepaja-sez.lv/en/ferry-traffic/) · [Stena Line](https://www.stenaline.com/)
+- **Higher-Education Registry & Enrollment** (VIIS _Valsts izglītības informācijas sistēma_ — augstskolas, koledžas, and tehnikumi with per-institution addresses via VRAA GeoServer WFS; joined with CSP per-institution enrollment IGP020 + IGA030 form-of-study haircut) — [VIIS](https://data.gov.lv/dati/lv/dataset/izgltbas-iestdes) · [CSP PxWeb IGP020](https://data.stat.gov.lv/api/v1/lv/OSP_PUB/START/IZG/IG/IGP/IGP020)
+- **Museums, Libraries & Cultural Centres** (KISC _Latvijas Nacionālais kultūras centrs_ open data — accredited-museum roster with per-museum physical visitor counts scraped from kulturasdati.lv, national library statistics with per-library physical visitor counts, cultural-centre event attendance) — [kulturasdati.lv](https://opendata.kulturasdati.lv/) · [data.gov.lv Muzeji](https://data.gov.lv/dati/lv/dataset/muzeju-statistika) · [data.gov.lv Bibliotēkas](https://data.gov.lv/dati/lv/dataset/bibliotku-statistika) · [data.gov.lv Kultūras centri](https://data.gov.lv/dati/lv/dataset/kulturas-centru-statistika)
+- **Tourism Attractions** (per-venue operator statistics for national parks, WHS-adjacent parks, historic complexes, theme parks, and zoos) — [Latvia Travel](https://www.latvia.travel/)
 
 ### Future countries
 
@@ -111,11 +162,12 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 - The modeled commute-distance distribution under-represents very-short trips (≤1 km, ~6% modeled vs ~16% in the Statistics Estonia TT231 ground truth) and very-long trips (>100 km, ~0.1% modeled vs ~3% TT231). The shortfall on the short tail is a sub-grid limitation (the resident-mesh cell grain floors how close origin and destination can land); the long tail is a closed-system limitation (the model only places trip endpoints within the bundle).
 - Cross-county commutes whose destination is neither Tallinn nor Tartu are currently modelled as in-bundle self-loops rather than redistributed across the remaining 13 county capitals (maakonna keskus). Affects ~6.8–6.9% of Pärnu and Ida-Viru bundle residents, ~1.5–3.8% of Tallinn / Tartu.
+- A small number of buildings render at implausible heights — most visibly a handful of phantom "kilometre-tall" towers over ordinary low-rise buildings near Tallinn — because the Ehitisregister source carries occasional spike errors in both its registered-height (`korgus`) and floor-count (`max_korruste_arv`) fields. (Fix landing in 0.3.3: each height signal is cross-validated against the building's gross-volume-over-footprint ratio and rejected when implausible.)
 
 ### Cross-country
 
-- Faraway water, cross-border land, and cross-border inland water past the bundle's modeled extent can render as a no-data "grid" pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).
-- Cross-border commute flows are absent from every country's national O/D matrix (CZ / PL / EE alike publish only within-country commutes). The model therefore reconstructs all worker demand from in-bundle residents only, which understates true labour-side demand in border bundles whose populations commute substantially to a neighbouring country. Most visible on Zielona Góra and Szczecin (Berlin / Brandenburg side), Ústí nad Labem – Chomutov, Liberec – Jablonec, and Ostrava (cross-border to Saxony / Slovakia / southern Poland respectively), and Ida-Viru (historically Narva – Ivangorod, now mostly closed).
+- Faraway water, cross-border land, and cross-border inland water past the bundle's modeled extent can render as a no-data "grid" pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Rīga (open Baltic beyond the Gulf of Rīga), Liepāja (open Baltic to the west), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).
+- Cross-border commute flows are absent from every country's national O/D matrix (CZ / PL / EE / LV alike publish only within-country commutes). The model therefore reconstructs all worker demand from in-bundle residents only, which understates true labour-side demand in border bundles whose populations commute substantially to a neighbouring country. Most visible on Zielona Góra and Szczecin (Berlin / Brandenburg side), Ústí nad Labem – Chomutov, Liberec – Jablonec, and Ostrava (cross-border to Saxony / Slovakia / southern Poland respectively), Ida-Viru (historically Narva – Ivangorod, now mostly closed), and Daugavpils (Lithuanian and Belarusian sides).
 
 ### Resolved (historical)
 
@@ -133,6 +185,48 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.4.1 (TBD)
+
+#### Updated Cities
+
+- **Estonia**
+  - `TLL` - Tallinn
+  - `TAY` - Tartu
+  - `EPU` - Pärnu
+  - `IDV` - Ida-Viru (Narva + Kohtla-Järve)
+
+#### New Features
+
+- **Per-building foundation depth.** A building's foundation — the below-ground volume a subway tunnel must clear — is now modeled per building from its height and footprint width rather than a flat default; mid- and high-rise foundations deepen with height and slenderness up to an 80 m cap.
+  - Radio masts, antennae, and other non-occupiable tower structures are detected by their footprint slenderness and held at the minimum rather than given a deep foundation. Estonia and Latvia are the first countries to ship with modeled foundations; the other countries follow as they are re-exported.
+- **Refined coastal bathymetry.** Baltic-facing bundles (Tallinn, Pärnu, Ida-Viru) now source coastal seafloor depth from EMODnet contours, with previously-shallow cells over deep water corrected and inter-band seams smoothed against the coastline.
+- **Updated buildings index.** The buildings index for each map is now packaged in both `.bin` and `.json` formats, to enable compatibility with the most recent versions of the simulation engine.
+
+#### Bugfixes
+
+- **Corrected implausible building heights from Ehitisregister spikes.** The Estonian building register carries occasional spike errors in both its registered-height (`korgus`) and floor-count (`max_korruste_arv`) fields — e.g. a 1025 m height on a two-storey village house, or 60 floors on a single-storey production shed.
+  - Each height signal is now cross-validated against the building's volume-over-footprint ratio.
+
+### 0.4.0 (TBD)
+
+#### Initial Cities
+
+- **Latvia**
+  - `RIX` - Rīga
+  - `LPX` - Liepāja
+  - `DGV` - Daugavpils
+
+#### New Features
+
+- First release of the Latvia maps.
+- Sub-municipal resident and worker placement for all three bundles, calibrated against the 2021 Latvian census (_Tautskaite 2021_) and CSP's native hybrid population grid (100 m across densely populated areas, 1 km rural).
+  - Rīga is further subdivided into its 58 official _apkaime_ (sub-city) neighborhoods; rural LGUs are subdivided by _pagasts_. A separate set of 131 pure-workplace anchor polygons is carved out for major industrial estates, office parks, and other documented employment clusters (e.g. the Rīga International Airport employment zone) from CSP's _Blīvi apdzīvotās teritorijas_ (densely populated areas) layer.
+  - Per-sub-municipal worker mass uses the VZD INSPIRE Buildings national cache filtered through the INSPIRE `CurrentUseValue` taxonomy, with per-institution and per-sector employment anchors from Latvian government statistical tables.
+- Demand points for airports, passenger ports and ferry terminals, universities and colleges, museums, libraries, cultural centres, national parks, historic complexes, theme parks, and tourism attractions across all three bundles.
+- Per-municipality commute calibration against the 2021 census commute matrix at three grains — NUTS-3 region × region, LGU × LGU, and sub-LGU pagasts × all workplaces — reconciled via a hierarchical gravity model with distance-decay.
+- INSPIRE-derived buildings used in place of Overture for spatial detail (with Overture kept as an auxiliary side-channel where the cadastre is incomplete).
+- Standard OSRM routing included.
 
 ### 0.3.2 (2026-06-15)
 
@@ -587,6 +681,29 @@ Per-country category breakdown of the modeled demand-point categories beyond res
   - Daily commute demand at inpatient and outpatient facilities, sized from Terviseamet (Estonian Health Board) per-facility bed counts.
 - **Military bases** _(to be populated in a future release)_
   - Active-duty personnel at Kaitsevägi (Estonian Defence Forces) garrisons.
+
+### Latvia
+
+- **Airports**
+  - Demand based on annualized passenger statistics from CSP's TPG010m monthly series, supplemented by Rīga International Airport operator annual reports.
+- **Passenger Ports & Ferry Terminals**
+  - Per-terminal annual passenger throughput at the Freeport of Rīga cruise terminal, and the Ventspils and Liepāja RoRo-PAX Stena Line services — sized from Freeport of Rīga passenger statistics, Liepāja SEZ port authority reports, and Stena Line operator communications.
+- **Institutions of Learning**
+  - Students at universities (_augstskolas_), junior colleges (_koledžas_), and technical colleges (_tehnikumi_), sized from the VIIS (Valsts izglītības informācijas sistēma) national higher-education registry joined with CSP per-institution enrollment. A form-of-study haircut is applied against CSP's national grain × form-of-study × legal-status × ISCED-level breakdown to estimate active on-site demand.
+- **Cultural Attractions**
+  - Attendance figures sourced from KISC (_Latvijas Nacionālais kultūras centrs_) open data on kulturasdati.lv, supplemented with operator annual reports for sites missing from the KISC survey.
+  - Art, history, and general museums, castles, and manor houses.
+  - Major parks, historic complexes, and natural landmarks.
+  - National parks and nature reserves (Gauja, Ķemeri, Slītere, Rāzna).
+  - Zoos and botanical gardens.
+  - UNESCO World Heritage sites — the Historic Centre of Rīga.
+  - Theme parks and aquaparks.
+- **Libraries**
+  - Per-branch visitor counts from the KISC national library-statistics table, including the Latvian National Library (Gaismas pils) and the principal municipal branches.
+- **Cultural Centers, Theatres & Concert Halls**
+  - Per-event attendance from the KISC cultural-centre statistics at the principal Latvian _kultūras nami_, concert halls, and theatres.
+- **Hospitals** _(to be populated in a future release)_
+- **Military bases** _(to be populated in a future release)_
 
 ## License
 
