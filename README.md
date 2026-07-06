@@ -164,6 +164,10 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Cross-county commutes whose destination is neither Tallinn nor Tartu are currently modelled as in-bundle self-loops rather than redistributed across the remaining 13 county capitals (maakonna keskus). Affects ~6.8–6.9% of Pärnu and Ida-Viru bundle residents, ~1.5–3.8% of Tallinn / Tartu.
 - A small number of buildings render at implausible heights — most visibly a handful of phantom "kilometre-tall" towers over ordinary low-rise buildings near Tallinn — because the Ehitisregister source carries occasional spike errors in both its registered-height (`korgus`) and floor-count (`max_korruste_arv`) fields. (Fix landing in 0.3.3: each height signal is cross-validated against the building's gross-volume-over-footprint ratio and rejected when implausible.)
 
+### Latvia
+
+_All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
+
 ### Cross-country
 
 - Faraway water, cross-border land, and cross-border inland water past the bundle's modeled extent can render as a no-data "grid" pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Rīga (open Baltic beyond the Gulf of Rīga), Liepāja (open Baltic to the west), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).
@@ -185,6 +189,21 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.4.2 (2026-07-06)
+
+#### Updated Cities
+
+- **Latvia**
+  - `RIX` - Rīga
+  - `LPX` - Liepāja
+  - `DGV` - Daugavpils
+
+#### Bugfixes
+
+- **Corrected Saulkrasti workplace attribution.** The Saulkrasti densely populated area (LVDPA0004) previously had its ~2,000 workers concentrated on a single anchor point (`LV0047200_RESIDUAL-w1`) because the DPA polygon straddles two adjacent pagasti at essentially equal overlap (Saulkrasti pilsēta 38.4% vs Saulkrastu pagasts 37.2%) and its centroid drifted into the wrong one. The workforce is now correctly distributed across the actual city building fabric.
+
+- **Regenerated Liepāja coastal water.** The Liepāja map's small oceanic slivers along the coast — a stale supplemental-water artifact from before the 0.4.0 export freeze — have been rebuilt with the current water pipeline, matching the improved coastal seams shipped for the Baltic-facing Estonian bundles in 0.4.1.
 
 ### 0.4.1 (2026-07-04)
 
@@ -209,10 +228,27 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 - **Updated buildings index.** The buildings index for each map is now packaged in both `.bin` and `.json` formats, to enable compatibility with the most recent versions of the simulation engine.
 
+- **Hospital demand.** Estonian hospitals have now been added as demand nodes; demand totals are derived from per-facility bed occupancy + walk-in outpatient counts published by Tervise Arengu Instituut.
+
+- **Military installation demand.** A hand-curated roster of 18 Kaitsevägi/Kaitseliit/NATO are now added as demand nodes
+  - Given EE's cadastre does not distinguish military buildings from those of other types, base perimeters are extracted from OpenStreetMap polygons, and buildings inside active bases are zeroed from the workplace pipeline to prevent double-counting.
+
+- **Stadium demand recalibration.** Meistriliiga home-stadium demand now includes per-venue multipliers for these buildings' other uses (e.g. youth-league activity community events).
+
+#### Other Features
+
+- **Removed extraneous tiles layers.** Several base protomaps layers (`roads`, `places`, etc.) are not read by the sim and have now been removed, reducing tile size by ~20% across the set of maps.
+
+- **Added compatibility for bridges/tunnels layer.** The sim now reads the `structure` field for roads on the `roads.geojson` output; to accommdoate this, the base protomaps layer is modified to encode the presence of bridges and tunnels in the `structure` field.
+
 #### Bugfixes
 
 - **Corrected implausible building heights from Ehitisregister spikes.** The Estonian building register carries occasional spike errors in both its registered-height (`korgus`) and floor-count (`max_korruste_arv`) fields — e.g. a 1025 m height on a two-storey village house, or 60 floors on a single-storey production shed.
   - Each height signal is now cross-validated against the building's volume-over-footprint ratio.
+
+- **Corrected Kaitsevägi attribution.** A single "known large employer" dataset point previously assigned ~7,000 Kaitsevägi FTE (all Estonian Defence Forces workers) to Tallinn KOV; these are now distributed across the curated set of installations.
+
+- **Added missing airport polygons.** The data pipeline was silently skipping aerodrome polygons for all airports (including Tallinn Lennujaam) from the ETAK source; these have no been added back in.
 
 ### 0.4.0 (2026-07-04)
 
