@@ -44,6 +44,20 @@ Latvian bundles combine the 2021 Latvian census (_Tautskaite 2021_) per-LGU (Loc
 
 Commute flows are calibrated against the 2021 census commute matrix at three grains — NUTS-3 region × region (5×5), 42 LGU × 42 LGU, and sub-LGU pagasts × all workplaces — reconciled via a hierarchical gravity model with distance-decay. Symmetric cordon snapping at LGU boundaries preserves cross-bundle commute flow where the closed-matrix boundary would otherwise collapse it onto the boundary LGU's self-loop.
 
+#### Ukraine
+
+Ukrainian bundles run into two open-data gaps that the other European bundles do not. Ukraine does not publish a national buildings cadastre, and the state statistics service does not publish a sub-oblast commute matrix. Where Czechia, Poland, Estonia, and Latvia each start from a national cadastre with per-building use codes, Ukrainian building geometry is drawn from the Overture Maps Europe extract with heights back-filled by JRC's Global Building Attribute (GBA) LoD1 rasters. Because Overture's class-tag coverage on Ukrainian territory is uniformly sparse, a bespoke seven-tier per-building classifier assigns each footprint to a residential, workplace, or inert class using a cascade of signals: JRC GHS OBAT per-polygon use-code hints where present, OpenStreetMap sub-tags for civic / school / hospital / religious / military buildings, OSM landuse-polygon context, the JRC GHS GULU 10 m urban land-use raster (voted 5×5 at 100 m to denoise 10 m road pixels), and per-building morphology (footprint × height × implied floor count). An operator-curated polygon-override set handles the tail — industrial estates that would otherwise misclassify as apartments, and OSM polygons tagged as `brownfield` or `military` only after the 2022 full-scale invasion, which on satellite spot-check turn out to be war-damage tagging of pre-war residential fabric rather than pre-existing brownfield.
+
+A significant portion of the classifier work is a five-rule polygon-matching cascade between JRC GHS OBAT and Overture. The two data sources publish overlapping footprints for the same building at slightly different centroids and sizes, which naively would double-count floor area or drop a match when the OBAT centroid lands outside the Overture polygon under a concave shape. The rescue cascade estimates a per-tile centroid-offset field, applies an offset-corrected snap, resolves multi-OBAT contention with an operator-visible review queue for the harder cases, dedupes twin polygons and OSM relation-outer envelopes, and synthesizes anchor points for large-footprint buildings that OBAT missed. Per-value provenance is preserved end-to-end so any classification can be audited back to its constituent source signals.
+
+Residential population is anchored to Держстат's pre-invasion _наявне населення_ (present population) per _hromada_ (the post-2020 KATOTTH-reform sub-municipal unit), split down to individual settlements using 2001 All-Ukrainian Census relative weights. Within each _hromada_, per-cell residential distribution is built bottom-up from the classified buildings' floor area — the JRC GHS-POP 100 m raster serves only as a last-resort rescue for rural _hromada_-fragments where the building signal is sparse, not as the primary distribution as it does in other GHS-only countries. Workplace mass is derived synthetically per _hromada_ from Робоча сила's per-oblast Зайняте (employed population) rate applied to each _hromada_'s working-age share, then distributed spatially across the classified buildings using a per-oblast NACE-sector anchor from Держстат's workplace-employee register. Sub-oblast headcount is statutorily confidential in Ukraine (the Symbol к rule), so the per-hromada workforce total is a synthetic derivation rather than a direct read; the spatial distribution within it is the classified-buildings signal.
+
+The seven metropolitan bundles — Kyiv, Kharkiv, Lviv, Odesa, Dnipro, Zaporizhzhia, Kryvyi Rih — carry sub-hromada _raion_ grain for their central _hromada_, with city-district polygons drawn from OpenStreetMap administrative-level-10 boundaries; satellite \_hromada_s stay at hromada grain. Commute calibration is where the second data gap surfaces: because Ukraine does not publish a sub-oblast commute O/D matrix, a **synthetic generalized-IPF** closure over per-region self-loop / same-raion / cross-raion bin marginals anchors a gravity-decay model. The bin-marginal priors are derived from cohort statistics of Poland (2021 gmina O/D), Japan (2020 municipality O/D), and Taiwan (2020 township O/D) at matched urbanity × population × density cells. A cordon-aware boundary-dilution penalty on boundary-hromada self-shares corrects for the fact that the cohort statistics come from bundles with open commuting across their bundle edges; the dilution shape is calibrated against Poland's symmetric-cordon recovery pattern to prevent Ukrainian boundary hromadas from inheriting inflated self-loop marginals.
+
+Special-demand points — airports, ports, universities, and a curated attractions roster covering museums, cultural centres, theatres, churches, parks, beaches, theme parks, aquariums, zoos, and National Reserves — all cite pre-February-2022 vintages by policy: 2019 for aviation and port throughput (pre-COVID plus pre-invasion peaks), 2021 for university enrollment, and pre-2022 sources for attraction visitor counts. Every attraction row in the curated roster carries a per-value provenance citation: the source publication or the press-grounded estimate method, plus an explicit uncertainty tag (sourced vs. estimate; low / moderate / high). The roster reconciles against Ukrstat's 2017 cultural-institution bulletin (per-region museum, theatre, and concert-organization visitor counts) — with a scope correction because Ukrstat's museum table covers state museums but not National Reserves like Kyiv-Pechersk Lavra, Sofia of Kyiv, Khortytsia, and Pyrohiv, which each carry substantial pre-war visitor traffic and are curated separately.
+
+Geographic exclusions are enforced at the data-file level for every consumed source, regardless of whether the source publication includes the excluded territories: Crimea and Sevastopol (occupied since 2014), and the portions of Donetsk and Luhansk oblasts east of the pre-2022 contact line (controlled by separatist authorities since 2014). Territories that were under Ukrainian government control pre-February 2022 remain policy-eligible even where they have since been captured or destroyed — Mariupol, Bakhmut, Avdiivka, and similar. Kherson, occupied February-November 2022 and since liberated, is policy-eligible and included where source data exists.
+
 ### Future countries
 
 Additional European countries will be added as country-specific open-data pipelines come online. Each country follows the same conservation-and-calibration scheme above, with country-specific inputs substituted for boundaries, population, employment, commute matrices, and special-demand layers.
@@ -135,6 +149,25 @@ Additional European countries will be added as country-specific open-data pipeli
 - **Museums, Libraries & Cultural Centres** (KISC _Latvijas Nacionālais kultūras centrs_ open data — accredited-museum roster with per-museum physical visitor counts scraped from kulturasdati.lv, national library statistics with per-library physical visitor counts, cultural-centre event attendance) — [kulturasdati.lv](https://opendata.kulturasdati.lv/) · [data.gov.lv Muzeji](https://data.gov.lv/dati/lv/dataset/muzeju-statistika) · [data.gov.lv Bibliotēkas](https://data.gov.lv/dati/lv/dataset/bibliotku-statistika) · [data.gov.lv Kultūras centri](https://data.gov.lv/dati/lv/dataset/kulturas-centru-statistika)
 - **Tourism Attractions** (per-venue operator statistics for national parks, WHS-adjacent parks, historic complexes, theme parks, and zoos) — [Latvia Travel](https://www.latvia.travel/)
 
+#### Ukraine
+
+- **Population Publications** (Держстат / SSSU annual _наявне населення_ per-hromada tabulations; 2022-01-01 vintage is the cleanest pre-full-scale-invasion + post-KATOTTH-reform baseline) — [Держстат / State Statistics Service of Ukraine](https://ukrstat.gov.ua/druk/publicat/kat_u/publnasel_u.htm)
+- **2001 All-Ukrainian Census** (settlement-level population baseline — sole all-population census; sub-hromada population fallback where hromada is coarse) — [Держстат](https://ukrstat.gov.ua/)
+- **Administrative Boundaries** (OCHA COD-AB Ukraine — canonical humanitarian source; geometries from State Scientific Production Enterprise "Kartographia", January 2025 adjustment; ADM0/1/2/3/4 hierarchy) — [OCHA HDX](https://data.humdata.org/dataset/cod-ab-ukr)
+- **KATOTTH Codifier** (Codifier of Administrative-Territorial Units and Territories of Territorial Communities — five-level oblast → raion → hromada → settlement hierarchy; replaces KOATUU since 2020-11-26) — [Mindev / Decentralization](https://decentralization.gov.ua/news)
+- **Building Polygons** (Overture Maps Foundation Europe extract — Ukraine does not publish a national buildings cadastre; Overture is the sole building-footprint source for both modeled demand and 3D tiles) — [Overture Maps Foundation](https://overturemaps.org/)
+- **Building Heights** (JRC GBA LoD1 — Global Building Attribute per-building height raster; UA bbox routes to the europe continent extract) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/)
+- **Global Urban Land Use** (GHS GULU R2025A — 10 m rasterized urban land-use classification for within-cell workplace-density surrounding-context in the seven-tier classifier cascade) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/)
+- **Land-Cover Fallback** (OSM `landuse=*` for residential / industrial / retail context and ESA WorldCover 10 m global landcover for landuse veto) — [OpenStreetMap](https://www.openstreetmap.org/) · [ESA WorldCover](https://esa-worldcover.org/)
+- **Labour Force Statistics** (Держстат LFS publications — _Робоча сила України_ annual — oblast-only sample-based; residence-side NACE A/B-F/G-S sectoral split) — [Держстат Labour](https://ukrstat.gov.ua/druk/publicat/kat_u/publrpr_u.htm)
+- **Workplace Employee Statistics** (Держстат SZE — _Кількість найманих працівників в еквіваленті повної зайнятості_ × NACE × oblast × year, formal-employee sector; 2021 vintage; workplace-side anchor for Phase D3 sectoral distribution) — [Держстат SZE](https://www.ukrstat.gov.ua/operativ/operativ2021/fin/pdsg/rnp_epz_ved_reg_rik.xlsx)
+- **Cultural Institution Statistics** (Ukrstat annual _Заклади культури, мистецтва, фізичної культури, спорту та туризму_ 2017 bulletin — per-region museum/theatre/concert-organization visitor counts, Tables 2.15/2.26/2.34/2.44/2.52; primary reconciliation source for the attractions roster) — [Ukrstat Culture](https://ukrstat.gov.ua/druk/publicat/kat_u/publkult_u.htm)
+- **University Registry & Enrollment** (МОН / EDBO — Єдина державна електронна база з питань освіти — per-institution 2020-2021 enrollment × in-person share, per-faculty split via `mes_admissions_estimate` cohort tables) — [МОН / Ministry of Education](https://mon.gov.ua/) · [EDBO](https://vstup.edbo.gov.ua/)
+- **Airport Passenger Statistics** (Державна авіаційна служба України — 2019 terminal-level annual passengers; pre-COVID + pre-invasion peak) — [Державіаслужба / State Aviation Service](https://avia.gov.ua/)
+- **Port Passenger Statistics** (АМПУ Ukrainian Sea Ports Authority — 2019 annual report per-terminal passenger throughput at Odesa Sea Terminal, Odesa Ferry, Chornomorsk, Pivdennyi) — [АМПУ / USPA](https://www.uspa.gov.ua/)
+- **Football League Attendance** (Ukrainian Premier League 2019/20 per-club attendance — 12 clubs, 552,941 grand total; COVID-cut season, scraped from Wikipedia) — [Wikipedia UPL](https://en.wikipedia.org/wiki/2019%E2%80%9320_Ukrainian_Premier_League)
+- **Tourism Attraction Roster** (per-venue operator publications + Wikipedia lists + Wikidata SPARQL `P1174` visitors-per-year + press coverage; ~600 curated sites across museums / cultural centers / theatres / churches / parks / beaches / theme parks / aquariums / zoos / national reserves) — [Wikidata](https://www.wikidata.org/) · [Ukrainian Wikipedia](https://uk.wikipedia.org/)
+
 ### Future countries
 
 To be populated as each country's pipeline is finalized.
@@ -189,6 +222,39 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.5.0 (2026-07-08)
+
+#### Initial Cities
+
+- **Ukraine**
+  - `KBP` - Київ / Kyiv
+  - `HRK` - Харків / Kharkiv
+  - `LWO` - Львів / Lviv
+  - `ODS` - Одеса / Odesa
+  - `DNK` - Дніпро / Dnipro
+  - `OZH` - Запоріжжя / Zaporizhzhia
+  - `KWG` - Кривий Ріг / Kryvyi Rih
+
+#### New Features
+
+- **First release of the Ukraine maps.** Sub-hromada resident and worker placement across seven metropolitan-area bundles, calibrated against 2022-01-01 Держстат hromada population publications and OCHA COD-AB Ukraine ADM3 boundaries.
+
+- **Overture buildings + JRC GBA heights.** Ukraine does not publish a national buildings cadastre, so Overture Maps Foundation supplies footprints and the JRC Global Building Attribute LoD1 (GBA) raster supplies heights. Each GBA building record is spatially matched to an Overture polygon via a five-rule offset-corrected join cascade (with an operator-visible review queue for multi-way-contention cases); the vast majority of GBA records land a match and inherit Overture's polygon footprint and resolved floor count, while the residual is represented by a synthesized square footprint sized from the GBA `height / 3.5 m` floor heuristic.
+  - Buildings are filtered through a bespoke seven-tier classifier cascade. Workplace counts are anchored to Держстат SZE workplace-keyed × NACE tables (2021) at oblast grain and distributed spatially via the classifier's per-building workplace-mass signal.
+  - Resident counts are anchored to Держстат hromada population totals and spatially disaggregated bottom-up from the classifier's per-building residential floor-area signal, which corrects the under-distribution new-build developments and Soviet-era apartment districts and over-distribution across industrial cells that a raster-only approach (namely from GHS-POP 100 m mesh R2023A / E2020 epoch) results in.
+  - The GHS-POP raster does serve as a last-resort fallback for rural hromada fragments where the building-derived signal is sparse.
+
+- **Synthetic-GIPF commute calibration.** Ukraine does not publish a public sub-oblast commute O/D matrix; a GIPF pass reconciles a gravity-decay model against municipal O/D priors based on analogue countries (PL + TW) at hromada grain; a synthetic sub-hromada O/D is overlaid for each of the seven metropolitan-area core cities that have sizeable city districts (using JP city wards as an analogue).
+
+- **Demand points for airports, ports, universities, and curated attractions.**
+  - Airports and passenger ports are sized from Державіаслужба and АМПУ 2019 statistics
+  - Universities and colleges are placed per-faculty for major multi-campus institutions where per-faculty enrollment breakdowns are published.
+  - Attractions attendance is grounded in the 2017 Ukrstat cultural-institution bulletin (per-region museum / theatre / concert-organization visitor tables), supplemented with per-site operator publications and Wikidata `P1174` visitors-per-year — covering museums, cultural centers, theatres, etc.
+
+- **Pre-2022-02-24 vintages throughout.** All source-data vintages are pre-full-scale-invasion (2019 for airports + ports; 2020-2021 for universities and workplace census; 2022-01-01 for population; 2017 for cultural-institution attendance baseline).
+  - Crimea and pre-2022 occupied Donbas are excluded from current and all future maps
+- Overture-derived buildings and OSRM routing included.
 
 ### 0.4.2 (2026-07-06)
 
@@ -623,8 +689,8 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 ## Planned Updates
 
 - Additional Polish cities not yet included.
-- Addition of additional Central / Eastern European countries (Hungary / Slovakia / Ukraine).
-- Hospital and military-base demand layers for the Estonian bundles (Terviseamet + Kaitsevägi sources curated in the pipeline but not yet rendered in v0.3.0).
+- Addition of additional Central / Eastern European countries (Hungary / Slovakia).
+- Hospital and military-base demand layers for the Ukrainian bundles (deferred from v0.5.0).
 
 ## Special Demand Details
 
@@ -746,6 +812,41 @@ Per-country category breakdown of the modeled demand-point categories beyond res
   - Per-event attendance from the KISC cultural-centre statistics at the principal Latvian _kultūras nami_, concert halls, and theatres.
 - **Hospitals** _(to be populated in a future release)_
 - **Military bases** _(to be populated in a future release)_
+
+### Ukraine
+
+- **Airports**
+  - Demand based on 2019 (pre-COVID + pre-invasion peak) terminal-level annual passenger statistics from the State Aviation Service (Державна авіаційна служба України), split by international and national travelers. Seven metropolitan-area airports: Boryspil (KBP), Kharkiv (HRK), Lviv (LWO), Odesa (ODS), Dnipro (DNK), Zaporizhzhia (OZH), Kryvyi Rih (KWG); Boryspil is by far the largest at ~15.3M pax 2019.
+- **Passenger Ports & Ferry Terminals**
+  - Per-terminal annual passenger throughput at four Odesa-oblast facilities (Odesa Sea Terminal (Морвокзал), Odesa Ferry Terminal (UkrFerry / Eurolines RoRo, suspended Feb 2022), Chornomorsk passenger terminal, and Pivdennyi seaport), sized from АМПУ (Ukrainian Sea Ports Authority) 2019 annual reports.
+- **Institutions of Learning**
+  - Students at universities and colleges sized from МОН / EDBO (Ministry of Education) per-institution 2020-2021 enrollment, with an in-person share (стаціонарна форма навчання) haircut applied to estimate active on-site demand.
+  - Multi-campus institutions with published per-faculty enrollment breakdowns (e.g. Kyiv National Taras Shevchenko University, National Technical University "KPI", V. N. Karazin Kharkiv National University, Ivan Franko National University of Lviv) are split into per-faculty coordinates rather than concentrated at the central rector's office.
+- **Cultural Attractions**
+  - Attendance figures anchored to the 2017 Ukrstat annual _Заклади культури, мистецтва, фізичної культури, спорту та туризму_ bulletin (Tables 2.15/2.26/2.34/2.44/2.52 — per-region museum counts, museum visits, theatre spectators, concert-organization audiences, and museum floor-area), supplemented with per-site operator publications, Wikipedia lists, and Wikidata `P1174` (visitors-per-year) where available.
+  - Art museums, general museums, castles, palaces, historic complexes, and heritage estates.
+  - Zoos, dolphinaria (Nemo network Odesa + Kharkiv), aquariums, and botanical gardens.
+  - Major parks, dendroparks, city forest parks, and river-island hydroparks (Truhaniv Island Kyiv; Odesa Peremohy Dendropark + Pryморський Boulevard + Potemkin Stairs; Lviv Stryisky Park + Pohulyanka Kaiserwald).
+  - Beaches — sized on a visitor-day basis (Odesa's Black Sea coast: Arcadia 2.4M + Lanzheron 1.2M + Zatoka resort strip N/S + Chornomorka + Otrada + Delfin + others; Dnipro River city beaches for Kyiv Obolon, Dnipro Frunzensky + Vorontsovsky, and Zaporizhzhia Voznesenivsky).
+  - National reserves — Kyiv-Pechersk Lavra (2M annual), Sofia of Kyiv (700K), Khortytsia National Reserve (300K); these carry Ukrainian government "national reserve" designation and are modelled separately from the Ukrstat state-museum count.
+  - UNESCO World Heritage Sites — Kyiv Lavra + Sofia (as part of the reserves above); Wooden Tserkvas of the Carpathian Region (St. George of Drohobych + Trinity of Zhovkva, both in the Lviv bundle catchment).
+  - Historic religious sites (cathedrals, monasteries, and pilgrimage churches across Orthodox jurisdictions OCU / UOC / UGCC + Roman Catholic + Lutheran heritage) — anchored by St. Michael's Golden-Domed Monastery Kyiv (500K), St. George's Cathedral Lviv (320K), Andriivska Church Kyiv (200K), Volodymyr's Cathedral Kyiv (150K), and the Patriarchal Cathedral of the Resurrection of Christ (UGCC national cathedral, Kyiv).
+  - Theme parks and aquaparks — Dream Town Kyiv (Dream Land + Dream Ocean + Dream Ice); SkyMall and Lavina Mall theme-park anchors Kyiv; Aquapark Terminal Brovary; Odesa water parks (Hawaii + Odesa + Zatoka + Oasis); Aquapark Lavina Dnipro + AquaZhur/Jungles Kharkiv + Kryvyi Rih Park Atraktsion.
+- **Sports Venues**
+  - Ukrainian Premier League football spectator demand at 12 UPL clubs, sized from 2019/20 per-club average attendance (Wikipedia-scraped, COVID-cut season). Includes Boryspil-area / Kyiv (Dynamo Lobanovsky, NSC Olimpiyskyi, Obolon Arena), Kharkiv Metalist, Lviv (Ukraina + Arena Lviv), Odesa Chornomorets, Dnipro-Arena, Zaporizhzhia Slavutych Arena, and Kryvyi Rih Hirnyk. UEFA Champions League / Europa League home-fixture uplift applied to catchments with UCL/UEL participation.
+- **Multi-Purpose Arenas**
+  - Non-sport event volume at the principal Ukrainian arenas modeled separately from the sport-tenant rows so concert / family-event demand is captured alongside the league spectator demand — Palace of Sports Kyiv, Kyiv Cirque, Kharkiv State Circus, Dnipro State Circus, Zaporizhzhia State Circus, Odesa City Circus.
+- **Convention & Exhibition Centers**
+  - Annual visitor totals from operator publications at Expocentr Ukraine (VDNKh Kyiv, 800K), International Exhibition Centre Kyiv (600K), Congress-Exhibition Centre Parkovyi Kyiv (300K), ACCO International Kyiv (150K), Lviv-EXPO (Gal-EXPO), Kharkiv Radmir ExpoHall (100K), METEOR EXPO Dnipro (60K), and the Gagarinn Congress-Exhibition Centre Odesa.
+- **Theatres, Philharmonics & Opera**
+  - Per-season attendance anchored on Ukrstat ZKM 2017 Tables 2.44 (theatre spectators by region) + 2.52 (concert-organization audience by region), supplemented by per-venue operator publications and Wikipedia infobox capacities.
+  - Flagship venues include the National Opera of Ukraine (Kyiv), Ivan Franko National Academic Drama Theatre (Kyiv), Lesia Ukrainka Russian Drama Theatre (Kyiv, renamed 2022), Lviv National Opera, Zankovetska National Drama Theatre (Lviv), Odesa National Opera and Ballet Theatre, Chornomorets Music-Comedy Theatre (Odesa), Kharkiv Opera and Ballet, Berezil Drama Theatre (Kharkiv), Dnipro Opera and Ballet, and the National Philharmonic of Ukraine.
+- **Cultural Centers & Palaces of Children's Creativity**
+  - Municipal palaces of culture (_палаци культури_) and city palaces of children and youth creativity (_палаци дитячої та юнацької творчості_) — separate Ukrstat category (клубні заклади), not counted in the theatre + concert-organization cap. Included across all seven bundles.
+- **Hospitals** _(to be populated in a future release)_
+  - Daily commute demand at inpatient and outpatient facilities, sized from the МОЗ (Ministry of Health of Ukraine) or НСЗУ (National Health Service of Ukraine) per-facility bed and outpatient statistics.
+- **Military bases** _(to be populated in a future release)_
+  - Active-duty personnel at Ukrainian Armed Forces installations. Deferred permanently unless a specific bundle-tier requirement emerges — operational-security-conditional per the same policy applied to Polish and Czech military layers during active conflict windows.
 
 ## License
 
