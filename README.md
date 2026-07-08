@@ -192,6 +192,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - Per-college in-person attendance is not available at the same granularity as Czechia; the resulting single-point campuses geocoded against the cadastre lead to some awkward large point placement.
 - Mixed-use buildings (ground-floor retail + residential upstairs) are classified by their predominant cadastral function and are not split between residential and worker meshes — a small (~2%) population of buildings is affected.
 - Self-loop reconstruction absorbs both 2021 → 2024 workforce growth and the long-haul register commutes that the cordon depth gate now correctly removes from daily transit, slightly inflating self-commute share — most visibly in boundary gminas of high-OOB-commuter bundles (warsaw, gdansk, szczecin).
+- A small number of offshore Baltic shallow-reef polygons in the Overture-derived water layer render as a flat −5 m foundation overlaying the correctly-computed ocean depth bands. Most visible on Koszalin–Słupsk (OSZ) over the Słupsk Bank shoals north of Ustka / Darłowo — a `_z13_inland` classifier treats the `kind='reef'` attribute as inland water instead of the ocean substrate it overlaps. Gdańsk (GDN) reefs sit near-shore and are not obviously player-visible. Fix queued for 0.5.2.
 
 ### Estonia
 
@@ -229,6 +230,22 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.5.1 (2026-07-08)
+
+#### New Cities
+
+- **Poland**
+  - `OSZ` - Pomorze Środkowe (Koszalin + Słupsk + Sławno)
+  - `PLW` - Płock - Włocławek
+
+#### Updated Cities
+
+- **Poland** — allpre-existing maps refreshed with the cross-cutting features shipped in 0.4.1; the two new maps inherit the changes by default
+  - Included are: per-building foundation depth, refined coastal bathymetry (Gdańsk, Szczecin), buildings index in both `.bin` and `.json` formats, plus the pmtiles / building-tag / roads-structure optimisations.
+
+  ![poland_coastal_bathymetry.png](img/poland_coastal_bathymetry.png)
+  ![poland_warszawa_full.png](img/warszawa_full.png)
 
 ### 0.5.0 (2026-07-08)
 
