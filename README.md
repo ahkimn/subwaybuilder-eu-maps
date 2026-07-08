@@ -203,6 +203,11 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 
 _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
+### Ukraine
+
+- University demand is likely somewhat overmodelled; compared to peer countries the UA maps have a disproportionately high share of students in the total population. The 2020-2021 МОН / EDBO enrollment data is the only source available, and it is not cross-validated against a census or other independent source, especially for in-person vs. remote attendance.
+- Apartment clusters are modelled as always having some tertiary sector workplaces, which is not always true in reality; therefore, the workplaces within the map are likely more dispersed than would otherwise be the case; upweighting the tertiary workplace density of other classes (e.g. RET/COM/OFF) will be considered in a future iteration.
+
 ### Cross-country
 
 - Faraway water, cross-border land, and cross-border inland water past the bundle's modeled extent can render as a no-data "grid" pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Rīga (open Baltic beyond the Gulf of Rīga), Liepāja (open Baltic to the west), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).
