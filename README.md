@@ -252,13 +252,13 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 #### Initial Cities
 
 - **Ukraine**
-  - `KBP` - Київ / Kyiv
-  - `HRK` - Харків / Kharkiv
-  - `LWO` - Львів / Lviv
-  - `ODS` - Одеса / Odesa
-  - `DNK` - Дніпро / Dnipro
-  - `OZH` - Запоріжжя / Zaporizhzhia
-  - `KWG` - Кривий Ріг / Kryvyi Rih
+  - `KBP` - Київ (Kyiv)
+  - `HRK` - Харків (Kharkiv)
+  - `LWO` - Львів (Lviv)
+  - `ODS` - Одеса (Odesa)
+  - `DNK` - Дніпро (Dnipro)
+  - `OZH` - Запоріжжя (Zaporizhzhia)
+  - `KWG` - Кривий Ріг (Kryvyi Rih)
 
 #### New Features
 
