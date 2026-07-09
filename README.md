@@ -231,6 +231,19 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ## Changelog
 
+### 0.5.2 (2026-07-09)
+
+#### Updated Cities
+
+- **Czechia** — all twelve maps refreshed with the cross-cutting features shipped in 0.4.1.
+  - Included are per-building foundation depth, refined water/landuse rendering, buildings index in both `.bin` and `.json` formats, plus the pmtiles / building-tag / roads-structure optimisations.
+
+#### New Features
+
+- **ZABAGED-driven kod reclassification (Tier 1 + Tier 2).** RÚIAN `zpusob_vyuziti_kod` categories 19 (`jiná stavba` — "other building") and 20 (`víceúčelová stavba` — multi-use) are structural catch-all bins that empirically absorb factory halls, warehouses, hospitals, and schools alongside legitimate mixed-use buildings.
+  - The pipeline now uses ZABAGED `ArealUceloveZastavby` complexes (e.g. `strojírenský průmysl` — machinery industry, `sklad, hangár` — warehouse) to reclassify these buildings into a more specific kod class, and therefore re-keyed to a more NACE-consistent target\
+  - In addition, an additional pass drops the synthesized workplace mass for the 88K+ small buildings inside ZABAGED `chatová kolonie` (cottage colony) and `zahrádkářská osada` (garden allotment) areals.
+
 ### 0.5.1 (2026-07-08)
 
 #### New Cities
@@ -241,7 +254,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 #### Updated Cities
 
-- **Poland** — all pre-existing maps refreshed with the cross-cutting features shipped in 0.4.1; the two new maps inherit the changes by default
+- **Poland** — all pre-existing maps refreshed with the cross-cutting features shipped in 0.4.1; the two new maps inherit the changes by default.
   - Included are: per-building foundation depth, refined coastal bathymetry (Gdańsk, Szczecin), buildings index in both `.bin` and `.json` formats, plus the pmtiles / building-tag / roads-structure optimisations.
 
   ![poland_coastal_bathymetry.png](img/poland_coastal_bathymetry.png)
