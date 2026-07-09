@@ -241,7 +241,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 #### Updated Cities
 
-- **Poland** — allpre-existing maps refreshed with the cross-cutting features shipped in 0.4.1; the two new maps inherit the changes by default
+- **Poland** — all pre-existing maps refreshed with the cross-cutting features shipped in 0.4.1; the two new maps inherit the changes by default
   - Included are: per-building foundation depth, refined coastal bathymetry (Gdańsk, Szczecin), buildings index in both `.bin` and `.json` formats, plus the pmtiles / building-tag / roads-structure optimisations.
 
   ![poland_coastal_bathymetry.png](img/poland_coastal_bathymetry.png)
