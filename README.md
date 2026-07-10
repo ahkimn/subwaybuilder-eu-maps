@@ -231,6 +231,12 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ## Changelog
 
+### 0.5.3 (upcoming)
+
+#### Planned Updates
+
+- **Ukraine — university placeholder fix (pending re-export).** [subwaybuilder-jp-data#319](https://github.com/ahkimn/subwaybuilder-jp-data/issues/319) + [#320](https://github.com/ahkimn/subwaybuilder-jp-data/issues/320) shipped a distance-vs-placeholder guard on the Overture matcher that corrects wrong-city university placements introduced by low-score fuzzy matches (small-city / village institutions were being matched to same-oblast bigger-city Overture POIs at score 0.20-0.30). Fourteen university POIs across five UA bundles (KBP / HRK removed no institutions; LWO / ODS / DNK / KWG / KBP each lost 1-4) will move to correct settlement centroids on next re-export — combined ~3,677 enrollment repositioned (<1% per bundle). Highest-visibility cases: eid=2744 (Миколаїв college, 624 enrollment, previously at Одеса centroid), eid=1516 (Нікополь coledj, 610 at Дніпро centroid), eid=1238 (Стрий coledj, 510 at Львів centroid).
+
 ### 0.5.2 (2026-07-09)
 
 #### Updated Cities
@@ -240,8 +246,8 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 #### New Features
 
-- **ZABAGED-driven kod reclassification (Tier 1 + Tier 2).** RÚIAN `zpusob_vyuziti_kod` categories 19 (`jiná stavba` — "other building") and 20 (`víceúčelová stavba` — multi-use) are structural catch-all bins that empirically absorb factory halls, warehouses, hospitals, and schools alongside legitimate mixed-use buildings.
-  - The pipeline now uses ZABAGED `ArealUceloveZastavby` complexes (e.g. `strojírenský průmysl` — machinery industry, `sklad, hangár` — warehouse) to reclassify these buildings into a more specific kod class, and therefore re-keyed to a more NACE-consistent target\
+- **ZABAGED-driven kod reclassification.** RÚIAN `zpusob_vyuziti_kod` categories 19 (`jiná stavba` — "other building") and 20 (`víceúčelová stavba` — multi-use) are structural catch-all bins that empirically absorb factory halls, warehouses, hospitals, and schools alongside legitimate mixed-use buildings.
+  - The pipeline now uses ZABAGED `ArealUceloveZastavby` complexes (e.g. `strojírenský průmysl` — machinery industry, `sklad, hangár` — warehouse) to reclassify these buildings into a more specific kod class, and therefore re-keyed to a more NACE-consistent target.
   - In addition, an additional pass drops the synthesized workplace mass for the 88K+ small buildings inside ZABAGED `chatová kolonie` (cottage colony) and `zahrádkářská osada` (garden allotment) areals.
 
 ### 0.5.1 (2026-07-08)
