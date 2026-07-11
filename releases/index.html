@@ -298,8 +298,10 @@
 </ul>
 <ul>
   <li><strong>Pre-2022-02-24 vintages throughout.</strong> All source-data vintages are pre-full-scale-invasion (2019 for airports + ports; 2020-2021 for universities and workplace census; 2022-01-01 for population; 2017 for cultural-institution attendance baseline).</li>
-  <li style="margin-left: 1.25em;">Crimea and pre-2022 occupied Donbas are excluded from current and all future maps</li>
-  <li>Overture-derived buildings and OSRM routing included.</li>
+  <li style="margin-left: 1.25em;">Crimea and pre-2022 occupied Donbas are excluded from current and all future maps.</li>
+</ul>
+<ul>
+  <li><strong>Overture-derived buildings and OSRM routing included.</strong></li>
 </ul>
 <h3>0.4.2 (2026-07-06)</h3>
 <h4>Updated Cities</h4>
@@ -384,14 +386,12 @@
 </ul>
 <h4>New Features</h4>
 <ul>
-  <li>First release of the Latvia maps.</li>
-  <li>Sub-municipal resident and worker placement for all three bundles, calibrated against the 2021 Latvian census (<em>Tautskaite 2021</em>) and CSP&#x27;s native hybrid population grid (100 m across densely populated areas, 1 km rural).</li>
+  <li><strong>First release of the Latvia maps.</strong> Sub-municipal resident and worker placement across all three bundles, calibrated against the 2021 Latvian census (<em>Tautskaite 2021</em>) and CSP&#x27;s native hybrid population grid (100 m across densely populated areas, 1 km rural).</li>
   <li style="margin-left: 1.25em;">Rīga is further subdivided into its 58 official <em>apkaime</em> (sub-city) neighborhoods; rural LGUs are subdivided by <em>pagasts</em>. A separate set of 131 pure-workplace anchor polygons is carved out for major industrial estates, office parks, and other documented employment clusters (e.g. the Rīga International Airport employment zone) from CSP&#x27;s <em>Blīvi apdzīvotās teritorijas</em> (densely populated areas) layer.</li>
   <li style="margin-left: 1.25em;">Per-sub-municipal worker mass uses the VZD INSPIRE Buildings national cache filtered through the INSPIRE <code>CurrentUseValue</code> taxonomy, with per-institution and per-sector employment anchors from Latvian government statistical tables.</li>
-  <li>Demand points for airports, passenger ports and ferry terminals, universities and colleges, museums, libraries, cultural centres, national parks, historic complexes, theme parks, and tourism attractions across all three bundles.</li>
-  <li>Per-municipality commute calibration against the 2021 census commute matrix at three grains — NUTS-3 region × region, LGU × LGU, and sub-LGU pagasts × all workplaces — reconciled via a hierarchical gravity model with distance-decay.</li>
-  <li>INSPIRE-derived buildings used in place of Overture for spatial detail (with Overture kept as an auxiliary side-channel where the cadastre is incomplete).</li>
-  <li>Standard OSRM routing included.</li>
+  <li style="margin-left: 1.25em;">INSPIRE-derived buildings are used in place of Overture for spatial detail (with Overture kept as an auxiliary side-channel where the cadastre is incomplete); standard OSRM routing is included.</li>
+  <li><strong>Per-municipality commute calibration</strong> against the 2021 census commute matrix at three grains — NUTS-3 region × region, LGU × LGU, and sub-LGU pagasts × all workplaces — reconciled via a hierarchical gravity model with distance-decay.</li>
+  <li><strong>Demand points</strong> for airports, passenger ports and ferry terminals, universities and colleges, museums, libraries, cultural centres, national parks, historic complexes, theme parks, and tourism attractions across all three bundles.</li>
 </ul>
 <h3>0.3.2 (2026-06-15)</h3>
 <h4>New Cities</h4>
@@ -483,16 +483,14 @@
 </ul>
 <h4>New Features</h4>
 <ul>
-  <li>First release of the Estonia maps.</li>
-  <li>Sub-municipal (asustusüksus) resident and worker placement for all four bundles, calibrated against the 2021 Estonian census and Statistikaamet&#x27;s INSPIRE-aligned 100 m / 250 m gridded population.</li>
+  <li><strong>First release of the Estonia maps.</strong> Sub-municipal (asustusüksus) resident and worker placement across all four bundles, calibrated against the 2021 Estonian census and Statistikaamet&#x27;s INSPIRE-aligned 100 m / 250 m gridded population.</li>
   <li style="margin-left: 1.25em;">The five largest cities (Tallinn, Tartu, Pärnu, Narva, Kohtla-Järve) are further subdivided into asum / kvartal / linnaosa neighborhoods via Maa-amet&#x27;s official sub-municipal boundary layer.</li>
   <li style="margin-left: 1.25em;">Per-asustusüksus worker mass uses the Ehitisregister national building cache (with the official KAOS use-code taxonomy filtering residential / workplace / mixed-use) and per-firm employee totals from Estonian Commercial Register annual reports as the workplace anchor.</li>
-  <li>Demand points for airports, passenger ferry terminals, universities and colleges, cultural attractions, convention and exhibition centers, sports venues, libraries, religious sites, national parks and natural landmarks, spa resorts, and theme parks across all four bundles.</li>
-  <li>Per-municipality commute calibration against the 2021 census commute matrix.</li>
+  <li style="margin-left: 1.25em;">ETAK + Ehitisregister-derived buildings are used in place of Overture for spatial detail; standard OSRM routing is included.</li>
+  <li><strong>Per-municipality commute calibration</strong> against the 2021 census commute matrix.</li>
   <li style="margin-left: 1.25em;">The published matrix releases only bin-marginal shares (within-municipality, within-county, cross-county, against Tallinn, against Tartu) rather than a full municipality-to-municipality cell matrix.</li>
   <li style="margin-left: 1.25em;">A Generalized IPF pass reconciles a gravity-decay model against those marginals with destination-pinning on the two anchor cities; a symmetric containment guard prevents over-routing to the urban core.</li>
-  <li>ETAK + Ehitisregister-derived buildings used in place of Overture for spatial detail.</li>
-  <li>Standard OSRM routing included.</li>
+  <li><strong>Demand points</strong> for airports, passenger ferry terminals, universities and colleges, cultural attractions, convention and exhibition centers, sports venues, libraries, religious sites, national parks and natural landmarks, spa resorts, and theme parks across all four bundles.</li>
 </ul>
 <h3>0.2.4 (2026-06-01)</h3>
 <h4>Updated Cities</h4>
@@ -679,14 +677,13 @@
 </ul>
 <h4>New Features</h4>
 <ul>
-  <li>First release of the Poland maps.</li>
-  <li>Sub-gmina (BREC rejon statystyczny) resident and worker placement for all four bundles, calibrated against NSP 2021 census tables and the GUGiK BDOT10k national buildings cadastre.</li>
+  <li><strong>First release of the Poland maps.</strong> Sub-gmina (BREC rejon statystyczny) resident and worker placement across all four bundles, calibrated against NSP 2021 census tables and the GUGiK BDOT10k national buildings cadastre.</li>
   <li style="margin-left: 1.25em;">Per-bundle BDOT10k <code>kodKst</code> building-function weights are fit against BDL PKD employment.</li>
-  <li>Special demand for airports, universities, tourism attractions, sports venues across four top-tier leagues, convention/cultural centers, and multi-purpose arenas on all four bundles.</li>
-  <li>Self-loop reconstruction applied to all four bundles</li>
+  <li style="margin-left: 1.25em;">BDOT10k-derived buildings are used in place of Overture; standard OSRM routing (congruous with Czechia) is included.</li>
+  <li><strong>Self-loop commute reconstruction</strong> applied to all four bundles.</li>
   <li style="margin-left: 1.25em;">GUS strips intra-gmina commute flows at NSP 2021 publication (the published matrix records only cross-gmina worker flows).</li>
   <li style="margin-left: 1.25em;">The diagonal is reconstructed deterministically per gmina as <code>BDL[g] − Σ inbound_OD[dest=g]</code>.</li>
-  <li>BDOT10k-derived buildings are used in place of Overture, standard OSRM routing (congruous with CZ) is included.</li>
+  <li><strong>Special demand</strong> for airports, universities, tourism attractions, sports venues across four top-tier leagues, convention and cultural centers, and multi-purpose arenas on all four bundles.</li>
 </ul>
 <h3>0.1.2 (2026-05-02)</h3>
 <h4>Updated Cities</h4>
@@ -747,11 +744,10 @@
 </ul>
 <h4>New Features</h4>
 <ul>
-  <li>First release of the Czechia maps.</li>
-  <li>Sub-municipal (ZSJ-díl) resident and worker placement for all four bundles, calibrated against Census 2021 tables and the GHS-POP 2020 raster.</li>
-  <li>Special demand for airports, universities/colleges, and cultural attractions on all four bundles.</li>
-  <li>COVID-era self-commute correction applied to all Czech bundles; aggregate self-commute share brought from ~27–34% (published census) down to ~3–8% per bundle via gravity-calibrated redistribution.</li>
-  <li>Overture-derived buildings and OSRM routing included.</li>
+  <li><strong>First release of the Czechia maps.</strong> Sub-municipal (ZSJ-díl) resident and worker placement across all four bundles, calibrated against the 2021 Census tables and the GHS-POP 2020 raster.</li>
+  <li style="margin-left: 1.25em;">Special demand for airports, universities and colleges, and cultural attractions on all four bundles.</li>
+  <li style="margin-left: 1.25em;">Overture-derived buildings and OSRM routing included.</li>
+  <li><strong>COVID-era self-commute correction</strong> applied to all Czech bundles; aggregate self-commute share is brought from the ~27–34% recorded in the published census down to ~3–8% per bundle via gravity-calibrated redistribution.</li>
 </ul>
 <h2>Planned Updates</h2>
 <ul>
