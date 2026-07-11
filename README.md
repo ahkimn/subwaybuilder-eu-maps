@@ -7,7 +7,7 @@ Each map covers the metropolitan area around one or more major European cities. 
 ## Features
 
 - High level of detail, with sub-municipality population placement driven by country-specific rasters or settlement-unit grids.
-- Spatial realism -- points are assigned in a manner that is aware of water features, administrative boundaries, and density-weighted placement surfaces.
+- Spatial realism — points are assigned in a manner that is aware of water features, administrative boundaries, and density-weighted placement surfaces.
 - Special demand from several country-specific open-data sources is modeled — covering airports, ports, universities, hospitals, military installations, sports venues, cultural attractions, museums, libraries, and tourism sites. See [Special Demand Details](#special-demand-details) below for the per-country category breakdown.
 - Buildings are sourced from each country's national cadastre (RÚIAN for Czechia, BDOT10k for Poland, EHR + ETAK for Estonia). OSRM routing data is shared with the broader Subway Builder map pipeline.
 - Building foundation depth (the clearance a subway tunnel needs to pass beneath a building) is modeled per building from its height and footprint width, starting with the Estonian bundles (0.3.3); bundles not yet re-exported use a flat default. Train-related infrastructure is exempt.
@@ -162,7 +162,7 @@ Additional European countries will be added as country-specific open-data pipeli
 - **Global Urban Land Use** (GHS GULU R2025A — 10 m rasterized urban land-use classification for within-cell workplace-density surrounding-context in the seven-tier classifier cascade) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/)
 - **Land-Cover Fallback** (OSM `landuse=*` for residential / industrial / retail context and ESA WorldCover 10 m global landcover for landuse veto) — [OpenStreetMap](https://www.openstreetmap.org/) · [ESA WorldCover](https://esa-worldcover.org/)
 - **Labour Force Statistics** (Держстат LFS publications — _Робоча сила України_ annual — oblast-only sample-based; residence-side NACE A/B-F/G-S sectoral split) — [Держстат Labour](https://ukrstat.gov.ua/druk/publicat/kat_u/publrpr_u.htm)
-- **Workplace Employee Statistics** (Держстат SZE — _Кількість найманих працівників в еквіваленті повної зайнятості_ × NACE × oblast × year, formal-employee sector; 2021 vintage; workplace-side anchor for Phase D3 sectoral distribution) — [Держстат SZE](https://www.ukrstat.gov.ua/operativ/operativ2021/fin/pdsg/rnp_epz_ved_reg_rik.xlsx)
+- **Workplace Employee Statistics** (Держстат SZE — _Кількість найманих працівників в еквіваленті повної зайнятості_ × NACE × oblast × year, formal-employee sector; 2021 vintage; workplace-side anchor for the sectoral workplace distribution) — [Держстат SZE](https://www.ukrstat.gov.ua/operativ/operativ2021/fin/pdsg/rnp_epz_ved_reg_rik.xlsx)
 - **Cultural Institution Statistics** (Ukrstat annual _Заклади культури, мистецтва, фізичної культури, спорту та туризму_ 2017 bulletin — per-region museum/theatre/concert-organization visitor counts, Tables 2.15/2.26/2.34/2.44/2.52; primary reconciliation source for the attractions roster) — [Ukrstat Culture](https://ukrstat.gov.ua/druk/publicat/kat_u/publkult_u.htm)
 - **University Registry & Enrollment** (МОН / EDBO — Єдина державна електронна база з питань освіти — per-institution 2020-2021 enrollment × in-person share, per-faculty split via `mes_admissions_estimate` cohort tables) — [МОН / Ministry of Education](https://mon.gov.ua/) · [EDBO](https://vstup.edbo.gov.ua/)
 - **Airport Passenger Statistics** (Державна авіаційна служба України — 2019 terminal-level annual passengers; pre-COVID + pre-invasion peak) — [Державіаслужба / State Aviation Service](https://avia.gov.ua/)
@@ -223,7 +223,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~Three building-function codes in the Polish national classification (freight handling, postal sorting, aircraft hangars) silently routed large logistics and retail halls into a high-density transport-active workplace class instead of warehousing, causing a ~20× per-gmina workplace-mass over-weight on the affected buildings and pushing jobs out of central districts into peripheral logistics belts.~~ **(Resolved in 0.3.1 — workplace classification fix.)**
 - ~~PL's published commute O/D matrix is employer-seat keyed: a najemni worker's commute is attributed to their employer's registered seat (siedziba), not their physical workplace. National employers headquartered in Warsaw / Kraków therefore booked their geographically-dispersed workforce's jobs to the HQ city, over-concentrating jobs at corporate-HQ city-counties.~~ **(Resolved in 0.2.4 — workplace totals re-keyed toward NSP-2021 P4500 physical workplace location.)**
 - ~~The `pracujący` count from BDL is the narrowest of four PL employment measures (excludes individual farmers on holdings <1 ha and small-employer agriculture). The gap to broader measures (NSP 2021 census `pracujący` ~16.5M, GUS `pracujący ogółem` P3193 ~16.0M, vs BDL ~14.1M) is mostly small-farm employment.~~ **(Resolved in 0.2.4 — broadened to the NSP 2021 census `pracujący`.)**
-- ~~Gdańsk oceanic index is not fully constructed -- requires a follow up and will be fixed in the next iteration~~ **(Resolved in 0.2.1)**
+- ~~Gdańsk oceanic index is not fully constructed — requires a follow up and will be fixed in the next iteration~~ **(Resolved in 0.2.1)**
 
 #### Czechia
 
@@ -511,9 +511,9 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
   - The result significantly improves CBD self-loop accuracy on monocentric bundles and de-conflates the boundary self-loop where the closed-matrix fabrication previously over-concentrated it; recovery is sharpest at the map boundary itself, declining monotonically toward the interior.
 
 - New special demand categories added across all 12 bundles:
-  - **Hospitals** -- daily commute demand at inpatient and outpatient hospital facilities. Per-facility bed counts are allocated from voivodship totals by BDOT10k building floor area, anchored to the RPWDL national medical-entity registry.
+  - **Hospitals** — daily commute demand at inpatient and outpatient hospital facilities. Per-facility bed counts are allocated from voivodship totals by BDOT10k building floor area, anchored to the RPWDL national medical-entity registry.
 
-  - **Military bases** -- active-duty personnel demand at Polish Land Forces, Air Force, Navy, Special Forces, and Territorial Defence installations.
+  - **Military bases** — active-duty personnel demand at Polish Land Forces, Air Force, Navy, Special Forces, and Territorial Defence installations.
 
   - **Passenger-ferry terminals.** New demand points at Świnoujście, Gdynia, Gdańsk-Westerplatte, and the seasonal Hel passenger pier — sized from annual Port Monitor passenger statistics.
 
@@ -588,9 +588,9 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - Building footprint area is now blended into the worker placement signal.
   - Industrial estates containing a small number of large warehouses should now be split into multiple anchored points rather than concentrating onto a single mega-point
 - New special demand points are added across all bundles, including
-  - **Libraries** -- with multi-branch library systems disaggregated per pobočka rather than concentrated at the central building. Per-branch visitor counts are derived from operator annual reports
-  - **Hospitals** -- with daily commute demand at inpatient and outpatient hospital facilities sized from ÚZIS Lůžkový fond (per-facility bed counts and occupancy) joined with the NRPZS national provider register for addresses and coordinates.
-  - **Military bases** -- with demand for active-duty soldiers stationed kasárna generated from a small set of named AČR installations
+  - **Libraries** — with multi-branch library systems disaggregated per pobočka rather than concentrated at the central building. Per-branch visitor counts are derived from operator annual reports
+  - **Hospitals** — with daily commute demand at inpatient and outpatient hospital facilities sized from ÚZIS Lůžkový fond (per-facility bed counts and occupancy) joined with the NRPZS national provider register for addresses and coordinates.
+  - **Military bases** — with demand for active-duty soldiers stationed kasárna generated from a small set of named AČR installations
 - Workplace point populations are now better balanced.
   - When a ZSJ-díl contains multiple worker points, workers are now actually distributed across those points rather than concentrating onto whichever point won the proportional sampling lottery.
 - Restored worker inbound for ZSJ-díl mismatched by the COVID-era census.
@@ -662,7 +662,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - First release of the Poland maps.
 - Sub-gmina (BREC rejon statystyczny) resident and worker placement for all four bundles, calibrated against NSP 2021 census tables and the GUGiK BDOT10k national buildings cadastre.
   - Per-bundle BDOT10k `kodKst` building-function weights are fit against BDL PKD employment.
-- Phase E special demand for airports, universities, tourism attractions, sports venues across four top-tier leagues, convention/cultural centers, and multi-purpose arenas on all four bundles.
+- Special demand for airports, universities, tourism attractions, sports venues across four top-tier leagues, convention/cultural centers, and multi-purpose arenas on all four bundles.
 - Self-loop reconstruction applied to all four bundles
   - GUS strips intra-gmina commute flows at NSP 2021 publication (the published matrix records only cross-gmina worker flows).
   - The diagonal is reconstructed deterministically per gmina as `BDL[g] − Σ inbound_OD[dest=g]`.
@@ -732,7 +732,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 - First release of the Czechia maps.
 - Sub-municipal (ZSJ-díl) resident and worker placement for all four bundles, calibrated against Census 2021 tables and the GHS-POP 2020 raster.
-- Phase E special demand for airports, universities/colleges, and cultural attractions on all four bundles.
+- Special demand for airports, universities/colleges, and cultural attractions on all four bundles.
 - COVID-era self-commute correction applied to all Czech bundles; aggregate self-commute share brought from ~27–34% (published census) down to ~3–8% per bundle via gravity-calibrated redistribution.
 - Overture-derived buildings and OSRM routing included.
 
