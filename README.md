@@ -58,6 +58,12 @@ Special-demand points — airports, ports, universities, and a curated attractio
 
 Geographic exclusions are enforced at the data-file level for every consumed source, regardless of whether the source publication includes the excluded territories: Crimea and Sevastopol (occupied since 2014), and the portions of Donetsk and Luhansk oblasts east of the pre-2022 contact line (controlled by separatist authorities since 2014). Territories that were under Ukrainian government control pre-February 2022 remain policy-eligible even where they have since been captured or destroyed — Mariupol, Bakhmut, Avdiivka, and similar. Kherson, occupied February-November 2022 and since liberated, is policy-eligible and included where source data exists.
 
+#### Lithuania
+
+Lithuanian bundles combine the register-based 2021 census (per-municipality and per-settlement population and employment) with the native Lithuanian statistical grid — 250 m across populated areas, 1 km where the finer cells are disclosure-suppressed — for within-municipality population weighting. Workplace mass is derived from the GRPK national building footprints, which carry the official _paskirtis_ use-class; because GRPK publishes no per-building floor count, heights come from the JRC Global Building Attribute (GBA) LoD1 model. Per-building worker density follows the use-class, with an OpenStreetMap correctness pass that reclassifies power / water / waste plants (filed by the registry under a generic industrial code) as utilities and schools / universities as education. Administrative boundaries and the _savivaldybė_ (municipality) / _seniūnija_ (ward) codes come from the Registrų centras Address Register; Vilnius and Klaipėda are further subdivided into their _seniūnaitija_ sub-districts. Workplace totals are anchored to Statistics Lithuania's place-of-activity employment (jobs physically located in each municipality, by NACE Rev 2 sector), with the financial and public-administration sectors — which the municipal series omits — added from national labour-force totals.
+
+Lithuania publishes no commute O/D matrix at any grain, so commute flows are synthesized: a gravity model with distance-decay is seeded by destination-keyed self-containment priors calibrated against the published commuting behaviour of peer countries (Estonia, Latvia, Czechia, Poland) at matched urbanity × population × density cells, with a metropolitan-proximity reduction on rural self-containment. The workplace-side marginal is the place-of-activity employment; the residence-side marginal is the census employed-resident count per municipality.
+
 ### Future countries
 
 Additional European countries will be added as country-specific open-data pipelines come online. Each country follows the same conservation-and-calibration scheme above, with country-specific inputs substituted for boundaries, population, employment, commute matrices, and special-demand layers.
@@ -170,6 +176,26 @@ Additional European countries will be added as country-specific open-data pipeli
 - **Football League Attendance** (Ukrainian Premier League 2019/20 per-club attendance — 12 clubs, 552,941 grand total; COVID-cut season, scraped from Wikipedia) — [Wikipedia UPL](https://en.wikipedia.org/wiki/2019%E2%80%9320_Ukrainian_Premier_League)
 - **Tourism Attraction Roster** (per-venue operator publications + Wikipedia lists + Wikidata SPARQL `P1174` visitors-per-year + press coverage; ~600 curated sites across museums / cultural centers / theatres / churches / parks / beaches / theme parks / aquariums / zoos / national reserves) — [Wikidata](https://www.wikidata.org/) · [Ukrainian Wikipedia](https://uk.wikipedia.org/)
 
+#### Lithuania
+
+- **2021 Census** (register-based _2021 m. visuotinis gyventojų ir būstų surašymas_ — per-municipality and per-settlement population, employment, and demographics) — [Statistics Lithuania / OSP](https://osp.stat.gov.lt/)
+- **Native Census Grid** (Lithuanian statistical grids — 250 m + 1 km national cell polygons in LKS-94 with per-cell population × sex × age, including the working-age band) — [Statistics Lithuania / geoportal.lt](https://www.geoportal.lt/)
+- **Workplace Employment Statistics** (OSP place-of-activity employment by municipality × NACE Rev 2 sector — jobs physically located in each municipality; the workplace-side marginal) — [Statistics Lithuania / OSP](https://osp.stat.gov.lt/)
+- **Residence Employment Statistics** (OSP employed persons by place of residence — the commute residence-side marginal) — [Statistics Lithuania / OSP](https://osp.stat.gov.lt/)
+- **National Sector Control Totals** (Eurostat Labour Force Survey — national financial and public-administration employment, the sectors OSP does not publish at municipal grain) — [Eurostat](https://ec.europa.eu/eurostat/web/lfs/database)
+- **Administrative Boundaries & Classifier** (INSPIRE Administrative Units — _savivaldybės_ + _seniūnijos_ + _apskritys_) — [Registrų centras / GIS-Centras](https://www.geoportal.lt/)
+- **Settlement & Ward Polygons** (Registrų centras Address Register — settlements _gyvenamosios vietovės_ + wards _seniūnijos_, the sub-municipal modeling units) — [Registrų centras](https://data.gov.lt/)
+- **City Sub-District Polygons** (municipal _seniūnaitija_ boundaries for the Vilnius and Klaipėda city cores) — [Vilnius](https://opencity.vilnius.lt/) · [Klaipėda](https://www.klaipeda.lt/)
+- **Building Polygons & Use Classification** (GRPK _Georeferencinių erdvinių duomenų rinkinys_ Pastatai — national building footprints with the official _paskirtis_ use-class; the sole building source for modeled demand and the 3D tiles) — [geoportal.lt GRPK](https://www.geoportal.lt/)
+- **Building Use-Class Taxonomy** (Registrų centras NtrPastatas cadastral attributes + the 91-type _NtrPaskirtiesTipas_ classifier) — [Registrų centras via data.gov.lt](https://data.gov.lt/)
+- **Building Heights** (JRC Global Building Attribute LoD1 — per-building height, with Overture Maps footprints as fallback) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/) · [Overture Maps Foundation](https://overturemaps.org/)
+- **Airport Passenger Statistics** (Lithuanian Airports annual series — Vilnius, Kaunas, Palanga) — [Lietuvos oro uostai](https://www.ltou.lt/)
+- **Port & Ferry Statistics** (Port of Klaipėda management report — ferry + cruise passenger throughput) — [Port of Klaipėda](https://www.portofklaipeda.lt/)
+- **Higher-Education Registry & Enrollment** (LAMA BPO admissions intake + ŠVIS institutional student stock + OSP full-time study-form shares) — [LAMA BPO](https://www.lamabpo.lt/) · [ŠVIS](https://www.svis.smm.lt/)
+- **Museums** (Ministry of Culture museum-activity statistics with per-institution annual visitor counts, geolocated against the LIMIS museum registry) — [Kultūros ministerija](https://lrkm.lrv.lt/) · [LIMIS](https://www.limis.lt/)
+- **Libraries** (National Library of Lithuania registrar + national library statistics with per-library physical visitor counts) — [Lietuvos nacionalinė Martyno Mažvydo biblioteka](https://www.lnb.lt/)
+- **Protected-Area Visitors** (State Service for Protected Areas per-territory annual visitor monitoring — national and regional parks) — [VSTT](https://vstt.lrv.lt/)
+
 ### Future countries
 
 To be populated as each country's pipeline is finalized.
@@ -209,6 +235,12 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - University demand is likely somewhat overmodelled; compared to peer countries the UA maps have a disproportionately high share of students in the total population. The 2020-2021 МОН / EDBO enrollment data is the only source available, and it is not cross-validated against a census or other independent source, especially for in-person vs. remote attendance.
 - Apartment clusters are modelled as always having some tertiary sector workplaces, which is not always true in reality; therefore, the workplaces within the map are likely more dispersed than would otherwise be the case; upweighting the tertiary workplace density of other classes (e.g. RET/COM/OFF) will be considered in a future iteration.
 
+### Lithuania
+
+- Apartment clusters are modeled as carrying some tertiary-sector workplaces via Overpass PoI enrichment; it is possible that workplaces are likely somewhat more dispersed than reality.
+- GRPK polygons carry no definitive height information; the JRC GBA LoD1 raster is used to assign a height to each building, from which we derive a floor count. Large footprint buildings (especially those misclassified as a higher density class) may have their overall workplace density overestimated.
+- Hospital and military-installation demand are not yet modeled (planned for a future release).
+
 ### Cross-country
 
 - Faraway water, cross-border land, and cross-border inland water past the bundle's modeled extent can render as a no-data "grid" pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Rīga (open Baltic beyond the Gulf of Rīga), Liepāja (open Baltic to the west), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).
@@ -231,11 +263,38 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ## Changelog
 
-### 0.5.3 (upcoming)
+### 0.6.1 (upcoming)
 
 #### Planned Updates
 
 - **Ukraine — university placeholder fix (pending re-export).** [subwaybuilder-jp-data#319](https://github.com/ahkimn/subwaybuilder-jp-data/issues/319) + [#320](https://github.com/ahkimn/subwaybuilder-jp-data/issues/320) shipped a distance-vs-placeholder guard on the Overture matcher that corrects wrong-city university placements introduced by low-score fuzzy matches (small-city / village institutions were being matched to same-oblast bigger-city Overture POIs at score 0.20-0.30). Fourteen university POIs across five UA bundles (KBP / HRK removed no institutions; LWO / ODS / DNK / KWG / KBP each lost 1-4) will move to correct settlement centroids on next re-export — combined ~3,677 enrollment repositioned (<1% per bundle). Highest-visibility cases: eid=2744 (Миколаїв college, 624 enrollment, previously at Одеса centroid), eid=1516 (Нікополь coledj, 610 at Дніпро centroid), eid=1238 (Стрий coledj, 510 at Львів centroid).
+
+### 0.6.0 (upcoming)
+
+#### Initial Cities
+
+- **Lithuania**
+  - `VNO` - Vilnius
+  - `KUN` - Kaunas
+  - `PLQ` - Klaipėda
+  - `SQQ` - Šiauliai
+  - `PNV` - Panevėžys
+
+#### New Features
+
+- **First release of the Lithuania maps.** Sub-municipal resident and worker placement across five metropolitan-area bundles, calibrated against the register-based 2021 Lithuanian census and the native Lithuanian statistical grid (250 m across populated areas, 1 km rural).
+  - Each city core is subdivided into its wards (_seniūnijos_), with Vilnius and Klaipėda further split into their finer _seniūnaitija_ sub-districts; rural areas are subdivided by named settlement (_gyvenamoji vietovė_). Municipality (_savivaldybė_) workplace totals from the census are conserved throughout.
+
+- **National GRPK buildings with Global Building Atlas heights.** Lithuania publishes a national building-footprint set (GRPK) carrying the official building use-class (_paskirtis_) but no per-building floor counts — so footprints and use-class come from GRPK, while heights come from the JRC Global Building Attribute (GBA) LoD1 model. Per-building worker density follows the use-class, refined with OpenStreetMap signals for certain building classes: power / water / waste plants which the registry files under a generic industrial code are joined to OSM land use/building tags to be correctly routed as utilities; a similar enrichment step ensures schools / universities are counted as education.
+
+- **Synthetic commute calibration.** Lithuania publishes no journey-to-work matrix at any grain, so commute flows are synthesized with a gravity model with distance-decay, seeded by destination-keyed self-containment priors calibrated against the published commuting behaviour of peer countries (Estonia, Latvia, Czechia, Poland). The workplace-side anchor is the official place-of-activity employment count (jobs physically located in each municipality, by economic sector); the residence side is the census employed-resident count.
+
+- **Demand points for airports, the seaport, universities, and curated attractions.**
+  - Airports sized from Lithuanian Airports annual passenger statistics (Vilnius, Kaunas, Palanga); the Klaipėda seaport from Port of Klaipėda ferry and cruise throughput.
+  - Universities and colleges placed from the national admissions and student registries with an in-person study-form haircut; large multi-faculty institutions split across their campuses.
+  - Attractions cover museums, libraries, national and regional parks, theatres and concert halls, basketball arenas and football stadiums, and convention centres — museum visitors from the Ministry of Culture museum-activity statistics, library visitors from the National Library statistics, and park visitors from the State Service for Protected Areas monitoring.
+
+- **Per-building foundation depth across all five maps, plus modeled coastal seafloor** on the coastal Klaipėda bundle (EMODnet bathymetry).
 
 ### 0.5.2 (2026-07-09)
 
@@ -894,6 +953,33 @@ Per-country category breakdown of the modeled demand-point categories beyond res
   - Daily commute demand at inpatient and outpatient facilities, sized from the МОЗ (Ministry of Health of Ukraine) or НСЗУ (National Health Service of Ukraine) per-facility bed and outpatient statistics.
 - **Military bases** _(to be populated in a future release)_
   - Active-duty personnel at Ukrainian Armed Forces installations. Deferred permanently unless a specific bundle-tier requirement emerges — operational-security-conditional per the same policy applied to Polish and Czech military layers during active conflict windows.
+
+### Lithuania
+
+- **Airports**
+  - Annual passenger statistics from Lithuanian Airports (Lietuvos oro uostai) for Vilnius (VNO), Kaunas (KUN), and Palanga (PLQ, serving the Klaipėda bundle); all three are international-only.
+- **Passenger Ports & Ferry Terminals**
+  - Klaipėda seaport passenger throughput — the DFDS international ferry service (Kiel / Karlshamn) and the cruise terminal — sized from the Port of Klaipėda management report.
+- **Institutions of Learning**
+  - Students at universities (_universitetai_) and colleges (_kolegijos_), sized from the LAMA BPO admissions registry joined with ŠVIS institutional student counts, with a full-time (_nuolatinė_) study-form haircut to estimate active on-site demand. Large multi-faculty institutions are split across their campus coordinates.
+- **Cultural Attractions**
+  - Museum attendance from the Ministry of Culture museum-activity statistics, distributed across each institution's branches (geolocated via the LIMIS museum registry).
+  - Art, history, and general museums; historic complexes and natural landmarks.
+  - Zoos, botanical gardens, and the Lithuanian Sea Museum + dolphinarium.
+- **Libraries**
+  - Per-branch visitor counts from the National Library statistics, including the National Library of Lithuania and the principal municipal library systems.
+- **Cultural Centres, Theatres & Concert Halls**
+  - Per-venue attendance at the principal Lithuanian theatres, opera and concert halls, and cultural centres (_kultūros centrai_), bounded by the national theatre + concert attendance ceilings.
+- **Sports Venues**
+  - Spectator demand at the top-flight basketball (LKL) arenas and A lyga football stadiums.
+- **Convention & Exhibition Centres**
+  - Annual visitor totals at the principal Lithuanian exhibition and convention venues (Litexpo Vilnius and others).
+- **Protected Areas**
+  - National- and regional-park visitors from the State Service for Protected Areas (VSTT) monitoring, anchored at each park's main visitor centre.
+- **Hospitals** _(to be populated in a future release)_
+  - Daily commute demand at inpatient and outpatient facilities.
+- **Military bases** _(to be populated in a future release)_
+  - Active-duty personnel at Lithuanian Armed Forces installations.
 
 ## License
 
