@@ -2,6 +2,16 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.2.1",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-07-20",
+      "changelog": "Newly added in 0.3.0",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.1/TLL.zip",
+      "sha256": "9474c4c234ddc7917fd721c52bb0291d17a385308077fadbadc27bdc98f944d2"
+    },
+    {
       "version": "0.2.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
