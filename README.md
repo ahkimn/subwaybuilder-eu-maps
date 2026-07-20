@@ -263,11 +263,37 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ## Changelog
 
-### 0.6.1 (upcoming)
+### 0.6.2 (upcoming)
 
 #### Planned Updates
 
 - **Ukraine — university placeholder fix (pending re-export).** [subwaybuilder-jp-data#319](https://github.com/ahkimn/subwaybuilder-jp-data/issues/319) + [#320](https://github.com/ahkimn/subwaybuilder-jp-data/issues/320) shipped a distance-vs-placeholder guard on the Overture matcher that corrects wrong-city university placements introduced by low-score fuzzy matches (small-city / village institutions were being matched to same-oblast bigger-city Overture POIs at score 0.20-0.30). Fourteen university POIs across five UA bundles (KBP / HRK removed no institutions; LWO / ODS / DNK / KWG / KBP each lost 1-4) will move to correct settlement centroids on next re-export — combined ~3,677 enrollment repositioned (<1% per bundle). Highest-visibility cases: eid=2744 (Миколаїв college, 624 enrollment, previously at Одеса centroid), eid=1516 (Нікополь coledj, 610 at Дніпро centroid), eid=1238 (Стрий coledj, 510 at Львів centroid).
+
+### 0.6.1 (upcoming)
+
+#### Updated Cities
+
+- **Estonia** — all four maps refreshed with the road-network update and the foundation-rendering fix (below).
+- **Latvia** — all three maps refreshed with the road-network update and the foundation-rendering fix (below).
+- **Lithuania** — all five maps updated with the workplace, resident-placement, and demand-layer fixes below, plus the shared road-network update.
+
+#### New Features
+
+- **Hospital demand (LT).** Lithuanian hospitals are now added as demand nodes. A roster of acute, psychiatric, long-term-care, and rehabilitation hospitals is anchored to Higienos institutas (Institute of Hygiene) per-facility bed counts, with per-region (_apskritis_) bed occupancy, hospital-outpatient volumes, and population providing the demand scaling.
+
+- **Military installation demand (LT).** A roster of Lithuanian Armed Forces (_Lietuvos kariuomenė_) installations — are added as demand nodes.
+
+#### Bugfixes
+
+- **Drivable "living street" roads now included (EE, LT, LV)**. The road network now includes streets listed as "highway:living_street" in OSM, which account for a significant portion of neighborhood roads; these were previously omitted.
+
+- **Some utility structures no longer counted as workplaces (LT).** Standalone storage tanks, silos, and similar structures — common in port and industrial areas — were inheriting a nearby building's office (and other workplace classes) worker density; they are now correctly treated as non-workplace structures using PASK-native codes and OSM land use proxies.
+
+- **Large single-volume buildings no longer over-count workers (LT).** Very large single-storey buildings (arenas, warehouses, big-box factories) were previously credited with too many floors from their height estimate, leading to their overrepresentation in worker mass. The floor estimate is now scaled down for large-footprint buildings, while any building with a measured floor count is unaffected.
+
+- **Small settlements now properly receive their residents (LT).** Some hamlets smaller than a single census grid cell were losing most if not all of their entire population to a larger neighbour due to centroid cell <> settlement mapping being too coarse; residents are now distributed to each settlement using that settlement's building floor area share per grid cell, so these settlements now carry their real population.
+
+- **Fixed over-drawn building foundations (EE, LT, LV).** Building foundations were not thinned out at lower zoom levels the way their buildings are, so foundations lingered where the building itself had dropped from view — and the redundant foundations needlessly enlarged the map download. Each foundation is now drawn only where its building is.
 
 ### 0.6.0 (upcoming)
 

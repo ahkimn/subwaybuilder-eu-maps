@@ -264,10 +264,40 @@
   <li><del>The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map</del> <strong>(Resolved in 0.2.0)</strong></li>
 </ul>
 <h2>Changelog</h2>
-<h3>0.6.1 (upcoming)</h3>
+<h3>0.6.2 (upcoming)</h3>
 <h4>Planned Updates</h4>
 <ul>
   <li><strong>Ukraine — university placeholder fix (pending re-export).</strong> <a href="https://github.com/ahkimn/subwaybuilder-jp-data/issues/319">subwaybuilder-jp-data#319</a> + <a href="https://github.com/ahkimn/subwaybuilder-jp-data/issues/320">#320</a> shipped a distance-vs-placeholder guard on the Overture matcher that corrects wrong-city university placements introduced by low-score fuzzy matches (small-city / village institutions were being matched to same-oblast bigger-city Overture POIs at score 0.20-0.30). Fourteen university POIs across five UA bundles (KBP / HRK removed no institutions; LWO / ODS / DNK / KWG / KBP each lost 1-4) will move to correct settlement centroids on next re-export — combined ~3,677 enrollment repositioned (&lt;1% per bundle). Highest-visibility cases: eid=2744 (Миколаїв college, 624 enrollment, previously at Одеса centroid), eid=1516 (Нікополь coledj, 610 at Дніпро centroid), eid=1238 (Стрий coledj, 510 at Львів centroid).</li>
+</ul>
+<h3>0.6.1 (upcoming)</h3>
+<h4>Updated Cities</h4>
+<ul>
+  <li><strong>Estonia</strong> — all four maps refreshed with the road-network update and the foundation-rendering fix (below).</li>
+  <li><strong>Latvia</strong> — all three maps refreshed with the road-network update and the foundation-rendering fix (below).</li>
+  <li><strong>Lithuania</strong> — all five maps updated with the workplace, resident-placement, and demand-layer fixes below, plus the shared road-network update.</li>
+</ul>
+<h4>New Features</h4>
+<ul>
+  <li><strong>Lithuania — hospital demand.</strong> Lithuanian hospitals are now demand nodes. A curated roster of acute, psychiatric, long-term-care, and rehabilitation hospitals is anchored to Higienos institutas (Institute of Hygiene) per-facility bed counts, with per-region (<em>apskritis</em>) bed occupancy, hospital-outpatient volumes, and population providing the demand scaling — sized so per-bundle hospital demand lands in the same 2-3% peer band as the other European maps. Neighbourhood polyclinics are intentionally excluded (local, diffuse demand already captured by the residential layer). <a href="https://github.com/ahkimn/subwaybuilder-jp-data/issues/369">subwaybuilder-jp-data#369</a></li>
+</ul>
+<ul>
+  <li><strong>Lithuania — military installation demand.</strong> A hand-curated roster of Lithuanian Armed Forces (<em>Lietuvos kariuomenė</em>) installations — the Ministry of National Defence and headquarters in Vilnius, the Rukla training area and NATO enhanced Forward Presence battlegroup, the Klaipėda Naval Force base, the Šiauliai (Zokniai) Air Base and NATO Air Policing detachment, and the KASP volunteer-force district units — are now demand nodes. As Lithuania&#x27;s cadastre does not distinguish military buildings, base perimeters are drawn from OpenStreetMap and buildings inside active bases are zeroed from the workplace layer to prevent double-counting. <a href="https://github.com/ahkimn/subwaybuilder-jp-data/issues/349">#349</a></li>
+</ul>
+<h4>Bugfixes</h4>
+<ul>
+  <li><strong>Drivable &quot;living street&quot; roads now included</strong> (all Baltic maps). The road network now includes residential-priority &quot;living street&quot; roads, which were previously omitted.</li>
+</ul>
+<ul>
+  <li><strong>Lithuania — utility structures no longer counted as workplaces.</strong> Standalone storage tanks, silos, and similar structures — common in port and industrial areas — were inheriting a nearby building&#x27;s office worker density; they are now correctly treated as non-workplace structures. <a href="https://github.com/ahkimn/subwaybuilder-jp-data/issues/349">#349</a></li>
+</ul>
+<ul>
+  <li><strong>Lithuania — large single-volume buildings no longer over-count workers.</strong> Very large single-storey buildings (arenas, warehouses, big-box factories) were credited with too many floors — and therefore too much worker mass — from their height estimate; the floor estimate is now scaled down for large-footprint buildings, while any building with a measured floor count is unaffected. <a href="https://github.com/ahkimn/subwaybuilder-jp-data/issues/369">#369</a></li>
+</ul>
+<ul>
+  <li><strong>Lithuania — small settlements now receive their residents.</strong> Some hamlets smaller than a single census grid cell were losing their entire population to a larger neighbour and rendering as empty; residents are now placed by each settlement&#x27;s building floor area, so these settlements carry their real population.</li>
+</ul>
+<ul>
+  <li><strong>Fixed over-drawn building foundations.</strong> Building foundations were not thinned out at lower zoom levels the way their buildings are, so foundations lingered where the building itself had dropped from view — and the redundant foundations needlessly enlarged the map download. Each foundation is now drawn only where its building is.</li>
 </ul>
 <h3>0.6.0 (upcoming)</h3>
 <h4>Initial Cities</h4>
