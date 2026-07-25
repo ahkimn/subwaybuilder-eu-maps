@@ -273,18 +273,18 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 #### Updated Cities
 
-- **Czechia** — all twelve maps refreshed with the duplicate-place-name label fix below.
+- **Czechia** — all twelve maps refreshed with the duplicate-place-name label fix below, plus the road-network update from 0.6.1.
 
 #### Bugfixes
 
-- **Duplicate town and village names now labeled distinctly (CZ).** Czech place names repeat heavily across the country — several different villages are all named "Chrášťany", for instance — and same-named places were sharing a single map label. The result was one label stranded partway between the real locations while the others went unlabeled (e.g. a "Chrášťany" appearing south of Prague where none exists, instead of the actual villages west and south of it). Each place whose name is shared now carries its district in parentheses — "Chrášťany (Praha-západ)" vs "Chrášťany (Benešov)" — so every place is labeled at its own location. Uniquely-named places are unchanged.
+- **Duplicate town and village names now labeled distinctly (CZ).** Czech place names repeat heavily across the country; for example, several different villages are all named "Chrášťany", and same-named places were previously sharing a single map label. For duplicate names within one map, this lead to a single label stranded partway between the real locations while the others went unlabeled (e.g. a "Chrášťany" appearing south of Prague where none exists, instead of the actual villages west and south of it). Each place whose name is shared now carries its district in parentheses — "Chrášťany (Praha-západ)" vs "Chrášťany (Benešov)" — so every place is labeled at its own location. Uniquely-named places are unchanged.
 
 ### 0.6.1 (2026-07-20)
 
 #### Updated Cities
 
-- **Estonia** — all four maps refreshed with the road-network update and the foundation-rendering fix (below).
-- **Latvia** — all three maps refreshed with the road-network update and the foundation-rendering fix (below).
+- **Estonia** — all four maps refreshed with the road-network update and the foundation-rendering fix below.
+- **Latvia** — all three maps refreshed with the road-network update and the foundation-rendering fix below.
 - **Lithuania** — all five maps updated with the workplace, resident-placement, and demand-layer fixes below, plus the shared road-network update.
 
 #### New Features
