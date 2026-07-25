@@ -263,11 +263,21 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ## Changelog
 
-### 0.6.2 (upcoming)
+### 0.6.3 (upcoming)
 
 #### Planned Updates
 
 - **Ukraine — university placeholder fix (pending re-export).** [subwaybuilder-jp-data#319](https://github.com/ahkimn/subwaybuilder-jp-data/issues/319) + [#320](https://github.com/ahkimn/subwaybuilder-jp-data/issues/320) shipped a distance-vs-placeholder guard on the Overture matcher that corrects wrong-city university placements introduced by low-score fuzzy matches (small-city / village institutions were being matched to same-oblast bigger-city Overture POIs at score 0.20-0.30). Fourteen university POIs across five UA bundles (KBP / HRK removed no institutions; LWO / ODS / DNK / KWG / KBP each lost 1-4) will move to correct settlement centroids on next re-export — combined ~3,677 enrollment repositioned (<1% per bundle). Highest-visibility cases: eid=2744 (Миколаїв college, 624 enrollment, previously at Одеса centroid), eid=1516 (Нікополь coledj, 610 at Дніпро centroid), eid=1238 (Стрий coledj, 510 at Львів centroid).
+
+### 0.6.2 (2026-07-25)
+
+#### Updated Cities
+
+- **Czechia** — all twelve maps refreshed with the duplicate-place-name label fix below.
+
+#### Bugfixes
+
+- **Duplicate town and village names now labeled distinctly (CZ).** Czech place names repeat heavily across the country — several different villages are all named "Chrášťany", for instance — and same-named places were sharing a single map label. The result was one label stranded partway between the real locations while the others went unlabeled (e.g. a "Chrášťany" appearing south of Prague where none exists, instead of the actual villages west and south of it). Each place whose name is shared now carries its district in parentheses — "Chrášťany (Praha-západ)" vs "Chrášťany (Benešov)" — so every place is labeled at its own location. Uniquely-named places are unchanged.
 
 ### 0.6.1 (2026-07-20)
 

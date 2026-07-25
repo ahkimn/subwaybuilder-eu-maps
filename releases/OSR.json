@@ -2,6 +2,16 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.4.1",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-07-25",
+      "changelog": "Map pack update.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.2/OSR.zip",
+      "sha256": "66d4ad74bc93493c39152707c915c50a5ecb16ec51c1857b99dba975658e03db"
+    },
+    {
       "version": "0.4.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,

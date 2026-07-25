@@ -2,6 +2,16 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.4.1",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-07-25",
+      "changelog": "Map pack update.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.2/HKP.zip",
+      "sha256": "cf9463b63e2619a07002d2d57c3892d1191783f539080d2d9594b8bd3f9c35ec"
+    },
+    {
       "version": "0.4.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
