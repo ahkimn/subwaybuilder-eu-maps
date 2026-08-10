@@ -7,7 +7,7 @@
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-20",
-      "changelog": "Map pack update.",
+      "changelog": "Added hospital and military-base demand to the Lithuanian maps, refreshed Estonian and Latvian road networks, and fixed workplace counts and over-drawn foundations.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.1/SQQ.zip",
       "sha256": "3487735ee36b7ce91638955294de24104d3c906e8463c938c6f70f5e44de7186"
     },
@@ -17,7 +17,7 @@
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-15",
-      "changelog": "Map pack update.",
+      "changelog": "Added the first Lithuanian maps — Vilnius, Kaunas, Klaipėda, Šiauliai, and Panevėžys — with census-based residents, workers, foundation depth, and a full range of demand points.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.0/SQQ.zip",
       "sha256": "c9e5455ee9523be440c992c68558f2f5bc58e68f7a34fb0d1f0a1d969d92921a"
     }

@@ -140,6 +140,34 @@ order, omitting any that don't apply:
 City lists are unbolded: `` - `CODE` - Native (Romaji) ``. Feature/bugfix items use
 the bold-lead-in convention (§2). Images use `![alt](img/name.png)` on their own line.
 
+### 5.1 Per-bundle changelog entries (release-note Notes / manifest changelog)
+
+The city-table **Notes** column, the per-tag GitHub release-note body, and each
+manifest's `versions[].changelog` all render the **same** per-bundle sentence.
+`CITY_TABLE.md` holds one *current* note per bundle (it drives future release notes
+and the newest manifest entry); per-version history lives in the manifest JSONs.
+Write each entry as **one sentence describing what changed for the player, in this
+version**:
+
+- Present-tense, player-facing outcome — what's different when they load the map,
+  not the pipeline mechanism (no phase names or internal file/column/artifact names — §4).
+- Lead with a verb: *Added / Expanded / Fixed / Reworked / Widened / Repositioned /
+  Improved / Rendered / Trimmed*. Multiple changes → semicolon-join, still one sentence.
+- **No version numbers in the text** — the `version`/`date` fields own that. Never
+  "New in 0.3.6" / "Newly added in 0.4.11".
+- **Never "Map pack update."** If a release only re-tiles with no visible change,
+  state the real thing ("Smaller download from recomputed map geometry.").
+- A bundle's **first** entry is an initial-release note — "Initial release of the
+  {City} map — " plus what it shipped with. A pure test build is just "Test map."
+- Target **40–200 characters**. Trim long paragraphs to the headline; fill stubs
+  from the real diff. One version = one delta; never paste the same paragraph across
+  many versions.
+- When a release both adds cities and refreshes existing ones, an existing bundle's
+  entry describes only *its* change (drop the "Added …other cities" lead).
+
+Regenerate the release-note bodies from the corrected manifests after any edit —
+they are repo-scoped by construction and must never list another country's bundles.
+
 ---
 
 ## 6. Special Demand Details

@@ -7,7 +7,7 @@
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-25",
-      "changelog": "Map pack update.",
+      "changelog": "Refreshed every Czech map so duplicated town and village names are now labeled distinctly by district, each at its own location.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.2/PRG.zip",
       "sha256": "06ab44ac712eaf6efe84b52fab2af36fee48ab1c9c43cdb4ca719a0ebd19a4ef"
     },
@@ -17,7 +17,7 @@
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-09",
-      "changelog": "Map pack update.",
+      "changelog": "Refreshed every Czech map with per-building foundation depth and cleaner water rendering, and reclassified catch-all buildings like warehouses, factories, and schools.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.5.2/PRG.zip",
       "sha256": "22cab0b858be47757adff7d54bf4de27a8b00a24896ce6aef0d6628fb90a630d"
     },
@@ -25,7 +25,7 @@
       "version": "0.3.0",
       "game_version": "<=1.3.0",
       "date": "2026-06-18",
-      "changelog": "Buildings render in true 3D at heights measured from national airborne-LiDAR (ČÚZK) — factories, warehouses, and industrial halls stand at their real height instead of a flat single-storey default — with footprints and workplace placement from the RÚIAN state cadastre. Worker totals and rural coverage come from the CZSO 2021 census employment measure with sub-settlement commute O/D, and a gravity-based correction brings the COVID-inflated 2021 self-commute back to plausible pre-pandemic levels. Special-demand coverage spans hospitals, universities, airports, museums, theatres, libraries, spa/wellness, and sports & convention venues.",
+      "changelog": "Widened every Czech metro boundary and rendered buildings in true 3D from the RÚIAN cadastre with fuller parks and land use.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.2/PRG.zip",
       "sha256": "2fb98d91c013257a046e2c12fc7f84332935a6141a0518e2698ff5ecee5d15f3"
     },
@@ -33,7 +33,7 @@
       "version": "0.2.1",
       "game_version": "<=1.3.0",
       "date": "2026-05-18",
-      "changelog": "Added hospitals, military bases, and library special demand.",
+      "changelog": "Introduced library, hospital, and military-base demand across the Czech maps.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.2/PRG.zip",
       "sha256": "e5d22de242d823694b6f9f9788a7dd5f5177d52614703b5cd13517d54f9f88e9"
     },
@@ -41,7 +41,7 @@
       "version": "0.2.0",
       "game_version": ">=1.3.0",
       "date": "2026-05-02",
-      "changelog": "Expanded map, fixed resident distribution, overhauled worker seeding / size distribution priors.",
+      "changelog": "Widened every Czech map's boundaries and switched buildings to the national RÚIAN cadastre, placing residents and workers only on correctly tagged buildings.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.1.2/PRG.zip",
       "sha256": "2c47f0b8b110adb60a6ff4c392d2b662db8aa137051d8104161072aa3587bf70"
     },
@@ -49,7 +49,7 @@
       "version": "0.1.1",
       "game_version": ">=1.3.0",
       "date": "2026-04-26",
-      "changelog": "Updated resident and worker point seeding, removed self-commute workers, and reduced overall population count by ~30% by upscaling minimum pop size.",
+      "changelog": "Sharpened resident placement by masking out industrial and empty rural areas so residents no longer land in factories.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.1.1/PRG.zip",
       "sha256": "e894fef79bb1129bda7fc429333735159bb9c160b9923130a6c3a4576e68cdf8"
     },
@@ -57,7 +57,7 @@
       "version": "0.1.0",
       "game_version": ">=1.3.0",
       "date": "2026-04-25",
-      "changelog": "New in 0.1.0. Initial Map Version",
+      "changelog": "Added the first Czech maps — Brno, Ostrava, Plzeň, and Praha — with census-based residents, workers, and demand for airports, universities, and cultural attractions.",
       "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.1.0/PRG.zip",
       "sha256": "0ebe5991f8ac09dac7be9208dbd1d8f362ffadd3d8357dacf9245bdecab76f25"
     }
