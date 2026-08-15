@@ -2,38 +2,52 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.4.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-15",
+      "changelog": "Made commute routing deterministic so simulated commuting flows follow the national journey-to-work matrix directly and are identical from build to build, added drivable \"living street\" roads, and thinned building foundations at lower zoom levels.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.3/KTW.zip",
+      "sha256": "73ba4d910ae79700e963c21fc082d960b7da4d3c0998008b8cf1e4ddcd899fb3"
+    },
+    {
       "version": "0.3.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-09",
       "changelog": "Refreshed every Polish map with per-building foundation depth and refined coastal bathymetry.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.5.1/KTW.zip",
-      "sha256": "1b6cd4b9037e7be8af8c1e6edd2b82fdc3e97057b2ad1795eaab75e608ae36bd"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.2.0",
       "game_version": "<= 1.3.0",
       "date": "2026-06-01",
       "changelog": "Broadened Polish worker totals with a census-based employment measure for better rural coverage, and added hospital, military-base, and ferry-terminal demand.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/KTW.zip",
-      "sha256": "b9049a0935e2ad4d1ed3ca96b30a0872bcd0d32049374ee5209a6576ad6efb72"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.1",
       "game_version": "<=1.3.0",
       "date": "2026-05-19",
       "changelog": "Rebalanced how commuters spread across workplaces in the Polish maps, expanded building coverage to stadiums and infrastructure, and added neighbourhood-level place labels.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.3/KTW.zip",
-      "sha256": "a715370ba947a42c760e3272f765c3c2249e2590268fd8e8f46e702397633229"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-05-13",
       "changelog": "Initial release of the Katowice - GZM map with census-based residents and workers on real building footprints and a full range of demand points.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.1/KTW.zip",
-      "sha256": "0434973950fa74fbcf619581a9c657386f3aeff2ba52b9a4b49581a534ad28fc"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }

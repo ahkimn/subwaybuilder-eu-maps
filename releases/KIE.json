@@ -2,22 +2,34 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.3.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-15",
+      "changelog": "Made commute routing deterministic so simulated commuting flows follow the national journey-to-work matrix directly and are identical from build to build, added drivable \"living street\" roads, and thinned building foundations at lower zoom levels.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.3/KIE.zip",
+      "sha256": "bec6735f0d0ff3b0877074723a7e309192b03d7a7e620bf04ee8f084dc6527ae"
+    },
+    {
       "version": "0.2.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-09",
       "changelog": "Refreshed every Polish map with per-building foundation depth and refined coastal bathymetry.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.5.1/KIE.zip",
-      "sha256": "a01f915399bcd27714eb9b4cddee9004de9158e4dd093fe9db083a7cee77dd90"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-06-13",
       "changelog": "Initial release of the Kielce map with census-based residents and workers, calibrated commute distances, and a full range of demand points.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/KIE.zip",
-      "sha256": "1a5019ff763c12c1d977d18088dfff122c38049deade8b25c2f5259c102f6baa"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }

@@ -2,14 +2,25 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.2.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-15",
+      "changelog": "Made commute routing deterministic for consistent, reproducible commuting flows that drop occasional implausibly-long trips.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.4/RIX.zip",
+      "sha256": "58b6f36128b845d6d70df84eb76dbd3442e17f16b75116a48cfdf78a9ef0fb72"
+    },
+    {
       "version": "0.1.2",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-20",
       "changelog": "Added hospital and military-base demand to the Lithuanian maps, refreshed Estonian and Latvian road networks, and fixed workplace counts and over-drawn foundations.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.1/RIX.zip",
-      "sha256": "da652a94e48282827c181f403b05dc2bb56eb7649ede6780411d2a997e12c80e"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.1",
@@ -18,8 +29,9 @@
       "game_version": ">=1.0.0",
       "date": "2026-07-08",
       "changelog": "Added hospital and military-base demand to the Latvian maps, and fixed workplace placement in Saulkrasti and stray coastal water slivers around Liepāja.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.4.2/RIX.zip",
-      "sha256": "67dbc1d66eef20274233b5b2f7ec216e434c3cde16768d0fa4655ecd62f01a2a"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
@@ -28,8 +40,9 @@
       "game_version": ">=1.0.0",
       "date": "2026-07-04",
       "changelog": "Added the first Latvian maps — Rīga, Liepāja, and Daugavpils — with census-based residents, workers, commute calibration, and demand for airports, ports, universities, and attractions.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.4.0/RIX.zip",
-      "sha256": "9a65ee1def26a849a83fcabfbc3254edb9562e394eee5b0e0f124f9aa091e7a7"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }

@@ -2,22 +2,34 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.3.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-15",
+      "changelog": "Made commute routing deterministic so simulated commuting flows follow the national journey-to-work matrix directly and are identical from build to build, added drivable \"living street\" roads, and thinned building foundations at lower zoom levels.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.3/IEG.zip",
+      "sha256": "30622751dae2b1ec95520751be9a5660f0a607b1ac643c044b062f51b6cde5b4"
+    },
+    {
       "version": "0.2.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-09",
       "changelog": "Refreshed every Polish map with per-building foundation depth and refined coastal bathymetry.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.5.1/IEG.zip",
-      "sha256": "05e9d45465a96d87dd968e7211d931120527a5c5fcba85bcd6bc99d8ceccea55"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-06-13",
       "changelog": "Initial release of the Zielona Góra map with census-based residents and workers, calibrated commute distances, and a full range of demand points.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.3.1/IEG.zip",
-      "sha256": "a26a4476040fed3ccb00ad272d55c019c68ed2d7226003c7b6701c0bf113c910"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }

@@ -2,14 +2,25 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.2.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-15",
+      "changelog": "Made commute routing deterministic for consistent, reproducible commuting flows that drop occasional implausibly-long trips.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.4/KUN.zip",
+      "sha256": "545a4e14ffd9d2b434f220959941152d7a82ce9d86a16fd035b7866ca2521419"
+    },
+    {
       "version": "0.1.1",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-20",
       "changelog": "Added hospital and military-base demand to the Lithuanian maps, refreshed Estonian and Latvian road networks, and fixed workplace counts and over-drawn foundations.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.1/KUN.zip",
-      "sha256": "76af3b2289317a56ed6732d28bee008c2533ea1666d27e1734fc72496a1e990d"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
@@ -18,8 +29,9 @@
       "game_version": ">=1.0.0",
       "date": "2026-07-15",
       "changelog": "Added the first Lithuanian maps — Vilnius, Kaunas, Klaipėda, Šiauliai, and Panevėžys — with census-based residents, workers, foundation depth, and a full range of demand points.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.0/KUN.zip",
-      "sha256": "9e750346f26f526b8033af041615d95554b9401945580e6aa727b6c6a8ee2c9c"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }

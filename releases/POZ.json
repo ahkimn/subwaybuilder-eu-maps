@@ -2,38 +2,52 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.4.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-15",
+      "changelog": "Made commute routing deterministic so simulated commuting flows follow the national journey-to-work matrix directly and are identical from build to build, added drivable \"living street\" roads, and thinned building foundations at lower zoom levels.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.3/POZ.zip",
+      "sha256": "0084d217e334565ccad59a928b470b5a29ad5c636cef0ccb47285b067a829ce5"
+    },
+    {
       "version": "0.3.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-09",
       "changelog": "Refreshed every Polish map with per-building foundation depth and refined coastal bathymetry.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.5.1/POZ.zip",
-      "sha256": "cdbed5cdb8f82b347e4dd0661e5d707956d349c6955e59c19a5fe556e3d54640"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.2.0",
       "game_version": "<= 1.3.0",
       "date": "2026-06-01",
       "changelog": "Broadened Polish worker totals with a census-based employment measure for better rural coverage, and added hospital, military-base, and ferry-terminal demand.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.4/POZ.zip",
-      "sha256": "40775188e8931e926ae37951d054566fb5d159bdaca1a256c8f865aa2ff9aba2"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.1",
       "game_version": "<=1.3.0",
       "date": "2026-05-19",
       "changelog": "Rebalanced how commuters spread across workplaces in the Polish maps, expanded building coverage to stadiums and infrastructure, and added neighbourhood-level place labels.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.3/POZ.zip",
-      "sha256": "2a7fa8a7b0d6316a285cfc0f13a27cdae8eaae512581f51870af6d7fef9e586f"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
       "game_version": "<=1.3.0",
       "date": "2026-05-13",
       "changelog": "Initial release of the Poznań map with census-based residents and workers on real building footprints and a full range of demand points.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.2.1/POZ.zip",
-      "sha256": "8c59b4fc3456e9da0a7901944e77059e33d37526205a5b275525e905417e1562"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }

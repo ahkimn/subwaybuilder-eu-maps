@@ -2,14 +2,25 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.2.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-15",
+      "changelog": "Made commute routing deterministic for consistent, reproducible commuting flows that drop occasional implausibly-long trips.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.4/LPX.zip",
+      "sha256": "81e373e3d0d6cad0376e3bb670a506e893722cf62e423c27fccc64471e4bc32d"
+    },
+    {
       "version": "0.1.2",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-07-20",
       "changelog": "Added hospital and military-base demand to the Lithuanian maps, refreshed Estonian and Latvian road networks, and fixed workplace counts and over-drawn foundations.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.1/LPX.zip",
-      "sha256": "5d6b4651b3d86408f8eefbb513f375e088feb8d94e0cdedbe5c80c207b11fb67"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.1",
@@ -18,8 +29,9 @@
       "game_version": ">=1.0.0",
       "date": "2026-07-08",
       "changelog": "Added hospital and military-base demand to the Latvian maps, and fixed workplace placement in Saulkrasti and stray coastal water slivers around Liepāja.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.4.2/LPX.zip",
-      "sha256": "9a6677e105c092cc555d1836784bb380f73676539bc7cd725afb578d8848387f"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
@@ -28,8 +40,9 @@
       "game_version": ">=1.0.0",
       "date": "2026-07-04",
       "changelog": "Added the first Latvian maps — Rīga, Liepāja, and Daugavpils — with census-based residents, workers, commute calibration, and demand for airports, ports, universities, and attractions.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.4.0/LPX.zip",
-      "sha256": "ce1f9b95e6da90b762e1b3f2b6285baf74fda8beb0b593daed3f3d594ac80804"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }
