@@ -263,11 +263,21 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ## Changelog
 
-### 0.6.3 (upcoming)
+### 0.6.4 (2026-08-15)
 
-#### Planned Updates
+#### Updated Cities
 
-- **Ukraine — university placeholder fix (pending re-export).** [subwaybuilder-jp-data#319](https://github.com/ahkimn/subwaybuilder-jp-data/issues/319) + [#320](https://github.com/ahkimn/subwaybuilder-jp-data/issues/320) shipped a distance-vs-placeholder guard on the Overture matcher that corrects wrong-city university placements introduced by low-score fuzzy matches (small-city / village institutions were being matched to same-oblast bigger-city Overture POIs at score 0.20-0.30). Fourteen university POIs across five UA bundles (KBP / HRK removed no institutions; LWO / ODS / DNK / KWG / KBP each lost 1-4) will move to correct settlement centroids on next re-export — combined ~3,677 enrollment repositioned (<1% per bundle). Highest-visibility cases: eid=2744 (Миколаїв college, 624 enrollment, previously at Одеса centroid), eid=1516 (Нікополь coledj, 610 at Дніпро centroid), eid=1238 (Стрий coledj, 510 at Львів centroid).
+- **Estonia** (four maps), **Latvia** (three maps), and **Lithuania** (five maps) — all refreshed with the same commute-routing update Poland received in 0.6.3 (below). For Estonia and Latvia the simulated commuting flows now follow the official census commuting matrix directly; Lithuania, which publishes no commuting matrix, uses the same method on its synthetic commute model.
+
+### 0.6.3 (2026-08-15)
+
+#### Updated Cities
+
+- **Poland** — all twenty-one maps refreshed with the commute-routing update below, and brought in line with the other countries by adding the drivable "living street" roads and the foundation-rendering fix from 0.6.1.
+
+#### New Features
+
+- **More consistent commute routing.** Commuter-to-workplace routing is now computed in a fixed, reproducible way rather than by random sampling, so the simulated commuting flows follow the national journey-to-work matrix (2021 census) directly, occasional implausibly-long commutes are removed, and each map's commuting pattern is identical from one build to the next. This mirrors the recent `jp-maps` and `tw-maps` change.
 
 ### 0.6.2 (2026-07-25)
 
@@ -831,6 +841,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - Additional Polish cities not yet included.
 - Addition of additional Central / Eastern European countries (Hungary / Slovakia).
 - Hospital and military-base demand layers for the Ukrainian bundles (deferred from v0.5.0).
+- Ukrainian university placement fix — corrects a handful of small-city universities currently matched to larger same-region cities; ships on the next Ukrainian re-export (deferred from 0.6.3).
 
 ## Special Demand Details
 
