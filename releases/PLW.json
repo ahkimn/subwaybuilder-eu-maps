@@ -2,14 +2,25 @@
   "schema_version": 1,
   "versions": [
     {
+      "version": "0.2.1",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-19",
+      "changelog": "Fixed water shattering at low zoom, where simplification had fattened narrow streams into slivers far wider than the real watercourse, and rebalanced demand-point detail so mid-density residential areas hold consistent detail while city centres keep full resolution.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.5/PLW.zip",
+      "sha256": "7f0afb4ce09906992674f105b2e0b9a2a873a4655e15a75b800e727a0fd77276"
+    },
+    {
       "version": "0.2.0",
       "min_game_version": ">=1.0.0",
       "max_game_version": null,
       "game_version": ">=1.0.0",
       "date": "2026-08-15",
       "changelog": "Made commute routing deterministic so simulated commuting flows follow the national journey-to-work matrix directly and are identical from build to build, added drivable \"living street\" roads, and thinned building foundations at lower zoom levels.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.3/PLW.zip",
-      "sha256": "1a0d25a27a6a516dd24ebb906c8c47920f9b5111ef485279811a632bdec31c83"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.1.0",
