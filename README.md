@@ -263,6 +263,20 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ## Changelog
 
+### 0.6.5 (2026-08-19)
+
+#### Updated Cities
+
+- **Poland** (all twenty-one maps), **Estonia** (four), **Latvia** (three), and **Lithuania** (five) — every map refreshed with the water fix and the demand-detail change below.
+
+#### New Features
+
+- **Demand detail scales better with local density.** Mid-density residential areas now hold a consistent level of detail instead of being squeezed by the settings dense city centres need.
+
+#### Bugfixes
+
+- **Fixed shattered water at low zoom.** Simplifying for zoomed-out views was fattening narrow streams into slivers far wider than the real watercourse; thin features are now culled before that simplification rather than after. Land use is rebuilt alongside so the two layers stay aligned.
+
 ### 0.6.4 (2026-08-15)
 
 #### Updated Cities
