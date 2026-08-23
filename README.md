@@ -211,6 +211,7 @@ Please raise an issue on this repository for incorrect manifests, broken downloa
 - A residual set of ZSJ-díl with no inbound commute flow from anywhere in the 2021 census matrix (and no resident commuters either) remain without modelled workers.
 - Obce on the outskirts of the map boundary see high levels of short commutes due to the constraint that all commutes must start and end within the map boundary.
 - Residential point location is noisy, and not entirely distanced from total "activity" density due to the smoothness of the GHS-POP raster — sometimes placing residents near industrial locations.
+- A few very large single-site employers have their workforce registered to a company address in a neighbouring ZSJ-díl rather than at the works itself, so the 2021 commute matrix reports those jobs at the office address. The model detects the mismatch — the registered district declares far more workers than its buildings can hold, while the industrial district declares far fewer — and moves part of the workforce back toward the buildings, but deliberately not all of it: the census is the only direct evidence of where people themselves say they work, so the correction stays conservative rather than overriding it. The clearest case is the car works at Mladá Boleslav (Praha map), where the industrial district ends up with roughly a tenth of the workers its floor area would support; four smaller instances sit in Praha and Frýdek-Místek. Expect somewhat under-weighted demand at those specific works and correspondingly over-weighted demand at the adjacent office district.
 
 ### Poland
 
@@ -262,6 +263,30 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.6.6 (2026-08-23)
+
+#### Updated Cities
+
+- **Czechia** — all twelve maps rebuilt on substantially larger boundaries with reworked visitor-attraction coverage and the demand corrections. These are also the first Czech maps to carry the water fix and the density-aware demand detail from 0.6.5.
+
+#### New Features
+
+- **Every map now covers its full surrounding region.** The twelve Czech maps now extend across the administrative regions around its core city, and together the twelve reach very nearly every municipality in the country. Commuter towns which used to sit just outside the edge of the maps' boundaries are now modelled, and the rail and road network extends to meet them.
+
+- **Far wider visitor-attraction coverage.** The roster behind museums, castles, galleries, theatres, libraries, aquatic centres, sports halls, spas and zoos has been rebuilt from municipal-operator annual reports and the national visitor-statistics collection, reaching well past the marquee sites into the towns the larger boundaries brought in. Where a published attendance figure exists it is used directly; where none exists the figure is derived from a documented rate — visits per catchment resident for pools, per-race-day attendance for racecourses, published gate figures for league sport — and carried as an estimate rather than presented as measured. Roughly nine in ten of the modelled visitor demand now traces to a published source.
+
+- **Racecourses, circuits and velodromes.** Horse-racing venues, motor circuits, speedway stadiums and velodromes are modelled as destinations in their own right, sized from published race-day counts and per-day attendance rather than folded into generic sports grounds.
+
+#### Bugfixes
+
+- **Visitor counts no longer duplicated between unrelated attractions.** The reader for the national visitor-statistics collection mishandled sites that publish no figure: rather than leaving such a site blank it carried the previous site's number forward, so unrelated attractions ended up sharing one attendance figure — in some cases a major zoo's count appearing against a small museum in another region. Sites without a published figure are now left unmodelled instead of inheriting a borrowed number, removing a substantial block of demand that was never real. Plzeň, Hradec Králové – Pardubice and Ústí nad Labem – Chomutov are the most affected.
+
+- **Attractions inside a larger site no longer counted twice.** Where a castle, monastery or château publishes a figure that already includes the museum or chapel within it, the enclosing site now carries only the remainder rather than both carrying the full count. The same correction applies to institutions reporting a single total across several branches.
+
+- **Hospital demand now reflects the whole hospital, and the right kind of beds.** Larger hospitals appear once per department in the national registry and only a single department was being counted, leaving major teaching hospitals with a fraction of their real capacity. Separately, long-stay psychiatric and specialist institutions were weighted like acute hospitals, overstating their daily traffic. Both are corrected: hospital demand rises across the country while the long-stay institutions fall back to a plausible level.
+
+- **Several attractions were placed in the wrong town.** A handful of sites had been geocoded to a same-named or neighbouring municipality — in one case a regional museum sitting some twenty kilometres from the town it belongs to, which in turn suppressed that town's genuine museum as an apparent duplicate. These are corrected against operator addresses.
 
 ### 0.6.5 (2026-08-19)
 
