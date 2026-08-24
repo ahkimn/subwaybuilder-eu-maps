@@ -9,7 +9,7 @@ Each map covers the metropolitan area around one or more major European cities. 
 - High level of detail, with sub-municipality population placement driven by country-specific rasters or settlement-unit grids.
 - Spatial realism — points are assigned in a manner that is aware of water features, administrative boundaries, and density-weighted placement surfaces.
 - Special demand from several country-specific open-data sources is modeled — covering airports, ports, universities, hospitals, military installations, sports venues, cultural attractions, museums, libraries, and tourism sites. See [Special Demand Details](#special-demand-details) below for the per-country category breakdown.
-- Buildings are sourced from each country's national cadastre (RÚIAN for Czechia, BDOT10k for Poland, EHR + ETAK for Estonia). OSRM routing data is shared with the broader Subway Builder map pipeline.
+- Buildings are sourced from each country's national cadastre (RÚIAN for Czechia, BDOT10k for Poland, EHR + ETAK for Estonia, INSPIRE Buildings + ZBGIS for Slovakia). OSRM routing data is shared with the broader Subway Builder map pipeline.
 - Building foundation depth (the clearance a subway tunnel needs to pass beneath a building) is modeled per building from its height and footprint width, starting with the Estonian bundles (0.3.3); bundles not yet re-exported use a flat default. Train-related infrastructure is exempt.
 
 ## High-Level Methodology
@@ -63,6 +63,14 @@ Geographic exclusions are enforced at the data-file level for every consumed sou
 Lithuanian bundles combine the register-based 2021 census (per-municipality and per-settlement population and employment) with the native Lithuanian statistical grid — 250 m across populated areas, 1 km where the finer cells are disclosure-suppressed — for within-municipality population weighting. Workplace mass is derived from the GRPK national building footprints, which carry the official _paskirtis_ use-class; because GRPK publishes no per-building floor count, heights come from the JRC Global Building Attribute (GBA) LoD1 model. Per-building worker density follows the use-class, with an OpenStreetMap correctness pass that reclassifies power / water / waste plants (filed by the registry under a generic industrial code) as utilities and schools / universities as education. Administrative boundaries and the _savivaldybė_ (municipality) / _seniūnija_ (ward) codes come from the Registrų centras Address Register; Vilnius and Klaipėda are further subdivided into their _seniūnaitija_ sub-districts. Workplace totals are anchored to Statistics Lithuania's place-of-activity employment (jobs physically located in each municipality, by NACE Rev 2 sector), with the financial and public-administration sectors — which the municipal series omits — added from national labour-force totals.
 
 Lithuania publishes no commute O/D matrix at any grain, so commute flows are synthesized: a gravity model with distance-decay is seeded by destination-keyed self-containment priors calibrated against the published commuting behaviour of peer countries (Estonia, Latvia, Czechia, Poland) at matched urbanity × population × density cells, with a metropolitan-proximity reduction on rural self-containment. The workplace-side marginal is the place-of-activity employment; the residence-side marginal is the census employed-resident count per municipality.
+
+#### Slovakia
+
+Slovak bundles are built on the _základná sídelná jednotka_ (ZSJ), the national settlement unit — around 7,200 nationwide, and the finest grain that carries both a published population and a stable identity. Population and economic-activity counts per ZSJ come from the 2021 census; municipality (_obec_) totals for residents and jobs are the conserved margins, and districts (_okresy_) aggregate above them. Administrative boundaries come from the Statistical Office's published boundary service, which redistributes the ÚGKK ZBGIS administrative polygons.
+
+Unlike several of its neighbours, Slovakia publishes its 2021 journey-to-work data as a full municipality-to-municipality matrix, so commute demand is read from observed flows rather than synthesized from a gravity model seeded with peer-country priors. Flows whose destination lies outside the map are resolved at the boundary instead of being folded back in as local trips, which keeps short-trip volume from being inflated by long-haul commuters the map cannot follow.
+
+Workplace mass is derived from building floor area: geometry and use-class come from the Slovak INSPIRE Buildings product and the ÚGKK ZBGIS building layer, and because neither publishes a dependable per-building floor count, heights come from the JRC Global Building Attribute LoD1 model and a floor count is derived from them. Per-building worker density follows the use-class, and per-municipality job totals from the census remain the anchor.
 
 ### Future countries
 
@@ -196,6 +204,20 @@ Additional European countries will be added as country-specific open-data pipeli
 - **Libraries** (National Library of Lithuania registrar + national library statistics with per-library physical visitor counts) — [Lietuvos nacionalinė Martyno Mažvydo biblioteka](https://www.lnb.lt/)
 - **Protected-Area Visitors** (State Service for Protected Areas per-territory annual visitor monitoring — national and regional parks) — [VSTT](https://vstt.lrv.lt/)
 
+#### Slovakia
+
+- **2021 Census** (_Sčítanie obyvateľov, domov a bytov 2021_ — per-municipality and per-ZSJ population, economic activity, and the municipality-to-municipality journey-to-work matrix) — [ŠÚ SR](https://www.scitanie.sk/)
+- **Administrative Boundaries** (kraj / okres / obec / ZSJ polygons, redistributing the ÚGKK ZBGIS administrative layer) — [ŠÚ SR](https://gis.scitanie.sk/) · [ÚGKK SR](https://www.geoportal.sk/)
+- **Municipal Population** (annual per-obec resident counts) — [ŠÚ SR DATAcube](https://datacube.statistics.sk/)
+- **Building Footprints & Use-Class** (INSPIRE Buildings + the ZBGIS building layer) — [ÚGKK SR](https://www.skgeodesy.sk/) · [INSPIRE SR](https://rpi.gov.sk/)
+- **Building Heights** (JRC Global Building Attribute LoD1 — per-building height, from which floor count is derived) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/)
+- **Airport Passenger Statistics** (operator annual passenger reporting — Bratislava, Košice, Sliač) — [Letisko M. R. Štefánika](https://www.bts.aero/) · [Letisko Košice](https://www.airportkosice.sk/)
+- **Hospitals** (Ministry of Health hospital categorisation, geolocated against the national address register and the ZBGIS building layer) — [MZ SR](https://www.health.gov.sk/) · [MV SR Register adries](https://rageo.minv.sk/)
+- **Higher-Education Registry & Enrollment** (CVTI SR higher-education statistical yearbook, with an in-person study-form haircut) — [CVTI SR](https://www.cvtisr.sk/)
+- **Museums & Galleries** (Slovak National Museum museology department annual returns, with per-institution and per-venue visitor counts) — [SNM](https://www.snm.sk/)
+- **Libraries, Theatres & Cultural Centres** (Ministry of Culture KULT statistical returns and the statutory culture registers; cultural-centre activity from the National Culture Centre annual report) — [MK SR](https://www.culture.gov.sk/) · [NOC](https://www.nocka.sk/)
+- **Spa & Accommodation Statistics** (national spa and accommodation series, used to size thermal-spa demand) — [ŠÚ SR DATAcube](https://datacube.statistics.sk/)
+
 ### Future countries
 
 To be populated as each country's pipeline is finalized.
@@ -242,6 +264,14 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - GRPK polygons carry no definitive height information; the JRC GBA LoD1 raster is used to assign a height to each building, from which we derive a floor count. Large footprint buildings (especially those misclassified as a higher density class) may have their overall workplace density overestimated.
 - Hospital and military-installation demand are not yet modeled (planned for a future release).
 
+### Slovakia
+
+- Thermal-spa demand is modelled only where an operator publishes a visitor or guest figure. A dozen smaller spa and medical-spa houses publish neither, and are deliberately carried without a value rather than being assigned an estimate — the national accommodation series cannot be split down to the individual house without inventing the split.
+- A small number of museum branch venues are placed at the wrong site. The national museum returns identify a branch only by an exhibition title, which for a handful of entries matches a different institution more closely than its own — most visibly the Roma culture museum, which lands on a same-named Hungarian culture museum in the same city, and one open-air ethnographic exhibition placed on a similarly-named site in another region. Affected entries are small in demand terms.
+- A handful of museum venue names in the source returns wrap across three lines of the published table and are reproduced with a fragment of the entry above them. Names only; visitor counts and placement are unaffected.
+- Cross-border commuting is not modelled. Slovakia's census matrix, like every other national matrix in this collection, records only within-country commutes — which understates labour demand most in Bratislava, whose travel-to-work area extends into Austria and Hungary, and in the north, where flows run into Czechia and Poland.
+- Aquarium and shopping-centre demand categories are unused: Slovakia is landlocked with no public aquarium of scale, and no Slovak shopping centre publishes footfall.
+
 ### Cross-country
 
 - Faraway water, cross-border land, and cross-border inland water past the bundle's modeled extent can render as a no-data "grid" pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Rīga (open Baltic beyond the Gulf of Rīga), Liepāja (open Baltic to the west), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).
@@ -263,6 +293,32 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.7.0 (2026-08-25)
+
+#### Initial Cities
+
+- **Slovakia**
+  - `BTS` - Bratislava
+  - `KSC` - Košice - Prešov
+  - `ILZ` - Žilina
+  - `BAN` - Banská Bystrica
+  - `NIT` - Nitra
+  - `TRC` - Trenčín
+  - `TAT` - Poprad - Spišská Nová Ves
+
+#### New Features
+
+- **First release of the Slovakia maps.** Sub-municipal resident and worker placement across seven metropolitan-area bundles, calibrated against the 2021 Slovak census and placed on the national settlement-unit layer (_základná sídelná jednotka_), the finest published grain that carries both population and a stable identity — roughly 7,200 units nationwide, of which the seven maps cover about 5,000.
+  - Each map is subdivided into its ZSJ; those aggregate into municipalities (_obce_) and districts (_okresy_), and municipal population and employment totals are conserved throughout.
+
+- **Measured commute flows rather than a synthesized matrix.** Slovakia publishes its 2021 census journey-to-work data as a full municipality-to-municipality matrix, so commute demand is read directly from observed flows.
+
+- **National building footprints with modeled heights.** Building geometry and use-class come from the Slovak INSPIRE Buildings product and the ÚGKK ZBGIS building layer; because neither publishes a reliable per-building floor count, heights come from the JRC Global Building Attribute LoD1 model, from which a floor count is derived. Per-building worker density follows the use-class.
+
+- **Demand points for airports, hospitals, universities, military installations, and a hand-checked attraction roster.** Airports are sized from published annual passenger statistics; universities from the national higher-education registry with an in-person study-form haircut, with large multi-faculty institutions split across their campuses; hospitals from the national bed-and-admission series.
+
+- **Administrative region overlays.** All seven maps ship district, municipality, and settlement-unit boundaries with Slovak names and per-region population, so in-game overlays for the `regions` mod match the administrative geography the demand model was built on.
 
 ### 0.6.6 (2026-08-23)
 
@@ -878,7 +934,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 ## Planned Updates
 
 - Additional Polish cities not yet included.
-- Addition of additional Central / Eastern European countries (Hungary / Slovakia).
+- Addition of additional Central / Eastern European countries (Hungary).
 - Hospital and military-base demand layers for the Ukrainian bundles (deferred from v0.5.0).
 - Ukrainian university placement fix — corrects a handful of small-city universities currently matched to larger same-region cities; ships on the next Ukrainian re-export (deferred from 0.6.3).
 
@@ -1066,6 +1122,25 @@ Per-country category breakdown of the modeled demand-point categories beyond res
   - Daily commute demand at inpatient and outpatient facilities.
 - **Military bases** _(to be populated in a future release)_
   - Active-duty personnel at Lithuanian Armed Forces installations.
+
+### Slovakia
+
+- **Airports**
+  - Demand based on annual passenger throughput published by each airport operator, split into international and domestic travellers (Bratislava, Košice, Sliač).
+- **Hospitals**
+  - Sized from the Ministry of Health hospital categorisation, geolocated against the national address register and snapped to the building they occupy.
+- **Institutions of Learning**
+  - Universities and colleges sized from the CVTI SR higher-education statistical yearbook with an in-person study-form haircut; large multi-faculty institutions split across their campuses rather than pinned to a rectorate.
+- **Military Installations**
+  - Sized from published establishment figures, with installation footprints excluded from ordinary workplace demand so the two are not counted twice.
+- **Cultural Attractions**
+  - Museums and galleries from the Slovak National Museum's annual museology returns, which report visitors per venue rather than per institution — so branch sites carry their own demand at their own address.
+  - Libraries from the Ministry of Culture KULT statistical returns; the larger municipal systems are split across their branch network rather than concentrated at a single central library.
+  - Theatres, concert halls, and cultural centres (_kultúrne domy_), the latter from the National Culture Centre's annual activity report.
+  - Castles, chateaux, and heritage sites, including every Slovak UNESCO World Heritage property that has a visitable site.
+  - Thermal spas and water parks, ski resorts, swimming pools and lidos.
+  - Football and ice-hockey stadiums, basketball arenas, exhibition grounds and race tracks.
+  - Botanical gardens, arboreta, city parks, gorges and lookout towers.
 
 ## License
 

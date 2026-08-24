@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "versions": [
+    {
+      "version": "0.1.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-08-25",
+      "changelog": "Added the first Slovak maps — Bratislava, Košice - Prešov, Žilina, Trenčín, Nitra, Banská Bystrica, and Poprad - Spišská Nová Ves — with residents, workers, and demand for airports, universities, hospitals, museums, and libraries.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.7.0/BAN.zip",
+      "sha256": "e327d1fecab23adef4b750cac3aa2900f1b8a9a13d8609273c464f12fd6b9558"
+    }
+  ]
+}
