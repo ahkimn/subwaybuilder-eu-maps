@@ -70,7 +70,7 @@ Slovak bundles are built on the _základná sídelná jednotka_ (ZSJ), the natio
 
 Unlike several of its neighbours, Slovakia publishes its 2021 journey-to-work data as a full municipality-to-municipality matrix. Those observed flows set the municipality-level totals each map must reproduce, and placement within and between those municipalities follows a gravity model with distance-decay — a stronger footing than countries publishing no matrix at all, where the totals themselves have to be inferred from the commuting behaviour of peers. Because the census records only part of the journeys its residents actually make, the remainder is reconstructed to reach the full employed-resident count; roughly half of Slovak commute demand comes from that reconstruction, a smaller share than in several neighbouring countries. Flows whose destination lies outside the map are attributed at the boundary rather than dropped.
 
-Workplace mass is derived from building floor area: geometry and use-class come from the Slovak INSPIRE Buildings product and the ÚGKK ZBGIS building layer, and because neither publishes a dependable per-building floor count, heights come from the JRC Global Building Attribute LoD1 model and a floor count is derived from them. Per-building worker density follows the use-class, and per-municipality job totals from the census remain the anchor.
+Workplace mass is derived from building floor area: geometry and use-class come from the Slovak INSPIRE Buildings product and the ÚGKK ZBGIS building layer, and height comes from the registry's own airborne laser scanning survey (DMR 5.0). Because neither product publishes a dependable per-building floor count, floors are derived from the surveyed height using a storey height calibrated per building use-class, with native floor counts from INSPIRE Buildings and OpenStreetMap taking precedence where they exist. Per-building worker density follows the use-class, and per-municipality job totals from the census remain the anchor.
 
 ### Future countries
 
@@ -210,7 +210,7 @@ Additional European countries will be added as country-specific open-data pipeli
 - **Administrative Boundaries** (kraj / okres / obec / ZSJ polygons, redistributing the ÚGKK ZBGIS administrative layer) — [ŠÚ SR](https://gis.scitanie.sk/) · [ÚGKK SR](https://www.geoportal.sk/)
 - **Municipal Population** (annual per-obec resident counts) — [ŠÚ SR DATAcube](https://datacube.statistics.sk/)
 - **Building Footprints & Use-Class** (INSPIRE Buildings + the ZBGIS building layer) — [ÚGKK SR](https://www.skgeodesy.sk/) · [INSPIRE SR](https://rpi.gov.sk/)
-- **Building Heights** (JRC Global Building Attribute LoD1 — per-building height, from which floor count is derived) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/)
+- **Building Heights** (ÚGKK ZBGIS — per-building height measured by the DMR 5.0 national airborne laser scanning survey, from which floor count is derived) — [ÚGKK SR](https://www.skgeodesy.sk/)
 - **Airport Passenger Statistics** (operator annual passenger reporting — Bratislava, Košice, Sliač) — [Letisko M. R. Štefánika](https://www.bts.aero/) · [Letisko Košice](https://www.airportkosice.sk/)
 - **Hospitals** (Ministry of Health hospital categorisation, geolocated against the national address register and the ZBGIS building layer) — [MZ SR](https://www.health.gov.sk/) · [MV SR Register adries](https://rageo.minv.sk/)
 - **Higher-Education Registry & Enrollment** (CVTI SR higher-education statistical yearbook, with an in-person study-form haircut) — [CVTI SR](https://www.cvtisr.sk/)
@@ -293,6 +293,20 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.7.1 (2026-08-26)
+
+#### Updated Cities
+
+- **Slovakia** — all seven maps rebuilt on the national building registry's own surveyed heights.
+
+#### Bugfixes
+
+- **Buildings now stand at their surveyed heights.** The ÚGKK ZBGIS building registry carries a measured height for almost every Slovak building, taken from the national airborne laser scanning survey (DMR 5.0), but the released maps were not using it: the first four shipped with heights estimated by the JRC Global Building Attribute model, and the remaining three with no height at all, so nearly every building in them was drawn at a flat placeholder. Every building across all seven maps is now drawn at its surveyed height.
+  - Foundation depths and tunnel-clearance collision scale with building height, so those are corrected by the same change — most visibly on Košice - Prešov, Žilina, and Trenčín, where almost the whole building stock previously sat at the placeholder depth.
+  - Roughly one Slovak building in fifteen is recorded without a measured height. Those are drawn at a single storey scaled to what the building is used for, rather than at a uniform default.
+
+- **Building footprints now come from the national registry.** Slovak footprints were being taken from Overture Maps Foundation rather than from ZBGIS, the registry the rest of the Slovak model is built on. Footprints and heights now come from that one national source, so a building's shape and its height agree with each other and with the demand model.
 
 ### 0.7.0 (2026-08-25)
 
