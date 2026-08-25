@@ -302,11 +302,11 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 #### Bugfixes
 
-- **Buildings now stand at their surveyed heights.** The ÚGKK ZBGIS building registry carries a measured height for almost every Slovak building, taken from the national airborne laser scanning survey (DMR 5.0), but the released maps were not using it: the first four shipped with heights estimated by the JRC Global Building Attribute model, and the remaining three with no height at all, so nearly every building in them was drawn at a flat placeholder. Every building across all seven maps is now drawn at its surveyed height.
+- **Buildings now stand at their surveyed heights.** The ÚGKK ZBGIS building registry carries a measured height for almost every Slovak building, taken from the national airborne laser scanning survey (DMR 5.0), but the released maps were (unintentionally) not using it. Every building across all seven maps is now drawn at its surveyed height.
   - Foundation depths and tunnel-clearance collision scale with building height, so those are corrected by the same change — most visibly on Košice - Prešov, Žilina, and Trenčín, where almost the whole building stock previously sat at the placeholder depth.
-  - Roughly one Slovak building in fifteen is recorded without a measured height. Those are drawn at a single storey scaled to what the building is used for, rather than at a uniform default.
+  - Roughly one Slovak building in fifteen is recorded without a measured height. Those are drawn at a single default height that is scaled to what the building is used for, rather than at a uniform default.
 
-- **Building footprints now come from the national registry.** Slovak footprints were being taken from Overture Maps Foundation rather than from ZBGIS, the registry the rest of the Slovak model is built on. Footprints and heights now come from that one national source, so a building's shape and its height agree with each other and with the demand model.
+- **Building footprints now come from the national registry.** Slovak footprints were being taken from Overture Maps Foundation instead of from ZBGIS, the registry the rest of the Slovak model is built on. Footprints and heights now come from that one national source, so a building's shape and its height agree with each other and with the demand model.
 
 ### 0.7.0 (2026-08-25)
 
