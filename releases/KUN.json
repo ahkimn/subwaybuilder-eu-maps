@@ -18,8 +18,9 @@
       "game_version": ">=1.0.0",
       "date": "2026-08-19",
       "changelog": "Fixed water shattering at low zoom, where simplification had fattened narrow streams into slivers far wider than the real watercourse, and rebalanced demand-point detail so mid-density residential areas hold consistent detail while city centres keep full resolution.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.6.5/KUN.zip",
-      "sha256": "71b45b4c403ba6cdb3ac54bdbf55ffb0dbd750e36712880b2c22b5d6b6fa2e32"
+      "download": null,
+      "sha256": null,
+      "retired": true
     },
     {
       "version": "0.2.0",
