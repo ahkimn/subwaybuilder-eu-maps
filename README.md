@@ -60,7 +60,7 @@ Geographic exclusions are enforced at the data-file level for every consumed sou
 
 #### Lithuania
 
-Lithuanian bundles combine the register-based 2021 census (per-municipality and per-settlement population and employment) with the native Lithuanian statistical grid — 250 m across populated areas, 1 km where the finer cells are disclosure-suppressed — for within-municipality population weighting. Workplace mass is derived from the GRPK national building footprints, which carry the official _paskirtis_ use-class; because GRPK publishes no per-building floor count, heights come from the JRC Global Building Attribute (GBA) LoD1 model. Per-building worker density follows the use-class, with an OpenStreetMap correctness pass that reclassifies power / water / waste plants (filed by the registry under a generic industrial code) as utilities and schools / universities as education. Administrative boundaries and the _savivaldybė_ (municipality) / _seniūnija_ (ward) codes come from the Registrų centras Address Register; Vilnius and Klaipėda are further subdivided into their _seniūnaitija_ sub-districts. Workplace totals are anchored to Statistics Lithuania's place-of-activity employment (jobs physically located in each municipality, by NACE Rev 2 sector), with the financial and public-administration sectors — which the municipal series omits — added from national labour-force totals.
+Lithuanian bundles combine the register-based 2021 census (per-municipality and per-settlement population and employment) with the native Lithuanian statistical grid — 250 m across populated areas, 1 km where the finer cells are disclosure-suppressed — for within-municipality population weighting. Workplace mass is derived from the GRPK national building footprints, which carry the official _paskirtis_ use-class; floor counts come from the surveyed storey count in the Registrų centras property register, with a nearest-neighbour estimate learned from surveyed buildings where the register has no entry. Per-building worker density follows the use-class, with an OpenStreetMap correctness pass that reclassifies power / water / waste plants (filed by the registry under a generic industrial code) as utilities and schools / universities as education. Administrative boundaries and the _savivaldybė_ (municipality) / _seniūnija_ (ward) codes come from the Registrų centras Address Register; Vilnius and Klaipėda are further subdivided into their _seniūnaitija_ sub-districts. Workplace totals are anchored to Statistics Lithuania's place-of-activity employment (jobs physically located in each municipality, by NACE Rev 2 sector), with the financial and public-administration sectors — which the municipal series omits — added from national labour-force totals.
 
 Lithuania publishes no commute O/D matrix at any grain, so commute flows are synthesized: a gravity model with distance-decay is seeded by destination-keyed self-containment priors calibrated against the published commuting behaviour of peer countries (Estonia, Latvia, Czechia, Poland) at matched urbanity × population × density cells, with a metropolitan-proximity reduction on rural self-containment. The workplace-side marginal is the place-of-activity employment; the residence-side marginal is the census employed-resident count per municipality.
 
@@ -196,7 +196,7 @@ Additional European countries will be added as country-specific open-data pipeli
 - **City Sub-District Polygons** (municipal _seniūnaitija_ boundaries for the Vilnius and Klaipėda city cores) — [Vilnius](https://opencity.vilnius.lt/) · [Klaipėda](https://www.klaipeda.lt/)
 - **Building Polygons & Use Classification** (GRPK _Georeferencinių erdvinių duomenų rinkinys_ Pastatai — national building footprints with the official _paskirtis_ use-class; the sole building source for modeled demand and the 3D tiles) — [geoportal.lt GRPK](https://www.geoportal.lt/)
 - **Building Use-Class Taxonomy** (Registrų centras NtrPastatas cadastral attributes + the 91-type _NtrPaskirtiesTipas_ classifier) — [Registrų centras via data.gov.lt](https://data.gov.lt/)
-- **Building Heights** (JRC Global Building Attribute LoD1 — per-building height, with Overture Maps footprints as fallback) — [JRC / EU Copernicus](https://ghsl.jrc.ec.europa.eu/) · [Overture Maps Foundation](https://overturemaps.org/)
+- **Building Floor Counts** (Registrų centras _Pastatų erdviniai duomenys_ — the surveyed storey count held in the national real-property register, published per municipality for all sixty municipalities; buildings absent from the register take an estimate learned from nearby surveyed buildings) — [Registrų centras](https://www.registrucentras.lt/) · [data.gov.lt](https://data.gov.lt/)
 - **Airport Passenger Statistics** (Lithuanian Airports annual series — Vilnius, Kaunas, Palanga) — [Lietuvos oro uostai](https://www.ltou.lt/)
 - **Port & Ferry Statistics** (Port of Klaipėda management report — ferry + cruise passenger throughput) — [Port of Klaipėda](https://www.portofklaipeda.lt/)
 - **Higher-Education Registry & Enrollment** (LAMA BPO admissions intake + ŠVIS institutional student stock + OSP full-time study-form shares) — [LAMA BPO](https://www.lamabpo.lt/) · [ŠVIS](https://www.svis.smm.lt/)
@@ -261,7 +261,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 ### Lithuania
 
 - Apartment clusters are modeled as carrying some tertiary-sector workplaces via Overpass PoI enrichment; it is possible that workplaces are likely somewhat more dispersed than reality.
-- GRPK polygons carry no definitive height information; the JRC GBA LoD1 raster is used to assign a height to each building, from which we derive a floor count. Large footprint buildings (especially those misclassified as a higher density class) may have their overall workplace density overestimated.
+- Roughly two in five buildings carry a surveyed floor count; the remainder are estimated from the surveyed buildings nearest them. Because the register includes garages, sheds and outbuildings, the stock is heavily single-storey, and foundation depth — which scales with height — is close to uniform on the smaller maps.
 - Hospital and military-installation demand are not yet modeled (planned for a future release).
 
 ### Slovakia
@@ -293,6 +293,25 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.7.2 (2026-08-26)
+
+#### Updated Cities
+
+- **Lithuania** — all five maps rebuilt on the national property register's own surveyed floor counts, with commute placement moved onto measured sub-municipal employment.
+
+#### New Features
+
+- **Buildings now stand on surveyed floor counts.** Lithuania's real-property register publishes a surveyed storey count for every building it holds, covering roughly two in five buildings on the maps; those are now used directly instead of a modelled height. Buildings the register does not hold — largely smaller structures mapped from aerial imagery — take an estimate learned from the surveyed buildings nearest them, so a warehouse is judged against neighbouring warehouses rather than against a national average. Measured against held-out surveyed buildings, the typical error on larger footprints roughly halves.
+  - Foundation depths and tunnel-clearance collision scale with building height, so they move with this change. Lithuanian building stock is genuinely low-rise once outbuildings and garages are counted, so the smaller maps now sit close to the minimum foundation depth across most of their stock.
+  - Building footprints and heights now come from the same national sources, so a building's shape and its height agree with each other and with the demand model.
+
+- **Commute placement follows measured local employment.** Where a resident's workplace commute begins was previously spread across each municipality in proportion to working-age population — a stand-in for the real distribution. The 2021 census publishes employment at the eldership (_seniūnija_) level, the sub-municipal tier the maps already use for their commute geography, and that measured distribution is now used instead. Municipal totals are unchanged; what moves is where inside a municipality those commutes start.
+  - Elderships reorganised since 2021 are matched to their present-day boundaries from the founding council decisions rather than by name, because names have been reused across reorganisations for territories that are not the same place.
+
+#### Bugfixes
+
+- **Klaipėda's ferry and cruise terminal names display correctly.** The two Klaipėda port destinations were showing mangled characters in place of Lithuanian diacritics, from a text-encoding fault when the port list was read. The names now read as intended.
 
 ### 0.7.1 (2026-08-26)
 
