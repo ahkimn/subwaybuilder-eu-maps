@@ -304,7 +304,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 - **Buildings now stand on surveyed floor counts.** Lithuania's real-property register publishes a surveyed storey count for every building it holds, covering roughly two in five buildings on the maps; those are now used directly instead of a modelled height. Buildings the register does not hold (mostly smaller structures mapped from aerial imagery) take an estimate from the surveyed buildings nearest them.
 
-- **Commute placement follows measured local employment.** Where a resident's workplace commute begins was previously spread across each municipality in proportion to working-age population — a stand-in for the real distribution. The 2021 census publishes employment at the eldership (_seniūnija_) level, the sub-municipal tier the maps already use for their commute geography, and that measured distribution is now used instead. Municipal totals are unchanged; what moves is where inside a municipality those commutes start.
+- **Commute placement follows measured local employment.** A resident's workplace commute begins was previously spread across each municipality in proportion to working-age population; however, the 2021 census publishes employment at the eldership (_seniūnija_) level, the sub-municipal tier. This measured distribution is now used for both the residential dasymetric and for defining the commute geography.
 
 #### Bugfixes
 
