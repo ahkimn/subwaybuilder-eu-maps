@@ -18,8 +18,9 @@
       "game_version": ">=1.0.0",
       "date": "2026-07-08",
       "changelog": "Added the first Ukrainian maps — Kyiv, Kharkiv, Lviv, Odesa, Dnipro, Zaporizhzhia, and Kryvyi Rih — with residents, workers, and demand for airports, ports, universities, and attractions.",
-      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.5.0/HRK.zip",
-      "sha256": "be1947b28af9b0946923348475019e9c2cb2d272fbfac69bbc62a2f9f34c09b8"
+      "download": null,
+      "sha256": null,
+      "retired": true
     }
   ]
 }
