@@ -255,8 +255,8 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ### Ukraine
 
-- University demand is likely somewhat overmodelled; compared to peer countries the UA maps have a disproportionately high share of students in the total population. The 2020-2021 МОН / EDBO enrollment data is the only source available, and it is not cross-validated against a census or other independent source, especially for in-person vs. remote attendance.
-- Apartment clusters are modelled as always having some tertiary sector workplaces, which is not always true in reality; therefore, the workplaces within the map are likely more dispersed than would otherwise be the case; upweighting the tertiary workplace density of other classes (e.g. RET/COM/OFF) will be considered in a future iteration.
+- University demand is now built on the day-attendance (_денна_) figure the МОН / ЄДЕБО register publishes per institution, which addresses the in-person versus remote split that previously inflated it. The register remains the only source available and is still not cross-validated against a census or other independent source, so the student share should be treated as approximate.
+- Apartment blocks are still modelled as carrying some workplace activity, which is not always true in reality. Their contribution is now capped to what a ground floor can hold rather than applied over the whole building, but workplaces across the map remain somewhat more dispersed than they would otherwise be; upweighting the workplace density of the retail, commercial and office classes will be considered in a future iteration.
 
 ### Lithuania
 
@@ -293,6 +293,70 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.7.3 (2026-09-06)
+
+#### Updated Cities
+
+- **Ukraine** — all seven maps rebuilt with corrected university attendance, new hospital demand, neighbourhood labels inside cities, and wider metropolitan footprints.
+  - `KBP` - Київ (Kyiv)
+  - `HRK` - Харків (Kharkiv)
+  - `LWO` - Львів (Lviv)
+  - `ODS` - Одеса (Odesa)
+  - `DNK` - Дніпро (Dnipro)
+  - `OZH` - Запоріжжя (Zaporizhzhia)
+  - `KWG` - Кривий Ріг (Kryvyi Rih)
+
+#### Initial Cities
+
+- **Ukraine** — fifteen further metropolitan areas, taking national coverage from seven cities to twenty-two.
+  - `VIN` - Вінниця (Vinnytsia)
+  - `NLV` - Миколаїв - Херсон (Mykolaiv - Kherson)
+  - `RWN` - Рівне - Луцьк (Rivne - Lutsk)
+  - `IFO` - Івано-Франківськ (Ivano-Frankivsk)
+  - `CWC` - Чернівці (Chernivtsi)
+  - `ZTR` - Житомир (Zhytomyr)
+  - `PLV` - Полтава (Poltava)
+  - `CKC` - Черкаси (Cherkasy)
+  - `HMJ` - Хмельницький (Khmelnytskyi)
+  - `TNL` - Тернопіль (Ternopil)
+  - `CEJ` - Чернігів (Chernihiv)
+  - `KHU` - Кременчук (Kremenchuk)
+  - `UMY` - Суми (Sumy)
+  - `KGO` - Кропивницький (Kropyvnytskyi)
+  - `UDJ` - Ужгород - Мукачево (Uzhhorod - Mukachevo)
+
+#### New Features
+
+- **Fifteen new Ukrainian cities.** Coverage grows from the seven largest metropolitan areas to twenty-two, adding the remaining regional capitals plus Kremenchuk, and pairing Mykolaiv with Kherson and Uzhhorod with Mukachevo where the two cities share one commuting area. Each new map is built on the same sources and the same modelling as the original seven.
+  - As with the original seven, every source vintage is pre-2022-02-24, so each map represents its city as it stood before the full-scale invasion.
+
+- **The original seven maps now reach further out.** Their metropolitan boundaries were drawn tightly around the core commuting area; they now extend to the full functional urban area, so the outer suburbs and satellite towns people actually commute from are on the map. Lviv and Ivano-Frankivsk gained the most.
+
+- **Hospital demand.** Inpatient and outpatient facilities now generate their own commute demand, sized from the Ministry of Health's pre-invasion bed and visit returns rather than from facility revenue, which turned out to track billing more than footfall. Facilities are placed at their operational site rather than their registered legal address — for a hospital group these are frequently different cities — and each site is corroborated against the mapped building before use.
+  - Facilities reporting no activity are left off the map rather than drawn with zero demand.
+
+- **Neighbourhood names inside cities.** Larger cities previously showed only the city name; the districts and named neighbourhoods within them are now labelled, so the map reads at street level as well as at metropolitan level.
+
+- **University attendance now counts students who actually attend in person.** Enrolment was previously taken as an institution's total registration, which counts distance and evening students the same as those who travel to campus daily. It is now anchored on the day-attendance (_денна_) figure the national education register publishes per institution, and the blanket reduction that had been compensating for the wrong basis has been removed as no longer needed. The result is a smaller and better-placed student population.
+  - Around two hundred institutions in smaller cities were carrying an approximate location; those now sit on their published address.
+  - Branch campuses registered separately from their parent institution were being counted twice. They now contribute only through the parent.
+
+#### Other Features
+
+- **Ground-floor shops no longer count as a full commercial floor.** Apartment blocks with shops at street level were being credited with fractional commercial activity across the whole building rather than the ground floor, which pulled significant workplace demand into residential districts. The contribution is now scaled to what the ground floor can hold.
+
+#### Bugfixes
+
+- **Buildings with no descriptive tags are no longer assumed to be homes.** Where a building carries nothing to say what it is, the model previously fell back on a residential assumption in some circumstances and an inert one in others, which put residents on warehouses and garages in some districts and emptied genuine housing in others. A street address is now taken as evidence that people live there, and a nearby shop or business as evidence that the ground floor is commercial.
+
+- **Structures that are tall but hollow are no longer modelled as multi-storey.** Greenhouses, hangars and similar single-volume structures were errnouesly given a floor count derived from their height, granting them an inflated workplace capacity. When detected, these buildings are apportioned a single story floor area to better represent their true nature.
+
+- **Farm and industrial buildings no longer absorb implausible worker counts.** Very large agricultural and light-industrial footprints could be assigned far more workers than a building of that should realistically holds. Per-use workplace density limits now apply to these buildings as they already did elsewhere.
+
+- **Rural areas no longer lose residents to sparse building data.** Where building coverage is thin, a rescue path fills in from population raster data. Previously it was firing in places where the only buildings present were ones nobody lived in, and being skipped in places where it was needed.
+
+- **Numerous other corrections to how buildings are classified.** Industrial estates reading as apartment blocks, retail rows reading as full-height shopping centres, duplicated building records counted twice, and similar faults are now corrected. These are internal to the demand model and should not be individually visible, but together they shift where residents and workers sit within a city.
 
 ### 0.7.2 (2026-08-26)
 

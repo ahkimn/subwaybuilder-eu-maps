@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "versions": [
+    {
+      "version": "0.1.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-09-06",
+      "changelog": "Added fifteen more Ukrainian maps, taking national coverage from seven metropolitan areas to twenty-two — the remaining regional capitals plus Kremenchuk, with Mykolaiv paired to Kherson and Uzhhorod to Mukachevo where the two cities share a commuting area.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.7.3/TNL.zip",
+      "sha256": "4f1ce23b92ab5590cb922150e0b3b43444b93b9b8d16873f4dc6d20c866c03fc"
+    }
+  ]
+}
