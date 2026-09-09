@@ -307,9 +307,9 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
   - `OZH` - Запоріжжя (Zaporizhzhia)
   - `KWG` - Кривий Ріг (Kryvyi Rih)
 
-#### Initial Cities
+#### New Cities
 
-- **Ukraine** — fifteen further metropolitan areas, taking national coverage from seven cities to twenty-two.
+- **Ukraine** — fifteen additional metropolitan areas.
   - `VIN` - Вінниця (Vinnytsia)
   - `NLV` - Миколаїв - Херсон (Mykolaiv - Kherson)
   - `RWN` - Рівне - Луцьк (Rivne - Lutsk)
@@ -328,17 +328,18 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 #### New Features
 
-- **Fifteen new Ukrainian cities.** Coverage grows from the seven largest metropolitan areas to twenty-two, adding the remaining regional capitals plus Kremenchuk, and pairing Mykolaiv with Kherson and Uzhhorod with Mukachevo where the two cities share one commuting area. Each new map is built on the same sources and the same modelling as the original seven.
+- **Fifteen new Ukrainian maps.** Coverage grows from the seven largest metropolitan to a total of twenty-two maps, with every oblast capital now represented. Each new map is built on the same sources and the same modelling as the original seven.
   - As with the original seven, every source vintage is pre-2022-02-24, so each map represents its city as it stood before the full-scale invasion.
 
-- **The original seven maps now reach further out.** Their metropolitan boundaries were drawn tightly around the core commuting area; they now extend to the full functional urban area, so the outer suburbs and satellite towns people actually commute from are on the map. Lviv and Ivano-Frankivsk gained the most.
+- **The original seven maps now reach further out.** The original metropolitan boundaries were drawn relatively closely around the core commuting area; they now extend to include outer suburbs and satellite centres.
 
-- **Hospital demand.** Inpatient and outpatient facilities now generate their own commute demand, sized from the Ministry of Health's pre-invasion bed and visit returns rather than from facility revenue, which turned out to track billing more than footfall. Facilities are placed at their operational site rather than their registered legal address — for a hospital group these are frequently different cities — and each site is corroborated against the mapped building before use.
-  - Facilities reporting no activity are left off the map rather than drawn with zero demand.
+- **Hospital demand.** Inpatient and outpatient medical facilities now contribute to special demand, with patient volumes estimated from the Ministry of Health's pre-invasion bed and visit returns (rather than from facility revenue). Facilities are placed at their operational site rather than their registered legal address (for a hospital group these are frequently different cities).
+  - Facilities reporting little to no activity (less than 10k estimated visits annually) are excludedd.
 
-- **Neighbourhood names inside cities.** Larger cities previously showed only the city name; the districts and named neighbourhoods within them are now labelled, so the map reads at street level as well as at metropolitan level.
+- **Neighbourhood names inside cities.** Districts and named neighbourhoods within large cities are now labelled.
 
-- **University attendance now counts students who actually attend in person.** Enrolment was previously taken as an institution's total registration, which counts distance and evening students the same as those who travel to campus daily. It is now anchored on the day-attendance (_денна_) figure the national education register publishes per institution, and the blanket reduction that had been compensating for the wrong basis has been removed as no longer needed. The result is a smaller and better-placed student population.
+- **University attendance now counts students who actually attend in person.** Enrollment was previously taken as an institution's total registration, which counts distance students identically to those who travel to campus daily. It is now anchored on the day-attendance (_денна_) figure the national education register published per institution, and the blanket reduction that had been compensating for the wrong basis has been removed.
+  - Several hundred college-type institutions are newly represented on the maps, making the modeled student population more complete.
   - Around two hundred institutions in smaller cities were carrying an approximate location; those now sit on their published address.
   - Branch campuses registered separately from their parent institution were being counted twice. They now contribute only through the parent.
 
