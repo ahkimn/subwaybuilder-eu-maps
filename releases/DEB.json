@@ -1,0 +1,15 @@
+{
+  "schema_version": 1,
+  "versions": [
+    {
+      "version": "0.1.0",
+      "min_game_version": ">=1.0.0",
+      "max_game_version": null,
+      "game_version": ">=1.0.0",
+      "date": "2026-09-22",
+      "changelog": "Map pack update.",
+      "download": "https://github.com/ahkimn/subwaybuilder-eu-maps/releases/download/0.8.0/DEB.zip",
+      "sha256": "56b30a0c8509ee67ce6bbfc5d39eca6e1868ef400dfa96aaa31ef7ec5eff7f7c"
+    }
+  ]
+}
