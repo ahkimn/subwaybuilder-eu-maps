@@ -327,7 +327,7 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 
 ## Changelog
 
-### 0.8.0 (2026-09-21)
+### 0.8.0 (2026-09-22)
 
 #### Initial Cities
 
