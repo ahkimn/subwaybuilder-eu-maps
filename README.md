@@ -72,7 +72,13 @@ Unlike several of its neighbours, Slovakia publishes its 2021 journey-to-work da
 
 Workplace mass is derived from building floor area: geometry and use-class come from the Slovak INSPIRE Buildings product and the ÚGKK ZBGIS building layer, and height comes from the registry's own airborne laser scanning survey (DMR 5.0). Because neither product publishes a dependable per-building floor count, floors are derived from the surveyed height using a storey height calibrated per building use-class, with native floor counts from INSPIRE Buildings and OpenStreetMap taking precedence where they exist. Per-building worker density follows the use-class, and per-municipality job totals from the census remain the anchor.
 
-### Future countries
+#### Hungary
+
+Hungarian bundles are built on a sub-settlement block fabric that no other country in the pack has: Hungary's public cadastre publishes its parcel layer with public roads as parcels of their own, so dissolving the road parcels out of each settlement leaves the city blocks a street map would draw. Those cadastral blocks are the base unit of resident and worker placement, aggregating into settlements (_település_ — 3,155 nationwide) and, in the capital, into Budapest's 23 districts (_kerület_), each of which is a first-class unit with its own census tables. Residential population is anchored per settlement and per kerület to the 2022 census (_Népszámlálás 2022_), distributed within each settlement using the census enumeration-block layer — over a million blocks nationwide — with the cadastre's per-parcel resident counts splitting block mass down to individual buildings.
+
+Hungary has no free national building registry (the state cadastral attribute services are paid products), so the building stack is assembled from open sources: Overture Maps footprints, with heights from the JRC Global Building Attribute LoD1 model — floor counts are derived from those heights through a mapping calibrated on the subset of buildings that carry a surveyed OpenStreetMap floor count, with a footprint-shape guard that stops elongated single-storey halls from being read as towers, and native floor counts taking precedence where they exist. Building use is classified through a cascade of signals: the Copernicus Urban Atlas 2021 land-use polygons, JRC GHS OBAT per-building hints, OpenStreetMap and Overture points-of-interest projected onto a common sector taxonomy, address-density evidence, and a 10 m ML land-use raster as the fallback tier. Per-settlement worker totals from the census workplace tables are the anchor throughout, with per-sector densities calibrated per settlement against them.
+
+Hungary publishes no settlement-to-settlement commute matrix, so commute flows are synthesized under measured constraints at the grains the census does publish: a full county-to-county (_megye_) residence × workplace matrix, per-settlement local-work and out-commute splits, and — for Budapest — per-kerület workplace totals. A Generalized IPF pass reconciles a gravity model with distance-decay against those margins. The census "works locally" statistic is settlement-grain, which for Budapest means "works somewhere in Budapest" rather than "works in the home district": the model therefore pins containment at the city level and lets gravity and the measured per-kerület workplace margins shape the district-to-district split, rather than forcing commuters to stay in their home kerület. Commuters whose census workplace lies beyond a map's boundary are routed to gateway points along their real outbound corridors rather than dropped.
 
 Additional European countries will be added as country-specific open-data pipelines come online. Each country follows the same conservation-and-calibration scheme above, with country-specific inputs substituted for boundaries, population, employment, commute matrices, and special-demand layers.
 
@@ -218,6 +224,27 @@ Additional European countries will be added as country-specific open-data pipeli
 - **Libraries, Theatres & Cultural Centres** (Ministry of Culture KULT statistical returns and the statutory culture registers; cultural-centre activity from the National Culture Centre annual report) — [MK SR](https://www.culture.gov.sk/) · [NOC](https://www.nocka.sk/)
 - **Spa & Accommodation Statistics** (national spa and accommodation series, used to size thermal-spa demand) — [ŠÚ SR DATAcube](https://datacube.statistics.sk/)
 
+#### Hungary
+
+- **2022 Census** (_Népszámlálás 2022_ — per-settlement and per-kerület population, employment, education, and commuting tables; the "key data on settlements" series covers all 3,155 települések plus Budapest's 23 kerületek) — [KSH / Hungarian Central Statistical Office](https://nepszamlalas2022.ksh.hu/)
+- **Census Enumeration Blocks** (Népszámlálás 2022 block-level population layer — over one million blocks nationwide, the within-settlement residential weighting) — [KSH Geoportal](https://map.ksh.hu/)
+- **Commuting Matrices** (megye-level residence × workplace matrix; per-settlement local-work and out-commute splits; per-kerület workplace totals for Budapest) — [KSH](https://nepszamlalas2022.ksh.hu/)
+- **1 km Population Grid** (KSH INSPIRE grid — population and dwellings, national EOV projection) — [KSH](https://www.ksh.hu/)
+- **Administrative Boundaries** (Eurostat GISCO LAU 2024 settlement polygons; Budapest kerület boundaries dissolved from the national cadastre) — [Eurostat GISCO](https://gisco-services.ec.europa.eu/distribution/v2/lau/lau-2024-files.html)
+- **National Cadastre Parcel Fabric** (public parcel layer with per-parcel resident counts; road parcels define the sub-settlement block boundaries) — [Lechner Tudásközpont](https://lechnerkozpont.hu/)
+- **Building Footprints** (Overture Maps national extract — footprint geometry and the sparse native floor counts) — [Overture Maps Foundation](https://overturemaps.org/)
+- **Building Heights** (JRC Global Building Attribute LoD1 model, with GHS-OBAT R2024A gap-fill — the per-building floor model for workplace floor area and the 3D building tiles) — [TUM GBA](https://github.com/zhu-xlab/GlobalBuildingAtlas) · [JRC GHSL](https://ghsl.jrc.ec.europa.eu/)
+- **Urban Land Use** (Copernicus Urban Atlas 2021 polygons; GHS GULU 10 m ML land-cover as the classification fallback tier) — [Copernicus](https://land.copernicus.eu/en/products/urban-atlas) · [Zenodo](https://zenodo.org/records/18194577)
+- **Addresses, Site Polygons & Neighborhood Names** (national address index, site-polygon context for the building classifier, and the _városrész_ neighborhood-name layer) — [OpenStreetMap](https://www.openstreetmap.org/)
+- **Points of Interest** (national Places extract, projected onto the shared sector taxonomy for building classification) — [Overture Maps Foundation](https://overturemaps.org/)
+- **Airport Passenger Statistics** (Budapest Liszt Ferenc International — annual terminal passengers) — [KSH STADAT](https://www.ksh.hu/stadat_files/sza/hu/sza0019.html) · [Budapest Airport](https://www.bud.hu/)
+- **Hospitals & Polyclinics** (per-facility operating bed counts and measured per-facility outpatient attendances from the national health-insurance fund's statutory registers) — [NEAK](https://www.neak.gov.hu/)
+- **University Enrollment** (per-institution higher-education headcount) — [Oktatási Hivatal](https://www.oktatas.hu/)
+- **Museums** (MuzeumStat — the national register of museum institutions with annual visitor counts) — [MuzeumStat](https://muzeumstat.hu/)
+- **Theatres, Libraries & Cultural Centres** (statutory per-institution attendance filings and the national library register) — [KultStat / OSZK](https://kultstat.oszk.hu/)
+- **Thermal Baths** (per-_gyógyfürdő_ annual admissions from operator reports) — [Budapest Gyógyfürdői Zrt.](https://www.budapestgyogyfurdoi.hu/)
+- **Sports & Racetrack Attendance** (per-club football attendance; national-stadium, arena, and racetrack figures from operator reports) — [magyarfutball.hu](https://www.magyarfutball.hu/)
+
 ### Future countries
 
 To be populated as each country's pipeline is finalized.
@@ -272,6 +299,12 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - Cross-border commuting is not modelled. Slovakia's census matrix, like every other national matrix in this collection, records only within-country commutes — which understates labour demand most in Bratislava, whose travel-to-work area extends into Austria and Hungary, and in the north, where flows run into Czechia and Poland.
 - Aquarium and shopping-centre demand categories are unused: Slovakia is landlocked with no public aquarium of scale, and no Slovak shopping centre publishes footfall.
 
+### Hungary
+
+- Cross-border commuting is not modelled, and Hungary is where that omission bites hardest in this pack: western Hungary's commuting into Austria is among the largest cross-border flows in the EU, so the Nyugat-Dunántúl and Győr maps understate true labour demand near the Austrian border (Sopron most of all).
+- Budapest's district-to-district commute flows are synthesized, not measured. The census records workplace at settlement grain only, so while each kerület's resident and workplace totals are census-measured, the split of who commutes from which district to which follows the gravity model under those measured margins.
+- Museum visitor counts cite the national register's last pre-COVID year for most institutions; sites that opened or reopened since (the Liget Budapest museums, the Citadella) are carried from newer operator figures, so attraction vintages are mixed by design, with each figure citing its own source year.
+
 ### Cross-country
 
 - Faraway water, cross-border land, and cross-border inland water past the bundle's modeled extent can render as a no-data "grid" pattern at the lowest zoom levels because the supplemental water and earth layers are extracted against the bundle boundary plus a small buffer. Coverage is correct at gameplay zoom levels and beyond; only the lowest-zoom overview is affected. Most visible on Ida-Viru (Russian land east of Narva river; Lake Peipus), Tartu (Lake Peipus; Russian land beyond), Pärnu (Latvian land to the south), Rīga (open Baltic beyond the Gulf of Rīga), Liepāja (open Baltic to the west), Szczecin (German land to the west), and Gdańsk (Kaliningrad to the north-east).
@@ -293,6 +326,41 @@ _All prior known issues resolved in 0.4.2 — see [changelog](#042-2026-07-06)._
 - ~~The new metropolitan area boundaries are a bit strange and will need some expansion. Targeting that in a 0.2.0 for each Czech map~~ **(Resolved in 0.2.0)**
 
 ## Changelog
+
+### 0.8.0 (2026-09-21)
+
+#### Initial Cities
+
+- **Hungary**
+  - `BUD` - Budapest
+  - `DEB` - Debrecen - Nyíregyháza
+  - `MIS` - Miskolc
+  - `SZE` - Szeged
+  - `PEC` - Pécs
+  - `GYO` - Győr
+  - `NYD` - Nyugat-Dunántúl
+  - `VES` - Veszprém - Balaton
+  - `BEK` - Békéscsaba
+  - `SZB` - Szekszárd - Baja
+  - `KAP` - Kaposvár
+
+#### New Features
+
+- **First release of the Hungary maps.** Eleven regional and metropolitan-area maps, each calibrated against the 2022 Hungarian census (_Népszámlálás 2022_) and placed on a block fabric cut directly from the national cadastre. 
+  - Hungary publishes its parcel layer with public roads as parcels of their own, so dissolving the road parcels out of each settlement leaves true city fabric, which are then aggregated to form blocks.
+  - Blocks aggregate into settlements (_település_) and, in the capital, Budapest's 23 districts (_kerület_); settlement and kerület population and employment totals are conserved throughout, with the census enumeration-block layer (over a million blocks nationwide) weighting residents within each settlement.
+
+- **Budapest as a first-class multi-district metropolis.** The capital's 23 kerületek each carry their own census tables and measured workplace totals. Because the census "works locally" question is settlement-grain — for a Budapest resident it means "works somewhere in Budapest", not "works in the home district", O/D containment is pinned to the city level and the district-to-district split follows gravity against the measured per-kerület workplace margins.
+
+- **Open-source building stack for a country without a free building registry.** Hungary's cadastral attribute services are paid products, so like Ukraine, buiding geometry comes from Overture Maps with heights enriched from the JRC Global Building Attribute LoD1 model. 
+  - Floor counts are derived from those heights through a mapping calibrated on the buildings that carry a surveyed OpenStreetMap floor count; a footprint-shape guard that stops long single-storey halls from reading as towers. Building use is classified through a cascade of different products, as was done for Ukraine.
+
+- **Synthesized commutes under measured constraints.** Hungary publishes no settlement-to-settlement matrix, so flows are reconciled against what is measured: a full county-to-county residence × workplace matrix, per-settlement local-work splits, and (for Budapest) per-kerület workplace totals. 
+  - Commuters whose workplace lies beyond a map's boundary are routed to gateway points along their real outbound corridors rather than dropped.
+
+- **Demand points for the airport, hospitals and polyclinics, universities, museums, theatres, libraries, thermal baths, stadiums, and more.** Special demand is primarily sourced from measured attendance (e.g. measured per-facility outpatient attendance from the national health-insurance registers) where possible; otherwise, estimates grounded in peer (other European countries) data are used.
+
+- **Real neighborhood names.** The lowest label tier renders Hungary's actual _városrész_ neighborhoods (e.g. Wekerletelep, Gazdagrét, and Angyalföld in Budapest, Avas and Diósgyőr in Miskolc).
 
 ### 0.7.3 (2026-09-06)
 
@@ -1236,6 +1304,23 @@ Per-country category breakdown of the modeled demand-point categories beyond res
   - Thermal spas and water parks, ski resorts, swimming pools and lidos.
   - Football and ice-hockey stadiums, basketball arenas, exhibition grounds and race tracks.
   - Botanical gardens, arboreta, city parks, gorges and lookout towers.
+
+### Hungary
+
+- **Airports**
+  - Budapest Liszt Ferenc International sized from annual terminal passenger statistics (KSH aviation series cross-checked against the airport operator).
+- **Hospitals & Polyclinics**
+  - Sized from the national health-insurance fund's statutory registers: per-facility operating bed counts plus **measured per-facility outpatient attendance** — Hungary is the only country in the pack whose outpatient demand is a per-site measurement rather than an inference — with non-attending diagnostics (laboratory, pathology) stripped so only real patient visits count. Site-grain placement covers both hospital campuses and standalone polyclinics (_rendelőintézetek_).
+- **Institutions of Learning**
+  - Universities and colleges sized from the Oktatási Hivatal per-institution enrollment, with large multi-faculty institutions split across their campuses.
+- **Cultural Attractions**
+  - Museums and galleries from MuzeumStat, the national register of museum institutions, with per-institution annual visitor counts and a hand-checked geocoding pass.
+  - Theatres from statutory per-institution attendance filings; the county totals reconcile against the filings so an anchored theatre never absorbs its neighbours' audiences.
+  - Libraries from the national library register's per-institution visit counts, with the largest municipal systems split across their branches.
+  - Community culture houses (_művelődési házak_) — the national network of local cultural centres — carried as their own category alongside theatres and concert halls.
+  - Hungary's signature thermal baths (_gyógyfürdők_) from operator-reported admissions — Széchenyi, Gellért, and Rudas in Budapest and the municipal baths beyond — with neighbourhood lidos (_strandfürdők_) as a separate local tier.
+  - Churches and basilicas, world-heritage sites, zoos and botanical gardens, parks and lookouts.
+  - Football grounds and arenas from per-club attendance records; the Hungaroring Formula 1 circuit and Kincsem Park racecourse carried as racetracks.
 
 ## License
 
